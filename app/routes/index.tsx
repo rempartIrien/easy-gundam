@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 export default function Index() {
+  let { t } = useTranslation();
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>Welcome to Remix</h1>
+      <h2>{t("test")}</h2>
       <ul>
         <li>
           <a
