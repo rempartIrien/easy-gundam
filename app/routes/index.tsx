@@ -1,11 +1,14 @@
 import { useTranslation } from "react-i18next";
+import { styled } from "../stitches.config";
 
 export default function Index() {
   let { t } = useTranslation();
+
+  const MyH2 = styled("h2", { color: "red" });
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>Welcome to Remix</h1>
-      <h2>{t("test")}</h2>
+      <MyH2>{t("test")}</MyH2>
       <ul>
         <li>
           <a

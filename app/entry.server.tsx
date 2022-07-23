@@ -6,6 +6,7 @@ import { resolve } from "node:path";
 import { renderToString } from "react-dom/server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import { i18n } from "./i18n.server";
+import { getCssText } from "./stitches.config";
 
 export default async function handleRequest(
   request: Request,
@@ -45,7 +46,7 @@ export default async function handleRequest(
     <I18nextProvider i18n={instance}>
       <RemixServer context={context} url={request.url} />
     </I18nextProvider>
-  );
+  ).replace(/<\/head>/, `<style id="stitches">${getCssText()}</style></head>`);
 
   headers.set("Content-Type", "text/html");
 
