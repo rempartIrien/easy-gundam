@@ -1,8 +1,9 @@
-import Backend from "i18next-fs-backend";
 import { resolve } from "node:path";
+
+import Backend from "i18next-fs-backend";
 import { RemixI18Next } from "remix-i18next";
 
-export let i18n = new RemixI18Next({
+export const i18n = new RemixI18Next({
   detection: {
     // This is the list of languages your application supports
     supportedLanguages: ["fr", "en"],

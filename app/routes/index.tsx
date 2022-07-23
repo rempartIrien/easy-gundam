@@ -1,8 +1,10 @@
+import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+
 import { styled } from "../stitches.config";
 
-export default function Index() {
-  let { t } = useTranslation();
+export default function Index(): ReactElement {
+  const { t } = useTranslation();
 
   const MyH2 = styled("h2", { color: "red" });
   return (

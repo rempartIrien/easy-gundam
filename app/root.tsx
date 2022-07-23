@@ -9,14 +9,18 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { i18n } from "./i18n.server";
-import { useChangeLanguage } from "remix-i18next";
+import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "remix-i18next";
 
-type LoaderData = { locale: string };
+import { i18n } from "./i18n.server";
 
-export let loader: LoaderFunction = async ({ request }) => {
-  let locale = await i18n.getLocale(request);
+interface LoaderData {
+  locale: string;
+}
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const locale = await i18n.getLocale(request);
   return json<LoaderData>({ locale });
 };
 
@@ -26,11 +30,11 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export default function Root() {
+export default function Root(): ReactElement {
   // Get the locale from the loader
-  let { locale } = useLoaderData<LoaderData>();
+  const { locale } = useLoaderData<LoaderData>();
 
-  let { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   // This hook will change the i18n instance language to the current locale
   // detected by the loader, this way, when we do something to change the
