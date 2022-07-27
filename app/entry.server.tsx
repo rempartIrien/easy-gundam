@@ -7,7 +7,13 @@ import Backend from "i18next-fs-backend";
 import { renderToString } from "react-dom/server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 
-import { i18n } from "./i18n.server";
+import {
+  defaultNamespace,
+  fallbackLanguage,
+  namespaceLoadPath,
+  supportedLanguages,
+} from "./i18n/i18n.config";
+import { i18n } from "./i18n/i18n.server";
 import { getCssText } from "./stitches.config";
 
 export default async function handleRequest(
@@ -30,15 +36,15 @@ export default async function handleRequest(
     .use(Backend) // Setup our backend
     .init({
       // And configure i18next as usual
-      supportedLngs: ["fr", "en"],
-      defaultNS: "translations",
-      fallbackLng: "en",
+      supportedLngs: supportedLanguages,
+      defaultNS: defaultNamespace,
+      fallbackLng: fallbackLanguage,
       // Disable suspense again here
       react: { useSuspense: false },
       lng, // The locale we detected above
       ns, // The namespaces the routes about to render want to use
       backend: {
-        loadPath: resolve("./public/locales/{{lng}}/{{ns}}.json"),
+        loadPath: resolve(`./public/${namespaceLoadPath}`),
       },
     });
 

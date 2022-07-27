@@ -5,7 +5,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/rempartIrien/gundam.git"
+    "url": "git+ssh://git@github.com/rempartIrien/easy-gundam.git"
   },
   "sideEffects": false,
   "scripts": {

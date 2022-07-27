@@ -13,7 +13,7 @@ import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
 
-import { i18n } from "./i18n.server";
+import { i18n } from "./i18n/i18n.server";
 
 interface LoaderData {
   locale: string;
