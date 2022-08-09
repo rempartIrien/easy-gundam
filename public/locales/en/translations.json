@@ -1,3 +1,4 @@
 {
-  "test": "I'm a test"
+  "test": "I'm a test",
+  "timeline": "Timeline code: {{ code }}"
 }
