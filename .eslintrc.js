@@ -266,13 +266,7 @@ module.exports = {
     },
     {
       files: ["**/*.spec.ts", "**/*.spec.tsx", "**/*.test.ts", "**/*.test.tsx"],
-      plugins: ["jest"],
-      extends: ["plugin:jest/recommended"],
-      rules: {
-        // you should turn the original rule off *only* for test files
-        "@typescript-eslint/unbound-method": "off",
-        "jest/unbound-method": "error",
-      },
+      extends: ["plugin:testing-library/react"],
     },
   ],
 };
