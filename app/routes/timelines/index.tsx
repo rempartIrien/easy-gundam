@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { ReactElement } from "react";
 
-import { API } from "~/constants.server";
+import { API } from "../../constants.server";
 
 interface LoaderData {
   timelines: { id: string; code: string }[];

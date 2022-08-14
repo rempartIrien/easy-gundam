@@ -6,13 +6,12 @@ vi.mock("./from-dto.server", () => ({
   default: vi.fn((v: unknown) => v),
 }));
 
+import { Language } from "../../i18n/i18n.config";
 import type { ID, MarkdownString } from "../types.server";
 
 import type { Dto } from "./dto.server";
 import fromDtoList from "./from-dto-list.server";
 import fromDto from "./from-dto.server";
-
-import { Language } from "~/i18n/i18n.config";
 
 interface Foo {
   id: ID;

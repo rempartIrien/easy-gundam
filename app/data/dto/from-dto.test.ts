@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 
+import { Language } from "../../i18n/i18n.config";
 import type { ID, MarkdownString } from "../types.server";
 
 import type { Dto } from "./dto.server";
 import fromDto from "./from-dto.server";
-
-import { Language } from "~/i18n/i18n.config";
 
 interface Foo {
   id: ID;

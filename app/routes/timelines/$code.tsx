@@ -5,9 +5,8 @@ import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
 
+import { API } from "../../constants.server";
 import { i18n } from "../../i18n/i18n.server";
-
-import { API } from "~/constants.server";
 
 interface LoaderData {
   timeline: { id: string; code: string };

@@ -1,9 +1,9 @@
+import type { Language } from "../../i18n/i18n.config";
+
 import type { Dto } from "./dto.server";
 import isObject from "./is-object.server";
 import type { CamelCaseKeyObject } from "./string-case.server";
 import { toCamelCaseKeys } from "./string-case.server";
-
-import type { Language } from "~/i18n/i18n.config";
 
 export default function fromDto<
   T extends CamelCaseKeyObject<T>,
