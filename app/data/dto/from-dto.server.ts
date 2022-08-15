@@ -1,4 +1,4 @@
-import type { Language } from "../../i18n/i18n.config";
+import type { MarkdownString } from "../types.server";
 
 import type { Dto } from "./dto.server";
 import isObject from "./is-object.server";
@@ -8,19 +8,18 @@ import { toCamelCaseKeys } from "./string-case.server";
 export default function fromDto<
   T extends CamelCaseKeyObject<T>,
   K extends keyof T,
->(dto: Partial<Dto<T, K>>, language: Language): Partial<T> {
+>(dto: Partial<Dto<T, K>>): T {
   if (!isObject(dto)) {
     throw new Error("This function takes objects as inputs.");
   }
-  const translations = dto?.translations?.[language] ?? {};
+  const { translations, ...rest } = dto;
 
-  const result = Object.entries(dto).reduce((acc, [key, value]) => {
-    if (key === "translations") {
-      return acc;
-    } else {
-      return { ...acc, [key]: value };
-    }
-  }, translations);
+  const result = {
+    ...rest,
+    ...((
+      translations as Record<K, string | MarkdownString>[] | undefined
+    )?.[0] || {}),
+  };
 
   return toCamelCaseKeys(result) as unknown as T;
 }
