@@ -1,37 +1,20 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { ReactElement } from "react";
 
-import { API } from "../../constants.server";
+import { listTimelines } from "../../data/timeline.server";
+import type { Language } from "../../i18n/i18n.config";
+import { i18n } from "../../i18n/i18n.server";
 
 interface LoaderData {
-  timelines: { id: string; code: string }[];
+  timelines: Awaited<ReturnType<typeof listTimelines>>;
 }
 
-export const loader: LoaderFunction = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  return fetch(API, {
-    method: "POST",
-    headers: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      "Content-Type": "application/json",
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      query: `{
-        timelines {
-          id
-          code
-        }
-      }`,
-    }),
-  })
-    .then((r) => r.json())
-    .then(({ data }) => {
-      return json<LoaderData>(data as LoaderData);
-    });
+export const loader: LoaderFunction = async ({ request }) => {
+  const locale = await i18n.getLocale(request);
+  const timelines = await listTimelines(locale as Language);
+  return json<LoaderData>({ timelines });
 };
 
 export default function Timelines(): ReactElement {
@@ -39,7 +22,9 @@ export default function Timelines(): ReactElement {
   return (
     <ul>
       {timelines.map((t) => (
-        <li key={t.id}>{t.code}</li>
+        <li key={t.code}>
+          <Link to={`/timelines/${t.code}`}>{t.name}</Link>
+        </li>
       ))}
     </ul>
   );
