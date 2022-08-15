@@ -1,6 +1,6 @@
 export enum Language {
-  French = "fr",
-  English = "en",
+  French = "fr-FR",
+  English = "en-US",
 }
 
 export const supportedLanguages: string[] = [Language.French, Language.English];
