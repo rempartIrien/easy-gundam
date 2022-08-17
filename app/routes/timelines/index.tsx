@@ -8,13 +8,13 @@ import type { Language } from "../../i18n/i18n.config";
 import { i18n } from "../../i18n/i18n.server";
 
 interface LoaderData {
-  timelines: Awaited<ReturnType<typeof listTimelines>>;
+  timelines: { code: string; name: string }[]; //Awaited<ReturnType<typeof listTimelines>>;
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
   const locale = await i18n.getLocale(request);
   const timelines = await listTimelines(locale as Language);
-  return json<LoaderData>({ timelines });
+  return json<LoaderData>({ timelines } as LoaderData);
 };
 
 export default function Timelines(): ReactElement {
