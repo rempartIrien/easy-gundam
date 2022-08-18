@@ -211,16 +211,16 @@ export type QueryTimelines_Translations_By_IdArgs = {
 
 export type Adaptations = {
   __typename?: 'adaptations';
-  code?: Maybe<Scalars['String']>;
+  code: Scalars['String'];
   date_created?: Maybe<Scalars['Date']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']>;
   date_updated_func?: Maybe<Datetime_Functions>;
-  episode_number?: Maybe<Scalars['Int']>;
-  format?: Maybe<Scalars['String']>;
+  episode_number: Scalars['Int'];
+  format: Scalars['String'];
   id?: Maybe<Scalars['ID']>;
   image?: Maybe<Directus_Files>;
-  parution_date?: Maybe<Scalars['Date']>;
+  parution_date: Scalars['Date'];
   parution_date_func?: Maybe<Date_Functions>;
   series?: Maybe<Series>;
   sort?: Maybe<Scalars['Int']>;
@@ -328,7 +328,7 @@ export type Adaptations_Translations = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   language_code?: Maybe<Languages>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 
@@ -554,7 +554,7 @@ export type Number_Filter_Operators = {
 
 export type Series = {
   __typename?: 'series';
-  code?: Maybe<Scalars['String']>;
+  code: Scalars['String'];
   date_created?: Maybe<Scalars['Date']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']>;
@@ -659,7 +659,7 @@ export type Series_Translations = {
   id?: Maybe<Scalars['ID']>;
   language_code?: Maybe<Languages>;
   serie_id?: Maybe<Series>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 
@@ -739,7 +739,7 @@ export type String_Filter_Operators = {
 
 export type Timelines = {
   __typename?: 'timelines';
-  code?: Maybe<Scalars['String']>;
+  code: Scalars['String'];
   date_created?: Maybe<Scalars['Date']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']>;
@@ -830,7 +830,7 @@ export type Timelines_Translations = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   language_code?: Maybe<Languages>;
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   timeline_id?: Maybe<Timelines>;
 };
 
@@ -892,11 +892,11 @@ export type Timelines_Translations_Filter = {
   timeline_id?: InputMaybe<Timelines_Filter>;
 };
 
-export type TimelineBaseFragment = { __typename?: 'timelines', code?: string | null, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name?: string | null } | null> | null };
+export type TimelineBaseFragment = { __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null };
 
 export type ListTimelinesQueryVariables = Exact<{
   language: Scalars['String'];
 }>;
 
 
-export type ListTimelinesQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code?: string | null, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name?: string | null } | null> | null }> };
+export type ListTimelinesQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null }> };

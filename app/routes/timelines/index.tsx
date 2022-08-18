@@ -8,7 +8,7 @@ import type { Language } from "../../i18n/i18n.config";
 import { i18n } from "../../i18n/i18n.server";
 
 interface LoaderData {
-  timelines: { code: string; name: string }[]; //Awaited<ReturnType<typeof listTimelines>>;
+  timelines: Awaited<ReturnType<typeof listTimelines>>;
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -19,11 +19,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Timelines(): ReactElement {
   const { timelines } = useLoaderData() as LoaderData;
+
   return (
     <ul>
       {timelines.map((t) => (
         <li key={t.code}>
-          <Link to={`/timelines/${t.code}`}>{t.name}</Link>
+          <Link to={`/timelines/${t.code}`}>
+            {t.name} created at {t.dateCreated}
+          </Link>
         </li>
       ))}
     </ul>

@@ -1,11 +1,26 @@
-import isObject from "~/utils/is-object.server";
+import isObject from "../utils/is-object.server";
 
-export function format<T>(source: T[]): T[];
-export function format<T extends Record<string | number, unknown>>(
+export type InlineTranslatedPropertyObject<T> = T extends (infer U)[]
+  ? InlineTranslatedPropertyObject<U>[]
+  : T extends {
+      translations?: null | undefined | (null | infer U)[];
+    }
+  ? (U extends Record<string, unknown>
+      ? InlineTranslatedPropertyObject<U>
+      : never) &
+      Omit<
+        { [K in keyof T]: InlineTranslatedPropertyObject<T[K]> },
+        "translations"
+      >
+  : T;
+
+export function format<T extends unknown[]>(
   source: T,
-): T;
-export function format<T>(source: T): T;
-export function format(source: unknown): unknown {
+): InlineTranslatedPropertyObject<T[number]>[];
+export function format<T>(source: T): InlineTranslatedPropertyObject<T>;
+export function format(
+  source: unknown,
+): InlineTranslatedPropertyObject<unknown> {
   if (Array.isArray(source)) {
     return (source as unknown[]).map((item) => format(item));
   } else if (isObject(source)) {
