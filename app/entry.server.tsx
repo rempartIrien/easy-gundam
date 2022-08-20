@@ -7,13 +7,8 @@ import Backend from "i18next-fs-backend";
 import { renderToString } from "react-dom/server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 
-import {
-  defaultNamespace,
-  fallbackLanguage,
-  namespaceLoadPath,
-  supportedLanguages,
-} from "./i18n/i18n.config";
-import { i18n } from "./i18n/i18n.server";
+import config, { namespaceLoadPath } from "./i18n/i18n.config";
+import i18Next from "./i18n/i18n.server";
 import { getCssText } from "./stitches.config";
 
 export default async function handleRequest(
@@ -27,22 +22,17 @@ export default async function handleRequest(
   const instance = createInstance();
 
   // Then we could detect locale from the request
-  const lng = await i18n.getLocale(request);
+  const lng = await i18Next.getLocale(request);
   // And here we detect what namespaces the routes about to render want to use
-  const ns = i18n.getRouteNamespaces(context);
+  const ns = i18Next.getRouteNamespaces(context);
 
   await instance
     .use(initReactI18next) // Tell our instance to use react-i18next
     .use(Backend) // Setup our backend
     .init({
-      // And configure i18next as usual
-      supportedLngs: supportedLanguages,
-      defaultNS: defaultNamespace,
-      fallbackLng: fallbackLanguage,
-      // Disable suspense again here
-      react: { useSuspense: false },
+      ...config, // spread the configuration
       lng, // The locale we detected above
-      ns, // The namespaces the routes about to render want to use
+      ns, // The namespaces the routes about to render wants to use
       backend: {
         loadPath: resolve(`./public/${namespaceLoadPath}`),
       },

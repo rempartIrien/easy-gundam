@@ -7,14 +7,14 @@ import invariant from "tiny-invariant";
 
 import { getTimelineByCode } from "../../graphql/timeline.server";
 import type { Language } from "../../i18n/i18n.config";
-import { i18n } from "../../i18n/i18n.server";
+import i18Next from "../../i18n/i18n.server";
 
 interface LoaderData {
   timeline: Awaited<ReturnType<typeof getTimelineByCode>>;
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  const locale = await i18n.getLocale(request);
+  const locale = await i18Next.getLocale(request);
   const { code } = params;
   invariant(code, "Code is required");
 

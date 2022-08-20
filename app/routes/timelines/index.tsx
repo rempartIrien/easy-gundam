@@ -5,14 +5,14 @@ import type { ReactElement } from "react";
 
 import { listTimelines } from "../../graphql/timeline.server";
 import type { Language } from "../../i18n/i18n.config";
-import { i18n } from "../../i18n/i18n.server";
+import i18Next from "../../i18n/i18n.server";
 
 interface LoaderData {
   timelines: Awaited<ReturnType<typeof listTimelines>>;
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const locale = await i18n.getLocale(request);
+  const locale = await i18Next.getLocale(request);
   const timelines = await listTimelines(locale as Language);
   return json<LoaderData>({ timelines } as LoaderData);
 };
