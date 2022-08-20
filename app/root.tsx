@@ -13,6 +13,7 @@ import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
 
+import Header from "./common/Header";
 import config from "./i18n/i18n.config";
 import i18Next from "./i18n/i18n.server";
 
@@ -58,6 +59,7 @@ export default function Root(): ReactElement {
         <Links />
       </head>
       <body>
+        <Header />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
