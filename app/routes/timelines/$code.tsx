@@ -5,11 +5,12 @@ import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
 
-import { API } from "../../constants.server";
+import { getTimelineByCode } from "../../graphql/timeline.server";
+import type { Language } from "../../i18n/i18n.config";
 import { i18n } from "../../i18n/i18n.server";
 
 interface LoaderData {
-  timeline: { id: string; code: string };
+  timeline: Awaited<ReturnType<typeof getTimelineByCode>>;
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -17,34 +18,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const { code } = params;
   invariant(code, "Code is required");
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  return fetch(API, {
-    method: "POST",
-    headers: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      "Content-Type": "application/json",
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      query: `{
-        timelines(limit: 1, filter: { code: { _eq: "${code}" } }) {
-          id
-          code,
-          translations(filter: { language_code: { code: { _starts_with: "${locale}" } } }) {
-            name
-          }
-        }
-      }`,
-    }),
-  })
-    .then((r) => r.json())
-    .then(({ data }) => {
-      return json<LoaderData>({
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        timeline: data.timelines[0],
-      } as LoaderData);
+  return getTimelineByCode(code, locale as Language).then((timeline) => {
+    return json<LoaderData>({
+      timeline,
     });
+  });
 };
 
 export default function Timelines(): ReactElement {

@@ -900,3 +900,11 @@ export type ListTimelinesQueryVariables = Exact<{
 
 
 export type ListTimelinesQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null }> };
+
+export type GettimelineByCodeQueryVariables = Exact<{
+  code: Scalars['String'];
+  language: Scalars['String'];
+}>;
+
+
+export type GettimelineByCodeQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null }> };
