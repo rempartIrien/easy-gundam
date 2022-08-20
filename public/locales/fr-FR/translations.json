@@ -1,4 +1,21 @@
 {
+  "header": {
+    "menu": {
+      "what_next": "Et maintenant ?",
+      "timelines": "Lignes temporeelles",
+      "series": "Séries"
+    }
+  },
   "test": "Je suis un test",
-  "timeline": "Code de la timeline : {{ code }}"
+  "timelines": {
+    "details": {
+      "labels": {
+        "code": "Code de la timeline : {{ code }}"
+      },
+      "links": {
+        "description": "Description",
+        "series": "Séries"
+      }
+    }
+  }
 }

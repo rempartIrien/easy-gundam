@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
@@ -25,9 +25,26 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   });
 };
 
-export default function Timelines(): ReactElement {
+export default function Timeline(): ReactElement {
   const { t } = useTranslation();
   const { timeline } = useLoaderData() as LoaderData;
 
-  return <div>{t("timeline", { code: timeline.code })}</div>;
+  return (
+    <>
+      <div>{t("timelines.details.labels.code", { code: timeline.code })}</div>
+      <ol>
+        <li>
+          <Link to={`/timelines/${timeline.code}`}>
+            {t("timelines.details.links.description")}
+          </Link>
+        </li>
+        <li>
+          <Link to={`/timelines/${timeline.code}/series`}>
+            {t("timelines.details.links.series")}
+          </Link>
+        </li>
+      </ol>
+      <Outlet />
+    </>
+  );
 }

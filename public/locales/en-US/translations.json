@@ -1,4 +1,21 @@
 {
+  "header": {
+    "menu": {
+      "what_next": "What next?",
+      "timelines": "Timelines",
+      "series": "Series"
+    }
+  },
   "test": "I'm a test",
-  "timeline": "Timeline code: {{ code }}"
+  "timelines": {
+    "details": {
+      "labels": {
+        "code": "Timeline code: {{ code }}"
+      },
+      "links": {
+        "description": "Description",
+        "series": "Series"
+      }
+    }
+  }
 }

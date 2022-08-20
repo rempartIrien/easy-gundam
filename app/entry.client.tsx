@@ -18,7 +18,7 @@ void i18next
     // This function detects the namespaces your routes rendered while SSR use
     ns: getInitialNamespaces(),
     backend: {
-      loadPath: namespaceLoadPath,
+      loadPath: `/${namespaceLoadPath}`,
     },
     detection: {
       // Here only enable htmlTag detection, we'll detect the language only
