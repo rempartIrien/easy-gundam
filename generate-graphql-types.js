@@ -6,7 +6,7 @@ dotenv.config();
 const config = {
   overwrite: true,
   schema: process.env.API,
-  documents: "./app/**/*.ts",
+  documents: "./app/graphql/**/*.ts",
   generates: {
     "app/graphql/generated/types.d.ts": {
       plugins: [
