@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 
-import { BASE_TIMELINE_FRAGMENT } from "./fragments";
+import { BASE_TIMELINE_FRAGMENT, FULL_TIMELINE_FRAGMENT } from "./fragments";
 
 export const LIST_TIMELINES_QUERY = gql`
   query listTimelines($language: String!) {
@@ -12,10 +12,10 @@ export const LIST_TIMELINES_QUERY = gql`
 `;
 
 export const GET_TIMELINE_BY_CODE_QUERY = gql`
-  query gettimelineByCode($code: String!, $language: String!) {
+  query getTimelineByCode($code: String!, $language: String!) {
     timelines(limit: 1, filter: { code: { _eq: $code } }) {
-      ...timelineBase
+      ...timelineFull
     }
   }
-  ${BASE_TIMELINE_FRAGMENT}
+  ${FULL_TIMELINE_FRAGMENT}
 `;

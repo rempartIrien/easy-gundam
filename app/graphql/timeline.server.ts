@@ -3,8 +3,8 @@ import type { Language } from "../i18n/i18n.config";
 import type { InlineTranslatedPropertyObject } from "./formatter.seerver";
 import { format } from "./formatter.seerver";
 import type {
-  GettimelineByCodeQuery,
-  GettimelineByCodeQueryVariables,
+  GetTimelineByCodeQuery,
+  GetTimelineByCodeQueryVariables,
   ListTimelinesQuery,
   ListTimelinesQueryVariables,
 } from "./generated/types";
@@ -31,13 +31,13 @@ export async function getTimelineByCode(
   code: string,
   language: Language,
 ): Promise<
-  InlineTranslatedPropertyObject<GettimelineByCodeQuery["timelines"][number]>
+  InlineTranslatedPropertyObject<GetTimelineByCodeQuery["timelines"][number]>
 > {
   const variables = { language, code };
 
   const { timelines } = await graphQLClient.request<
-    GettimelineByCodeQuery,
-    GettimelineByCodeQueryVariables
+    GetTimelineByCodeQuery,
+    GetTimelineByCodeQueryVariables
   >(GET_TIMELINE_BY_CODE_QUERY, variables);
 
   if (!timelines[0]) {

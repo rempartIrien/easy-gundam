@@ -892,7 +892,27 @@ export type Timelines_Translations_Filter = {
   timeline_id?: InputMaybe<Timelines_Filter>;
 };
 
+export type SeriesBaseFragment = { __typename?: 'series', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'series_translations', title: string } | null> | null };
+
+export type ListSeriesQueryVariables = Exact<{
+  timelineCode: Scalars['String'];
+  language: Scalars['String'];
+}>;
+
+
+export type ListSeriesQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'series_translations', title: string } | null> | null }> };
+
+export type GetSerieByCodeQueryVariables = Exact<{
+  code: Scalars['String'];
+  language: Scalars['String'];
+}>;
+
+
+export type GetSerieByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'series_translations', title: string } | null> | null }> };
+
 export type TimelineBaseFragment = { __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null };
+
+export type TimelineFullFragment = { __typename?: 'timelines', code: string, dateCreated?: any | null, image?: { __typename?: 'directus_files', filename_download: string, title?: string | null } | null, translations?: Array<{ __typename?: 'timelines_translations', name: string, description?: string | null } | null> | null };
 
 export type ListTimelinesQueryVariables = Exact<{
   language: Scalars['String'];
@@ -901,10 +921,10 @@ export type ListTimelinesQueryVariables = Exact<{
 
 export type ListTimelinesQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null }> };
 
-export type GettimelineByCodeQueryVariables = Exact<{
+export type GetTimelineByCodeQueryVariables = Exact<{
   code: Scalars['String'];
   language: Scalars['String'];
 }>;
 
 
-export type GettimelineByCodeQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated?: any | null, translations?: Array<{ __typename?: 'timelines_translations', name: string } | null> | null }> };
+export type GetTimelineByCodeQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated?: any | null, image?: { __typename?: 'directus_files', filename_download: string, title?: string | null } | null, translations?: Array<{ __typename?: 'timelines_translations', name: string, description?: string | null } | null> | null }> };

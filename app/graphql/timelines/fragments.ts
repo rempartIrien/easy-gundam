@@ -9,3 +9,18 @@ export const BASE_TIMELINE_FRAGMENT = gql`
     }
   }
 `;
+
+export const FULL_TIMELINE_FRAGMENT = gql`
+  fragment timelineFull on timelines {
+    code
+    dateCreated: date_created
+    image {
+      filename_download
+      title
+    }
+    translations(filter: { language_code: { code: { _eq: $language } } }) {
+      name
+      description
+    }
+  }
+`;
