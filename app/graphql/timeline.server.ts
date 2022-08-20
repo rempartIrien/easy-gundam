@@ -1,12 +1,13 @@
-import type { InlineTranslatedPropertyObject } from "../graphql/formatter.seerver";
-import { format } from "../graphql/formatter.seerver";
+import type { Language } from "../i18n/i18n.config";
+
+import type { InlineTranslatedPropertyObject } from "./formatter.seerver";
+import { format } from "./formatter.seerver";
 import type {
   ListTimelinesQuery,
   ListTimelinesQueryVariables,
-} from "../graphql/generated/types";
-import graphQLClient from "../graphql/graphql-client.server";
-import { LIST_TIMELINES_QUERY } from "../graphql/timelines/queries";
-import type { Language } from "../i18n/i18n.config";
+} from "./generated/types";
+import graphQLClient from "./graphql-client.server";
+import { LIST_TIMELINES_QUERY } from "./timelines/queries";
 
 export async function listTimelines(
   language: Language,
