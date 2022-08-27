@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
-import { styled } from "../stitches.config";
+import { styled } from "../styles/stitches.config";
 
 export default function Index(): ReactElement {
   const { t } = useTranslation();
