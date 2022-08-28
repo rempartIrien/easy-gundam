@@ -1,6 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { marked } from "marked";
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
@@ -20,7 +21,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   return getTimelineByCode(code, locale as Language).then((timeline) => {
     return json<LoaderData>({
-      timeline,
+      timeline: {
+        ...timeline,
+        description: marked(timeline.description || ""),
+      },
     });
   });
 };

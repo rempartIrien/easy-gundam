@@ -37,5 +37,8 @@ export default function Timeline(): ReactElement {
   if (!data) {
     throw new Error("This should be impossible.");
   }
-  return <p>{data.timeline.description}</p>;
+  return (
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    <p dangerouslySetInnerHTML={{ __html: data.timeline.description || "" }} />
+  );
 }
