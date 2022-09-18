@@ -3,9 +3,9 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import type { ReactElement } from "react";
 
-import { listTimelines } from "../../graphql/timeline.server";
-import type { Language } from "../../i18n/i18n.config";
-import i18Next from "../../i18n/i18n.server";
+import { listTimelines } from "../../../graphql/timeline.server";
+import type { Language } from "../../../i18n/i18n.config";
+import i18Next from "../../../i18n/i18n.server";
 
 interface LoaderData {
   timelines: Awaited<ReturnType<typeof listTimelines>>;

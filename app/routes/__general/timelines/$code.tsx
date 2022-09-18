@@ -6,9 +6,9 @@ import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
 
-import { getTimelineByCode } from "../../graphql/timeline.server";
-import type { Language } from "../../i18n/i18n.config";
-import i18Next from "../../i18n/i18n.server";
+import { getTimelineByCode } from "../../../graphql/timeline.server";
+import type { Language } from "../../../i18n/i18n.config";
+import i18Next from "../../../i18n/i18n.server";
 
 interface LoaderData {
   timeline: Awaited<ReturnType<typeof getTimelineByCode>>;

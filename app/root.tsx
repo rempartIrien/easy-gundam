@@ -1,4 +1,8 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type {
+  HeadersFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -14,7 +18,8 @@ import type { PropsWithChildren, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
 
-import Header from "./common/Header";
+import type { ThemeName } from "./cookies";
+import { getColorScheme } from "./cookies";
 import config from "./i18n/i18n.config";
 import i18Next from "./i18n/i18n.server";
 import { styled } from "./styles/stitches.config";
@@ -22,17 +27,24 @@ import { Styles } from "./styles/Styles";
 
 interface LoaderData {
   locale: string;
+  themeName: ThemeName;
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
+  const themeName = await getColorScheme(request);
   const locale = await i18Next.getLocale(request);
-  return json<LoaderData>({ locale });
+  return json<LoaderData>({ locale, themeName });
 };
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Easy Gundam",
   viewport: "width=device-width,initial-scale=1",
+});
+
+export const headers: HeadersFunction = () => ({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  "Accept-CH": "Sec-CH-Prefers-Color-Scheme",
 });
 
 export const handle = {
@@ -58,10 +70,12 @@ function Head(): ReactElement<"head"> {
   );
 }
 
-function Body({ children }: PropsWithChildren): ReactElement<"body"> {
+function Body({
+  themeName,
+  children,
+}: PropsWithChildren<{ themeName?: ThemeName }>): ReactElement<"body"> {
   return (
-    <body>
-      <Header />
+    <body className={themeName}>
       {children}
       <ScrollRestoration />
       <Scripts />
@@ -72,7 +86,7 @@ function Body({ children }: PropsWithChildren): ReactElement<"body"> {
 
 export default function Root(): ReactElement {
   // Get the locale from the loader
-  const { locale } = useLoaderData<LoaderData>();
+  const { locale, themeName } = useLoaderData<LoaderData>();
 
   const { i18n } = useTranslation();
 
@@ -85,7 +99,7 @@ export default function Root(): ReactElement {
   return (
     <html lang={locale} dir={i18n.dir()}>
       <Head />
-      <Body>
+      <Body themeName={themeName}>
         <Outlet />
       </Body>
     </html>

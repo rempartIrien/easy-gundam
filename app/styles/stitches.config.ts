@@ -4,18 +4,18 @@ export const { styled, createTheme, globalCss, getCssText, theme } =
   createStitches({
     theme: {
       colors: {
-        text: "#191919",
+        text: "red",
         bgBody: "#f8f9fa",
-        anchor: "DarkGoldenRod",
+        anchor: "green",
       },
     },
   });
 
 export const darkTheme = createTheme("dark", {
   colors: {
-    text: "#f8f9fa",
+    text: "blue",
     bgBody: "#191919",
-    anchor: "BlanchedAlmond",
+    anchor: "black",
   },
 });
 
