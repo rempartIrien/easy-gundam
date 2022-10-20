@@ -1,11 +1,9 @@
 import type { ActionFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node"; // or cloudflare/deno
+import { redirect } from "@remix-run/node";
 
 import { ThemeName, colorSchemeCookie, getColorScheme } from "~/cookies";
 
 export const action: ActionFunction = async ({ request }) => {
-  // eslint-disable-next-line no-debugger
-  debugger;
   const currentColorScheme = await getColorScheme(request);
   const newColorScheme =
     currentColorScheme === ThemeName.Light ? ThemeName.Dark : ThemeName.Light;

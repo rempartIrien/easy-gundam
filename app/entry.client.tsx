@@ -8,28 +8,6 @@ import { I18nextProvider, initReactI18next } from "react-i18next";
 import { getInitialNamespaces } from "remix-i18next";
 
 import config, { namespaceLoadPath } from "./i18n/i18n.config";
-import ClientStyleContext from "./styles/client.context";
-import { getCssText } from "./styles/stitches.config";
-
-interface ClientCacheProviderProps {
-  children: React.ReactNode;
-}
-
-function ClientCacheProvider({
-  children,
-}: ClientCacheProviderProps): JSX.Element {
-  const [sheet, setSheet] = React.useState(getCssText());
-
-  const reset = React.useCallback(() => {
-    setSheet(getCssText());
-  }, []);
-
-  return (
-    <ClientStyleContext.Provider value={{ reset, sheet }}>
-      {children}
-    </ClientStyleContext.Provider>
-  );
-}
 
 void i18next
   .use(initReactI18next) // Tell i18next to use the react-i18next plugin
@@ -59,11 +37,9 @@ void i18next
     return hydrateRoot(
       document,
       <React.StrictMode>
-        <ClientCacheProvider>
-          <I18nextProvider i18n={i18next}>
-            <RemixBrowser />
-          </I18nextProvider>
-        </ClientCacheProvider>
+        <I18nextProvider i18n={i18next}>
+          <RemixBrowser />
+        </I18nextProvider>
       </React.StrictMode>,
     );
   });

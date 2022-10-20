@@ -22,8 +22,6 @@ import type { ThemeName } from "./cookies";
 import { getColorScheme } from "./cookies";
 import config from "./i18n/i18n.config";
 import i18Next from "./i18n/i18n.server";
-import { styled } from "./styles/stitches.config";
-import { Styles } from "./styles/Styles";
 
 interface LoaderData {
   locale: string;
@@ -55,17 +53,11 @@ export const handle = {
   i18n: config.defaultNS,
 };
 
-const Container = styled("div", {
-  backgroundColor: "#ff0000",
-  padding: "1em",
-});
-
 function Head(): ReactElement<"head"> {
   return (
     <head>
       <Meta />
       <Links />
-      <Styles />
     </head>
   );
 }
@@ -114,13 +106,11 @@ export function CatchBoundary(): unknown {
     <html lang={i18n.language} dir={i18n.dir()}>
       <Head />
       <Body>
-        <Container>
-          <p>
-            [CatchBoundary]: {caught.status} {caught.statusText}
-            <br />
-            {t("test")}
-          </p>
-        </Container>
+        <p>
+          [CatchBoundary]: {caught.status} {caught.statusText}
+          <br />
+          {t("test")}
+        </p>
       </Body>
     </html>
   );
@@ -134,16 +124,13 @@ export function ErrorBoundary({ error }: { error: Error }): unknown {
       <head>
         <Meta />
         <Links />
-        <Styles />
       </head>
       <Body>
-        <Container>
-          <p>
-            <p>[ErrorBoundary]: There was an error: {error.message}</p>
-            <br />
-            {t("test")}
-          </p>
-        </Container>
+        <p>
+          <p>[ErrorBoundary]: There was an error: {error.message}</p>
+          <br />
+          {t("test")}
+        </p>
       </Body>
     </html>
   );
