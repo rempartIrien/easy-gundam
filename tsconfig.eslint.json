@@ -4,5 +4,5 @@
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true
   },
-  "include": [".eslintrc.js", "lint-staged.js"]
+  "include": [".eslintrc.js", "lint-staged.js", "generate-graphql-types"]
 }

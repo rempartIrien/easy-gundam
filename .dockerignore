@@ -5,3 +5,6 @@
 /.cache
 /public/build
 /build
+/dist
+.vscode
+.husky

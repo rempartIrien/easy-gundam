@@ -1,8 +1,7 @@
 /**
   npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser \
     eslint eslint-config-prettier eslint-config-typescript eslint-plugin-import \
-    eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jest prettier \
-    typescript
+    prettier typescript eslint-plugin-testing-library
  */
 
 module.exports = {
@@ -14,11 +13,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:import/errors",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-    "@remix-run/eslint-config",
-    "@remix-run/eslint-config/node",
+    "plugin:solid/recommended",
     "prettier",
   ],
   plugins: ["import"],
@@ -94,11 +89,6 @@ module.exports = {
         ignoreMemberSort: false,
       },
     ], // Everything else done by `import` plugin
-    "react/hook-use-state": "error",
-    "react/no-array-index-key": "error",
-    "react/jsx-key": "error",
-    "react/jsx-pascal-case": "error",
-    "react/self-closing-comp": "error",
   },
   overrides: [
     {
@@ -107,6 +97,7 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:import/typescript",
+        "plugin:solid/typescript",
       ],
       parser: "@typescript-eslint/parser",
       parserOptions: {
@@ -141,12 +132,7 @@ module.exports = {
             readonly: "array",
           },
         ],
-        "@typescript-eslint/explicit-function-return-type": [
-          "error",
-          { allowExpressions: true, allowTypedFunctionExpressions: true },
-        ],
         "@typescript-eslint/no-unsafe-member-access": "error",
-        "@typescript-eslint/explicit-module-boundary-types": "error",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/no-unused-vars": "error",

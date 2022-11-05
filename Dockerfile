@@ -38,7 +38,8 @@ COPY --from=deps /app/node_modules /app/node_modules
 # RUN npx prisma generate
 
 ADD . .
-RUN npm run build
+RUN --mount=type=secret,id=VITE_API \
+  VITE_API="$(cat /run/secrets/VITE_API)" npm run build
 
 # Finally, build the production image with minimal footprint
 FROM base
@@ -53,8 +54,7 @@ COPY --from=production-deps /app/node_modules /app/node_modules
 # Uncomment if using Prisma
 # COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
 
-COPY --from=build /app/build /app/build
-COPY --from=build /app/public /app/public
+COPY --from=build /app/dist /app/dist
 ADD . .
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "prod"]
