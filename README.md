@@ -1,5 +1,7 @@
 # TODO
 
-1. i18n with ???
-2. CSS with vannila-extract
-3. tiny-invariant
+Next steps:
+
+1. i18n with `@solid-primitives/i18n`
+2. CSS with `@vanilla-extract/css`
+3. Validation with `tiny-invariant`
