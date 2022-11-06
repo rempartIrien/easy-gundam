@@ -1,5 +1,6 @@
 import { For } from "solid-js";
-import { A, RouteDataArgs, useRouteData } from "solid-start";
+import type { RouteDataArgs } from "solid-start";
+import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
 import { listSeries } from "~/graphql/series.server";

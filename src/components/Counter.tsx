@@ -1,4 +1,5 @@
-import { JSX, createSignal } from "solid-js";
+import type { JSX } from "solid-js";
+import { createSignal } from "solid-js";
 import "./Counter.css";
 
 export default function Counter(): JSX.Element {

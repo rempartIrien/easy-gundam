@@ -1,6 +1,7 @@
 import { marked } from "marked";
 import { Show } from "solid-js";
-import { A, Outlet, RouteDataArgs, useRouteData } from "solid-start";
+import type { RouteDataArgs } from "solid-start";
+import { A, Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
 import { getTimelineByCode } from "~/graphql/timeline.server";

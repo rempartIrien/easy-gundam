@@ -1,4 +1,5 @@
-import { For } from "solid-js";
+import { useI18n } from "@solid-primitives/i18n";
+import { For, createSignal } from "solid-js";
 import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
@@ -12,15 +13,25 @@ export function routeData() {
 
 export default function Timelines() {
   const timelines = useRouteData<typeof routeData>();
+  const [name, setName] = createSignal("John");
+  const [t] = useI18n();
+
+  setInterval(() => {
+    setName(name() === "John" ? "Jean" : "John");
+  }, 1000);
+
   return (
-    <ul>
-      <For each={timelines()}>
-        {(timeline) => (
-          <li>
-            <A href={`/timelines/${timeline.code}`}>{timeline.name}</A>
-          </li>
-        )}
-      </For>
-    </ul>
+    <>
+      <p>{t("hello", { name: name() })}</p>
+      <ul>
+        <For each={timelines()}>
+          {(timeline) => (
+            <li>
+              <A href={`/timelines/${timeline.code}`}>{timeline.name}</A>
+            </li>
+          )}
+        </For>
+      </ul>
+    </>
   );
 }

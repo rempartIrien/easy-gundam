@@ -1,5 +1,6 @@
 import { Show } from "solid-js";
-import { RouteDataArgs, useRouteData } from "solid-start";
+import type { RouteDataArgs } from "solid-start";
+import { useRouteData } from "solid-start";
 
 import type { routeData as parentRouteData } from "../[code]";
 

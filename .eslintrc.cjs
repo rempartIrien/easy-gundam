@@ -191,6 +191,7 @@ module.exports = {
           "error",
           "interface",
         ],
+        "@typescript-eslint/consistent-type-imports": "error",
         "@typescript-eslint/member-delimiter-style": [
           "error",
           {
