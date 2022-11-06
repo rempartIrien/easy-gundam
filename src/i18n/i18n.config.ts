@@ -1,4 +1,9 @@
 export enum Language {
-  French = "fr-FR",
   English = "en-US",
+  French = "fr-FR",
 }
+
+export const LanguageNmes = {
+  [Language.English]: "English",
+  [Language.French]: "Français",
+};
