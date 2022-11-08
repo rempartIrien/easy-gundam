@@ -3,12 +3,15 @@ import type { RouteDataArgs } from "solid-start";
 import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
+import { getLocale } from "~/cookies/i18n.cookie";
 import { listSeries } from "~/graphql/series.server";
-import { Language } from "~/i18n/i18n.config";
 
 export function routeData({ params }: RouteDataArgs) {
   const series = createServerData$(
-    ([, code]: string[]) => listSeries(code, Language.English),
+    async ([, code]: string[], { request }) => {
+      const locale = await getLocale(request);
+      return listSeries(code, locale);
+    },
     { key: () => ["timelines", params.code] },
   );
   return series;

@@ -4,13 +4,14 @@ import type { RouteDataArgs } from "solid-start";
 import { A, Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
+import { getLocale } from "~/cookies/i18n.cookie";
 import { getTimelineByCode } from "~/graphql/timeline.server";
-import { Language } from "~/i18n/i18n.config";
 
 export function routeData({ params }: RouteDataArgs) {
   const timeline = createServerData$(
-    async ([, code]: string[]) => {
-      const t = await getTimelineByCode(code, Language.English);
+    async ([, code]: string[], { request }) => {
+      const locale = await getLocale(request);
+      const t = await getTimelineByCode(code, locale);
       return {
         ...t,
         description: marked(t.description || ""),

@@ -2,11 +2,14 @@ import { For } from "solid-js";
 import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
+import { getLocale } from "~/cookies/i18n.cookie";
 import { listTimelines } from "~/graphql/timeline.server";
-import { Language } from "~/i18n/i18n.config";
 
 export function routeData() {
-  const timelines = createServerData$(() => listTimelines(Language.English));
+  const timelines = createServerData$(async (_, { request }) => {
+    const locale = await getLocale(request);
+    return listTimelines(locale);
+  });
   return timelines;
 }
 
