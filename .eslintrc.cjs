@@ -23,6 +23,7 @@ module.exports = {
     },
   },
   rules: {
+    "no-console": "error",
     "max-classes-per-file": "error",
     "use-isnan": "error",
     "no-new-wrappers": "error",

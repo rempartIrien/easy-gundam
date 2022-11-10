@@ -3,7 +3,7 @@ export enum Language {
   French = "fr-FR",
 }
 
-export const LanguageNmes = {
+export const LanguageNmes: Record<Language, string> = {
   [Language.English]: "English",
   [Language.French]: "Français",
 };

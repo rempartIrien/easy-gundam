@@ -8,7 +8,7 @@ import {
   colorSchemeCookie,
   getColorScheme,
 } from "~/cookies/theme.cookie";
-import { Language, LanguageNmes } from "~/i18n/i18n.config";
+import { LanguageNmes } from "~/i18n/i18n.config";
 
 export default function Header() {
   const [, { Form: ThemeForm }] = createServerAction$(
@@ -53,10 +53,10 @@ export default function Header() {
         </button>
       </ThemeForm>
       <LocaleForm>
-        <For each={Object.values(Language)}>
-          {(locale) => (
+        <For each={Object.entries(LanguageNmes)}>
+          {([locale, name]) => (
             <button name="locale" value={locale}>
-              {LanguageNmes[locale]}
+              {name}
             </button>
           )}
         </For>

@@ -11,6 +11,9 @@ export function routeData({ params }: RouteDataArgs) {
   const timeline = createServerData$(
     async ([, code]: string[], { request }) => {
       const locale = await getLocale(request);
+      // TODO: Remove
+      // eslint-disable-next-line no-console
+      console.log(locale);
       const t = await getTimelineByCode(code, locale);
       return {
         ...t,
