@@ -2,13 +2,13 @@ import { For } from "solid-js";
 import { A } from "solid-start";
 import { createServerAction$, redirect } from "solid-start/server";
 
-import { localeCookie } from "~/cookies/i18n.cookie";
+import { LanguageNmes } from "~/i18n/i18n.config";
+import { localeCookie } from "~/i18n/i18n.cookie";
 import {
   ThemeName,
   colorSchemeCookie,
   getColorScheme,
-} from "~/cookies/theme.cookie";
-import { LanguageNmes } from "~/i18n/i18n.config";
+} from "~/theme/theme.cookie";
 
 export default function Header() {
   const [, { Form: ThemeForm }] = createServerAction$(

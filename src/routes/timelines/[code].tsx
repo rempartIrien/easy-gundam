@@ -4,8 +4,8 @@ import type { RouteDataArgs } from "solid-start";
 import { A, Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
-import { getLocale } from "~/cookies/i18n.cookie";
 import { getTimelineByCode } from "~/graphql/timeline.server";
+import { getLocale } from "~/i18n/i18n.cookie";
 
 export function routeData({ params }: RouteDataArgs) {
   const timeline = createServerData$(

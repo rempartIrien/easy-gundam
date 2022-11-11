@@ -15,8 +15,8 @@ import { ErrorBoundary } from "solid-start/error-boundary";
 import { createServerData$ } from "solid-start/server";
 
 import Header from "./components/Header";
-import { getLocale } from "./cookies/i18n.cookie";
-import { ThemeName, getColorScheme } from "./cookies/theme.cookie";
+import { getLocale } from "./i18n/i18n.cookie";
+import { ThemeName, getColorScheme } from "./theme/theme.cookie";
 import { darkTheme, lightTheme } from "./theme/theme.css";
 
 export default function Root() {

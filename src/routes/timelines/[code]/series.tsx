@@ -3,8 +3,8 @@ import type { RouteDataArgs } from "solid-start";
 import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
-import { getLocale } from "~/cookies/i18n.cookie";
 import { listSeries } from "~/graphql/series.server";
+import { getLocale } from "~/i18n/i18n.cookie";
 
 export function routeData({ params }: RouteDataArgs) {
   const series = createServerData$(
