@@ -1,0 +1,9 @@
+@import "@fontsource/m-plus-1p/latin-400.css";
+@import "@fontsource/m-plus-1p/latin-700.css";
+@import "@fontsource/m-plus-1p/japanese-400.css";
+@import "@fontsource/m-plus-1p/japanese-700.css";
+
+body {
+  font-family: 'M PLUS 1p', 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+

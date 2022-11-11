@@ -1,5 +1,5 @@
 import Counter from "~/components/Counter";
-import "./index.css";
+import "./font.css";
 
 export default function Home() {
   return (
