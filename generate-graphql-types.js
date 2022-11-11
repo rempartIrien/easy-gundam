@@ -1,14 +1,14 @@
-const { generate } = require("@graphql-codegen/cli");
-const dotenv = require("dotenv");
+import { generate } from "@graphql-codegen/cli";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const config = {
   overwrite: true,
   schema: process.env.API,
-  documents: "./app/graphql/**/*.ts",
+  documents: "./src/graphql/**/*.ts",
   generates: {
-    "app/graphql/generated/types.d.ts": {
+    "src/graphql/generated/types.d.ts": {
       plugins: [
         {
           add: {

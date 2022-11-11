@@ -1,5 +1,5 @@
 // See https://rossmoody.com/writing/remix-stitches
-import { createCookie } from "@remix-run/node";
+import { createCookie } from "solid-start";
 
 export enum ThemeName {
   Dark = "dark",
@@ -14,8 +14,8 @@ export const colorSchemeCookie = createCookie("color-scheme", {
   maxAge: ONE_YEAR, // in seconds
   path: "/",
   sameSite: "strict",
-  secrets: ["s3cret1"], // TODO: use a real secret
-  secure: true,
+  secrets: [import.meta.env.VITE_SECRETS],
+  secure: import.meta.env.PROD,
 });
 
 // Helper function to get the value of the color scheme cookie
@@ -33,7 +33,6 @@ export async function getColorScheme(request: Request): Promise<ThemeName> {
   const systemPreferredColorScheme = request.headers.get(
     "Sec-CH-Prefers-Color-Scheme",
   );
-
   // Return the manually selected theme
   // or system preferred theme or default theme
   return (

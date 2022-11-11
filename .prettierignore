@@ -4,4 +4,5 @@ build
 /public/build
 package-lock.json
 
-app/graphql/generated
+src/graphql/generated
+*.css
