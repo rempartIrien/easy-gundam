@@ -48,25 +48,23 @@ export default function Root() {
   );
 
   return (
-    <Suspense>
-      <Html lang={locale()}>
-        <Head>
-          <Title>Easy Gundam</Title>
-          <Meta charset="utf-8" />
-          <Meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
-        <Body class={className()}>
-          <ErrorBoundary>
-            <Suspense>
-              <Header />
-              <Routes>
-                <FileRoutes />
-              </Routes>
-            </Suspense>
-          </ErrorBoundary>
-          <Scripts />
-        </Body>
-      </Html>
-    </Suspense>
+    <Html lang={locale()}>
+      <Head>
+        <Title>Easy Gundam</Title>
+        <Meta charset="utf-8" />
+        <Meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <Body class={className()}>
+        <ErrorBoundary>
+          <Suspense>
+            <Header />
+            <Routes>
+              <FileRoutes />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
+        <Scripts />
+      </Body>
+    </Html>
   );
 }

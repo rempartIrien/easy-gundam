@@ -2,6 +2,8 @@ import { For } from "solid-js";
 import { A } from "solid-start";
 import { createServerAction$, redirect } from "solid-start/server";
 
+import Button from "./Button";
+
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
 import {
@@ -48,16 +50,16 @@ export default function Header() {
       <A href="/timelines">Timelines</A>
       <A href="/about">About</A>
       <ThemeForm>
-        <button type="submit" name="switchTheme">
+        <Button type="submit" name="switchTheme">
           Switch Theme
-        </button>
+        </Button>
       </ThemeForm>
       <LocaleForm>
         <For each={Object.entries(LanguageNmes)}>
           {([locale, name]) => (
-            <button name="locale" value={locale}>
+            <Button name="locale" value={locale}>
               {name}
-            </button>
+            </Button>
           )}
         </For>
       </LocaleForm>

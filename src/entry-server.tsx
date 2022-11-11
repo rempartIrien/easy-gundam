@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 
+import { Suspense } from "solid-js";
 import {
   StartServer,
   createHandler,
@@ -38,7 +39,9 @@ const dict = await retrieveTranslsations();
 export default createHandler(
   renderAsync((event) => (
     <I18nProvider dict={dict}>
-      <StartServer event={event} />
+      <Suspense>
+        <StartServer event={event} />
+      </Suspense>
     </I18nProvider>
   )),
 );

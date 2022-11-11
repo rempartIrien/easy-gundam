@@ -1,3 +1,4 @@
+import { Suspense } from "solid-js";
 import { StartClient, mount } from "solid-start/entry-client";
 
 import { Language } from "./i18n/i18n.config";
@@ -28,7 +29,9 @@ const dict = await retrieveTranslsations();
 mount(
   () => (
     <I18nProvider dict={dict}>
-      <StartClient />
+      <Suspense>
+        <StartClient />
+      </Suspense>
     </I18nProvider>
   ),
   document,
