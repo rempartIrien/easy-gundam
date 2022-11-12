@@ -6,7 +6,6 @@ export const buttonStyle = style({
   color: "#fff",
   backgroundColor: "#333",
   borderStyle: "none",
-  fontFamily: vars.font.body,
   selectors: {
     "&:hover": {
       color: vars.color.brand,
