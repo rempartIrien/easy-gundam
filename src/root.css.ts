@@ -1,5 +1,7 @@
 import { globalStyle } from "@vanilla-extract/css";
 
+import { vars } from "./theme/theme.css";
+
 globalStyle("html", {
   fontSize: "100%",
   "@media": {
@@ -13,6 +15,9 @@ globalStyle("html", {
 
 globalStyle("body", {
   boxSizing: "border-box",
+  backgroundColor: vars.color.background.main,
+  color: vars.color.text.main,
+  minHeight: "100%",
 });
 
 globalStyle("body *, body *::before, body *::after", {
