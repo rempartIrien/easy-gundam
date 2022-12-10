@@ -18,6 +18,8 @@ import Header from "./components/Header";
 import { getLocale } from "./i18n/i18n.cookie";
 import { ThemeName, getColorScheme } from "./theme/theme.cookie";
 import { darkTheme, lightTheme } from "./theme/theme.css";
+import "./root.css";
+import "./font.css";
 
 export default function Root() {
   // Cannot fetch it in routeData as it is not handled by root.tsx at the moment
