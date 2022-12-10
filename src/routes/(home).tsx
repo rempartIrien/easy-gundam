@@ -1,5 +1,4 @@
 import { paragraphStyle, titleStyle } from "./(home).css";
-import "./font.css";
 
 export default function Home() {
   return (

@@ -1,5 +1,23 @@
 import { createTheme, createThemeContract } from "@vanilla-extract/css";
 
+export const vars = createThemeContract({
+  color: {
+    background: { main: null },
+    text: { main: null, disabled: null },
+    primary: { main: null, text: null, background: null },
+    secondary: { main: null, text: null, background: null },
+    info: { main: null, text: null, background: null },
+    success: { main: null, text: null, background: null },
+    warning: { main: null, text: null, background: null },
+    error: { main: null, text: null, background: null },
+  },
+  font: {
+    title: { family: null, size: null, lineHeight: null },
+    subtitle: { family: null, size: null, lineHeight: null },
+    paragraph: { family: null, size: null, lineHeight: null },
+  },
+});
+
 // TODO: execute https://coolors.co/contrast-checker/
 
 const merigold = "#FCAE1E";
@@ -31,18 +49,32 @@ const cerulean = "#0492C2";
 const ceruleanLight = "#d1f3fe";
 const ceruleanDark = "#023a4e";
 
-export const vars = createThemeContract({
-  color: {
-    background: { main: null },
-    text: { main: null, disabled: null },
-    primary: { main: null, text: null, background: null },
-    secondary: { main: null, text: null, background: null },
-    info: { main: null, text: null, background: null },
-    success: { main: null, text: null, background: null },
-    warning: { main: null, text: null, background: null },
-    error: { main: null, text: null, background: null },
+interface FontVariables {
+  family: "Kaisei Opti" | "M PLUS 1p";
+  size: `${number}rem`;
+  lineHeight: `${number}rem` | `${number}`;
+}
+
+const fontFamiliySerif = "Kaisei Opti";
+const fontFamiliySansSerif = "M PLUS 1p";
+
+const font: Record<"title" | "subtitle" | "paragraph", FontVariables> = {
+  title: {
+    family: fontFamiliySerif,
+    size: "4rem",
+    lineHeight: "2",
   },
-});
+  subtitle: {
+    family: fontFamiliySansSerif,
+    size: "2rem",
+    lineHeight: "1.5",
+  },
+  paragraph: {
+    family: fontFamiliySansSerif,
+    size: "1rem",
+    lineHeight: "1.25",
+  },
+};
 
 export const lightTheme = createTheme(vars, {
   color: {
@@ -67,6 +99,7 @@ export const lightTheme = createTheme(vars, {
       background: candyAppleLight,
     },
   },
+  font,
 });
 
 export const darkTheme = createTheme(vars, {
@@ -88,4 +121,5 @@ export const darkTheme = createTheme(vars, {
       background: candyAppleDark,
     },
   },
+  font,
 });

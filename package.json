@@ -53,8 +53,8 @@
     "vitest": "^0.20.3"
   },
   "dependencies": {
-    "@fontsource/zen-kaku-gothic-new": "^4.5.14",
-    "@fontsource/zen-old-mincho": "^4.5.12",
+    "@fontsource/kaisei-opti": "^4.5.12",
+    "@fontsource/m-plus-1p": "^4.5.10",
     "@solid-primitives/i18n": "^1.1.2",
     "@solidjs/meta": "^0.28.0",
     "@solidjs/router": "^0.5.0",
