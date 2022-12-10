@@ -4,6 +4,7 @@ import type { RouteDataArgs } from "solid-start";
 import { A, Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
+import Title from "~/components/Title";
 import { getTimelineByCode } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
@@ -11,9 +12,6 @@ export function routeData({ params }: RouteDataArgs) {
   const timeline = createServerData$(
     async ([, code]: string[], { request }) => {
       const locale = await getLocale(request);
-      // TODO: Remove
-      // eslint-disable-next-line no-console
-      console.log(locale);
       const t = await getTimelineByCode(code, locale);
       return {
         ...t,
@@ -30,7 +28,7 @@ export default function Timelines() {
   return (
     <Show when={timeline()}>
       <section>
-        <h2>{timeline()?.name}</h2>
+        <Title>{timeline()?.name}</Title>
         <nav>
           <ol>
             <li>
