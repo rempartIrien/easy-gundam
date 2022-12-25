@@ -55,12 +55,11 @@ interface FontVariables {
   lineHeight: `${number}rem` | `${number}`;
 }
 
-const fontFamiliySerif = "Kaisei Opti";
 const fontFamiliySansSerif = "M PLUS 1p";
 
 const font: Record<"title" | "subtitle" | "paragraph", FontVariables> = {
   title: {
-    family: fontFamiliySerif,
+    family: fontFamiliySansSerif,
     size: "4rem",
     lineHeight: "2",
   },
