@@ -22,6 +22,19 @@
     "codegen": "node generate-graphql-types.js"
   },
   "type": "module",
+  "dependencies": {
+    "@fontsource/m-plus-1p": "^4.5.10",
+    "@solid-primitives/i18n": "^1.1.2",
+    "@solidjs/meta": "^0.28.0",
+    "@solidjs/router": "^0.6.0",
+    "@vanilla-extract/css": "^1.9.1",
+    "clsx": "^1.2.1",
+    "graphql-request": "^5.1.0",
+    "marked": "^4.2.2",
+    "solid-js": "^1.6.0",
+    "solid-start": "^0.2.7",
+    "undici": "^5.11.0"
+  },
   "devDependencies": {
     "@graphql-codegen/add": "^3.2.1",
     "@graphql-codegen/cli": "^2.13.11",
@@ -39,30 +52,17 @@
     "eslint-config-typescript": "^3.0.0",
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-solid": "^0.8.0",
+    "eslint-plugin-solid": "^0.9.0",
     "eslint-plugin-testing-library": "^5.9.1",
     "husky": "^8.0.0",
     "jsdom": "^20.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "solid-start-node": "^0.2.5",
-    "solid-testing-library": "^0.3.0",
+    "solid-testing-library": "^0.5.0",
     "typescript": "^4.8.4",
     "vite": "^3.1.8",
     "vite-tsconfig-paths": "^3.5.2",
     "vitest": "^0.20.3"
-  },
-  "dependencies": {
-    "@fontsource/m-plus-1p": "^4.5.10",
-    "@solid-primitives/i18n": "^1.1.2",
-    "@solidjs/meta": "^0.28.0",
-    "@solidjs/router": "^0.6.0",
-    "@vanilla-extract/css": "^1.9.1",
-    "clsx": "^1.2.1",
-    "graphql-request": "^4.3.0",
-    "marked": "^4.2.2",
-    "solid-js": "^1.6.0",
-    "solid-start": "^0.2.7",
-    "undici": "^5.11.0"
   }
 }
