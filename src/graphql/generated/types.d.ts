@@ -568,6 +568,7 @@ export type Series = {
   translations_func?: Maybe<Count_Functions>;
   user_created?: Maybe<Scalars['String']>;
   user_updated?: Maybe<Scalars['String']>;
+  year: Scalars['Int'];
 };
 
 
@@ -627,11 +628,13 @@ export type Series_Aggregated_Count = {
   translations?: Maybe<Scalars['Int']>;
   user_created?: Maybe<Scalars['Int']>;
   user_updated?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type Series_Aggregated_Fields = {
   __typename?: 'series_aggregated_fields';
   sort?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['Float']>;
 };
 
 export type Series_Filter = {
@@ -651,6 +654,7 @@ export type Series_Filter = {
   translations_func?: InputMaybe<Count_Function_Filter_Operators>;
   user_created?: InputMaybe<String_Filter_Operators>;
   user_updated?: InputMaybe<String_Filter_Operators>;
+  year?: InputMaybe<Number_Filter_Operators>;
 };
 
 export type Series_Translations = {
