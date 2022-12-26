@@ -7,11 +7,3 @@ export const headerStyle = style({
 export const navStyle = style({
   flex: 1,
 });
-
-export const navItemStyle = style({
-  selectors: {
-    "& + &": {
-      marginLeft: "8px",
-    },
-  },
-});

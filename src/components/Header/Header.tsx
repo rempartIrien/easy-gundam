@@ -3,19 +3,18 @@ import Nav from "../Nav";
 import NavItem from "../NavItem";
 import ThemeSwitcher from "../ThemeSwitcher";
 
-import { headerStyle, navItemStyle, navStyle } from "./Header.css";
+import { headerStyle, navStyle } from "./Header.css";
 
 export default function Header() {
   return (
     <header class={headerStyle}>
-      <Nav class={navStyle}>
-        <NavItem class={navItemStyle} href="/timelines">
-          Timelines
-        </NavItem>
-        <NavItem class={navItemStyle} href="/about">
-          About
-        </NavItem>
-      </Nav>
+      <Nav
+        class={navStyle}
+        items={[
+          <NavItem href="/timelines">Timelines</NavItem>,
+          <NavItem href="/about">About</NavItem>,
+        ]}
+      />
       <ThemeSwitcher />
       <LocaleSwitcher />
     </header>
