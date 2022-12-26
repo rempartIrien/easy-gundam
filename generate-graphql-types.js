@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { generate } from "@graphql-codegen/cli";
 import dotenv from "dotenv";
 
@@ -5,7 +6,7 @@ dotenv.config();
 
 const config = {
   overwrite: true,
-  schema: process.env.API,
+  schema: process.env.VITE_API,
   documents: "./src/graphql/**/*.ts",
   generates: {
     "src/graphql/generated/types.d.ts": {

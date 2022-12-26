@@ -5,3 +5,5 @@ build
 package-lock.json
 
 src/graphql/generated
+.solid
+dist

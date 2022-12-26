@@ -156,7 +156,6 @@ module.exports = {
               "private-instance-field",
               "public-abstract-field",
               "protected-abstract-field",
-              "private-abstract-field",
               // Constructors
               "public-constructor",
               "protected-constructor",
@@ -173,7 +172,6 @@ module.exports = {
               "private-instance-method",
               "public-abstract-method",
               "protected-abstract-method",
-              "private-abstract-method",
             ],
           },
         ],
