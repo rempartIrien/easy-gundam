@@ -1,5 +1,6 @@
 import { For } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
+import { useParams } from "solid-start";
 import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
@@ -18,13 +19,16 @@ export function routeData({ params }: RouteDataArgs) {
 }
 
 export default function Timelines() {
+  const params = useParams<{ code: string }>();
   const series = useRouteData<typeof routeData>();
   return (
     <ol>
       <For each={series()}>
         {(s) => (
           <li>
-            <A href={`/series/${s.code}`}>{s.title}</A>
+            <A href={`/series/${s.code}`}>
+              {`${params.code} ${String(s.year)}`} - {s.title}
+            </A>
           </li>
         )}
       </For>
