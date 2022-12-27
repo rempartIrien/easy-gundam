@@ -1,9 +1,9 @@
-import { For } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useParams } from "solid-start";
-import { A, useRouteData } from "solid-start";
+import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
+import Chronology from "~/components/Chronology";
 import { listSeries } from "~/graphql/series.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
@@ -21,17 +21,5 @@ export function routeData({ params }: RouteDataArgs) {
 export default function Timelines() {
   const params = useParams<{ code: string }>();
   const series = useRouteData<typeof routeData>();
-  return (
-    <ol>
-      <For each={series()}>
-        {(s) => (
-          <li>
-            <A href={`/series/${s.code}`}>
-              {`${params.code} ${String(s.year)}`} - {s.title}
-            </A>
-          </li>
-        )}
-      </For>
-    </ol>
-  );
+  return <Chronology timelineCode={params.code} items={series()} />;
 }

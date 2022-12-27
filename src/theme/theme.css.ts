@@ -52,7 +52,7 @@ const ceruleanDark = "#023a4e";
 interface FontVariables {
   family: "Kaisei Opti" | "M PLUS 1p";
   size: `${number}rem`;
-  lineHeight: `${number}rem` | `${number}`;
+  lineHeight: `${number}`;
 }
 
 const fontFamiliySansSerif = "M PLUS 1p";
