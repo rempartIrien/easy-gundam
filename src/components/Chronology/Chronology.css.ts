@@ -4,10 +4,18 @@ import { calc } from "@vanilla-extract/css-utils";
 import { vars } from "~/theme/theme.css";
 import { space } from "~/theme/utils";
 
+const leftWidth = "2O%";
+const borderWidth = "4px";
+const gap = calc(borderWidth).divide(2).add(space(4)).toString();
+
 export const chronologyStyle = style({
   listStyle: "none",
   padding: 0,
   margin: 0,
+  selectors: {
+    "&::before": {},
+    "&::after": {},
+  },
 });
 
 export const chronologyItemStyle = style({
@@ -15,15 +23,12 @@ export const chronologyItemStyle = style({
   alignItems: "stretch",
 });
 
-const borderWidth = "4px";
-const gap = calc(borderWidth).divide(2).add(space(4)).toString();
-
 export const yearStyle = style({
   borderRightWidth: borderWidth,
   borderRightStyle: "solid",
   borderRightColor: vars.color.primary.main,
   marginRight: gap,
-  width: "20%",
+  width: leftWidth,
   maxWidth: space(20),
   position: "relative",
   display: "inline-block",
@@ -40,7 +45,7 @@ export const yearStyle = style({
       height: "1em",
       display: "inline-block",
       position: "absolute",
-      right: calc(borderWidth).divide(2).add(space()).negate().toString(),
+      right: calc(borderWidth).divide(2).add(space(1)).negate().toString(),
       top: calc(vars.font.paragraph.size)
         .multiply(vars.font.paragraph.lineHeight)
         .divide(2)
