@@ -1,10 +1,13 @@
 import { gql } from "graphql-request";
 
-import { BASE_SERIES_FRAGMENT } from "./fragments";
+import { BASE_SERIES_FRAGMENT, FULL_SERIES_FRAGMENT } from "./fragments";
 
 export const LIST_SERIES_QUERY = gql`
   query listSeries($timelineCode: String!, $language: String!) {
-    series(filter: { timeline: { code: { _eq: $timelineCode } } }) {
+    series(
+      filter: { timeline: { code: { _eq: $timelineCode } } }
+      sort: ["sort", "year"]
+    ) {
       ...seriesBase
     }
   }
@@ -17,5 +20,5 @@ export const GET_SERIES_BY_CODE_QUERY = gql`
       ...seriesBase
     }
   }
-  ${BASE_SERIES_FRAGMENT}
+  ${FULL_SERIES_FRAGMENT}
 `;
