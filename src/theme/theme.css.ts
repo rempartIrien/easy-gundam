@@ -16,6 +16,9 @@ export const vars = createThemeContract({
     subtitle: { family: null, size: null, lineHeight: null },
     paragraph: { family: null, size: null, lineHeight: null },
   },
+  space: {
+    base: null,
+  },
 });
 
 // TODO: execute https://coolors.co/contrast-checker/
@@ -50,7 +53,7 @@ const ceruleanLight = "#d1f3fe";
 const ceruleanDark = "#023a4e";
 
 interface FontVariables {
-  family: "Kaisei Opti" | "M PLUS 1p";
+  family: "M PLUS 1p";
   size: `${number}rem`;
   lineHeight: `${number}`;
 }
@@ -73,6 +76,10 @@ const font: Record<"title" | "subtitle" | "paragraph", FontVariables> = {
     size: "1rem",
     lineHeight: "1.25",
   },
+};
+
+const space = {
+  base: "8px",
 };
 
 export const lightTheme = createTheme(vars, {
@@ -99,6 +106,7 @@ export const lightTheme = createTheme(vars, {
     },
   },
   font,
+  space,
 });
 
 export const darkTheme = createTheme(vars, {
@@ -121,4 +129,5 @@ export const darkTheme = createTheme(vars, {
     },
   },
   font,
+  space,
 });

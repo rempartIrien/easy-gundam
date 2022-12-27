@@ -2,6 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
 import { vars } from "~/theme/theme.css";
+import { space } from "~/theme/utils";
 
 export const chronologyStyle = style({
   listStyle: "none",
@@ -14,16 +15,19 @@ export const chronologyItemStyle = style({
   alignItems: "stretch",
 });
 
+const borderWidth = "4px";
+const gap = calc(borderWidth).divide(2).add(space(4)).toString();
+
 export const yearStyle = style({
-  borderRightWidth: "4px",
+  borderRightWidth: borderWidth,
   borderRightStyle: "solid",
   borderRightColor: vars.color.primary.main,
-  marginRight: "32px",
+  marginRight: gap,
   width: "20%",
-  maxWidth: "160px",
+  maxWidth: space(20),
   position: "relative",
   display: "inline-block",
-  paddingRight: "32px",
+  paddingRight: gap,
   textAlign: "end",
   lineHeight: vars.font.paragraph.lineHeight,
   selectors: {
@@ -36,7 +40,7 @@ export const yearStyle = style({
       height: "1em",
       display: "inline-block",
       position: "absolute",
-      right: "-10px",
+      right: calc(borderWidth).divide(2).add(space()).negate().toString(),
       top: calc(vars.font.paragraph.size)
         .multiply(vars.font.paragraph.lineHeight)
         .divide(2)
