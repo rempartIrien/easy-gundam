@@ -4,17 +4,24 @@ import { calc } from "@vanilla-extract/css-utils";
 import { vars } from "~/theme/theme.css";
 import { space } from "~/theme/utils";
 
-const leftWidth = "2O%";
+const leftWidth = "20%";
 const borderWidth = "4px";
 const gap = calc(borderWidth).divide(2).add(space(4)).toString();
 
 export const chronologyStyle = style({
   listStyle: "none",
-  padding: 0,
   margin: 0,
   selectors: {
-    "&::before": {},
-    "&::after": {},
+    [`&::before,
+    &::after`]: {
+      content: "",
+      borderRightWidth: borderWidth,
+      borderRightStyle: "dashed",
+      borderRightColor: vars.color.primary.main,
+      display: "block",
+      height: space(5),
+      width: leftWidth,
+    },
   },
 });
 
@@ -34,7 +41,6 @@ export const yearStyle = style({
   display: "inline-block",
   paddingRight: gap,
   textAlign: "end",
-  lineHeight: vars.font.paragraph.lineHeight,
   selectors: {
     "&::after": {
       flexShrink: 0,
@@ -49,6 +55,7 @@ export const yearStyle = style({
       top: calc(vars.font.paragraph.size)
         .multiply(vars.font.paragraph.lineHeight)
         .divide(2)
+        .add("2px") // because of gap between text node and parent node
         .toString(),
       transform: "translateY(-50%)",
     },
