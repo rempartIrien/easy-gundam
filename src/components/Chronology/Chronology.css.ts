@@ -64,6 +64,9 @@ export const yearStyle = style({
   },
 });
 
-export const seriesStyle = style({
+export const seriesListStyle = style({
   flex: "1",
+  listStyle: "none",
+  padding: 0,
+  margin: 0,
 });

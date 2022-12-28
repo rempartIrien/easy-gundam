@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import type { JSX } from "solid-js";
+import { Show, createMemo } from "solid-js";
 import { For, splitProps } from "solid-js";
 import { A } from "solid-start";
 
 import {
   chronologyItemStyle,
   chronologyStyle,
-  seriesStyle,
+  seriesListStyle,
   yearStyle,
 } from "./Chronology.css";
 
@@ -24,20 +25,36 @@ interface ChronologyProps extends JSX.OlHTMLAttributes<HTMLOListElement> {
 export default function Chronology(props: ChronologyProps) {
   const [local, others] = splitProps(props, ["timelineCode", "items", "class"]);
 
+  const seriesByYear = createMemo(() => {
+    return Object.entries(
+      (local.items || []).reduce((acc, cur) => {
+        return { ...acc, [cur.year]: (acc[cur.year] || []).concat(cur) };
+      }, {} as Record<BaseSeries["year"], BaseSeries[]>),
+    );
+  });
+
   return (
-    <ol {...others} class={clsx(chronologyStyle, local.class)}>
-      <For each={local.items}>
-        {(item) => (
-          <li class={chronologyItemStyle}>
-            <div class={yearStyle}>
-              {local.timelineCode}&nbsp;{item.year}
-            </div>
-            <div class={seriesStyle}>
-              <A href={`/series/${item.code}`}>{item.title}</A>
-            </div>
-          </li>
-        )}
-      </For>
-    </ol>
+    <Show when={seriesByYear()?.length}>
+      <ol {...others} class={clsx(chronologyStyle, local.class)}>
+        <For each={seriesByYear()}>
+          {([year, items]) => (
+            <li class={chronologyItemStyle}>
+              <div class={yearStyle}>
+                {local.timelineCode}&nbsp;{year}
+              </div>
+              <ol class={seriesListStyle}>
+                <For each={items}>
+                  {(item) => (
+                    <li>
+                      <A href={`/series/${item.code}`}>{item.title}</A>
+                    </li>
+                  )}
+                </For>
+              </ol>
+            </li>
+          )}
+        </For>
+      </ol>
+    </Show>
   );
 }
