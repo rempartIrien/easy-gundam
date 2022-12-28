@@ -11,6 +11,7 @@ const gap = calc(borderWidth).divide(2).add(space(4)).toString();
 export const chronologyStyle = style({
   listStyle: "none",
   margin: 0,
+  padding: 0,
   selectors: {
     [`&::before,
     &::after`]: {
@@ -21,6 +22,7 @@ export const chronologyStyle = style({
       display: "block",
       height: space(5),
       width: leftWidth,
+      maxWidth: space(20),
     },
   },
 });
