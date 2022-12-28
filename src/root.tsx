@@ -37,7 +37,7 @@ export default function Root() {
     key: "locale",
   });
 
-  const [, { locale: updateLocale }] = useI18n();
+  const [t, { locale: updateLocale }] = useI18n();
 
   createEffect(() => {
     if (locale()) {
@@ -52,7 +52,7 @@ export default function Root() {
   return (
     <Html lang={locale()}>
       <Head>
-        <Title>Easy Gundam</Title>
+        <Title>{t("appName")}</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

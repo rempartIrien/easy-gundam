@@ -1,3 +1,4 @@
+import { useI18n } from "@solid-primitives/i18n";
 import { createServerAction$, redirect } from "solid-start/server";
 
 import Button from "../Button";
@@ -27,10 +28,12 @@ export default function ThemeSwitcher() {
     },
   );
 
+  const [t] = useI18n();
+
   return (
     <ThemeForm>
       <Button type="submit" name="switchTheme">
-        Switch Theme
+        {t("header.actions.switchTheme")}
       </Button>
     </ThemeForm>
   );

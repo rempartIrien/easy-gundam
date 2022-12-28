@@ -1,14 +1,14 @@
-import { Title } from "solid-start";
+import { useI18n } from "@solid-primitives/i18n";
 import { HttpStatusCode } from "solid-start/server";
 
 export default function NotFound() {
+  const [t] = useI18n();
   return (
     <main>
-      <Title>Not Found</Title>
       <HttpStatusCode code={404} />
-      <h1>Page Not Found</h1>
+      <h1>{t("notFound.title")}</h1>
       <p>
-        <a href="/">Back to home</a>
+        <a href="/">{t("notFound.links.backToHome")}</a>
       </p>
     </main>
   );

@@ -1,3 +1,4 @@
+import { useI18n } from "@solid-primitives/i18n";
 import { marked } from "marked";
 import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
@@ -26,6 +27,7 @@ export function routeData({ params }: RouteDataArgs) {
 }
 
 export default function Timelines() {
+  const [t] = useI18n();
   const timeline = useRouteData<typeof routeData>();
   return (
     <Show when={timeline()}>
@@ -34,9 +36,9 @@ export default function Timelines() {
         <Nav
           items={[
             <NavItem href="" end>
-              Description
+              {t("timelines.nav.description")}
             </NavItem>,
-            <NavItem href="series">Series</NavItem>,
+            <NavItem href="series">{t("timelines.nav.series")}</NavItem>,
           ]}
         />
         <Outlet />

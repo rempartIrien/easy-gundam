@@ -1,15 +1,13 @@
+import { useI18n } from "@solid-primitives/i18n";
+
 import { paragraphStyle, titleStyle } from "./(home).css";
 
 export default function Home() {
+  const [t] = useI18n();
   return (
     <main>
-      <h1 class={titleStyle}>
-        Welcome to Easy Gundam! (イジ士ガンダムにようこそ)
-      </h1>
-      <p class={paragraphStyle}>
-        This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series
-        by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸).
-      </p>
+      <h1 class={titleStyle}>{t("home.title")}</h1>
+      <p class={paragraphStyle}>{t("home.subtitle")}</p>
     </main>
   );
 }

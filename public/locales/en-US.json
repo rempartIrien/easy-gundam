@@ -1,3 +1,29 @@
 {
-  "hello": "hello {{ name }}, how are you?"
+  "appName": "Easy Gundam",
+  "header": {
+    "actions": {
+      "switchTheme": "Switch theme"
+    },
+    "nav": {
+      "home": "Home",
+      "timelines": "Timelines",
+      "about": "About"
+    }
+  },
+  "home": {
+    "title": "Welcome to Easy Gundam!",
+    "subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸)."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "links": {
+      "backToHome": "Back to home"
+    }
+  },
+  "timelines": {
+    "nav": {
+      "description": "Description",
+      "series": "Series"
+    }
+  }
 }
