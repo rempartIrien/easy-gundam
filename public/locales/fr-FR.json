@@ -21,6 +21,7 @@
     }
   },
   "timelines": {
+    "title": "Univers",
     "nav": {
       "description": "Description",
       "series": "Séries"

@@ -21,6 +21,7 @@
     }
   },
   "timelines": {
+    "title": "Timelines",
     "nav": {
       "description": "Description",
       "series": "Series"
