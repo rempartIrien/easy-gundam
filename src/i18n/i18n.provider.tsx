@@ -1,5 +1,4 @@
-import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
-import type { JSX } from "solid-js";
+import { readFile } from "node:fs/promises";
 
 import { Language } from "./i18n.config";
 
@@ -9,16 +8,25 @@ interface RecursiveString {
 
 export type I18Dictionary = Record<Language, RecursiveString>;
 
-interface I18nProviderProps {
-  dict: I18Dictionary;
-  children: JSX.Element;
-}
-
-export function I18nProvider(props: I18nProviderProps) {
-  //FIXME: Handle this warning properly
-  // eslint-disable-next-line solid/reactivity
-  const value = createI18nContext(props.dict, Language.French);
-  return (
-    <I18nContext.Provider value={value}>{props.children}</I18nContext.Provider>
-  );
+export async function retrieveTranslsations(): Promise<I18Dictionary> {
+  try {
+    // Retrieve all locale files
+    const locales = Object.values(Language);
+    const contents = await Promise.all(
+      locales.map((locale) => {
+        const filePath = new URL(
+          `../public/locales/${locale}.json`,
+          import.meta.url,
+        );
+        return readFile(filePath, { encoding: "utf8" }).then(JSON.parse);
+      }),
+    );
+    return locales.reduce((acc, cur, index) => {
+      return { ...acc, [cur]: contents[index] };
+    }, {} as I18Dictionary);
+  } catch (err) {
+    // FIXME: logger
+    const message = err instanceof Error ? `: ${err.message}` : "";
+    throw new Error(`Can't retrieve translation files${message}`);
+  }
 }

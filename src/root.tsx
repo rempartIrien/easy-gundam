@@ -1,21 +1,15 @@
 // @refresh reload
-import { useI18n } from "@solid-primitives/i18n";
+import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
 import { Routes } from "@solidjs/router";
 import { Suspense, createEffect, createMemo } from "solid-js";
-import {
-  Body,
-  FileRoutes,
-  Head,
-  Html,
-  Meta,
-  Scripts,
-  Title,
-} from "solid-start";
+import { Body, FileRoutes, Head, Html, Meta, Scripts } from "solid-start";
 import { ErrorBoundary } from "solid-start/error-boundary";
 import { createServerData$ } from "solid-start/server";
 
 import Header from "./components/Header";
+import { Language } from "./i18n/i18n.config";
 import { getLocale } from "./i18n/i18n.cookie";
+import { retrieveTranslsations } from "./i18n/i18n.provider";
 import { ThemeName, getColorScheme } from "./theme/theme.cookie";
 import { darkTheme, lightTheme } from "./theme/theme.css";
 import "./root.css";
@@ -37,11 +31,23 @@ export default function Root() {
     key: "locale",
   });
 
-  const [t, { locale: updateLocale }] = useI18n();
+  const dict = createServerData$(async () => retrieveTranslsations(), {
+    key: "dict",
+  });
+
+  const i18n = createI18nContext({}, Language.French);
 
   createEffect(() => {
     if (locale()) {
-      updateLocale(locale());
+      i18n[1].locale(locale());
+    }
+  });
+
+  createEffect(() => {
+    if (dict()) {
+      Object.entries(dict() || {}).map(([key, value]) => {
+        i18n[1].add(key, value);
+      });
     }
   });
 
@@ -50,23 +56,30 @@ export default function Root() {
   );
 
   return (
-    <Html lang={locale()}>
-      <Head>
-        <Title>{t("appName")}</Title>
-        <Meta charset="utf-8" />
-        <Meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <Body class={className()}>
-        <ErrorBoundary>
-          <Suspense>
-            <Header />
-            <Routes>
-              <FileRoutes />
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-        <Scripts />
-      </Body>
-    </Html>
+    <Suspense>
+      <I18nContext.Provider value={i18n}>
+        <Html lang={locale()}>
+          <Head>
+            {/* <Title>{t("appName")}</Title> */}
+            <Meta charset="utf-8" />
+            <Meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+          </Head>
+          <Body class={className()}>
+            <ErrorBoundary>
+              <Suspense>
+                <Header />
+                <Routes>
+                  <FileRoutes />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+            <Scripts />
+          </Body>
+        </Html>
+      </I18nContext.Provider>
+    </Suspense>
   );
 }
