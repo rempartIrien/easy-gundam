@@ -10,8 +10,8 @@ import Header from "~/components/Header";
 import { LocaleContext } from "~/contexts/LocaleContext";
 import type { Language } from "~/i18n/i18n.config";
 import { DEFAULT_LOCALE } from "~/i18n/i18n.cookie";
-import type { I18Dictionary } from "~/i18n/i18n.provider";
-import { retrieveTranslsations } from "~/i18n/i18n.provider";
+import type { I18nDictionary } from "~/i18n/i18n.server";
+import { retrieveTranslsations } from "~/i18n/i18n.server";
 
 export function routeData(params: RouteDataArgs) {
   return createServerData$(
@@ -36,7 +36,7 @@ export default function I18nLayout() {
 
   createEffect(() => {
     if (!dict.loading && dict()?.[params.lang]) {
-      i18n[1].add(params.lang, dict()?.[params.lang] as I18Dictionary);
+      i18n[1].add(params.lang, dict()?.[params.lang] as I18nDictionary);
       i18n[1].locale(params.lang);
       setLocale(params.lang as Language);
     }

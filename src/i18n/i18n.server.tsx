@@ -6,9 +6,9 @@ interface RecursiveString {
   [key: string]: string | RecursiveString;
 }
 
-export type I18Dictionary = Record<Language, RecursiveString>;
+export type I18nDictionary = Record<Language, RecursiveString>;
 
-export async function retrieveTranslsations(): Promise<I18Dictionary> {
+export async function retrieveTranslsations(): Promise<I18nDictionary> {
   try {
     // Retrieve all locale files
     const locales = Object.values(Language);
@@ -23,7 +23,7 @@ export async function retrieveTranslsations(): Promise<I18Dictionary> {
     );
     return locales.reduce((acc, cur, index) => {
       return { ...acc, [cur]: contents[index] };
-    }, {} as I18Dictionary);
+    }, {} as I18nDictionary);
   } catch (err) {
     // FIXME: logger
     const message = err instanceof Error ? `: ${err.message}` : "";
