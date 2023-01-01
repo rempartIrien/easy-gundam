@@ -26,7 +26,7 @@ export default function Timelines() {
         <For each={timelines()}>
           {(timeline) => (
             <li>
-              <A href={`/timelines/${timeline.code}`}>{timeline.name}</A>
+              <A href={timeline.code}>{timeline.name}</A>
             </li>
           )}
         </For>

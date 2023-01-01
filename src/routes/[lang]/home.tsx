@@ -1,6 +1,6 @@
 import { useI18n } from "@solid-primitives/i18n";
 
-import { paragraphStyle, titleStyle } from "./(home).css";
+import { paragraphStyle, titleStyle } from "./home.css";
 
 export default function Home() {
   const [t] = useI18n();

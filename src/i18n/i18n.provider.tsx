@@ -15,7 +15,7 @@ export async function retrieveTranslsations(): Promise<I18Dictionary> {
     const contents = await Promise.all(
       locales.map((locale) => {
         const filePath = new URL(
-          `../public/locales/${locale}.json`,
+          `../../public/locales/${locale}.json`,
           import.meta.url,
         );
         return readFile(filePath, { encoding: "utf8" }).then(JSON.parse);
