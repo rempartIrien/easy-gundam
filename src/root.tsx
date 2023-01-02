@@ -36,7 +36,7 @@ export default function Root() {
   const [, updateLocale] = useContext(LocaleContext);
 
   createEffect(() => {
-    if (locale()) {
+    if (!locale.loading) {
       updateLocale(locale() as Language);
     }
   });
