@@ -1,38 +1,24 @@
-import { Suspense } from "solid-js";
 import { StartClient, mount } from "solid-start/entry-client";
 
-import { Language } from "./i18n/i18n.config";
-import type { I18Dictionary } from "./i18n/i18n.provider";
-import { I18nProvider } from "./i18n/i18n.provider";
+import { DictionaryProvider } from "./contexts/DictionaryContext";
+import { LocaleProvider } from "./contexts/LocaleContext";
+import type { Language } from "./i18n/i18n.config";
+import type { I18nDictionary } from "./i18n/i18n.utils";
+import { retrieveTranslsations } from "./i18n/i18n.utils";
 
-async function retrieveTranslsations(): Promise<I18Dictionary> {
-  try {
-    // Retrieve all locale files
-    const locales = Object.values(Language);
-    const content = await Promise.all(
-      locales.map((locale) =>
-        fetch(`/locales/${locale}.json`).then((response) => response.json()),
-      ),
-    );
-    return locales.reduce((acc, cur, index) => {
-      return { ...acc, [cur]: content[index] };
-    }, {} as I18Dictionary);
-  } catch (err) {
-    // FIXME: logger
-    const message = err instanceof Error ? `: ${err.message}` : "";
-    throw new Error(`Can't retrieve translation files${message}`);
-  }
-}
-
-const dict = await retrieveTranslsations();
+const dict = await retrieveTranslsations((locale) =>
+  fetch(`/locales/${locale}.json`).then(
+    (response) => response.json() as Promise<I18nDictionary[Language]>,
+  ),
+);
 
 mount(
   () => (
-    <I18nProvider dict={dict}>
-      <Suspense>
+    <LocaleProvider>
+      <DictionaryProvider initialDict={dict}>
         <StartClient />
-      </Suspense>
-    </I18nProvider>
+      </DictionaryProvider>
+    </LocaleProvider>
   ),
   document,
 );

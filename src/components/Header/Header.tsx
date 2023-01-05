@@ -14,11 +14,9 @@ export default function Header() {
       <Nav
         class={navStyle}
         items={[
-          <NavItem href="/" end>
-            {t("header.nav.home")}
-          </NavItem>,
-          <NavItem href="/timelines">{t("header.nav.timelines")}</NavItem>,
-          <NavItem href="/about">{t("header.nav.about")}</NavItem>,
+          <NavItem href="home">{t("header.nav.home")}</NavItem>,
+          <NavItem href="timelines">{t("header.nav.timelines")}</NavItem>,
+          <NavItem href="about">{t("header.nav.about")}</NavItem>,
         ]}
       />
       <ThemeSwitcher />
