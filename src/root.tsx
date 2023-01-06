@@ -1,16 +1,18 @@
 // @refresh reload
+import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
 import { Routes } from "@solidjs/router";
-import { Suspense, createEffect, createMemo, useContext } from "solid-js";
+import { Show, Suspense, createMemo, useContext } from "solid-js";
 import { Body, FileRoutes, Head, Html, Meta, Scripts } from "solid-start";
 import { ErrorBoundary } from "solid-start/error-boundary";
 import { createServerData$ } from "solid-start/server";
 
 import ErrorPage from "./components/ErrorPage";
+import { DictionaryContext } from "./contexts/DictionaryContext";
 import { LocaleContext } from "./contexts/LocaleContext";
-import type { Language } from "./i18n/i18n.config";
 import { getLocale } from "./i18n/i18n.cookie";
 import { ThemeName, getColorScheme } from "./theme/theme.cookie";
 import { darkTheme, lightTheme } from "./theme/theme.css";
+
 import "./root.css";
 import "./font.css";
 
@@ -34,32 +36,33 @@ export default function Root() {
     themeName() === ThemeName.Dark ? darkTheme : lightTheme,
   );
 
-  const [, updateLocale] = useContext(LocaleContext);
-
-  createEffect(() => {
-    if (!locale.loading) {
-      updateLocale(locale() as Language);
-    }
-  });
+  const dict = useContext(DictionaryContext);
 
   return (
     <Suspense>
-      <Html lang={locale()}>
-        <Head>
-          <Meta charset="utf-8" />
-          <Meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
-        <Body class={className()}>
-          <ErrorBoundary
-            fallback={() => <ErrorPage initialLocale={locale() as Language} />}
-          >
-            <Routes>
-              <FileRoutes />
-            </Routes>
-          </ErrorBoundary>
-          <Scripts />
-        </Body>
-      </Html>
+      <Show when={locale()}>
+        <LocaleContext.Provider value={locale()}>
+          <I18nContext.Provider value={createI18nContext(dict, locale())}>
+            <Html lang={locale()}>
+              <Head>
+                <Meta charset="utf-8" />
+                <Meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1"
+                />
+              </Head>
+              <Body class={className()}>
+                <ErrorBoundary fallback={() => <ErrorPage />}>
+                  <Routes>
+                    <FileRoutes />
+                  </Routes>
+                </ErrorBoundary>
+                <Scripts />
+              </Body>
+            </Html>
+          </I18nContext.Provider>
+        </LocaleContext.Provider>
+      </Show>
     </Suspense>
   );
 }

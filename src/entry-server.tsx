@@ -7,7 +7,6 @@ import {
 } from "solid-start/entry-server";
 
 import { DictionaryProvider } from "./contexts/DictionaryContext";
-import { LocaleProvider } from "./contexts/LocaleContext";
 import type { Language } from "./i18n/i18n.config";
 import type { I18nDictionary } from "./i18n/i18n.utils";
 import { retrieveTranslsations } from "./i18n/i18n.utils";
@@ -21,10 +20,8 @@ const dict = await retrieveTranslsations((locale) => {
 
 export default createHandler(
   renderAsync((event) => (
-    <LocaleProvider>
-      <DictionaryProvider initialDict={dict}>
-        <StartServer event={event} />
-      </DictionaryProvider>
-    </LocaleProvider>
+    <DictionaryProvider initialDict={dict}>
+      <StartServer event={event} />
+    </DictionaryProvider>
   )),
 );

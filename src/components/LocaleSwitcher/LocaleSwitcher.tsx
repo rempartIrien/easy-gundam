@@ -28,11 +28,11 @@ export default function LocaleSwitcher() {
     },
   );
 
-  const [currentLocale] = useContext(LocaleContext);
+  const currentLocale = useContext(LocaleContext);
 
   return (
     <LocaleForm>
-      <input type="hidden" name="currentLocale" value={currentLocale()} />
+      <input type="hidden" name="currentLocale" value={currentLocale} />
       <For each={Object.entries(LanguageNmes)}>
         {([locale, name]) => (
           <Button name="newLocale" value={locale}>
