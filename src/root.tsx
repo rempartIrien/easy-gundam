@@ -5,6 +5,7 @@ import { Body, FileRoutes, Head, Html, Meta, Scripts } from "solid-start";
 import { ErrorBoundary } from "solid-start/error-boundary";
 import { createServerData$ } from "solid-start/server";
 
+import ErrorPage from "./components/ErrorPage";
 import { LocaleContext } from "./contexts/LocaleContext";
 import type { Language } from "./i18n/i18n.config";
 import { getLocale } from "./i18n/i18n.cookie";
@@ -49,7 +50,9 @@ export default function Root() {
           <Meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <Body class={className()}>
-          <ErrorBoundary>
+          <ErrorBoundary
+            fallback={() => <ErrorPage initialLocale={locale() as Language} />}
+          >
             <Routes>
               <FileRoutes />
             </Routes>

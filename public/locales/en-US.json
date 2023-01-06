@@ -1,5 +1,11 @@
 {
   "appName": "Easy Gundam",
+  "error": {
+    "title": "Error",
+    "links": {
+      "backToHome": "Back to home"
+    }
+  },
   "header": {
     "actions": {
       "switchTheme": "Switch theme"

@@ -3,14 +3,16 @@ import { createSignal } from "solid-js";
 import { createContext } from "solid-js";
 
 import type { Language } from "~/i18n/i18n.config";
-import { DEFAULT_LOCALE } from "~/i18n/i18n.cookie";
 
-const [locale, setLocale] = createSignal(DEFAULT_LOCALE);
+const [locale, setLocale] = createSignal<Language | undefined>();
 
-type LocaleContextType = [Accessor<Language>, (locale: Language) => void];
+type LocaleContextType = [
+  Accessor<Language | undefined>,
+  (locale: Language) => void,
+];
 
 export const LocaleContext = createContext<LocaleContextType>([
-  () => DEFAULT_LOCALE,
+  () => undefined,
   setLocale,
 ]);
 
