@@ -1,7 +1,7 @@
 import type { JSX } from "solid-js";
 import { createContext } from "solid-js";
 
-import type { I18nDictionary } from "~/i18n/i18n.utils";
+import type { I18nDictionary } from "~/i18n/i18n.server";
 
 // This context aims to hold the translation dictionary.
 // It is separated from the I18nContext because can't be filled

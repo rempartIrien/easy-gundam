@@ -39,9 +39,14 @@ function extractPreferredLocale(
 }
 
 export async function getLocale(request: Request): Promise<Language> {
-  // Locale sset by given URL
+  // Locale set by given URL
   const urlBasedLocale = Object.keys(LanguageNmes).find((lang) =>
     request.url.match(`/${lang}/`),
+  ) as Language | undefined;
+
+  // Locale set by referer header
+  const referrerBasedLocale = Object.keys(LanguageNmes).find((lang) =>
+    request.headers.get("Referer")?.match(`/${lang}/`),
   ) as Language | undefined;
 
   // Manually selected locale
@@ -56,6 +61,7 @@ export async function getLocale(request: Request): Promise<Language> {
   // or system preferred locale or default locale
   return (
     urlBasedLocale ??
+    referrerBasedLocale ??
     userSelectedLocale ??
     systemPreferredLocale ??
     DEFAULT_LOCALE
