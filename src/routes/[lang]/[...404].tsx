@@ -1,23 +1,20 @@
 import { useI18n } from "@solid-primitives/i18n";
-import { useContext } from "solid-js";
 import { A } from "solid-start";
 import { HttpStatusCode } from "solid-start/server";
 
 import Title from "~/components/Title";
-import { LocaleContext } from "~/contexts/LocaleContext";
+import useRootPath from "~/hooks/useRootPath";
 
 export default function NotFound() {
   const [t] = useI18n();
-  const locale = useContext(LocaleContext);
+  const rootPath = useRootPath();
 
   return (
     <main>
       <HttpStatusCode code={404} />
       <Title>{t("notFound.title")}</Title>
       <p>
-        <A href={locale ? `/${locale}` : "/"}>
-          {t("notFound.links.backToHome")}
-        </A>
+        <A href={rootPath}>{t("notFound.links.backToHome")}</A>
       </p>
     </main>
   );

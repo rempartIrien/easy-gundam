@@ -11,6 +11,8 @@ import {
   yearStyle,
 } from "./Chronology.css";
 
+import useRootPath from "~/hooks/useRootPath";
+
 interface BaseSeries {
   code: string;
   title: string;
@@ -24,6 +26,7 @@ interface ChronologyProps extends JSX.OlHTMLAttributes<HTMLOListElement> {
 
 export default function Chronology(props: ChronologyProps) {
   const [local, others] = splitProps(props, ["timelineCode", "items", "class"]);
+  const rootPath = useRootPath();
 
   const seriesByYear = createMemo(() => {
     return Object.entries(
@@ -46,7 +49,9 @@ export default function Chronology(props: ChronologyProps) {
                 <For each={items}>
                   {(item) => (
                     <li>
-                      <A href={`/series/${item.code}`}>{item.title}</A>
+                      <A href={`${rootPath}series/${item.code}`}>
+                        {item.title}
+                      </A>
                     </li>
                   )}
                 </For>
