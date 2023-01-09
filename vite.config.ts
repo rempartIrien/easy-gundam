@@ -16,4 +16,7 @@ export default defineConfig({
       reporter: ["json", "html"],
     },
   },
+  resolve: {
+    conditions: ["development", "browser"],
+  },
 });
