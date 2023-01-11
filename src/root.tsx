@@ -14,35 +14,35 @@ import "./root.css";
 import "./font.css";
 
 export default function Root() {
-  // Cannot fetch it in routeData as it is not handled by root.tsx at the moment
-  // See https://discordapp.com/channels/722131463138705510/910635844119982080/1036479279019606036
-  const themeName = createServerData$(
-    async (_, { request }) => {
-      return await getColorScheme(request);
-    },
-    {
-      key: "themeName",
-    },
-  );
+	// Cannot fetch it in routeData as it is not handled by root.tsx at the moment
+	// See https://discordapp.com/channels/722131463138705510/910635844119982080/1036479279019606036
+	const themeName = createServerData$(
+		async (_, { request }) => {
+			return await getColorScheme(request);
+		},
+		{
+			key: "themeName",
+		},
+	);
 
-  const className = createMemo(() =>
-    themeName() === ThemeName.Dark ? darkTheme : lightTheme,
-  );
+	const className = createMemo(() =>
+		themeName() === ThemeName.Dark ? darkTheme : lightTheme,
+	);
 
-  return (
-    <HtmlRoot>
-      <Head>
-        <Meta charset="utf-8" />
-        <Meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <Body class={className()}>
-        <ErrorBoundary fallback={() => <ErrorPage />}>
-          <Routes>
-            <FileRoutes />
-          </Routes>
-        </ErrorBoundary>
-        <Scripts />
-      </Body>
-    </HtmlRoot>
-  );
+	return (
+		<HtmlRoot>
+			<Head>
+				<Meta charset="utf-8" />
+				<Meta name="viewport" content="width=device-width, initial-scale=1" />
+			</Head>
+			<Body class={className()}>
+				<ErrorBoundary fallback={() => <ErrorPage />}>
+					<Routes>
+						<FileRoutes />
+					</Routes>
+				</ErrorBoundary>
+				<Scripts />
+			</Body>
+		</HtmlRoot>
+	);
 }

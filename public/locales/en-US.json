@@ -1,36 +1,36 @@
 {
-  "appName": "Easy Gundam",
-  "error": {
-    "title": "Error",
-    "links": {
-      "backToHome": "Back to home"
-    }
-  },
-  "header": {
-    "actions": {
-      "switchTheme": "Switch theme"
-    },
-    "nav": {
-      "home": "Home",
-      "timelines": "Timelines",
-      "about": "About"
-    }
-  },
-  "home": {
-    "title": "Welcome to Easy Gundam!",
-    "subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸)."
-  },
-  "notFound": {
-    "title": "Page not found",
-    "links": {
-      "backToHome": "Back to home"
-    }
-  },
-  "timelines": {
-    "title": "Timelines",
-    "nav": {
-      "description": "Description",
-      "series": "Series"
-    }
-  }
+	"appName": "Easy Gundam",
+	"error": {
+		"title": "Error",
+		"links": {
+			"backToHome": "Back to home"
+		}
+	},
+	"header": {
+		"actions": {
+			"switchTheme": "Switch theme"
+		},
+		"nav": {
+			"home": "Home",
+			"timelines": "Timelines",
+			"about": "About"
+		}
+	},
+	"home": {
+		"title": "Welcome to Easy Gundam!",
+		"subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸)."
+	},
+	"notFound": {
+		"title": "Page not found",
+		"links": {
+			"backToHome": "Back to home"
+		}
+	},
+	"timelines": {
+		"title": "Timelines",
+		"nav": {
+			"description": "Description",
+			"series": "Series"
+		}
+	}
 }

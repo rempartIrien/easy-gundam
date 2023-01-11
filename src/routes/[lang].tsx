@@ -5,13 +5,13 @@ import { Outlet } from "solid-start";
 import Header from "~/components/Header";
 
 export default function I18nLayout() {
-  const [t] = useI18n();
+	const [t] = useI18n();
 
-  return (
-    <>
-      <Title>{t("appName")}</Title>
-      <Header />
-      <Outlet />
-    </>
-  );
+	return (
+		<>
+			<Title>{t("appName")}</Title>
+			<Header />
+			<Outlet />
+		</>
+	);
 }

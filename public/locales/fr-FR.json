@@ -1,36 +1,36 @@
 {
-  "appName": "Easy Gundam",
-  "error": {
-    "title": "Erreur",
-    "links": {
-      "backToHome": "Retour à l'accueil"
-    }
-  },
-  "header": {
-    "actions": {
-      "switchTheme": "Changer de thème"
-    },
-    "nav": {
-      "home": "Accueil",
-      "timelines": "Univers",
-      "about": "À propos"
-    }
-  },
-  "home": {
-    "title": "Bienvenue sur Easy Gundam!",
-    "subtitle": "Ce site parle de Mobile Suit Gundam (機動戦士ガンダム), une série créée par Yoshiyuki Tomino (富野 由悠季 ou 富野 喜幸)."
-  },
-  "notFound": {
-    "title": "Page introuvable",
-    "links": {
-      "backToHome": "Retour à l'accueil"
-    }
-  },
-  "timelines": {
-    "title": "Univers",
-    "nav": {
-      "description": "Description",
-      "series": "Séries"
-    }
-  }
+	"appName": "Easy Gundam",
+	"error": {
+		"title": "Erreur",
+		"links": {
+			"backToHome": "Retour à l'accueil"
+		}
+	},
+	"header": {
+		"actions": {
+			"switchTheme": "Changer de thème"
+		},
+		"nav": {
+			"home": "Accueil",
+			"timelines": "Univers",
+			"about": "À propos"
+		}
+	},
+	"home": {
+		"title": "Bienvenue sur Easy Gundam!",
+		"subtitle": "Ce site parle de Mobile Suit Gundam (機動戦士ガンダム), une série créée par Yoshiyuki Tomino (富野 由悠季 ou 富野 喜幸)."
+	},
+	"notFound": {
+		"title": "Page introuvable",
+		"links": {
+			"backToHome": "Retour à l'accueil"
+		}
+	},
+	"timelines": {
+		"title": "Univers",
+		"nav": {
+			"description": "Description",
+			"series": "Séries"
+		}
+	}
 }

@@ -5,61 +5,61 @@ import { For, splitProps } from "solid-js";
 import { A } from "solid-start";
 
 import {
-  chronologyItemStyle,
-  chronologyStyle,
-  seriesListStyle,
-  yearStyle,
+	chronologyItemStyle,
+	chronologyStyle,
+	seriesListStyle,
+	yearStyle,
 } from "./Chronology.css";
 
 import useRootPath from "~/hooks/useRootPath";
 
 interface BaseSeries {
-  code: string;
-  title: string;
-  year: number;
+	code: string;
+	title: string;
+	year: number;
 }
 
 interface ChronologyProps extends JSX.OlHTMLAttributes<HTMLOListElement> {
-  timelineCode: string;
-  items: BaseSeries[] | undefined;
+	timelineCode: string;
+	items: BaseSeries[] | undefined;
 }
 
 export default function Chronology(props: ChronologyProps) {
-  const [local, others] = splitProps(props, ["timelineCode", "items", "class"]);
-  const rootPath = useRootPath();
+	const [local, others] = splitProps(props, ["timelineCode", "items", "class"]);
+	const rootPath = useRootPath();
 
-  const seriesByYear = createMemo(() => {
-    return Object.entries(
-      (local.items || []).reduce((acc, cur) => {
-        return { ...acc, [cur.year]: (acc[cur.year] || []).concat(cur) };
-      }, {} as Record<BaseSeries["year"], BaseSeries[]>),
-    );
-  });
+	const seriesByYear = createMemo(() => {
+		return Object.entries(
+			(local.items || []).reduce((acc, cur) => {
+				return { ...acc, [cur.year]: (acc[cur.year] || []).concat(cur) };
+			}, {} as Record<BaseSeries["year"], BaseSeries[]>),
+		);
+	});
 
-  return (
-    <Show when={seriesByYear()?.length}>
-      <ol {...others} class={clsx(chronologyStyle, local.class)}>
-        <For each={seriesByYear()}>
-          {([year, items]) => (
-            <li class={chronologyItemStyle}>
-              <div class={yearStyle}>
-                {local.timelineCode}&nbsp;{year}
-              </div>
-              <ol class={seriesListStyle}>
-                <For each={items}>
-                  {(item) => (
-                    <li>
-                      <A href={`${rootPath}series/${item.code}`}>
-                        {item.title}
-                      </A>
-                    </li>
-                  )}
-                </For>
-              </ol>
-            </li>
-          )}
-        </For>
-      </ol>
-    </Show>
-  );
+	return (
+		<Show when={seriesByYear()?.length}>
+			<ol {...others} class={clsx(chronologyStyle, local.class)}>
+				<For each={seriesByYear()}>
+					{([year, items]) => (
+						<li class={chronologyItemStyle}>
+							<div class={yearStyle}>
+								{local.timelineCode}&nbsp;{year}
+							</div>
+							<ol class={seriesListStyle}>
+								<For each={items}>
+									{(item) => (
+										<li>
+											<A href={`${rootPath}series/${item.code}`}>
+												{item.title}
+											</A>
+										</li>
+									)}
+								</For>
+							</ol>
+						</li>
+					)}
+				</For>
+			</ol>
+		</Show>
+	);
 }

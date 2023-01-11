@@ -6,16 +6,16 @@ import Title from "~/components/Title";
 import useRootPath from "~/hooks/useRootPath";
 
 export default function NotFound() {
-  const [t] = useI18n();
-  const rootPath = useRootPath();
+	const [t] = useI18n();
+	const rootPath = useRootPath();
 
-  return (
-    <main>
-      <HttpStatusCode code={404} />
-      <Title>{t("notFound.title")}</Title>
-      <p>
-        <A href={rootPath}>{t("notFound.links.backToHome")}</A>
-      </p>
-    </main>
-  );
+	return (
+		<main>
+			<HttpStatusCode code={404} />
+			<Title>{t("notFound.title")}</Title>
+			<p>
+				<A href={rootPath}>{t("notFound.links.backToHome")}</A>
+			</p>
+		</main>
+	);
 }

@@ -2,40 +2,40 @@
 import { createCookie } from "solid-start";
 
 export enum ThemeName {
-  Dark = "dark",
-  Light = "light",
+	Dark = "dark",
+	Light = "light",
 }
 
 const ONE_YEAR = 365 * 24 * 60 * 60;
 
 // Create a cookie to track color scheme state
 export const colorSchemeCookie = createCookie("color-scheme", {
-  httpOnly: true,
-  maxAge: ONE_YEAR, // in seconds
-  path: "/",
-  sameSite: "strict",
-  secrets: [import.meta.env.VITE_SECRETS],
-  secure: import.meta.env.PROD,
+	httpOnly: true,
+	maxAge: ONE_YEAR, // in seconds
+	path: "/",
+	sameSite: "strict",
+	secrets: [import.meta.env.VITE_SECRETS],
+	secure: import.meta.env.PROD,
 });
 
 // Helper function to get the value of the color scheme cookie
 function getColorSchemeToken(request: Request): Promise<ThemeName> {
-  return colorSchemeCookie.parse(
-    request.headers.get("Cookie"),
-  ) as Promise<ThemeName>;
+	return colorSchemeCookie.parse(
+		request.headers.get("Cookie"),
+	) as Promise<ThemeName>;
 }
 
 export async function getColorScheme(request: Request): Promise<ThemeName> {
-  // Manually selected theme
-  const userSelectedColorScheme = await getColorSchemeToken(request);
+	// Manually selected theme
+	const userSelectedColorScheme = await getColorSchemeToken(request);
 
-  // System preferred color scheme header
-  const systemPreferredColorScheme = request.headers.get(
-    "Sec-CH-Prefers-Color-Scheme",
-  );
-  // Return the manually selected theme
-  // or system preferred theme or default theme
-  return (
-    userSelectedColorScheme ?? systemPreferredColorScheme ?? ThemeName.Light
-  );
+	// System preferred color scheme header
+	const systemPreferredColorScheme = request.headers.get(
+		"Sec-CH-Prefers-Color-Scheme",
+	);
+	// Return the manually selected theme
+	// or system preferred theme or default theme
+	return (
+		userSelectedColorScheme ?? systemPreferredColorScheme ?? ThemeName.Light
+	);
 }

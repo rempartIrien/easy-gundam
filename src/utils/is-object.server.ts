@@ -1,5 +1,5 @@
 export default function isObject(
-  value?: unknown,
+	value?: unknown,
 ): value is Record<string | number, unknown> {
-  return !!value && typeof value === "object" && !Array.isArray(value);
+	return !!value && typeof value === "object" && !Array.isArray(value);
 }
