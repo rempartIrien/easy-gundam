@@ -4,14 +4,14 @@ import { Show, createMemo } from "solid-js";
 import { For, splitProps } from "solid-js";
 import { A } from "solid-start";
 
+import useRootPath from "~/hooks/useRootPath";
+
 import {
 	chronologyItemStyle,
 	chronologyStyle,
 	seriesListStyle,
 	yearStyle,
 } from "./Chronology.css";
-
-import useRootPath from "~/hooks/useRootPath";
 
 interface BaseSeries {
 	code: string;

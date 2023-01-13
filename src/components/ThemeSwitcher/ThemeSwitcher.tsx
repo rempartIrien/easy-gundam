@@ -1,13 +1,13 @@
 import { useI18n } from "@solid-primitives/i18n";
 import { createServerAction$, redirect } from "solid-start/server";
 
-import Button from "../Button";
-
 import {
 	ThemeName,
 	colorSchemeCookie,
 	getColorScheme,
 } from "~/theme/theme.cookie";
+
+import Button from "../Button";
 
 export default function ThemeSwitcher() {
 	const [, { Form: ThemeForm }] = createServerAction$(

@@ -5,15 +5,14 @@ import { Show, Suspense } from "solid-js";
 import { Html } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
-import { LocaleContext } from "../../contexts/LocaleContext";
-
-import { htmlRootStyle } from "./HtmlRoot.css";
-
 import { getLocale } from "~/i18n/i18n.cookie";
 import { retrieveTranslsations } from "~/i18n/i18n.server";
 import { ThemeName, getColorScheme } from "~/theme/theme.cookie";
 import { darkTheme, lightTheme } from "~/theme/theme.css";
 
+import { LocaleContext } from "../../contexts/LocaleContext";
+
+import { htmlRootStyle } from "./HtmlRoot.css";
 import "./HtmlRoot.css";
 
 interface RootProps {

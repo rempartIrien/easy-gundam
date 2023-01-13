@@ -1,12 +1,12 @@
 import { For, useContext } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 
-import Button from "../Button";
-
 import { LocaleContext } from "~/contexts/LocaleContext";
 import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
+
+import Button from "../Button";
 
 export default function LocaleSwitcher() {
 	const [, { Form: LocaleForm }] = createServerAction$(

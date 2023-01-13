@@ -1,9 +1,9 @@
 import { cleanup, render, screen } from "solid-testing-library";
 
-import useRootPath from "./useRootPath";
-
 import { LocaleContext } from "~/contexts/LocaleContext";
 import { Language } from "~/i18n/i18n.config";
+
+import useRootPath from "./useRootPath";
 
 function LocaleConsumer() {
 	const rootPath = useRootPath();

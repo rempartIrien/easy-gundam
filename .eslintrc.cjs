@@ -79,6 +79,13 @@ module.exports = {
 			{
 				"newlines-between": "always",
 				alphabetize: { order: "asc", caseInsensitive: true },
+				pathGroups: [
+					{
+						pattern: "~/**",
+						group: "external",
+						position: "after",
+					},
+				],
 			},
 		],
 		"import/newline-after-import": "error",
