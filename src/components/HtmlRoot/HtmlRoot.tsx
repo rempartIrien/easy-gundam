@@ -8,6 +8,8 @@ import { LocaleContext } from "../../contexts/LocaleContext";
 
 import { getLocale } from "~/i18n/i18n.cookie";
 import { retrieveTranslsations } from "~/i18n/i18n.server";
+import { ThemeName, getColorScheme } from "~/theme/theme.cookie";
+import { darkTheme, lightTheme } from "~/theme/theme.css";
 
 interface RootProps {
 	children: JSX.Element;
@@ -22,13 +24,27 @@ export default function HtmlRoot(props: RootProps) {
 		key: "locale",
 	});
 
+	const themeName = createServerData$(
+		async (_, { request }) => {
+			return await getColorScheme(request);
+		},
+		{
+			key: "themeName",
+		},
+	);
+
 	return (
 		<Suspense>
 			<Show when={locale()}>
 				<Show when={dict()}>
 					<LocaleContext.Provider value={locale()}>
 						<I18nContext.Provider value={createI18nContext(dict(), locale())}>
-							<Html lang={locale()}>{props.children}</Html>
+							<Html
+								lang={locale()}
+								class={themeName() === ThemeName.Dark ? darkTheme : lightTheme}
+							>
+								{props.children}
+							</Html>
 						</I18nContext.Provider>
 					</LocaleContext.Provider>
 				</Show>
