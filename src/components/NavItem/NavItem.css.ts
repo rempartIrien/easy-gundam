@@ -6,7 +6,7 @@ export const navItemStyle = style({
 	textDecoration: "none",
 	color: vars.color.text.main,
 	selectors: {
-		[`&:hover`]: {
+		"&:hover": {
 			color: vars.color.primary.main,
 		},
 	},

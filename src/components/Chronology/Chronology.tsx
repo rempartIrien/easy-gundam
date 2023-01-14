@@ -2,9 +2,6 @@ import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { Show, createMemo } from "solid-js";
 import { For, splitProps } from "solid-js";
-import { A } from "solid-start";
-
-import useRootPath from "~/hooks/useRootPath";
 
 import {
 	chronologyItemStyle,
@@ -12,12 +9,8 @@ import {
 	seriesListStyle,
 	yearStyle,
 } from "./Chronology.css";
-
-interface BaseSeries {
-	code: string;
-	title: string;
-	year: number;
-}
+import type { BaseSeries } from "./SeriesItem";
+import SeriesItem from "./SeriesItem";
 
 interface ChronologyProps extends JSX.OlHTMLAttributes<HTMLOListElement> {
 	timelineCode: string;
@@ -26,7 +19,6 @@ interface ChronologyProps extends JSX.OlHTMLAttributes<HTMLOListElement> {
 
 export default function Chronology(props: ChronologyProps) {
 	const [local, others] = splitProps(props, ["timelineCode", "items", "class"]);
-	const rootPath = useRootPath();
 
 	const seriesByYear = createMemo(() => {
 		return Object.entries(
@@ -49,9 +41,7 @@ export default function Chronology(props: ChronologyProps) {
 								<For each={items}>
 									{(item) => (
 										<li>
-											<A href={`${rootPath}series/${item.code}`}>
-												{item.title}
-											</A>
+											<SeriesItem series={item} />
 										</li>
 									)}
 								</For>
