@@ -6,9 +6,9 @@ import { Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import Heading from "~/components/Heading";
 import Nav from "~/components/Nav";
 import NavItem from "~/components/NavItem";
-import Title from "~/components/Title";
 import { getTimelineByCode } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
@@ -34,7 +34,7 @@ export default function Timelines() {
 	return (
 		<Show when={timeline()}>
 			<section>
-				<Title>{timeline()?.name}</Title>
+				<Heading>{timeline()?.name}</Heading>
 				<Nav
 					items={[
 						<NavItem href="" end>

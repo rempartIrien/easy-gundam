@@ -3,7 +3,7 @@ import { For } from "solid-js";
 import { A, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
-import Title from "~/components/Title";
+import Heading from "~/components/Heading";
 import { listTimelines } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
@@ -21,7 +21,7 @@ export default function Timelines() {
 
 	return (
 		<>
-			<Title>{t("timelines.title")}</Title>
+			<Heading>{t("timelines.title")}</Heading>
 			<ul>
 				<For each={timelines()}>
 					{(timeline) => (

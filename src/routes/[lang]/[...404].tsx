@@ -2,7 +2,7 @@ import { useI18n } from "@solid-primitives/i18n";
 import { A } from "solid-start";
 import { HttpStatusCode } from "solid-start/server";
 
-import Title from "~/components/Title";
+import Heading from "~/components/Heading";
 import useRootPath from "~/hooks/useRootPath";
 
 export default function NotFound() {
@@ -12,7 +12,7 @@ export default function NotFound() {
 	return (
 		<main>
 			<HttpStatusCode code={404} />
-			<Title>{t("notFound.title")}</Title>
+			<Heading>{t("notFound.title")}</Heading>
 			<p>
 				<A href={rootPath}>{t("notFound.links.backToHome")}</A>
 			</p>
