@@ -7,6 +7,7 @@ export const BASE_SERIES_FRAGMENT = gql`
 		dateCreated: date_created
 		translations(filter: { language_code: { code: { _eq: $language } } }) {
 			title
+			description
 		}
 		image {
 			id
@@ -25,6 +26,7 @@ export const FULL_SERIES_FRAGMENT = gql`
 		}
 		translations(filter: { language_code: { code: { _eq: $language } } }) {
 			title
+			description
 		}
 		image {
 			id
