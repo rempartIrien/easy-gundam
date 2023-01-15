@@ -27,9 +27,9 @@ export default function SeriesItem(props: SeriesItemProps) {
 			<Show when={props.series.image?.id}>
 				<div>
 					<img
-						src={`/api/images/${props.series.image?.id as string}/small`}
+						src={`/api/images/${props.series.image?.id as string}/extraSmall`}
 						alt={props.series.image?.description || props.series.title}
-						srcset={`/api/images/${props.series.image?.id as string}/medium 2x`}
+						srcset={`/api/images/${props.series.image?.id as string}/small 2x`}
 					/>
 				</div>
 			</Show>

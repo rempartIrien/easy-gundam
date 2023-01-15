@@ -4,6 +4,7 @@ import invariant from "tiny-invariant";
 import { API } from "~/constants.server";
 
 const sizeMap = {
+	extraSmall: "100",
 	small: "200",
 	medium: "400",
 	large: "800",
