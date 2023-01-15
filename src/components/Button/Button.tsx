@@ -9,7 +9,6 @@ interface ButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button(props: ButtonProps) {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [local, otherProps] = splitProps(props, ["class", "variant"]);
 	return <button class={clsx(buttonStyle, local.class)} {...otherProps} />;
 }

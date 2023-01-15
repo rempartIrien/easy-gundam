@@ -21,7 +21,7 @@ export default function Timelines() {
 
 	return (
 		<>
-			<Heading>{t("timelines.title")}</Heading>
+			<Heading variant="title">{t("timelines.title")}</Heading>
 			<ul>
 				<For each={timelines()}>
 					{(timeline) => (

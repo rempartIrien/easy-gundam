@@ -34,7 +34,7 @@ export default function Timelines() {
 	return (
 		<Show when={timeline()}>
 			<section>
-				<Heading>{timeline()?.name}</Heading>
+				<Heading variant="title">{timeline()?.name}</Heading>
 				<Nav
 					items={[
 						<NavItem href="" end>
