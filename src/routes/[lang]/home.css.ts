@@ -9,7 +9,7 @@ export const titleStyle = style({
 });
 
 export const paragraphStyle = style({
-	fontFamily: vars.font.paragraph.family,
-	fontSize: vars.font.paragraph.size,
-	lineHeight: vars.font.paragraph.lineHeight,
+	fontFamily: vars.font.normalText.family,
+	fontSize: vars.font.normalText.size,
+	lineHeight: vars.font.normalText.lineHeight,
 });

@@ -14,7 +14,9 @@ export const vars = createThemeContract({
 	font: {
 		title: { family: null, size: null, lineHeight: null },
 		subtitle: { family: null, size: null, lineHeight: null },
-		paragraph: { family: null, size: null, lineHeight: null },
+		bigText: { family: null, size: null, lineHeight: null },
+		normalText: { family: null, size: null, lineHeight: null },
+		smallText: { family: null, size: null, lineHeight: null },
 	},
 	space: {
 		base: null,
@@ -60,7 +62,10 @@ interface FontVariables {
 
 const fontFamiliySansSerif = "M PLUS 1p";
 
-const font: Record<"title" | "subtitle" | "paragraph", FontVariables> = {
+const font: Record<
+	"title" | "subtitle" | "bigText" | "normalText" | "smallText",
+	FontVariables
+> = {
 	title: {
 		family: fontFamiliySansSerif,
 		size: "4rem",
@@ -71,9 +76,19 @@ const font: Record<"title" | "subtitle" | "paragraph", FontVariables> = {
 		size: "2rem",
 		lineHeight: "1.5",
 	},
-	paragraph: {
+	bigText: {
+		family: fontFamiliySansSerif,
+		size: "1.25rem",
+		lineHeight: "1.25",
+	},
+	normalText: {
 		family: fontFamiliySansSerif,
 		size: "1rem",
+		lineHeight: "1.25",
+	},
+	smallText: {
+		family: fontFamiliySansSerif,
+		size: "0.75rem",
 		lineHeight: "1.25",
 	},
 };
