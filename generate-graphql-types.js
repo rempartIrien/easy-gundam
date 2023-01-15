@@ -6,7 +6,7 @@ dotenv.config();
 
 const config = {
 	overwrite: true,
-	schema: process.env.VITE_API,
+	schema: `${process.env.VITE_API}/graphql`,
 	documents: "./src/graphql/**/*.ts",
 	generates: {
 		"src/graphql/generated/types.d.ts": {

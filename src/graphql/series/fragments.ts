@@ -8,11 +8,15 @@ export const BASE_SERIES_FRAGMENT = gql`
 		translations(filter: { language_code: { code: { _eq: $language } } }) {
 			title
 		}
+		image {
+			id
+			description
+		}
 	}
 `;
 
 export const FULL_SERIES_FRAGMENT = gql`
-	fragment seriesBase on series {
+	fragment seriesFull on series {
 		code
 		year
 		dateCreated: date_created
@@ -21,6 +25,10 @@ export const FULL_SERIES_FRAGMENT = gql`
 		}
 		translations(filter: { language_code: { code: { _eq: $language } } }) {
 			title
+		}
+		image {
+			id
+			description
 		}
 	}
 `;
