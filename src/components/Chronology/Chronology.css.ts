@@ -8,6 +8,8 @@ const leftWidth = "20%";
 const borderWidth = "4px";
 const gap = calc(borderWidth).divide(2).add(space(4)).toString();
 
+export const bulletPaddingTop = space(2);
+
 export const chronologyStyle = style({
 	listStyle: "none",
 	margin: 0,
@@ -42,6 +44,7 @@ export const yearStyle = style({
 	position: "relative",
 	display: "inline-block",
 	paddingRight: gap,
+	paddingTop: bulletPaddingTop,
 	textAlign: "end",
 	selectors: {
 		"&::after": {
@@ -54,10 +57,11 @@ export const yearStyle = style({
 			display: "inline-block",
 			position: "absolute",
 			right: calc(borderWidth).divide(2).add(space(1)).negate().toString(),
-			top: calc(vars.font.paragraph.size)
-				.multiply(vars.font.paragraph.lineHeight)
+			top: calc(vars.font.bigText.size)
+				.multiply(vars.font.bigText.lineHeight)
 				.divide(2)
 				.add("2px") // because of gap between text node and parent node
+				.add(bulletPaddingTop)
 				.toString(),
 			transform: "translateY(-50%)",
 		},

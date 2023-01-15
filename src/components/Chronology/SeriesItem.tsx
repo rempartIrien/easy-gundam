@@ -3,12 +3,14 @@ import { Show } from "solid-js";
 import useRootPath from "~/hooks/useRootPath";
 
 import Link from "../Link";
+import Text from "../Text";
 
-import { seriesItemStyle } from "./SeriesItem.css";
+import { contentStyle, seriesItemStyle, titleStyle } from "./SeriesItem.css";
 
 export interface BaseSeries {
 	code: string;
 	title: string;
+	description?: string | null;
 	year: number;
 	image?: { id?: string | null; description?: string | null } | null;
 }
@@ -21,6 +23,7 @@ export default function SeriesItem(props: SeriesItemProps) {
 	const rootPath = useRootPath();
 	return (
 		<Link
+			noStyle
 			class={seriesItemStyle}
 			href={`${rootPath}series/${props.series.code}`}
 		>
@@ -33,7 +36,12 @@ export default function SeriesItem(props: SeriesItemProps) {
 					/>
 				</div>
 			</Show>
-			<div>{props.series.title}</div>
+			<div class={contentStyle}>
+				<Text variant="big" class={titleStyle}>
+					{props.series.title}
+				</Text>
+				<Text variant="normal">{props.series.description}</Text>
+			</div>
 		</Link>
 	);
 }
