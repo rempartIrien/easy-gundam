@@ -1,0 +1,6 @@
+# EditorConfig file to set tab size to 2 spaces on GitHub at project level
+root = true
+
+[*]
+indent_style = tab
+indent_size = 2
