@@ -10,9 +10,9 @@ import { contentStyle, seriesItemStyle, titleStyle } from "./SeriesItem.css";
 export interface BaseSeries {
 	code: string;
 	title: string;
-	description?: string | null;
+	description: string | null;
 	year: number;
-	image?: { id?: string | null; description?: string | null } | null;
+	image: { id: string | null; description: string | null } | null;
 }
 
 interface SeriesItemProps {

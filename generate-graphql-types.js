@@ -19,6 +19,9 @@ const config = {
 				"typescript",
 				"typescript-operations",
 			],
+			config: {
+				avoidOptionals: true,
+			},
 		},
 	},
 };
