@@ -2,7 +2,7 @@ import { createTheme, createThemeContract } from "@vanilla-extract/css";
 
 export const vars = createThemeContract({
 	color: {
-		background: { main: null },
+		background: { main: null, emphasis: null },
 		text: { main: null, disabled: null },
 		primary: { main: null, text: null, background: null },
 		secondary: { main: null, text: null, background: null },
@@ -34,8 +34,10 @@ const imperialRedLight = "#fcdfe1";
 const imperialRedDark = "#670910";
 
 const black = "#262626";
-const grayDark = "#999999";
-const grayLight = "#dedede";
+const grayDarker = "#515151";
+const grayDark = "#909090";
+const grayLight = "#d1d1d1";
+const grayLighter = "#e1e1e1";
 const white = "#ffffff";
 
 const candyApple = "#FF0800";
@@ -99,7 +101,7 @@ const space = {
 
 export const lightTheme = createTheme(vars, {
 	color: {
-		background: { main: white },
+		background: { main: white, emphasis: grayLighter },
 		text: { main: black, disabled: grayDark },
 		primary: {
 			main: imperialRed,
@@ -126,7 +128,7 @@ export const lightTheme = createTheme(vars, {
 
 export const darkTheme = createTheme(vars, {
 	color: {
-		background: { main: black },
+		background: { main: black, emphasis: grayDarker },
 		text: { main: white, disabled: grayLight },
 		primary: { main: merigold, text: merigoldLight, background: merigoldDark },
 		secondary: {
