@@ -21,6 +21,13 @@ export const vars = createThemeContract({
 	space: {
 		base: null,
 	},
+	breakpoint: {
+		xs: null, // Mobile devices
+		sm: null, // iPads, Tablets
+		md: null, // Small screens, laptops
+		lg: null, // Desktops, large screens
+		xl: null, // Extra large screens, TV
+	},
 });
 
 // TODO: execute https://coolors.co/contrast-checker/
@@ -97,7 +104,17 @@ const font: Record<
 
 const space = {
 	base: "8px",
-};
+} as const;
+
+const breakpoint = {
+	xs: "320px", // Mobile devices -- default case, shouldn't be used
+	sm: "481px", // iPads, Tablets
+	md: "769px", // Small screens, laptops
+	lg: "1025px", // Desktops, large screens
+	xl: "1201px", // Extra large screens, TV
+} as const;
+
+export type Breakpoint = keyof typeof breakpoint;
 
 export const lightTheme = createTheme(vars, {
 	color: {
@@ -124,6 +141,7 @@ export const lightTheme = createTheme(vars, {
 	},
 	font,
 	space,
+	breakpoint,
 });
 
 export const darkTheme = createTheme(vars, {
@@ -147,4 +165,5 @@ export const darkTheme = createTheme(vars, {
 	},
 	font,
 	space,
+	breakpoint,
 });

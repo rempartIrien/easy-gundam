@@ -1,10 +1,20 @@
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("./theme.css", () => ({
-	vars: { space: { base: "42px" } },
+	vars: {
+		space: { base: "42px" },
+		breakpoint: {
+			xs: "320px",
+			sm: "481px",
+			md: "769px",
+			lg: "1025px",
+			xl: "1201px",
+		},
+	},
 }));
 
-import { space } from "./utils";
+import type { Breakpoint } from "./theme.css";
+import { from, space } from "./utils";
 
 describe("space", () => {
 	it("should exist", () => {
@@ -41,5 +51,23 @@ describe("space", () => {
 		expect(space(-3, 4, -6, -8)).toBe(
 			"calc(42px * -3) calc(42px * 4) calc(42px * -6) calc(42px * -8)",
 		);
+	});
+});
+
+describe("from", () => {
+	it("should exist", () => {
+		expect(from).toBeDefined();
+	});
+
+	it("should return breakpoint value matching the given key", () => {
+		expect(from("xs")).toBe("screen and (min-width: 320px)");
+		expect(from("sm")).toBe("screen and (min-width: 481px)");
+		expect(from("md")).toBe("screen and (min-width: 769px)");
+		expect(from("lg")).toBe("screen and (min-width: 1025px)");
+		expect(from("xl")).toBe("screen and (min-width: 1201px)");
+	});
+
+	it("should throw if no value matching the given key is found", () => {
+		expect(() => from("whatever" as Breakpoint)).toThrow("");
 	});
 });
