@@ -32,6 +32,9 @@ export const vars = createThemeContract({
 		base: null,
 		round: null,
 	},
+	boxShadow: {
+		base: null,
+	},
 });
 
 // TODO: execute https://coolors.co/contrast-checker/
@@ -123,7 +126,12 @@ export type Breakpoint = keyof typeof breakpoint;
 const borderRadius = {
 	base: "4px",
 	round: "50%",
-};
+} as const;
+
+// This should be used with a color.
+const boxShadow = {
+	base: "0 3px 10px",
+} as const;
 
 export const lightTheme = createTheme(vars, {
 	color: {
@@ -152,6 +160,7 @@ export const lightTheme = createTheme(vars, {
 	space,
 	breakpoint,
 	borderRadius,
+	boxShadow,
 });
 
 export const darkTheme = createTheme(vars, {
@@ -177,4 +186,5 @@ export const darkTheme = createTheme(vars, {
 	space,
 	breakpoint,
 	borderRadius,
+	boxShadow,
 });

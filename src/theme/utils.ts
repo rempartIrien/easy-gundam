@@ -27,3 +27,9 @@ export function from(
 	}
 	return `screen and (min-width: ${breakpoint})`;
 }
+
+export function shadow(
+	color: `var(--${string})`,
+): `var(--${string}) var(--${string})` {
+	return `${vars.boxShadow.base} ${color}`;
+}
