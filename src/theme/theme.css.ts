@@ -28,6 +28,10 @@ export const vars = createThemeContract({
 		lg: null, // Desktops, large screens
 		xl: null, // Extra large screens, TV
 	},
+	borderRadius: {
+		base: null,
+		round: null,
+	},
 });
 
 // TODO: execute https://coolors.co/contrast-checker/
@@ -116,6 +120,11 @@ const breakpoint = {
 
 export type Breakpoint = keyof typeof breakpoint;
 
+const borderRadius = {
+	base: "4px",
+	round: "50%",
+};
+
 export const lightTheme = createTheme(vars, {
 	color: {
 		background: { main: white, emphasis: grayLighter },
@@ -142,6 +151,7 @@ export const lightTheme = createTheme(vars, {
 	font,
 	space,
 	breakpoint,
+	borderRadius,
 });
 
 export const darkTheme = createTheme(vars, {
@@ -166,4 +176,5 @@ export const darkTheme = createTheme(vars, {
 	font,
 	space,
 	breakpoint,
+	borderRadius,
 });
