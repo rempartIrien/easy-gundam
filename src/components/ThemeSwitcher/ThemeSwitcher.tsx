@@ -1,22 +1,23 @@
 import { useI18n } from "@solid-primitives/i18n";
+import { createSignal, onMount } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 
-import {
-	ThemeName,
-	colorSchemeCookie,
-	getColorScheme,
-} from "~/theme/theme.cookie";
+import { colorSchemeCookie, getColorScheme } from "~/theme/theme.cookie";
+import { getNewColorScheme } from "~/theme/ThemeName";
 
 import Button from "../Button";
 
+const prefersDarkModeInputName = "prefersDarkMode";
+
 export default function ThemeSwitcher() {
 	const [, { Form: ThemeForm }] = createServerAction$(
-		async (_: FormData, { request }) => {
+		async (form: FormData, { request }) => {
 			const currentColorScheme = await getColorScheme(request);
-			const newColorScheme =
-				currentColorScheme === ThemeName.Light
-					? ThemeName.Dark
-					: ThemeName.Light;
+			const prefersDarkMode = form.get(prefersDarkModeInputName) === "true";
+			const newColorScheme = getNewColorScheme(
+				currentColorScheme,
+				prefersDarkMode,
+			);
 
 			const redirectTo: string = request.headers.get("Referer") ?? "/";
 			return redirect(redirectTo, {
@@ -30,8 +31,26 @@ export default function ThemeSwitcher() {
 
 	const [t] = useI18n();
 
+	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
+
+	onMount(() => {
+		// eslint-disable-next-line no-console
+		console.log(
+			'window.matchMedia("(prefers-color-scheme: dark)").matches',
+			window.matchMedia("(prefers-color-scheme: dark)").matches,
+		);
+		setPrefersDarkMode(
+			window.matchMedia("(prefers-color-scheme: dark)").matches,
+		);
+	});
+
 	return (
 		<ThemeForm>
+			<input
+				type="hidden"
+				name={prefersDarkModeInputName}
+				value={String(prefersDarkMode())}
+			/>
 			<Button type="submit" name="switchTheme">
 				{t("header.actions.switchTheme")}
 			</Button>

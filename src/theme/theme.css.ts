@@ -1,4 +1,9 @@
-import { createTheme, createThemeContract } from "@vanilla-extract/css";
+import {
+	assignVars,
+	createTheme,
+	createThemeContract,
+	style,
+} from "@vanilla-extract/css";
 
 export const vars = createThemeContract({
 	color: {
@@ -133,7 +138,7 @@ const boxShadow = {
 	base: "0 3px 10px",
 } as const;
 
-export const lightTheme = createTheme(vars, {
+const lightThemeVars = {
 	color: {
 		background: { main: white, emphasis: grayLighter },
 		text: { main: black, disabled: grayDark },
@@ -161,9 +166,10 @@ export const lightTheme = createTheme(vars, {
 	breakpoint,
 	borderRadius,
 	boxShadow,
-});
+};
+export const lightTheme = createTheme(vars, lightThemeVars);
 
-export const darkTheme = createTheme(vars, {
+const darkThemeVars = {
 	color: {
 		background: { main: black, emphasis: grayDarker },
 		text: { main: white, disabled: grayLight },
@@ -187,4 +193,14 @@ export const darkTheme = createTheme(vars, {
 	breakpoint,
 	borderRadius,
 	boxShadow,
+};
+export const darkTheme = createTheme(vars, darkThemeVars);
+
+export const defaultTheme = style({
+	vars: assignVars(vars, lightThemeVars),
+	"@media": {
+		"(prefers-color-scheme: dark)": {
+			vars: assignVars(vars, darkThemeVars),
+		},
+	},
 });

@@ -5,14 +5,17 @@ import { Show, Suspense } from "solid-js";
 import { Html } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
+import { ThemeContext } from "~/contexts/ThemeContext";
 import { getLocale } from "~/i18n/i18n.cookie";
 import { retrieveTranslsations } from "~/i18n/i18n.server";
-import { ThemeName, getColorScheme } from "~/theme/theme.cookie";
-import { darkTheme, lightTheme } from "~/theme/theme.css";
+import { getColorScheme } from "~/theme/theme.cookie";
+import { darkTheme, defaultTheme, lightTheme } from "~/theme/theme.css";
+import { ThemeName } from "~/theme/ThemeName";
 
 import { LocaleContext } from "../../contexts/LocaleContext";
 
 import { htmlRootStyle } from "./HtmlRoot.css";
+
 import "./HtmlRoot.css";
 
 interface RootProps {
@@ -35,21 +38,25 @@ export default function HtmlRoot(props: RootProps) {
 	return (
 		<Suspense>
 			<Show when={init()}>
-				<LocaleContext.Provider value={init()?.locale}>
-					<I18nContext.Provider
-						value={createI18nContext(init()?.dict, init()?.locale)}
-					>
-						<Html
-							lang={init()?.locale}
-							class={clsx([
-								htmlRootStyle,
-								init()?.themeName === ThemeName.Dark ? darkTheme : lightTheme,
-							])}
+				<ThemeContext.Provider value={init()?.themeName}>
+					<LocaleContext.Provider value={init()?.locale}>
+						<I18nContext.Provider
+							value={createI18nContext(init()?.dict, init()?.locale)}
 						>
-							{props.children}
-						</Html>
-					</I18nContext.Provider>
-				</LocaleContext.Provider>
+							<Html
+								lang={init()?.locale}
+								class={clsx([
+									htmlRootStyle,
+									init()?.themeName === ThemeName.Dark && darkTheme,
+									init()?.themeName === ThemeName.Light && lightTheme,
+									!init()?.themeName && defaultTheme,
+								])}
+							>
+								{props.children}
+							</Html>
+						</I18nContext.Provider>
+					</LocaleContext.Provider>
+				</ThemeContext.Provider>
 			</Show>
 		</Suspense>
 	);

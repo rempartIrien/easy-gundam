@@ -8,11 +8,14 @@ import { localeCookie } from "~/i18n/i18n.cookie";
 
 import Button from "../Button";
 
+const currentLocaleInputName = "currentLocale";
+const newLocaleInputName = "newLocale";
+
 export default function LocaleSwitcher() {
 	const [, { Form: LocaleForm }] = createServerAction$(
 		async (form: FormData, { request }) => {
-			const currentLocale = form.get("currentLocale");
-			const newLocale = form.get("newLocale");
+			const currentLocale = form.get(currentLocaleInputName);
+			const newLocale = form.get(newLocaleInputName);
 			const redirectTo: string =
 				request.headers
 					.get("Referer")
@@ -32,10 +35,14 @@ export default function LocaleSwitcher() {
 
 	return (
 		<LocaleForm>
-			<input type="hidden" name="currentLocale" value={currentLocale} />
+			<input
+				type="hidden"
+				name={currentLocaleInputName}
+				value={currentLocale}
+			/>
 			<For each={Object.entries(LanguageNmes)}>
 				{([locale, name]) => (
-					<Button name="newLocale" value={locale}>
+					<Button name={newLocaleInputName} value={locale}>
 						{name}
 					</Button>
 				)}

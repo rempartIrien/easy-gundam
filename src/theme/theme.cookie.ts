@@ -1,10 +1,7 @@
 // See https://rossmoody.com/writing/remix-stitches
 import { createCookie } from "solid-start";
 
-export enum ThemeName {
-	Dark = "dark",
-	Light = "light",
-}
+import type { ThemeName } from "./ThemeName";
 
 const ONE_YEAR = 365 * 24 * 60 * 60;
 
@@ -25,7 +22,9 @@ function getColorSchemeToken(request: Request): Promise<ThemeName> {
 	) as Promise<ThemeName>;
 }
 
-export async function getColorScheme(request: Request): Promise<ThemeName> {
+export async function getColorScheme(
+	request: Request,
+): Promise<ThemeName | null> {
 	// Manually selected theme
 	const userSelectedColorScheme = await getColorSchemeToken(request);
 
@@ -35,7 +34,5 @@ export async function getColorScheme(request: Request): Promise<ThemeName> {
 	);
 	// Return the manually selected theme
 	// or system preferred theme or default theme
-	return (
-		userSelectedColorScheme ?? systemPreferredColorScheme ?? ThemeName.Light
-	);
+	return userSelectedColorScheme ?? systemPreferredColorScheme;
 }
