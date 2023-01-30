@@ -1,6 +1,7 @@
 import { calc } from "@vanilla-extract/css-utils";
 
 import type { Breakpoint } from "./theme.css";
+import { breakpoints } from "./theme.css";
 import { vars } from "./theme.css";
 
 export function space(multiplier: number): string;
@@ -18,10 +19,8 @@ export function space(...multipliers: number[]): string {
 		.join(" ");
 }
 
-export function from(
-	size: Breakpoint,
-): `screen and (min-width: var(--${string}))` {
-	const breakpoint = vars.breakpoint[size];
+export function from(size: Breakpoint): `screen and (min-width: ${number}px)` {
+	const breakpoint = breakpoints[size];
 	if (!breakpoint) {
 		throw new Error(`Cannot get breakpoint value from key '${size}'`);
 	}

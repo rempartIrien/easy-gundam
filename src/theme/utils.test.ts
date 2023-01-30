@@ -9,14 +9,14 @@ vi.mock("./theme.css", () => ({
 			},
 		},
 		space: { base: "var(--space-base)" },
-		breakpoint: {
-			xs: "var(--breakpoint-xs)",
-			sm: "var(--breakpoint-sm)",
-			md: "var(--breakpoint-md)",
-			lg: "var(--breakpoint-lg)",
-			xl: "var(--breakpoint-xl)",
-		},
 		boxShadow: { base: "var(--boxShadow-base)" },
+	},
+	breakpoints: {
+		xs: "320px",
+		sm: "481px",
+		md: "769px",
+		lg: "1025px",
+		xl: "1201px",
 	},
 }));
 
@@ -78,11 +78,11 @@ describe("from", () => {
 	});
 
 	it("should return breakpoint value matching the given key", () => {
-		expect(from("xs")).toBe("screen and (min-width: var(--breakpoint-xs))");
-		expect(from("sm")).toBe("screen and (min-width: var(--breakpoint-sm))");
-		expect(from("md")).toBe("screen and (min-width: var(--breakpoint-md))");
-		expect(from("lg")).toBe("screen and (min-width: var(--breakpoint-lg))");
-		expect(from("xl")).toBe("screen and (min-width: var(--breakpoint-xl))");
+		expect(from("xs")).toBe("screen and (min-width: 320px)");
+		expect(from("sm")).toBe("screen and (min-width: 481px)");
+		expect(from("md")).toBe("screen and (min-width: 769px)");
+		expect(from("lg")).toBe("screen and (min-width: 1025px)");
+		expect(from("xl")).toBe("screen and (min-width: 1201px)");
 	});
 
 	it("should throw if no value matching the given key is found", () => {

@@ -1,11 +1,13 @@
+import clsx from "clsx";
 import { Show } from "solid-js";
 
 import useRootPath from "~/hooks/useRootPath";
 
+import Card from "../Card";
 import Link from "../Link";
 import Text from "../Text";
 
-import { contentStyle, seriesItemStyle, titleStyle } from "./SeriesItem.css";
+import { seriesItemStyle, titleStyle } from "./SeriesItem.css";
 
 export interface BaseSeries {
 	code: string;
@@ -17,14 +19,18 @@ export interface BaseSeries {
 
 interface SeriesItemProps {
 	series: BaseSeries;
+	class?: string;
 }
 
+// TODO: fallback when image is null
+// TODO: fix image size accordin to size
 export default function SeriesItem(props: SeriesItemProps) {
 	const rootPath = useRootPath();
 	return (
-		<Link
+		<Card
+			component={Link}
 			noStyle
-			class={seriesItemStyle}
+			class={clsx([seriesItemStyle, props.class])}
 			href={`${rootPath}series/${props.series.code}`}
 		>
 			<Show when={props.series.image?.id}>
@@ -36,12 +42,12 @@ export default function SeriesItem(props: SeriesItemProps) {
 					/>
 				</div>
 			</Show>
-			<div class={contentStyle}>
+			<div>
 				<Text variant="big" class={titleStyle}>
 					{props.series.title}
 				</Text>
 				<Text variant="normal">{props.series.description}</Text>
 			</div>
-		</Link>
+		</Card>
 	);
 }

@@ -6,7 +6,9 @@ import { For, splitProps } from "solid-js";
 import {
 	chronologyItemStyle,
 	chronologyStyle,
+	seriesListItemStyle,
 	seriesListStyle,
+	seriesStyle,
 	yearStyle,
 } from "./Chronology.css";
 import type { BaseSeries } from "./SeriesItem";
@@ -40,8 +42,8 @@ export default function Chronology(props: ChronologyProps) {
 							<ol class={seriesListStyle}>
 								<For each={items}>
 									{(item) => (
-										<li>
-											<SeriesItem series={item} />
+										<li class={seriesListItemStyle}>
+											<SeriesItem class={seriesStyle} series={item} />
 										</li>
 									)}
 								</For>

@@ -2,13 +2,12 @@ import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
 import { vars } from "~/theme/theme.css";
-import { space } from "~/theme/utils";
+import { from, space } from "~/theme/utils";
 
 const leftWidth = "20%";
 const borderWidth = "4px";
 const gap = calc(borderWidth).divide(2).add(space(4)).toString();
-
-export const bulletPaddingTop = space(2);
+const bulletPaddingTop = space(2);
 
 export const chronologyStyle = style({
 	listStyle: "none",
@@ -73,4 +72,17 @@ export const seriesListStyle = style({
 	listStyle: "none",
 	padding: 0,
 	margin: 0,
+	display: "grid",
+	gap: space(4),
+	gridTemplateColumns: "1fr",
+	paddingBottom: space(4),
+	"@media": {
+		[from("md")]: {
+			gridTemplateColumns: "1fr 1fr",
+		},
+	},
 });
+
+export const seriesListItemStyle = style({});
+
+export const seriesStyle = style({});

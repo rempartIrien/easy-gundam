@@ -26,13 +26,6 @@ export const vars = createThemeContract({
 	space: {
 		base: null,
 	},
-	breakpoint: {
-		xs: null, // Mobile devices
-		sm: null, // iPads, Tablets
-		md: null, // Small screens, laptops
-		lg: null, // Desktops, large screens
-		xl: null, // Extra large screens, TV
-	},
 	borderRadius: {
 		base: null,
 		round: null,
@@ -52,9 +45,10 @@ const imperialRed = "#ED2939";
 const imperialRedLight = "#fcdfe1";
 const imperialRedDark = "#670910";
 
-const black = "#262626";
-const grayDarker = "#515151";
-const grayDark = "#909090";
+const black = "#000000";
+const grayDarker = "#131313";
+const grayDark = "#434343";
+const gray = "#909090";
 const grayLight = "#d1d1d1";
 const grayLighter = "#e1e1e1";
 const white = "#ffffff";
@@ -118,7 +112,7 @@ const space = {
 	base: "8px",
 } as const;
 
-const breakpoint = {
+export const breakpoints = {
 	xs: "320px", // Mobile devices -- default case, shouldn't be used
 	sm: "481px", // iPads, Tablets
 	md: "769px", // Small screens, laptops
@@ -126,21 +120,16 @@ const breakpoint = {
 	xl: "1201px", // Extra large screens, TV
 } as const;
 
-export type Breakpoint = keyof typeof breakpoint;
+export type Breakpoint = keyof typeof breakpoints;
 
 const borderRadius = {
 	base: "4px",
 	round: "50%",
 } as const;
 
-// This should be used with a color.
-const boxShadow = {
-	base: "0 3px 10px",
-} as const;
-
 const lightThemeVars = {
 	color: {
-		background: { main: white, emphasis: grayLighter },
+		background: { main: grayLighter, emphasis: white },
 		text: { main: black, disabled: grayDark },
 		primary: {
 			main: imperialRed,
@@ -163,15 +152,14 @@ const lightThemeVars = {
 	},
 	font,
 	space,
-	breakpoint,
 	borderRadius,
-	boxShadow,
+	boxShadow: { base: `0px 4px 10px 2px ${gray}` },
 };
 export const lightTheme = createTheme(vars, lightThemeVars);
 
 const darkThemeVars = {
 	color: {
-		background: { main: black, emphasis: grayDarker },
+		background: { main: grayDarker, emphasis: grayDark },
 		text: { main: white, disabled: grayLight },
 		primary: { main: merigold, text: merigoldLight, background: merigoldDark },
 		secondary: {
@@ -190,9 +178,8 @@ const darkThemeVars = {
 	},
 	font,
 	space,
-	breakpoint,
 	borderRadius,
-	boxShadow,
+	boxShadow: { base: "none" },
 };
 export const darkTheme = createTheme(vars, darkThemeVars);
 

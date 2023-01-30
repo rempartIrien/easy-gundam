@@ -1,15 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
 import { vars } from "~/theme/theme.css";
+import { space } from "~/theme/utils";
 
-import { bulletPaddingTop } from "./Chronology.css";
+export const bulletPaddingTop = space(2);
 
 export const seriesItemStyle = style({
 	display: "flex",
-});
-
-export const contentStyle = style({
-	padding: bulletPaddingTop,
+	gap: space(2),
 });
 
 export const titleStyle = style({
