@@ -24,7 +24,8 @@ export const vars = createThemeContract({
 		smallText: { family: null, size: null, lineHeight: null },
 	},
 	space: {
-		base: null,
+		fixed: null,
+		relative: null,
 	},
 	borderRadius: {
 		base: null,
@@ -109,21 +110,22 @@ const font: Record<
 };
 
 const space = {
-	base: "8px",
+	fixed: "8px",
+	relative: "0.5rem",
 } as const;
 
 export const breakpoints = {
-	xs: "320px", // Mobile devices -- default case, shouldn't be used
-	sm: "481px", // iPads, Tablets
-	md: "769px", // Small screens, laptops
-	lg: "1025px", // Desktops, large screens
-	xl: "1201px", // Extra large screens, TV
+	xs: "20rem", // Mobile devices -- default case, shouldn't be used
+	sm: "30rem", // iPads, Tablets
+	md: "48rem", // Small screens, laptops
+	lg: "64rem", // Desktops, large screens
+	xl: "75rem", // Extra large screens, TV
 } as const;
 
 export type Breakpoint = keyof typeof breakpoints;
 
 const borderRadius = {
-	base: "4px",
+	base: "8px",
 	round: "50%",
 } as const;
 

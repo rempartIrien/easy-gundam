@@ -2,12 +2,14 @@ import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
 import { vars } from "~/theme/theme.css";
-import { from, space } from "~/theme/utils";
+import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 
 const leftWidth = "20%";
 const borderWidth = "4px";
-const gap = calc(borderWidth).divide(2).add(space(4)).toString();
-const bulletPaddingTop = space(2);
+const bulletSize = fixedSpace(3);
+const gap = calc(borderWidth).divide(2).add(fixedSpace(4)).toString();
+const bulletPaddingTop = fixedSpace(2);
+const yearColumnWidth = relativeSpace(20);
 
 export const chronologyStyle = style({
 	listStyle: "none",
@@ -21,9 +23,9 @@ export const chronologyStyle = style({
 			borderRightStyle: "dashed",
 			borderRightColor: vars.color.primary.main,
 			display: "block",
-			height: space(5),
+			height: relativeSpace(5),
 			width: leftWidth,
-			maxWidth: space(20),
+			maxWidth: yearColumnWidth,
 		},
 	},
 });
@@ -39,7 +41,7 @@ export const yearStyle = style({
 	borderRightColor: vars.color.primary.main,
 	marginRight: gap,
 	width: leftWidth,
-	maxWidth: space(20),
+	maxWidth: yearColumnWidth,
 	position: "relative",
 	display: "inline-block",
 	paddingRight: gap,
@@ -51,11 +53,11 @@ export const yearStyle = style({
 			content: "",
 			backgroundColor: vars.color.primary.main,
 			borderRadius: "50%",
-			width: "1em",
-			height: "1em",
+			width: bulletSize,
+			height: bulletSize,
 			display: "inline-block",
 			position: "absolute",
-			right: calc(borderWidth).divide(2).add(space(1)).negate().toString(),
+			right: calc(borderWidth).add(bulletSize).divide(2).negate().toString(),
 			top: calc(vars.font.bigText.size)
 				.multiply(vars.font.bigText.lineHeight)
 				.divide(2)
@@ -73,9 +75,9 @@ export const seriesListStyle = style({
 	padding: 0,
 	margin: 0,
 	display: "grid",
-	gap: space(4),
+	gap: relativeSpace(4),
 	gridTemplateColumns: "1fr",
-	paddingBottom: space(4),
+	paddingBottom: relativeSpace(4),
 	"@media": {
 		[from("md")]: {
 			gridTemplateColumns: "1fr 1fr",

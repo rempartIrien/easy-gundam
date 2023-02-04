@@ -8,7 +8,7 @@ vi.mock("./theme.css", () => ({
 				emphasis: "var(--color-background-emphasis)",
 			},
 		},
-		space: { base: "var(--space-base)" },
+		space: { fixed: "var(--space-fixed)", relative: "var(--space-relative)" },
 		boxShadow: { base: "var(--boxShadow-base)" },
 	},
 	breakpoints: {
@@ -22,52 +22,100 @@ vi.mock("./theme.css", () => ({
 
 import type { Breakpoint } from "./theme.css";
 import { vars } from "./theme.css";
-import { from, shadow, space } from "./utils";
+import { fixedSpace, from, relativeSpace, shadow } from "./utils";
 
-describe("space", () => {
+describe("fixedSpace", () => {
 	it("should exist", () => {
-		expect(space).toBeDefined();
+		expect(fixedSpace).toBeDefined();
 	});
 
 	it("should convert one value", () => {
-		expect(space(1)).toBe("calc(var(--space-base) * 1)");
-		expect(space(3)).toBe("calc(var(--space-base) * 3)");
-		expect(space(-3)).toBe("calc(var(--space-base) * -3)");
+		expect(fixedSpace(1)).toBe("calc(var(--space-fixed) * 1)");
+		expect(fixedSpace(3)).toBe("calc(var(--space-fixed) * 3)");
+		expect(fixedSpace(-3)).toBe("calc(var(--space-fixed) * -3)");
 	});
 
 	it("should convert two values", () => {
-		expect(space(1, 2)).toBe(
-			"calc(var(--space-base) * 1) calc(var(--space-base) * 2)",
+		expect(fixedSpace(1, 2)).toBe(
+			"calc(var(--space-fixed) * 1) calc(var(--space-fixed) * 2)",
 		);
-		expect(space(3, 4)).toBe(
-			"calc(var(--space-base) * 3) calc(var(--space-base) * 4)",
+		expect(fixedSpace(3, 4)).toBe(
+			"calc(var(--space-fixed) * 3) calc(var(--space-fixed) * 4)",
 		);
-		expect(space(-3, 4)).toBe(
-			"calc(var(--space-base) * -3) calc(var(--space-base) * 4)",
+		expect(fixedSpace(-3, 4)).toBe(
+			"calc(var(--space-fixed) * -3) calc(var(--space-fixed) * 4)",
 		);
 	});
 
 	it("should convert three values", () => {
-		expect(space(1, 2, 5)).toBe(
-			"calc(var(--space-base) * 1) calc(var(--space-base) * 2) calc(var(--space-base) * 5)",
+		expect(fixedSpace(1, 2, 5)).toBe(
+			"calc(var(--space-fixed) * 1) calc(var(--space-fixed) * 2) calc(var(--space-fixed) * 5)",
 		);
-		expect(space(3, 4, 6)).toBe(
-			"calc(var(--space-base) * 3) calc(var(--space-base) * 4) calc(var(--space-base) * 6)",
+		expect(fixedSpace(3, 4, 6)).toBe(
+			"calc(var(--space-fixed) * 3) calc(var(--space-fixed) * 4) calc(var(--space-fixed) * 6)",
 		);
-		expect(space(-3, 4, -6)).toBe(
-			"calc(var(--space-base) * -3) calc(var(--space-base) * 4) calc(var(--space-base) * -6)",
+		expect(fixedSpace(-3, 4, -6)).toBe(
+			"calc(var(--space-fixed) * -3) calc(var(--space-fixed) * 4) calc(var(--space-fixed) * -6)",
 		);
 	});
 
 	it("should convert four values", () => {
-		expect(space(1, 2, 5, 7)).toBe(
-			"calc(var(--space-base) * 1) calc(var(--space-base) * 2) calc(var(--space-base) * 5) calc(var(--space-base) * 7)",
+		expect(fixedSpace(1, 2, 5, 7)).toBe(
+			"calc(var(--space-fixed) * 1) calc(var(--space-fixed) * 2) calc(var(--space-fixed) * 5) calc(var(--space-fixed) * 7)",
 		);
-		expect(space(3, 4, 6, -8)).toBe(
-			"calc(var(--space-base) * 3) calc(var(--space-base) * 4) calc(var(--space-base) * 6) calc(var(--space-base) * -8)",
+		expect(fixedSpace(3, 4, 6, -8)).toBe(
+			"calc(var(--space-fixed) * 3) calc(var(--space-fixed) * 4) calc(var(--space-fixed) * 6) calc(var(--space-fixed) * -8)",
 		);
-		expect(space(-3, 4, -6, -8)).toBe(
-			"calc(var(--space-base) * -3) calc(var(--space-base) * 4) calc(var(--space-base) * -6) calc(var(--space-base) * -8)",
+		expect(fixedSpace(-3, 4, -6, -8)).toBe(
+			"calc(var(--space-fixed) * -3) calc(var(--space-fixed) * 4) calc(var(--space-fixed) * -6) calc(var(--space-fixed) * -8)",
+		);
+	});
+});
+
+describe("relativeSpace", () => {
+	it("should exist", () => {
+		expect(relativeSpace).toBeDefined();
+	});
+
+	it("should convert one value", () => {
+		expect(relativeSpace(1)).toBe("calc(var(--space-relative) * 1)");
+		expect(relativeSpace(3)).toBe("calc(var(--space-relative) * 3)");
+		expect(relativeSpace(-3)).toBe("calc(var(--space-relative) * -3)");
+	});
+
+	it("should convert two values", () => {
+		expect(relativeSpace(1, 2)).toBe(
+			"calc(var(--space-relative) * 1) calc(var(--space-relative) * 2)",
+		);
+		expect(relativeSpace(3, 4)).toBe(
+			"calc(var(--space-relative) * 3) calc(var(--space-relative) * 4)",
+		);
+		expect(relativeSpace(-3, 4)).toBe(
+			"calc(var(--space-relative) * -3) calc(var(--space-relative) * 4)",
+		);
+	});
+
+	it("should convert three values", () => {
+		expect(relativeSpace(1, 2, 5)).toBe(
+			"calc(var(--space-relative) * 1) calc(var(--space-relative) * 2) calc(var(--space-relative) * 5)",
+		);
+		expect(relativeSpace(3, 4, 6)).toBe(
+			"calc(var(--space-relative) * 3) calc(var(--space-relative) * 4) calc(var(--space-relative) * 6)",
+		);
+		expect(relativeSpace(-3, 4, -6)).toBe(
+			"calc(var(--space-relative) * -3) calc(var(--space-relative) * 4) calc(var(--space-relative) * -6)",
+		);
+	});
+
+	it("should convert four values", () => {
+		expect(relativeSpace(1, 2, 5, 7)).toBe(
+			"calc(var(--space-relative) * 1) calc(var(--space-relative) * 2) calc(var(--space-relative) * 5) calc(var(--space-relative) * 7)",
+		);
+		expect(relativeSpace(3, 4, 6, -8)).toBe(
+			"calc(var(--space-relative) * 3) calc(var(--space-relative) * 4) calc(var(--space-relative) * 6) calc(var(--space-relative) * -8)",
+		);
+		expect(relativeSpace(-3, 4, -6, -8)).toBe(
+			"calc(var(--space-relative) * -3) calc(var(--space-relative) * 4) calc(var(--space-relative) * -6) calc(var(--space-relative) * -8)",
 		);
 	});
 });
