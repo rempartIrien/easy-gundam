@@ -2,6 +2,12 @@
 import { Routes } from "@solidjs/router";
 import { Body, FileRoutes, Head, Meta, Scripts } from "solid-start";
 import { ErrorBoundary } from "solid-start/error-boundary";
+import "sanitize.css";
+import "sanitize.css/forms.css";
+import "sanitize.css/typography.css";
+import "sanitize.css/assets.css";
+import "sanitize.css/system-ui.css";
+import "sanitize.css/ui-monospace.css";
 
 import ErrorPage from "./components/ErrorPage";
 import HtmlRoot from "./components/HtmlRoot";
