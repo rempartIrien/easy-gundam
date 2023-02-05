@@ -34,11 +34,6 @@ export default function ThemeSwitcher() {
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
 
 	onMount(() => {
-		// eslint-disable-next-line no-console
-		console.log(
-			'window.matchMedia("(prefers-color-scheme: dark)").matches',
-			window.matchMedia("(prefers-color-scheme: dark)").matches,
-		);
 		setPrefersDarkMode(
 			window.matchMedia("(prefers-color-scheme: dark)").matches,
 		);
