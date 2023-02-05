@@ -34,13 +34,11 @@ export default function SeriesItem(props: SeriesItemProps) {
 			href={`${rootPath}series/${props.series.code}`}
 		>
 			<Show when={props.series.image?.id}>
-				<div>
-					<img
-						src={`/api/images/${props.series.image?.id as string}/extraSmall`}
-						alt={props.series.image?.description || props.series.title}
-						srcset={`/api/images/${props.series.image?.id as string}/small 2x`}
-					/>
-				</div>
+				<img
+					src={`/api/images/${props.series.image?.id as string}/extraSmall`}
+					alt={props.series.image?.description || props.series.title}
+					srcset={`/api/images/${props.series.image?.id as string}/small 2x`}
+				/>
 			</Show>
 			<div>
 				<Text variant="big" class={titleStyle}>
