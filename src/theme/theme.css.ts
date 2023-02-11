@@ -5,6 +5,8 @@ import {
 	style,
 } from "@vanilla-extract/css";
 
+import { hexToRgba } from "./utils";
+
 export const vars = createThemeContract({
 	color: {
 		background: { main: null, emphasis: null },
@@ -32,6 +34,10 @@ export const vars = createThemeContract({
 		round: null,
 	},
 	boxShadow: {
+		base: null,
+		header: null,
+	},
+	border: {
 		base: null,
 	},
 });
@@ -125,13 +131,13 @@ export const breakpoints = {
 export type Breakpoint = keyof typeof breakpoints;
 
 const borderRadius = {
-	base: "8px",
+	base: "4px",
 	round: "50%",
 } as const;
 
 const lightThemeVars = {
 	color: {
-		background: { main: grayLighter, emphasis: white },
+		background: { main: grayLighter, emphasis: hexToRgba(white, 0.65) },
 		text: { main: black, disabled: grayDark },
 		primary: {
 			main: imperialRed,
@@ -155,13 +161,17 @@ const lightThemeVars = {
 	font,
 	space,
 	borderRadius,
-	boxShadow: { base: `0px 4px 10px 2px ${gray}` },
+	boxShadow: {
+		base: `0px 4px 10px 2px ${hexToRgba(gray, 0.5)}`,
+		header: `0px 25px 20px -20px ${hexToRgba(gray, 0.5)}`,
+	},
+	border: { base: `1px solid ${grayLighter}` },
 };
 export const lightTheme = createTheme(vars, lightThemeVars);
 
 const darkThemeVars = {
 	color: {
-		background: { main: grayDarker, emphasis: grayDark },
+		background: { main: grayDarker, emphasis: hexToRgba(grayDark, 0.65) },
 		text: { main: white, disabled: grayLight },
 		primary: { main: merigold, text: merigoldLight, background: merigoldDark },
 		secondary: {
@@ -181,7 +191,8 @@ const darkThemeVars = {
 	font,
 	space,
 	borderRadius,
-	boxShadow: { base: "none" },
+	boxShadow: { base: "none", header: "none" },
+	border: { base: `1px solid ${gray}` },
 };
 export const darkTheme = createTheme(vars, darkThemeVars);
 
