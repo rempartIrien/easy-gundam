@@ -121,11 +121,11 @@ const space = {
 } as const;
 
 export const breakpoints = {
-	xs: "20rem", // Mobile devices -- default case, shouldn't be used
-	sm: "30rem", // iPads, Tablets
-	md: "48rem", // Small screens, laptops
-	lg: "64rem", // Desktops, large screens
-	xl: "75rem", // Extra large screens, TV
+	xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
+	sm: "30rem", // iPads, Tablets (480)
+	md: "48rem", // Small screens, laptops (768)
+	lg: "64rem", // Desktops, large screens (1024)
+	xl: "75rem", // Extra large screens, TV (1200)
 } as const;
 
 export type Breakpoint = keyof typeof breakpoints;

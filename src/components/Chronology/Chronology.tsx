@@ -3,6 +3,8 @@ import type { JSX } from "solid-js";
 import { Show, createMemo } from "solid-js";
 import { For, splitProps } from "solid-js";
 
+import Text from "../Text";
+
 import {
 	chronologyItemStyle,
 	chronologyStyle,
@@ -36,9 +38,9 @@ export default function Chronology(props: ChronologyProps) {
 				<For each={seriesByYear()}>
 					{([year, items]) => (
 						<li class={chronologyItemStyle}>
-							<div class={yearStyle}>
+							<Text variant="big" class={yearStyle}>
 								{local.timelineCode}&nbsp;{year}
-							</div>
+							</Text>
 							<ol class={seriesListStyle}>
 								<For each={items}>
 									{(item) => (

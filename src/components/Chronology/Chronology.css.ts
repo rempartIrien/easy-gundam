@@ -1,3 +1,4 @@
+import type { StyleRule } from "@vanilla-extract/css";
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
@@ -11,60 +12,73 @@ const gap = calc(borderWidth).divide(2).add(fixedSpace(4)).toString();
 const bulletPaddingTop = fixedSpace(2);
 const yearColumnWidth = relativeSpace(20);
 
+const beginEndBorderStyles: StyleRule = {
+	content: "",
+	borderRightWidth: borderWidth,
+	borderRightStyle: "dashed",
+	borderRightColor: vars.color.primary.main,
+	display: "block",
+	height: relativeSpace(5),
+	width: leftWidth,
+	maxWidth: yearColumnWidth,
+};
+
 export const chronologyStyle = style({
 	listStyle: "none",
 	margin: 0,
 	padding: 0,
-	selectors: {
-		[`&::before,
-    &::after`]: {
-			content: "",
-			borderRightWidth: borderWidth,
-			borderRightStyle: "dashed",
-			borderRightColor: vars.color.primary.main,
-			display: "block",
-			height: relativeSpace(5),
-			width: leftWidth,
-			maxWidth: yearColumnWidth,
+	"@media": {
+		[from("md")]: {
+			"::before": beginEndBorderStyles,
+			"::after": beginEndBorderStyles,
 		},
 	},
 });
 
 export const chronologyItemStyle = style({
-	display: "flex",
-	alignItems: "stretch",
+	"@media": {
+		[from("md")]: {
+			display: "flex",
+			alignItems: "stretch",
+		},
+	},
 });
 
 export const yearStyle = style({
-	borderRightWidth: borderWidth,
-	borderRightStyle: "solid",
-	borderRightColor: vars.color.primary.main,
-	marginRight: gap,
-	width: leftWidth,
-	maxWidth: yearColumnWidth,
-	position: "relative",
-	display: "inline-block",
-	paddingRight: gap,
-	paddingTop: bulletPaddingTop,
-	textAlign: "end",
-	selectors: {
-		"&::after": {
-			flexShrink: 0,
-			content: "",
-			backgroundColor: vars.color.primary.main,
-			borderRadius: "50%",
-			width: bulletSize,
-			height: bulletSize,
+	marginBottom: relativeSpace(2),
+	color: vars.color.primary.text,
+	textAlign: "center",
+	"@media": {
+		[from("md")]: {
+			marginBottom: 0,
+			borderRightWidth: borderWidth,
+			borderRightStyle: "solid",
+			borderRightColor: vars.color.primary.main,
+			marginRight: gap,
+			width: leftWidth,
+			maxWidth: yearColumnWidth,
+			position: "relative",
 			display: "inline-block",
-			position: "absolute",
-			right: calc(borderWidth).add(bulletSize).divide(2).negate().toString(),
-			top: calc(vars.font.bigText.size)
-				.multiply(vars.font.bigText.lineHeight)
-				.divide(2)
-				.add("2px") // because of gap between text node and parent node
-				.add(bulletPaddingTop)
-				.toString(),
-			transform: "translateY(-50%)",
+			paddingRight: gap,
+			paddingTop: bulletPaddingTop,
+			textAlign: "end",
+			"::after": {
+				flexShrink: 0,
+				content: "",
+				backgroundColor: vars.color.primary.main,
+				borderRadius: "50%",
+				width: bulletSize,
+				height: bulletSize,
+				display: "inline-block",
+				position: "absolute",
+				right: calc(borderWidth).add(bulletSize).divide(2).negate().toString(),
+				top: calc(vars.font.bigText.size)
+					.multiply(vars.font.bigText.lineHeight)
+					.divide(2)
+					.add(bulletPaddingTop)
+					.toString(),
+				transform: "translateY(-50%)",
+			},
 		},
 	},
 });
@@ -79,7 +93,7 @@ export const seriesListStyle = style({
 	gridTemplateColumns: "1fr",
 	paddingBottom: relativeSpace(4),
 	"@media": {
-		[from("md")]: {
+		[from("lg")]: {
 			gridTemplateColumns: "1fr 1fr",
 		},
 	},
