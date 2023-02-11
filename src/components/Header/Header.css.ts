@@ -1,13 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-import { vars } from "~/theme/theme.css";
+import { glassEffectStyles } from "~/theme/theme.css";
 import { fixedSpace } from "~/theme/utils";
 
 export const headerStyle = style({
-	backgroundColor: vars.color.background.emphasis,
-	backdropFilter: `blur(${fixedSpace(4)})`,
-	borderBottom: vars.border.base,
-	boxShadow: vars.boxShadow.base,
+	...glassEffectStyles,
+	borderTopStyle: "none",
+	borderRightStyle: "none",
+	borderLeftStyle: "none",
 	paddingTop: fixedSpace(2),
 	paddingBottom: fixedSpace(2),
 });

@@ -5,7 +5,7 @@ import {
 	style,
 } from "@vanilla-extract/css";
 
-import { hexToRgba } from "./utils";
+import { fixedSpace, hexToRgba } from "./utils";
 
 export const vars = createThemeContract({
 	color: {
@@ -130,6 +130,13 @@ export const breakpoints = {
 
 export type Breakpoint = keyof typeof breakpoints;
 
+export const glassEffectStyles = {
+	backgroundColor: vars.color.background.emphasis,
+	backdropFilter: `blur(${fixedSpace(4)})`,
+	border: vars.border.base,
+	boxShadow: vars.boxShadow.base,
+};
+
 const borderRadius = {
 	base: "4px",
 	round: "50%",
@@ -137,7 +144,7 @@ const borderRadius = {
 
 const lightThemeVars = {
 	color: {
-		background: { main: grayLighter, emphasis: hexToRgba(white, 0.65) },
+		background: { main: grayLighter, emphasis: hexToRgba(white, 0.6) },
 		text: { main: black, disabled: grayDark },
 		primary: {
 			main: imperialRed,
@@ -165,13 +172,13 @@ const lightThemeVars = {
 		base: `0px 4px 10px 2px ${hexToRgba(gray, 0.5)}`,
 		header: `0px 25px 20px -20px ${hexToRgba(gray, 0.5)}`,
 	},
-	border: { base: `1px solid ${grayLighter}` },
+	border: { base: `1px solid ${grayLight}` },
 };
 export const lightTheme = createTheme(vars, lightThemeVars);
 
 const darkThemeVars = {
 	color: {
-		background: { main: grayDarker, emphasis: hexToRgba(grayDark, 0.65) },
+		background: { main: grayDarker, emphasis: hexToRgba(grayDark, 0.5) },
 		text: { main: white, disabled: grayLight },
 		primary: { main: merigold, text: merigoldLight, background: merigoldDark },
 		secondary: {
@@ -192,7 +199,7 @@ const darkThemeVars = {
 	space,
 	borderRadius,
 	boxShadow: { base: "none", header: "none" },
-	border: { base: `1px solid ${gray}` },
+	border: { base: `1px solid ${grayDark}` },
 };
 export const darkTheme = createTheme(vars, darkThemeVars);
 
