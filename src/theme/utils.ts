@@ -55,8 +55,31 @@ export function from(size: Breakpoint): `screen and (min-width: ${string})` {
 	return `screen and (min-width: ${breakpoint})`;
 }
 
-export function shadow(
-	color: `var(--${string})`,
-): `var(--${string}) var(--${string})` {
-	return `${vars.boxShadow.base} ${color}`;
+export function hexToRgba(
+	color: `#${string}`,
+	alpha: number = 1,
+): `rgba(${string})` {
+	const hexToDecimal = (s: string) => parseInt(s.length === 1 ? s + s : s, 16);
+
+	if (!Number.isFinite(alpha) || alpha > 1 || alpha < 0) {
+		throw new Error(
+			`Cannot use alpha value '${alpha}'. It should be a number between 0 and 1.`,
+		);
+	}
+
+	const hasThreeCharacters = /^#([A-Fa-f\d])([A-Fa-f\d])([A-Fa-f\d])$/.exec(
+		color,
+	);
+	const hasSixCharacters =
+		/^#([A-Fa-f\d]{2})([A-Fa-f\d]{2})([A-Fa-f\d]{2})$/.exec(color);
+
+	const regexResult = hasSixCharacters || hasThreeCharacters;
+	if (regexResult) {
+		const [, r, g, b] = regexResult;
+		return `rgba(${hexToDecimal(r)}, ${hexToDecimal(g)}, ${hexToDecimal(
+			b,
+		)}, ${alpha})`;
+	}
+
+	throw new Error(`Cannot convert '${color}' to decimal RGB color.`);
 }

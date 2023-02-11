@@ -21,8 +21,7 @@ vi.mock("./theme.css", () => ({
 }));
 
 import type { Breakpoint } from "./theme.css";
-import { vars } from "./theme.css";
-import { fixedSpace, from, relativeSpace, shadow } from "./utils";
+import { fixedSpace, from, hexToRgba, relativeSpace } from "./utils";
 
 describe("fixedSpace", () => {
 	it("should exist", () => {
@@ -138,14 +137,78 @@ describe("from", () => {
 	});
 });
 
-describe("shadow", () => {
+describe("hexToRgba", () => {
 	it("should exist", () => {
-		expect(shadow).toBeDefined();
+		expect(hexToRgba).toBeDefined();
 	});
 
-	it("should return a box shadow value with the given color", () => {
-		expect(shadow(vars.color.background.emphasis)).toBe(
-			"var(--boxShadow-base) var(--color-background-emphasis)",
+	it("should return a rgba string matching the given hex color with 6 characters", () => {
+		expect(hexToRgba("#ffffff")).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#fcae1e")).toBe("rgba(252, 174, 30, 1)");
+		expect(hexToRgba("#ed2939")).toBe("rgba(237, 41, 57, 1)");
+		expect(hexToRgba("#0492c2")).toBe("rgba(4, 146, 194, 1)");
+	});
+
+	it("should return a rgba string matching the given hex color with 3 characters", () => {
+		expect(hexToRgba("#fff")).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#fb2")).toBe("rgba(255, 187, 34, 1)");
+		expect(hexToRgba("#e34")).toBe("rgba(238, 51, 68, 1)");
+		expect(hexToRgba("#09C")).toBe("rgba(0, 153, 204, 1)");
+	});
+
+	it("should be case-insensitive", () => {
+		expect(hexToRgba("#ffffff")).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#FFFFFF")).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#FFffFF")).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#fFfFfF")).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#FCae1e")).toBe("rgba(252, 174, 30, 1)");
+		expect(hexToRgba("#eD2939")).toBe("rgba(237, 41, 57, 1)");
+		expect(hexToRgba("#0492C2")).toBe("rgba(4, 146, 194, 1)");
+	});
+
+	it("should throw if the given color is not well formed", () => {
+		expect(() => hexToRgba("ffffff" as unknown as "#ffffff")).toThrowError(
+			"Cannot convert 'ffffff' to decimal RGB color.",
+		);
+		expect(() => hexToRgba("#fffff")).toThrowError(
+			"Cannot convert '#fffff' to decimal RGB color.",
+		);
+		expect(() => hexToRgba("#ffffffff")).toThrowError(
+			"Cannot convert '#ffffffff' to decimal RGB color.",
+		);
+		expect(() => hexToRgba("whatever" as unknown as "#ffffff")).toThrowError(
+			"Cannot convert 'whatever' to decimal RGB color.",
+		);
+		expect(() => hexToRgba(null as unknown as "#ffffff")).toThrowError(
+			"Cannot convert 'null' to decimal RGB color.",
+		);
+		expect(() => hexToRgba(undefined as unknown as "#ffffff")).toThrowError(
+			"Cannot convert 'undefined' to decimal RGB color.",
+		);
+	});
+
+	it("should return a rgba string matching the given alpha", () => {
+		expect(hexToRgba("#ffffff", 0)).toBe("rgba(255, 255, 255, 0)");
+		expect(hexToRgba("#ffffff", 0.1111)).toBe("rgba(255, 255, 255, 0.1111)");
+		expect(hexToRgba("#ffffff", 1)).toBe("rgba(255, 255, 255, 1)");
+		expect(hexToRgba("#ffffff", 0.5)).toBe("rgba(255, 255, 255, 0.5)");
+		expect(hexToRgba("#ffffff", 0.87)).toBe("rgba(255, 255, 255, 0.87)");
+		expect(hexToRgba("#fcae1e", 0)).toBe("rgba(252, 174, 30, 0)");
+		expect(hexToRgba("#fcae1e", 0.1111)).toBe("rgba(252, 174, 30, 0.1111)");
+		expect(hexToRgba("#fcae1e", 1)).toBe("rgba(252, 174, 30, 1)");
+		expect(hexToRgba("#fcae1e", 0.5)).toBe("rgba(252, 174, 30, 0.5)");
+		expect(hexToRgba("#fcae1e", 0.87)).toBe("rgba(252, 174, 30, 0.87)");
+	});
+
+	it("should throw if the alpa is not between 0 and 1", () => {
+		expect(() => hexToRgba("#ffffff", -1)).toThrowError(
+			"Cannot use alpha value '-1'. It should be a number between 0 and 1.",
+		);
+		expect(() => hexToRgba("#ffffff", 42)).toThrowError(
+			"Cannot use alpha value '42'. It should be a number between 0 and 1.",
+		);
+		expect(() => hexToRgba("#ffffff", "0.1" as unknown as number)).toThrowError(
+			"Cannot use alpha value '0.1'. It should be a number between 0 and 1.",
 		);
 	});
 });
