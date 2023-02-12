@@ -12,6 +12,8 @@ import NavItem from "~/components/NavItem";
 import { getTimelineByCode } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
+import { contentStyle } from "./[code].css";
+
 export function routeData({ params }: RouteDataArgs) {
 	invariant(params.code, "Expected params.code");
 	const timeline = createServerData$(
@@ -43,7 +45,9 @@ export default function Timelines() {
 						<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
 					]}
 				/>
-				<Outlet />
+				<section class={contentStyle}>
+					<Outlet />
+				</section>
 			</section>
 		</Show>
 	);
