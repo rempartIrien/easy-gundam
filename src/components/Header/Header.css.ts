@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 import { glassEffectStyles } from "~/theme/theme.css";
-import { fixedSpace } from "~/theme/utils";
+import { fixedSpace, from } from "~/theme/utils";
 
 export const headerStyle = style({
 	...glassEffectStyles,
@@ -14,6 +14,14 @@ export const headerStyle = style({
 
 export const containerStyle = style({
 	display: "flex",
+	flexDirection: "column",
+	alignItems: "flex-start",
+	"@media": {
+		[from("md")]: {
+			flexDirection: "row",
+			alignItems: "center",
+		},
+	},
 });
 
 export const navStyle = style({

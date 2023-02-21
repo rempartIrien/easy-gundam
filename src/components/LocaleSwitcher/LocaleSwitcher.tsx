@@ -1,4 +1,6 @@
-import { For, useContext } from "solid-js";
+import { DropdownMenu } from "@kobalte/core";
+import clsx from "clsx";
+import { For, createSignal, useContext } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
@@ -7,15 +9,28 @@ import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
 
 import Button from "../Button";
+import Icon from "../Icon";
 
-const currentLocaleInputName = "currentLocale";
-const newLocaleInputName = "newLocale";
+import {
+	activeButtonStyle,
+	buttonStyle,
+	iconButtonStyle,
+	menuContentStyle,
+} from "./LocaleSwitcher.css";
 
+interface LocalePayload {
+	currentLocale?: Language;
+	newLocale?: Language;
+}
+
+/**
+ * Because Kobalte cannot handle progressively nehanced form in DropdownMenu,
+ * we need to hack a little and trigger the server action by ourselves.
+ */
 export default function LocaleSwitcher() {
-	const [, { Form: LocaleForm }] = createServerAction$(
-		async (form: FormData, { request }) => {
-			const currentLocale = form.get(currentLocaleInputName);
-			const newLocale = form.get(newLocaleInputName);
+	const [, act] = createServerAction$(
+		async (form: LocalePayload, { request }) => {
+			const { currentLocale, newLocale } = form;
 			const redirectTo: string =
 				request.headers
 					.get("Referer")
@@ -33,20 +48,32 @@ export default function LocaleSwitcher() {
 
 	const currentLocale = useContext(LocaleContext);
 
+	const [open, setOpen] = createSignal(false);
 	return (
-		<LocaleForm>
-			<input
-				type="hidden"
-				name={currentLocaleInputName}
-				value={currentLocale}
-			/>
-			<For each={Object.entries(LanguageNmes)}>
-				{([locale, name]) => (
-					<Button name={newLocaleInputName} value={locale}>
-						{name}
-					</Button>
-				)}
-			</For>
-		</LocaleForm>
+		<DropdownMenu.Root isOpen={open()} onOpenChange={setOpen}>
+			<DropdownMenu.Trigger as={Button} class={iconButtonStyle}>
+				<Icon name="languages" />
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Portal>
+				<DropdownMenu.Content class={menuContentStyle}>
+					<For each={Object.entries(LanguageNmes)}>
+						{([locale, name]) => (
+							<DropdownMenu.Item
+								as={Button}
+								class={clsx([
+									buttonStyle,
+									currentLocale === locale && activeButtonStyle,
+								])}
+								onSelect={() =>
+									void act({ currentLocale, newLocale: locale as Language })
+								}
+							>
+								{name}
+							</DropdownMenu.Item>
+						)}
+					</For>
+				</DropdownMenu.Content>
+			</DropdownMenu.Portal>
+		</DropdownMenu.Root>
 	);
 }
