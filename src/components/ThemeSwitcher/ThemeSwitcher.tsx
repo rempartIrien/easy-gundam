@@ -1,11 +1,20 @@
+import { ToggleButton } from "@kobalte/core";
 import { useI18n } from "@solid-primitives/i18n";
-import { createSignal, onMount } from "solid-js";
+import {
+	Show,
+	createEffect,
+	createSignal,
+	onMount,
+	useContext,
+} from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 
+import { ThemeContext } from "~/contexts/ThemeContext";
 import { colorSchemeCookie, getColorScheme } from "~/theme/theme.cookie";
-import { getNewColorScheme } from "~/theme/ThemeName";
+import { ThemeName, getNewColorScheme } from "~/theme/ThemeName";
 
 import Button from "../Button";
+import Icon from "../Icon";
 
 const prefersDarkModeInputName = "prefersDarkMode";
 
@@ -31,7 +40,10 @@ export default function ThemeSwitcher() {
 
 	const [t] = useI18n();
 
+	const currentTheme = useContext(ThemeContext);
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
+	const [pressed, setPressed] = createSignal(currentTheme === ThemeName.Dark);
+	const [ready, setReady] = createSignal(false);
 
 	onMount(() => {
 		setPrefersDarkMode(
@@ -39,16 +51,37 @@ export default function ThemeSwitcher() {
 		);
 	});
 
+	createEffect(() => {
+		setPressed(
+			currentTheme === ThemeName.Dark || (!currentTheme && prefersDarkMode()),
+		);
+		setReady(true);
+	});
+
 	return (
-		<ThemeForm>
-			<input
-				type="hidden"
-				name={prefersDarkModeInputName}
-				value={String(prefersDarkMode())}
-			/>
-			<Button type="submit" name="switchTheme">
-				{t("header.actions.switchTheme")}
-			</Button>
-		</ThemeForm>
+		<Show when={ready()}>
+			<ThemeForm>
+				<input
+					type="hidden"
+					name={prefersDarkModeInputName}
+					value={String(prefersDarkMode())}
+				/>
+
+				<ToggleButton.Root
+					aria-label={t("header.actions.switchTheme")}
+					isPressed={pressed()}
+					onPressedChange={setPressed}
+					as={Button}
+					type="submit"
+					name="switchTheme"
+				>
+					{() => (
+						<Show when={pressed()} fallback={<Icon name="sun" />}>
+							<Icon name="moon" />
+						</Show>
+					)}
+				</ToggleButton.Root>
+			</ThemeForm>
+		</Show>
 	);
 }
