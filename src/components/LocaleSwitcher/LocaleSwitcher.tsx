@@ -1,4 +1,5 @@
 import { DropdownMenu } from "@kobalte/core";
+import { useI18n } from "@solid-primitives/i18n";
 import clsx from "clsx";
 import { For, createSignal, useContext } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
@@ -46,12 +47,18 @@ export default function LocaleSwitcher() {
 		},
 	);
 
+	const [t] = useI18n();
+
 	const currentLocale = useContext(LocaleContext);
 
 	const [open, setOpen] = createSignal(false);
 	return (
 		<DropdownMenu.Root isOpen={open()} onOpenChange={setOpen}>
-			<DropdownMenu.Trigger as={Button} class={iconButtonStyle}>
+			<DropdownMenu.Trigger
+				as={Button}
+				class={iconButtonStyle}
+				aria-label={t("header.actions.switchLocale")}
+			>
 				<Icon name="languages" />
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>

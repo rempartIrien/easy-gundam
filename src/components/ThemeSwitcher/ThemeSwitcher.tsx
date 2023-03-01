@@ -1,5 +1,6 @@
-import { ToggleButton } from "@kobalte/core";
+import { DropdownMenu } from "@kobalte/core";
 import { useI18n } from "@solid-primitives/i18n";
+import clsx from "clsx";
 import {
 	Show,
 	createEffect,
@@ -10,29 +11,40 @@ import {
 import { createServerAction$, redirect } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
-import { colorSchemeCookie, getColorScheme } from "~/theme/theme.cookie";
-import { ThemeName, getNewColorScheme } from "~/theme/ThemeName";
+import { colorSchemeCookie } from "~/theme/theme.cookie";
+import { ThemeName } from "~/theme/ThemeName";
 
 import Button from "../Button";
 import Icon from "../Icon";
 
-const prefersDarkModeInputName = "prefersDarkMode";
+import {
+	activeButtonStyle,
+	buttonStyle,
+	iconButtonStyle,
+	menuContentStyle,
+} from "./ThemeSwitcher.css";
 
+interface ThemePayload {
+	themeName?: ThemeName;
+}
+
+/**
+ * Because Kobalte cannot handle progressively nehanced form in DropdownMenu,
+ * we need to hack a little and trigger the server action by ourselves.
+ */
 export default function ThemeSwitcher() {
-	const [, { Form: ThemeForm }] = createServerAction$(
-		async (form: FormData, { request }) => {
-			const currentColorScheme = await getColorScheme(request);
-			const prefersDarkMode = form.get(prefersDarkModeInputName) === "true";
-			const newColorScheme = getNewColorScheme(
-				currentColorScheme,
-				prefersDarkMode,
-			);
+	const [, act] = createServerAction$(
+		async (form: ThemePayload, { request }) => {
+			const { themeName } = form;
 
 			const redirectTo: string = request.headers.get("Referer") ?? "/";
 			return redirect(redirectTo, {
 				headers: {
 					// eslint-disable-next-line @typescript-eslint/naming-convention
-					"Set-Cookie": await colorSchemeCookie.serialize(newColorScheme),
+					"Set-Cookie": await colorSchemeCookie.serialize(
+						themeName,
+						!themeName ? { maxAge: -1 } : {},
+					),
 				},
 			});
 		},
@@ -42,46 +54,75 @@ export default function ThemeSwitcher() {
 
 	const currentTheme = useContext(ThemeContext);
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
-	const [pressed, setPressed] = createSignal(currentTheme === ThemeName.Dark);
+	const [isDarkMode, setIsDarkMode] = createSignal(
+		currentTheme === ThemeName.Dark,
+	);
 	const [ready, setReady] = createSignal(false);
 
 	onMount(() => {
-		setPrefersDarkMode(
-			window.matchMedia("(prefers-color-scheme: dark)").matches,
-		);
+		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+		// Set value at init
+		setPrefersDarkMode(mediaQuery.matches);
+		// Detect changes to update the icon
+		mediaQuery.addEventListener("change", (e) => setPrefersDarkMode(e.matches));
 	});
 
 	createEffect(() => {
-		setPressed(
+		setIsDarkMode(
 			currentTheme === ThemeName.Dark || (!currentTheme && prefersDarkMode()),
 		);
 		setReady(true);
 	});
 
+	const switchTheme = (themeName?: ThemeName) => {
+		void act({ themeName });
+	};
+
+	const [open, setOpen] = createSignal(false);
 	return (
 		<Show when={ready()}>
-			<ThemeForm>
-				<input
-					type="hidden"
-					name={prefersDarkModeInputName}
-					value={String(prefersDarkMode())}
-				/>
-
-				<ToggleButton.Root
-					aria-label={t("header.actions.switchTheme")}
-					isPressed={pressed()}
-					onPressedChange={setPressed}
+			<DropdownMenu.Root isOpen={open()} onOpenChange={setOpen}>
+				<DropdownMenu.Trigger
 					as={Button}
-					type="submit"
-					name="switchTheme"
+					class={iconButtonStyle}
+					aria-label={t("header.actions.switchTheme")}
 				>
-					{() => (
-						<Show when={pressed()} fallback={<Icon name="sun" />}>
-							<Icon name="moon" />
-						</Show>
-					)}
-				</ToggleButton.Root>
-			</ThemeForm>
+					<Show when={isDarkMode()} fallback={<Icon name="sun" />}>
+						<Icon name="moon" />
+					</Show>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Portal>
+					<DropdownMenu.Content class={menuContentStyle}>
+						<DropdownMenu.Item
+							as={Button}
+							class={clsx([buttonStyle, !currentTheme && activeButtonStyle])}
+							onSelect={() => switchTheme()}
+						>
+							{t("header.themes.system")}
+						</DropdownMenu.Item>
+						<DropdownMenu.Item
+							as={Button}
+							class={clsx([
+								buttonStyle,
+								currentTheme === ThemeName.Light && activeButtonStyle,
+							])}
+							onSelect={() => switchTheme(ThemeName.Light)}
+						>
+							{t("header.themes.light")}
+						</DropdownMenu.Item>
+						<DropdownMenu.Item
+							as={Button}
+							class={clsx([
+								buttonStyle,
+								currentTheme === ThemeName.Dark && activeButtonStyle,
+							])}
+							onSelect={() => switchTheme(ThemeName.Dark)}
+						>
+							{t("header.themes.dark")}
+						</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu.Portal>
+			</DropdownMenu.Root>
 		</Show>
 	);
 }

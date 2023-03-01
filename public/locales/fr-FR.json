@@ -8,12 +8,18 @@
 	},
 	"header": {
 		"actions": {
+			"switchLocale": "Changer de langue",
 			"switchTheme": "Changer de thème"
 		},
 		"nav": {
 			"home": "Accueil",
 			"timelines": "Univers",
 			"about": "À propos"
+		},
+		"themes": {
+			"dark": "Sombre",
+			"light": "Clair",
+			"system": "Système"
 		}
 	},
 	"home": {
