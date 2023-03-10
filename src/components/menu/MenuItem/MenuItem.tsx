@@ -20,11 +20,10 @@ export default function MenuItem(props: MenuItemProps) {
 		"isActive",
 	]);
 	return (
-		<DropdownMenu.Item asChild>
+		<DropdownMenu.Item onSelect={local.onSelect} asChild>
 			<As
 				component={Button}
 				class={clsx([buttonStyle, local.isActive && activeButtonStyle])}
-				onSelect={local.onSelect}
 				{...others}
 			>
 				{local.children}
