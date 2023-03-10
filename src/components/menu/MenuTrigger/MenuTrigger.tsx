@@ -1,4 +1,4 @@
-import { DropdownMenu } from "@kobalte/core";
+import { As, DropdownMenu } from "@kobalte/core";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
@@ -13,13 +13,15 @@ export default function MenuTrigger(props: MenuTriggerProps) {
 	const [local, others] = splitProps(props, ["class", "children"]);
 
 	return (
-		<DropdownMenu.Trigger
-			as={Button}
-			class={clsx([buttonStyle, local.class])}
-			aria-label={props["aria-label"]}
-			{...others}
-		>
-			{props.children}
+		<DropdownMenu.Trigger asChild>
+			<As
+				component={Button}
+				class={clsx([buttonStyle, local.class])}
+				aria-label={props["aria-label"]}
+				{...others}
+			>
+				{props.children}
+			</As>
 		</DropdownMenu.Trigger>
 	);
 }

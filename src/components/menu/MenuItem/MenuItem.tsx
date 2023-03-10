@@ -1,4 +1,4 @@
-import { DropdownMenu } from "@kobalte/core";
+import { As, DropdownMenu } from "@kobalte/core";
 import clsx from "clsx";
 import { splitProps } from "solid-js";
 
@@ -20,13 +20,15 @@ export default function MenuItem(props: MenuItemProps) {
 		"isActive",
 	]);
 	return (
-		<DropdownMenu.Item
-			as={Button}
-			class={clsx([buttonStyle, local.isActive && activeButtonStyle])}
-			onSelect={local.onSelect}
-			{...others}
-		>
-			{local.children}
+		<DropdownMenu.Item asChild>
+			<As
+				component={Button}
+				class={clsx([buttonStyle, local.isActive && activeButtonStyle])}
+				onSelect={local.onSelect}
+				{...others}
+			>
+				{local.children}
+			</As>
 		</DropdownMenu.Item>
 	);
 }

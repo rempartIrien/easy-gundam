@@ -1,4 +1,4 @@
-import { DropdownMenu } from "@kobalte/core";
+import { As, DropdownMenu } from "@kobalte/core";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
 
@@ -12,11 +12,10 @@ interface MenuContentProps {
 export default function MenuContent(props: MenuContentProps) {
 	return (
 		<DropdownMenu.Portal>
-			<DropdownMenu.Content
-				as="ol"
-				class={clsx([menuContentStyle, props.class])}
-			>
-				{props.children}
+			<DropdownMenu.Content asChild>
+				<As component="ol" class={clsx([menuContentStyle, props.class])}>
+					{props.children}
+				</As>
 			</DropdownMenu.Content>
 		</DropdownMenu.Portal>
 	);
