@@ -1,6 +1,4 @@
-import { DropdownMenu } from "@kobalte/core";
 import { useI18n } from "@solid-primitives/i18n";
-import clsx from "clsx";
 import {
 	Show,
 	createEffect,
@@ -14,15 +12,11 @@ import { ThemeContext } from "~/contexts/ThemeContext";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
-import Button from "../Button";
 import Icon from "../Icon";
-
-import {
-	activeButtonStyle,
-	buttonStyle,
-	iconButtonStyle,
-	menuContentStyle,
-} from "./ThemeSwitcher.css";
+import Menu from "../menu/Menu";
+import MenuContent from "../menu/MenuContent";
+import MenuItem from "../menu/MenuItem";
+import MenuTrigger from "../menu/MenuTrigger";
 
 interface ThemePayload {
 	themeName?: ThemeName;
@@ -81,48 +75,30 @@ export default function ThemeSwitcher() {
 	const [open, setOpen] = createSignal(false);
 	return (
 		<Show when={ready()}>
-			<DropdownMenu.Root isOpen={open()} onOpenChange={setOpen}>
-				<DropdownMenu.Trigger
-					as={Button}
-					class={iconButtonStyle}
-					aria-label={t("header.actions.switchTheme")}
-				>
+			<Menu isOpen={open()} onOpenChange={setOpen}>
+				<MenuTrigger aria-label={t("header.actions.switchTheme")}>
 					<Show when={isDarkMode()} fallback={<Icon name="sun" />}>
 						<Icon name="moon" />
 					</Show>
-				</DropdownMenu.Trigger>
-				<DropdownMenu.Portal>
-					<DropdownMenu.Content class={menuContentStyle}>
-						<DropdownMenu.Item
-							as={Button}
-							class={clsx([buttonStyle, !currentTheme && activeButtonStyle])}
-							onSelect={() => switchTheme()}
-						>
-							{t("header.themes.system")}
-						</DropdownMenu.Item>
-						<DropdownMenu.Item
-							as={Button}
-							class={clsx([
-								buttonStyle,
-								currentTheme === ThemeName.Light && activeButtonStyle,
-							])}
-							onSelect={() => switchTheme(ThemeName.Light)}
-						>
-							{t("header.themes.light")}
-						</DropdownMenu.Item>
-						<DropdownMenu.Item
-							as={Button}
-							class={clsx([
-								buttonStyle,
-								currentTheme === ThemeName.Dark && activeButtonStyle,
-							])}
-							onSelect={() => switchTheme(ThemeName.Dark)}
-						>
-							{t("header.themes.dark")}
-						</DropdownMenu.Item>
-					</DropdownMenu.Content>
-				</DropdownMenu.Portal>
-			</DropdownMenu.Root>
+				</MenuTrigger>
+				<MenuContent>
+					<MenuItem isActive={!currentTheme} onSelect={() => switchTheme()}>
+						{t("header.themes.system")}
+					</MenuItem>
+					<MenuItem
+						isActive={currentTheme === ThemeName.Light}
+						onSelect={() => switchTheme(ThemeName.Light)}
+					>
+						{t("header.themes.light")}
+					</MenuItem>
+					<MenuItem
+						isActive={currentTheme === ThemeName.Dark}
+						onSelect={() => switchTheme(ThemeName.Dark)}
+					>
+						{t("header.themes.dark")}
+					</MenuItem>
+				</MenuContent>
+			</Menu>
 		</Show>
 	);
 }

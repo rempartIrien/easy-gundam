@@ -1,6 +1,4 @@
-import { DropdownMenu } from "@kobalte/core";
 import { useI18n } from "@solid-primitives/i18n";
-import clsx from "clsx";
 import { For, createSignal, useContext } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 
@@ -9,15 +7,11 @@ import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
 
-import Button from "../Button";
 import Icon from "../Icon";
-
-import {
-	activeButtonStyle,
-	buttonStyle,
-	iconButtonStyle,
-	menuContentStyle,
-} from "./LocaleSwitcher.css";
+import Menu from "../menu/Menu";
+import MenuContent from "../menu/MenuContent";
+import MenuItem from "../menu/MenuItem";
+import MenuTrigger from "../menu/MenuTrigger";
 
 interface LocalePayload {
 	currentLocale?: Language;
@@ -53,34 +47,24 @@ export default function LocaleSwitcher() {
 
 	const [open, setOpen] = createSignal(false);
 	return (
-		<DropdownMenu.Root isOpen={open()} onOpenChange={setOpen}>
-			<DropdownMenu.Trigger
-				as={Button}
-				class={iconButtonStyle}
-				aria-label={t("header.actions.switchLocale")}
-			>
+		<Menu isOpen={open()} onOpenChange={setOpen}>
+			<MenuTrigger aria-label={t("header.actions.switchLocale")}>
 				<Icon name="languages" />
-			</DropdownMenu.Trigger>
-			<DropdownMenu.Portal>
-				<DropdownMenu.Content class={menuContentStyle}>
-					<For each={Object.entries(LanguageNmes)}>
-						{([locale, name]) => (
-							<DropdownMenu.Item
-								as={Button}
-								class={clsx([
-									buttonStyle,
-									currentLocale === locale && activeButtonStyle,
-								])}
-								onSelect={() =>
-									void act({ currentLocale, newLocale: locale as Language })
-								}
-							>
-								{name}
-							</DropdownMenu.Item>
-						)}
-					</For>
-				</DropdownMenu.Content>
-			</DropdownMenu.Portal>
-		</DropdownMenu.Root>
+			</MenuTrigger>
+			<MenuContent>
+				<For each={Object.entries(LanguageNmes)}>
+					{([locale, name]) => (
+						<MenuItem
+							isActive={currentLocale === locale}
+							onSelect={() =>
+								void act({ currentLocale, newLocale: locale as Language })
+							}
+						>
+							{name}
+						</MenuItem>
+					)}
+				</For>
+			</MenuContent>
+		</Menu>
 	);
 }
