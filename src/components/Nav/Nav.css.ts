@@ -1,12 +1,12 @@
 import { style } from "@vanilla-extract/css";
 
-import { relativeSpace } from "~/theme/utils";
+import { fixedSpace } from "~/theme/utils";
 
 export const navStyle = style({});
 
 export const listStyle = style({
 	display: "flex",
-	gap: relativeSpace(1),
+	gap: fixedSpace(2),
 	listStyle: "none",
 	margin: 0,
 	padding: 0,
