@@ -5,8 +5,8 @@ import { calc } from "@vanilla-extract/css-utils";
 import { vars } from "~/theme/theme.css";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 
-const leftWidth = "20%";
 const borderWidth = "4px";
+const yearWidth = calc(borderWidth).divide(2).add("50%").toString();
 const bulletSize = fixedSpace(3);
 const gap = calc(borderWidth).divide(2).add(fixedSpace(4)).toString();
 const bulletPaddingTop = fixedSpace(2);
@@ -19,7 +19,7 @@ const beginEndBorderStyles: StyleRule = {
 	borderRightColor: vars.color.primary.main,
 	display: "block",
 	height: relativeSpace(5),
-	width: leftWidth,
+	width: yearWidth,
 	maxWidth: yearColumnWidth,
 };
 
@@ -32,6 +32,10 @@ export const chronologyStyle = style({
 			"::before": beginEndBorderStyles,
 			"::after": beginEndBorderStyles,
 		},
+		[from("lg")]: {
+			"::before": { maxWidth: "none" },
+			"::after": { maxWidth: "none" },
+		},
 	},
 });
 
@@ -40,6 +44,13 @@ export const chronologyItemStyle = style({
 		[from("md")]: {
 			display: "flex",
 			alignItems: "stretch",
+		},
+		[from("lg")]: {
+			selectors: {
+				"&:nth-of-type(even)": {
+					flexDirection: "row-reverse",
+				},
+			},
 		},
 	},
 });
@@ -55,7 +66,7 @@ export const yearStyle = style({
 			borderRightStyle: "solid",
 			borderRightColor: vars.color.primary.main,
 			marginRight: gap,
-			width: leftWidth,
+			width: yearWidth,
 			maxWidth: yearColumnWidth,
 			position: "relative",
 			display: "inline-block",
@@ -80,6 +91,26 @@ export const yearStyle = style({
 				transform: "translateY(-50%)",
 			},
 		},
+		[from("lg")]: {
+			maxWidth: "none",
+			selectors: {
+				[`${chronologyItemStyle}:nth-of-type(even) &`]: {
+					borderRightWidth: 0,
+					borderLeftWidth: borderWidth,
+					borderLeftStyle: "solid",
+					borderLeftColor: vars.color.primary.main,
+					textAlign: "start",
+					paddingRight: 0,
+					paddingLeft: gap,
+					marginRight: 0,
+					marginLeft: gap,
+				},
+				[`${chronologyItemStyle}:nth-of-type(even) &::after`]: {
+					right: 0,
+					left: calc(borderWidth).add(bulletSize).divide(2).negate().toString(),
+				},
+			},
+		},
 	},
 });
 
@@ -92,11 +123,6 @@ export const seriesListStyle = style({
 	gap: relativeSpace(4),
 	gridTemplateColumns: "1fr",
 	paddingBottom: relativeSpace(4),
-	"@media": {
-		[from("lg")]: {
-			gridTemplateColumns: "1fr 1fr",
-		},
-	},
 });
 
 export const seriesListItemStyle = style({});

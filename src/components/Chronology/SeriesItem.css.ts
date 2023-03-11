@@ -10,4 +10,9 @@ export const seriesItemStyle = style({
 
 export const titleStyle = style({
 	color: vars.color.primary.text,
+	selectors: {
+		[`${seriesItemStyle}:hover &`]: {
+			color: vars.color.primary.main,
+		},
+	},
 });
