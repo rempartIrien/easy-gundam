@@ -5,11 +5,11 @@ import { Dynamic } from "solid-js/web";
 
 import { textStyle } from "./Text.css";
 
-interface HeadingProps extends JSX.HTMLAttributes<HTMLHeadingElement> {
+type TextProps = JSX.IntrinsicElements["p"] & {
 	variant: "small" | "normal" | "big";
-}
+};
 
-export default function Heading(props: HeadingProps) {
+export default function Text(props: TextProps) {
 	const [local, otherProps] = splitProps(props, [
 		"class",
 		"variant",
