@@ -13,7 +13,7 @@ export function routeData({ params }: RouteDataArgs) {
 			const locale = await getLocale(request);
 			return listSeries(code, locale);
 		},
-		{ key: () => ["timelines", params.code] },
+		{ key: () => ["timelines", params.code, "series"] },
 	);
 	return series;
 }
