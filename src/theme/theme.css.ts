@@ -45,11 +45,11 @@ export const vars = createThemeContract({
 // TODO: execute https://coolors.co/contrast-checker/
 
 const merigold = "#FCAE1E";
-const merigoldLight = "#fff3dd";
+const merigoldLight = "#fbdfaa";
 const merigoldDark = "#6f4901";
 
 const imperialRed = "#ED2939";
-const imperialRedLight = "#fcdfe1";
+const imperialRedLight = "#fdc4c8";
 const imperialRedDark = "#670910";
 
 const black = "#000000";
