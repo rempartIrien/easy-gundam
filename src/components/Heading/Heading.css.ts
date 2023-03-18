@@ -1,10 +1,9 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { vars } from "~/theme/theme.css";
+import { textBlockStyles, vars } from "~/theme/theme.css";
 
 const baseHeadingStyle = style({
-	padding: 0,
-	margin: 0,
+	...textBlockStyles,
 });
 
 export const headingStyle = styleVariants({

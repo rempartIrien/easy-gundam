@@ -137,6 +137,12 @@ export const glassEffectStyles = {
 	boxShadow: vars.boxShadow.base,
 };
 
+export const textBlockStyles = {
+	padding: 0,
+	margin: "0 0 1em",
+	width: `min(${fixedSpace(88)}, 100%)`,
+};
+
 const borderRadius = {
 	base: "4px",
 	round: "50%",
