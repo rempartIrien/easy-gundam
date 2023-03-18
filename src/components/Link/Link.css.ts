@@ -4,11 +4,9 @@ import { vars } from "~/theme/theme.css";
 
 const baseLinkStyle = style({
 	textDecoration: "none",
-	selectors: {
-		'&[target="_blank"]::after': {
-			content: "↗",
-		},
-	},
+	display: "inline-flex",
+	alignItems: "center",
+	gap: "0.5ch",
 });
 
 export const linkStyle = styleVariants({
