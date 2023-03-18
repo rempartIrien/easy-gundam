@@ -17,8 +17,10 @@ export const localeCookie = createCookie("locale", {
 });
 
 // Helper function to get the value of the locale cookie
-function getLocaleToken(request: Request): Promise<Language> {
-	return localeCookie.parse(request.headers.get("Cookie")) as Promise<Language>;
+export function getLocaleToken(request: Request): Promise<Language | null> {
+	return localeCookie.parse(
+		request.headers.get("Cookie"),
+	) as Promise<Language | null>;
 }
 
 function extractPreferredLocale(

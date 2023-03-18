@@ -1,5 +1,28 @@
 {
 	"appName": "Easy Gundam",
+	"cookies": {
+		"title": "Cookie management",
+		"list": {
+			"text": "{{ appName }} can add two cookies:",
+			"language": "a cookie to save the language you want to use",
+			"theme": "a cookie to save the theme you want to use"
+		},
+		"text": "You can delete all the cookies saved on your device here:",
+		"language": {
+			"title": "Language cookie",
+			"text": "This cookie is used to save the language you use so that you can be redirected to the good language when you first arrive on the website default page. On other pages, the language in the address of the visited page is used. If this cookie is not present, your browser language is detected and used."
+		},
+		"theme": {
+			"title": "Theme cookie",
+			"text": "this cookie is used to save the theme you use. If this cookie is not present, your operating system theme is used instead."
+		},
+		"noCookie": "You do not use such a cookie on your device.",
+		"actions": {
+			"deleteAll": "Delete all cookies",
+			"deleteLanguage": "Delete the language cookie",
+			"deleteTheme": "Delete the theme cookie"
+		}
+	},
 	"error": {
 		"title": "Error",
 		"links": {

@@ -5,7 +5,7 @@ import {
 	style,
 } from "@vanilla-extract/css";
 
-import { fixedSpace, hexToRgba } from "./utils";
+import { fixedSpace, hexToRgba, relativeSpace } from "./utils";
 
 export const vars = createThemeContract({
 	color: {
@@ -140,7 +140,7 @@ export const glassEffectStyles = {
 export const textBlockStyles = {
 	padding: 0,
 	margin: "0 0 1em",
-	width: `min(${fixedSpace(88)}, 100%)`,
+	width: `min(${relativeSpace(88)}, 100%)`,
 };
 
 const borderRadius = {

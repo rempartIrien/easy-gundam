@@ -16,10 +16,12 @@ export const colorSchemeCookie = createCookie("color-scheme", {
 });
 
 // Helper function to get the value of the color scheme cookie
-function getColorSchemeToken(request: Request): Promise<ThemeName> {
+export function getColorSchemeToken(
+	request: Request,
+): Promise<ThemeName | null> {
 	return colorSchemeCookie.parse(
 		request.headers.get("Cookie"),
-	) as Promise<ThemeName>;
+	) as Promise<ThemeName | null>;
 }
 
 export async function getColorScheme(
@@ -31,7 +33,7 @@ export async function getColorScheme(
 	// System preferred color scheme header
 	const systemPreferredColorScheme = request.headers.get(
 		"Sec-CH-Prefers-Color-Scheme",
-	);
+	) as ThemeName | null;
 	// Return the manually selected theme
 	// or system preferred theme or default theme
 	return userSelectedColorScheme ?? systemPreferredColorScheme;
