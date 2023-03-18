@@ -6,9 +6,9 @@ import { Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
-import Heading from "~/components/Heading";
 import Nav from "~/components/Nav";
 import NavItem from "~/components/NavItem";
+import PageContent from "~/components/PageContent";
 import { getTimelineByCode } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
@@ -35,8 +35,7 @@ export default function Timelines() {
 	const timeline = useRouteData<typeof routeData>();
 	return (
 		<Show when={timeline()}>
-			<section>
-				<Heading variant="title">{timeline()?.name}</Heading>
+			<PageContent title={timeline()?.name}>
 				<Nav
 					items={[
 						<NavItem href="" end>
@@ -48,7 +47,7 @@ export default function Timelines() {
 				<section class={contentStyle}>
 					<Outlet />
 				</section>
-			</section>
+			</PageContent>
 		</Show>
 	);
 }

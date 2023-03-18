@@ -1,9 +1,11 @@
 import { useI18n } from "@solid-primitives/i18n";
 import { For } from "solid-js";
-import { A, useRouteData } from "solid-start";
+import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 
-import Heading from "~/components/Heading";
+import Link from "~/components/Link";
+import List from "~/components/List";
+import PageContent from "~/components/PageContent";
 import { listTimelines } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
@@ -20,17 +22,16 @@ export default function Timelines() {
 	const timelines = useRouteData<typeof routeData>();
 
 	return (
-		<>
-			<Heading variant="title">{t("timelines.title")}</Heading>
-			<ul>
+		<PageContent title={t("timelines.title")}>
+			<List>
 				<For each={timelines()}>
 					{(timeline) => (
 						<li>
-							<A href={timeline.code}>{timeline.name}</A>
+							<Link href={timeline.code}>{timeline.name}</Link>
 						</li>
 					)}
 				</For>
-			</ul>
-		</>
+			</List>
+		</PageContent>
 	);
 }
