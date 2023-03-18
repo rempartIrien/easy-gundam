@@ -1,4 +1,51 @@
 {
+	"about": {
+		"title": "About",
+		"legal": {
+			"title": "Legal information",
+			"texts": {
+				"website": "{{ appName }} is an independent website and is in no way supported, endorsed or affiliated in with Sunrise or Bandai. The aim of {{ appName }} is to inform and share our passion towards Gundam. This site is not for profit or commercial purposes.",
+				"gundam": "Gundam and all associated names, images and trademarks are copyright of Sunrise and Bandai",
+				"copyright": "La gestion des droits en France est détenue par Bandai. If any media available on this website could harm the rights holders, we undertake to remove it at their request.",
+				"texts": "All texts of {{ appName }} are under CC BY-NC-ND 4.0 license.",
+				"media": "Images that are displayed on this site are copyrighted to Sunrise or Bandai, or to the creator of the image and are used on this website as defined by the French fair use (droit de citation)."
+			},
+			"resources": {
+				"fairUse": "Fair use (France)",
+				"license": "Common Creative BY-NC-ND 4.0 license"
+			}
+		},
+		"privacy": {
+			"title": "Privacy and data",
+			"texts": {
+				"cookies": {
+					"list": "{{ appName }} uses two kinds of cookies:",
+					"theme": "a cookie that saves the theme used (preference cookie); if it is not present, the site uses the operating system theme from the user's device",
+					"language": "a cookie that saves the language used by the user so that he/she can be redirected from the default page to the good language (preference cookie); if it is not present, he/she is redirected with the language detected from the user's browser",
+					"expiration": "Cookies last one year. They are saved on the user's device when he/she chooses a language or a theme and if he/she accepts cookies.",
+					"noCookies": "{{ appName }} can work without any cookie. Cookies can be deleted from the cookie management page."
+				},
+				"dataSharing": "{{ appName }} does not collect or process any user-related information outside of user's theme and language, as described above."
+			},
+			"resources": {
+				"cookieManagement": "Cookie management page",
+				"gdpr": "GDPR"
+			}
+		},
+		"purpose": {
+			"title": "Website purpose",
+			"texts": {
+				"share": "{{ appName }}'s prupose is to let people discover and improve their knowledge about Gundam and to make the community bigger.",
+				"exhaustiveness": "{{ appName }} does not want to cover all Gundam universes or medias. Other Gundam sites do it very well.",
+				"free": "{{ appName }} is not for profit or commercial purposes, you can access it for free."
+			},
+			"resources": {
+				"aeug": "AEUG",
+				"gundamFrance": "Gundam France",
+				"wiki": "The Gundam Wikia"
+			}
+		}
+	},
 	"appName": "Easy Gundam",
 	"cookies": {
 		"title": "Cookie management",
