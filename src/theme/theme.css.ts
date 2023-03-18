@@ -57,7 +57,7 @@ const grayDarker = "#131313";
 const grayDark = "#434343";
 const gray = "#909090";
 const grayLight = "#d1d1d1";
-const grayLighter = "#e1e1e1";
+const grayLighter = "#f1f1f1";
 const white = "#ffffff";
 
 const candyApple = "#FF0800";
@@ -91,27 +91,27 @@ const font: Record<
 	title: {
 		family: fontFamiliySansSerif,
 		size: "4rem",
-		lineHeight: "2",
+		lineHeight: "1.3",
 	},
 	subtitle: {
 		family: fontFamiliySansSerif,
 		size: "2rem",
-		lineHeight: "1.5",
+		lineHeight: "1.35",
 	},
 	bigText: {
 		family: fontFamiliySansSerif,
 		size: "1.25rem",
-		lineHeight: "1.25",
+		lineHeight: "1.6",
 	},
 	normalText: {
 		family: fontFamiliySansSerif,
 		size: "1rem",
-		lineHeight: "1.25",
+		lineHeight: "1.6",
 	},
 	smallText: {
 		family: fontFamiliySansSerif,
 		size: "0.75rem",
-		lineHeight: "1.25",
+		lineHeight: "1.6",
 	},
 };
 
