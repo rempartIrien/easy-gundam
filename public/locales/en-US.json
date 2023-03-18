@@ -6,7 +6,7 @@
 			"texts": {
 				"website": "{{ appName }} is an independent website and is in no way supported, endorsed or affiliated in with Sunrise or Bandai. The aim of {{ appName }} is to inform and share our passion towards Gundam. This site is not for profit or commercial purposes.",
 				"gundam": "Gundam and all associated names, images and trademarks are copyright of Sunrise and Bandai",
-				"copyright": "La gestion des droits en France est détenue par Bandai. If any media available on this website could harm the rights holders, we undertake to remove it at their request.",
+				"copyright": "Rights management in France is owned by Bandai. If any media available on this website could harm the rights holders, we undertake to remove it at their request.",
 				"texts": "All texts of {{ appName }} are under CC BY-NC-ND 4.0 license.",
 				"media": "Images that are displayed on this site are copyrighted to Sunrise or Bandai, or to the creator of the image and are used on this website as defined by the French fair use (droit de citation)."
 			},
@@ -21,7 +21,7 @@
 				"cookies": {
 					"list": "{{ appName }} uses two kinds of cookies:",
 					"theme": "a cookie that saves the theme used (preference cookie); if it is not present, the site uses the operating system theme from the user's device",
-					"language": "a cookie that saves the language used by the user so that he/she can be redirected from the default page to the good language (preference cookie); if it is not present, he/she is redirected with the language detected from the user's browser",
+					"language": "a cookie that saves the language used by the user so that he/she can be redirected from the default page to the good language (preference cookie); if it is not present, he/she is redirected with the language detected from his/her browser",
 					"expiration": "Cookies last one year. They are saved on the user's device when he/she chooses a language or a theme and if he/she accepts cookies.",
 					"noCookies": "{{ appName }} can work without any cookie. Cookies can be deleted from the cookie management page."
 				},

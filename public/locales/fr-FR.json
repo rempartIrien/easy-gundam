@@ -35,7 +35,7 @@
 		"purpose": {
 			"title": "Objectifs de ce site",
 			"texts": {
-				"share": "{{ appName }} a pour but de permettre aux internautes de découvrir Gundam ou d'approfondir leurs connaissances sur Gundam et de faire grossir la communauté de fans.",
+				"share": "{{ appName }} a pour but de permettre aux internautes de découvrir Gundam et d'approfondir leurs connaissances sur Gundam afin de faire grossir la communauté de fans.",
 				"exhaustiveness": "{{ appName }} n'a pas vocation à couvrir la totalité de l'univers Gundam, ni en terme d'univers, ni en terme de média. D'autres sites internet remplissent déjà ce rôle.",
 				"free": "{{ appName }} n'a aucun but lucratif ou commercial, l'accès au site est gratuit."
 			},
