@@ -1,17 +1,18 @@
 import clsx from "clsx";
-import type { Component, JSX } from "solid-js";
+import type { ComponentProps, JSX, ValidComponent } from "solid-js";
 import { splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { cardStyle } from "./Card.css";
 
-type CardProps<P> = {
-	component?: Component<P> | string | keyof JSX.IntrinsicElements;
-	children: JSX.Element;
-	class?: string;
-} & P;
+type CardProps<T extends ValidComponent = "div"> = {
+	component?: T;
+} & ComponentProps<T> &
+	JSX.HTMLAttributes<HTMLElement>;
 
-export default function Card<T>(props: CardProps<T>) {
+export default function Card<T extends ValidComponent = "div">(
+	props: CardProps<T>,
+) {
 	const [local, otherProps] = splitProps(props, [
 		"class",
 		"component",

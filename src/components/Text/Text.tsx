@@ -1,24 +1,30 @@
 import clsx from "clsx";
-import type { JSX } from "solid-js";
+import type { ComponentProps, JSX, ValidComponent } from "solid-js";
 import { splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { textStyle } from "./Text.css";
 
-type TextProps = JSX.IntrinsicElements["p"] & {
-	variant: "small" | "normal" | "big";
-};
+export type TextProps<T extends ValidComponent = "span"> = {
+	variant?: "small" | "normal" | "big";
+} & {
+	component?: T;
+} & ComponentProps<T> &
+	JSX.HTMLAttributes<HTMLElement>;
 
-export default function Text(props: TextProps) {
+export default function Text<T extends ValidComponent = "span">(
+	props: TextProps<T>,
+) {
 	const [local, otherProps] = splitProps(props, [
 		"class",
+		"component",
 		"variant",
 		"children",
 	]);
 	return (
 		<Dynamic
-			component={"p"}
-			class={clsx([textStyle[local.variant], local.class])}
+			component={local.component || "span"}
+			class={clsx([textStyle[local.variant || "normal"], local.class])}
 			{...otherProps}
 		>
 			{local.children}
