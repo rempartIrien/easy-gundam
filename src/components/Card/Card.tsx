@@ -6,7 +6,7 @@ import { Dynamic } from "solid-js/web";
 import { cardStyle } from "./Card.css";
 
 type CardProps<P> = {
-	component: Component<P> | string | keyof JSX.IntrinsicElements;
+	component?: Component<P> | string | keyof JSX.IntrinsicElements;
 	children: JSX.Element;
 	class?: string;
 } & P;
