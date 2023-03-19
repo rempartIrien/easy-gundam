@@ -12,10 +12,11 @@ import Heading from "~/components/Heading";
 import List from "~/components/List";
 import PageContent from "~/components/PageContent";
 import Paragraph from "~/components/Paragraph";
+import Section from "~/components/Section";
 import { getLocaleToken, localeCookie } from "~/i18n/i18n.cookie";
 import { colorSchemeCookie, getColorSchemeToken } from "~/theme/theme.cookie";
 
-import { butonStyles } from "./cookies.css";
+import { buttonStyles } from "./cookies.css";
 
 const buttonName = "deleteCookie";
 const allCookie = "all" as const;
@@ -71,52 +72,58 @@ export default function Cookies() {
 		<CookieForm>
 			<PageContent title={t("cookies.title")}>
 				<Show when={cookies()}>
-					<Paragraph>
-						{t("cookies.list.text", { appName: t("appName") })}
-					</Paragraph>
-					<List>
-						<li>{t("cookies.list.language")}</li>
-						<li>{t("cookies.list.theme")}</li>
-					</List>
-					<Paragraph>{t("cookies.text")}</Paragraph>
-					<Button
-						class={butonStyles}
-						type="submit"
-						name={buttonName}
-						value={allCookie}
-					>
-						{t("cookies.actions.deleteAll")}
-					</Button>
-					<Heading variant="subtitle">{t("cookies.language.title")}</Heading>
-					<Paragraph>{t("cookies.language.text")}</Paragraph>
-					<Show
-						when={cookies()?.locale}
-						fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
-					>
+					<Section>
+						<Paragraph>
+							{t("cookies.list.text", { appName: t("appName") })}
+						</Paragraph>
+						<List>
+							<li>{t("cookies.list.language")}</li>
+							<li>{t("cookies.list.theme")}</li>
+						</List>
+						<Paragraph>{t("cookies.text")}</Paragraph>
 						<Button
-							class={butonStyles}
+							class={buttonStyles}
 							type="submit"
 							name={buttonName}
-							value={languageCookie}
+							value={allCookie}
 						>
-							{t("cookies.actions.deleteLanguage")}
+							{t("cookies.actions.deleteAll")}
 						</Button>
-					</Show>
-					<Heading variant="subtitle">{t("cookies.theme.title")}</Heading>
-					<Paragraph>{t("cookies.theme.text")}</Paragraph>
-					<Show
-						when={cookies()?.theme}
-						fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
-					>
-						<Button
-							class={butonStyles}
-							type="submit"
-							name={buttonName}
-							value={themeCookie}
+					</Section>
+					<Section>
+						<Heading variant="subtitle">{t("cookies.language.title")}</Heading>
+						<Paragraph>{t("cookies.language.text")}</Paragraph>
+						<Show
+							when={cookies()?.locale}
+							fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
 						>
-							{t("cookies.actions.deleteTheme")}
-						</Button>
-					</Show>
+							<Button
+								class={buttonStyles}
+								type="submit"
+								name={buttonName}
+								value={languageCookie}
+							>
+								{t("cookies.actions.deleteLanguage")}
+							</Button>
+						</Show>
+					</Section>
+					<Section>
+						<Heading variant="subtitle">{t("cookies.theme.title")}</Heading>
+						<Paragraph>{t("cookies.theme.text")}</Paragraph>
+						<Show
+							when={cookies()?.theme}
+							fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
+						>
+							<Button
+								class={buttonStyles}
+								type="submit"
+								name={buttonName}
+								value={themeCookie}
+							>
+								{t("cookies.actions.deleteTheme")}
+							</Button>
+						</Show>
+					</Section>
 				</Show>
 			</PageContent>
 		</CookieForm>
