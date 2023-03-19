@@ -54,7 +54,7 @@
 			"language": "un cookie pour sauvegarder la langue utilisée",
 			"theme": "un cookie pour sauvegarder le thème utilisé"
 		},
-		"text": "Vous pouvez supprimer les cookie sauvegardés sur votre appareil ici :",
+		"text": "Vous pouvez supprimer les cookies sauvegardés sur votre appareil ici :",
 		"language": {
 			"title": "Cookie de langue",
 			"text": "Ce cookie sert à sauvegarder la langue utilisée afin de vous rediriger vers la bonne langue lorsque vous arrivez sur la page par défaut du site. Sur les autres pages, la langue présente dans l'adresse de la page visitée prévaut. En l'absence de ce cookie, la langue de votre navigateur sera détectée et utilisée pour la redirection."
