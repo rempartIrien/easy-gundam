@@ -2,10 +2,7 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 import { vars } from "~/theme/theme.css";
 
-const baseTextStyle = style({
-	padding: 0,
-	margin: 0,
-});
+const baseTextStyle = style({});
 
 export const textStyle = styleVariants({
 	big: [

@@ -1,6 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
 import { textBlockStyles, vars } from "~/theme/theme.css";
+import { relativeSpace } from "~/theme/utils";
 
 const baseHeadingStyle = style({
 	...textBlockStyles,
@@ -14,6 +15,7 @@ export const headingStyle = styleVariants({
 			fontFamily: vars.font.title.family,
 			lineHeight: vars.font.title.lineHeight,
 			color: vars.color.primary.main,
+			marginBottom: relativeSpace(4),
 		},
 	],
 	subtitle: [
@@ -23,6 +25,7 @@ export const headingStyle = styleVariants({
 			fontFamily: vars.font.subtitle.family,
 			lineHeight: vars.font.subtitle.lineHeight,
 			color: vars.color.primary.text,
+			marginBottom: relativeSpace(2),
 		},
 	],
 });

@@ -5,5 +5,6 @@ import { relativeSpace } from "~/theme/utils";
 
 export const listStyle = style({
 	...textBlockStyles,
+	marginBottom: relativeSpace(2),
 	paddingLeft: relativeSpace(4),
 });

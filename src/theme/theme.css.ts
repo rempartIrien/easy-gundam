@@ -139,7 +139,7 @@ export const glassEffectStyles = {
 
 export const textBlockStyles = {
 	padding: 0,
-	margin: "0 0 1em",
+	margin: 0,
 	width: `min(${relativeSpace(88)}, 100%)`,
 };
 

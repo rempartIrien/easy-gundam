@@ -5,5 +5,5 @@ import { relativeSpace } from "~/theme/utils";
 
 export const buttonStyles = style({
 	...glassEffectStyles,
-	marginBottom: relativeSpace(1),
+	marginBottom: relativeSpace(2),
 });
