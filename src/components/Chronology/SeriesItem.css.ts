@@ -8,6 +8,11 @@ export const seriesItemStyle = style({
 	gap: fixedSpace(2),
 });
 
+export const textBlockStyle = style({
+	flex: 1,
+	alignSelf: "stretch",
+});
+
 export const titleStyle = style({
 	color: vars.color.primary.text,
 	selectors: {

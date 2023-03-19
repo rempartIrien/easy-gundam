@@ -6,13 +6,13 @@ import { Outlet, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import Heading from "~/components/Heading";
 import Nav from "~/components/Nav";
 import NavItem from "~/components/NavItem";
-import PageContent from "~/components/PageContent";
 import { getTimelineByCode } from "~/graphql/timeline.server";
 import { getLocale } from "~/i18n/i18n.cookie";
 
-import { contentStyle } from "./[code].css";
+import { contentStyle, navStyle } from "./[code].css";
 
 export function routeData({ params }: RouteDataArgs) {
 	invariant(params.code, "Expected params.code");
@@ -35,19 +35,19 @@ export default function Timelines() {
 	const timeline = useRouteData<typeof routeData>();
 	return (
 		<Show when={timeline()}>
-			<PageContent title={timeline()?.name}>
-				<Nav
-					items={[
-						<NavItem href="" end>
-							{t("timelines.nav.description")}
-						</NavItem>,
-						<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
-					]}
-				/>
-				<section class={contentStyle}>
-					<Outlet />
-				</section>
-			</PageContent>
+			<Heading variant="title">{timeline()?.name}</Heading>
+			<Nav
+				class={navStyle}
+				items={[
+					<NavItem href="" end>
+						{t("timelines.nav.description")}
+					</NavItem>,
+					<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
+				]}
+			/>
+			<section class={contentStyle}>
+				<Outlet />
+			</section>
 		</Show>
 	);
 }

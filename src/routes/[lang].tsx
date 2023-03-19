@@ -5,7 +5,7 @@ import { Outlet } from "solid-start";
 import CenterContent from "~/components/CenterContent";
 import Header from "~/components/Header";
 
-import { headerStyle } from "./[lang].css";
+import { contentStyle, headerStyle } from "./[lang].css";
 
 export default function I18nLayout() {
 	const [t] = useI18n();
@@ -14,7 +14,7 @@ export default function I18nLayout() {
 		<>
 			<Title>{t("appName")}</Title>
 			<Header class={headerStyle} />
-			<CenterContent>
+			<CenterContent class={contentStyle}>
 				<Outlet />
 			</CenterContent>
 		</>

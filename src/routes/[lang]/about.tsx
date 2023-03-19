@@ -3,7 +3,6 @@ import { useI18n } from "@solid-primitives/i18n";
 import Heading from "~/components/Heading";
 import Link from "~/components/Link";
 import List from "~/components/List";
-import PageContent from "~/components/PageContent";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
 import Text from "~/components/Text";
@@ -12,7 +11,8 @@ export default function About() {
 	const [t] = useI18n();
 	const appName = t("appName");
 	return (
-		<PageContent title={t("about.title")}>
+		<>
+			<Heading variant="title">{t("about.title")}</Heading>
 			<Section>
 				<Heading variant="subtitle">{t("about.legal.title")}</Heading>
 				<Paragraph>{t("about.legal.texts.website", { appName })}</Paragraph>
@@ -93,6 +93,6 @@ export default function About() {
 					</li>
 				</List>
 			</Section>
-		</PageContent>
+		</>
 	);
 }

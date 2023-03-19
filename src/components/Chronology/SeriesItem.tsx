@@ -7,7 +7,7 @@ import Card from "../Card";
 import Link from "../Link";
 import Text from "../Text";
 
-import { seriesItemStyle, titleStyle } from "./SeriesItem.css";
+import { seriesItemStyle, textBlockStyle, titleStyle } from "./SeriesItem.css";
 
 export interface BaseSeries {
 	code: string;
@@ -40,11 +40,11 @@ export default function SeriesItem(props: SeriesItemProps) {
 					srcset={`/api/images/${props.series.image?.id as string}/small 2x`}
 				/>
 			</Show>
-			<div>
-				<Text variant="big" class={titleStyle}>
+			<div class={textBlockStyle}>
+				<Text component="div" variant="big" class={titleStyle}>
 					{props.series.title}
 				</Text>
-				<Text variant="normal">{props.series.description}</Text>
+				<Text component="div">{props.series.description}</Text>
 			</div>
 		</Card>
 	);
