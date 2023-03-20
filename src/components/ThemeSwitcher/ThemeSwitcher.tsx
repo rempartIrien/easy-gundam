@@ -6,7 +6,7 @@ import {
 	onMount,
 	useContext,
 } from "solid-js";
-import { createServerAction$, redirect } from "solid-start/server";
+import { createServerAction$ } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
@@ -27,30 +27,27 @@ interface ThemePayload {
  * we need to hack a little and trigger the server action by ourselves.
  */
 export default function ThemeSwitcher() {
-	const [, act] = createServerAction$(
-		async (form: ThemePayload, { request }) => {
-			const { themeName } = form;
+	const [, act] = createServerAction$(async (form: ThemePayload) => {
+		const { themeName } = form;
 
-			const redirectTo: string = request.headers.get("Referer") ?? "/";
-			return redirect(redirectTo, {
-				headers: {
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					"Set-Cookie": await colorSchemeCookie.serialize(
-						themeName,
-						!themeName ? { maxAge: -1 } : {},
-					),
-				},
-			});
-		},
-	);
+		// const redirectTo: string = request.headers.get("Referer") ?? "/";
+		return new Response(null, {
+			status: 200,
+			headers: {
+				// eslint-disable-next-line @typescript-eslint/naming-convention
+				"Set-Cookie": await colorSchemeCookie.serialize(
+					themeName,
+					!themeName ? { maxAge: -1 } : {},
+				),
+			},
+		});
+	});
 
 	const [t] = useI18n();
 
-	const currentTheme = useContext(ThemeContext);
+	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
-	const [isDarkMode, setIsDarkMode] = createSignal(
-		currentTheme === ThemeName.Dark,
-	);
+	const [isDarkMode, setIsDarkMode] = createSignal(false);
 	const [ready, setReady] = createSignal(false);
 
 	onMount(() => {
@@ -63,13 +60,25 @@ export default function ThemeSwitcher() {
 
 	createEffect(() => {
 		setIsDarkMode(
-			currentTheme === ThemeName.Dark || (!currentTheme && prefersDarkMode()),
+			currentTheme() === ThemeName.Dark ||
+				(!currentTheme() && prefersDarkMode()),
 		);
 		setReady(true);
 	});
 
-	const switchTheme = (themeName?: ThemeName) => {
-		void act({ themeName });
+	const switchTheme = async (themeName?: ThemeName) => {
+		try {
+			// Update theme.
+			setCurrentTheme(themeName);
+			// Save the settings.
+			// TODO: do this if cookie is asked by user.
+			await act({ themeName });
+			// TODO:
+			// toastSuccess("OK");
+		} catch (e) {
+			// TODO:
+			// toastError("Not good...");
+		}
 	};
 
 	const [open, setOpen] = createSignal(false);
@@ -82,17 +91,17 @@ export default function ThemeSwitcher() {
 					</Show>
 				</MenuTrigger>
 				<MenuContent>
-					<MenuItem isActive={!currentTheme} onSelect={() => switchTheme()}>
+					<MenuItem isActive={!currentTheme()} onSelect={() => switchTheme()}>
 						{t("header.themes.system")}
 					</MenuItem>
 					<MenuItem
-						isActive={currentTheme === ThemeName.Light}
+						isActive={currentTheme() === ThemeName.Light}
 						onSelect={() => switchTheme(ThemeName.Light)}
 					>
 						{t("header.themes.light")}
 					</MenuItem>
 					<MenuItem
-						isActive={currentTheme === ThemeName.Dark}
+						isActive={currentTheme() === ThemeName.Dark}
 						onSelect={() => switchTheme(ThemeName.Dark)}
 					>
 						{t("header.themes.dark")}
