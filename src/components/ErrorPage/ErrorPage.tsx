@@ -12,7 +12,7 @@ export default function ErrorPage() {
 		<main>
 			<h1>{t("error.title")}</h1>
 			<p>
-				<A href={rootPath}>{t("error.links.backToHome")}</A>
+				<A href={rootPath()}>{t("error.links.backToHome")}</A>
 			</p>
 		</main>
 	);

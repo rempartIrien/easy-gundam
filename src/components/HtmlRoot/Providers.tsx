@@ -1,6 +1,7 @@
 import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
+import { createEffect } from "solid-js";
 import { createSignal } from "solid-js";
 import { Html } from "solid-start";
 
@@ -28,18 +29,25 @@ export default function Providers(props: {
 	const [themeName, setThemeName] = createSignal<ThemeName | null | undefined>(
 		props.initialProps?.themeName,
 	);
+	const [locale, setlocale] = createSignal<Language | undefined>(
+		props.initialProps?.locale,
+	);
+
+	const context = createI18nContext(
+		props.initialProps?.dict,
+		props.initialProps?.locale,
+	);
+
+	createEffect(() => {
+		context[1].locale(locale());
+	});
 
 	return (
 		<ThemeContext.Provider value={[themeName, setThemeName]}>
-			<LocaleContext.Provider value={props.initialProps?.locale}>
-				<I18nContext.Provider
-					value={createI18nContext(
-						props.initialProps?.dict,
-						props.initialProps?.locale,
-					)}
-				>
+			<LocaleContext.Provider value={[locale, setlocale]}>
+				<I18nContext.Provider value={context}>
 					<Html
-						lang={props.initialProps?.locale}
+						lang={locale()}
 						class={clsx([
 							htmlRootStyle,
 							themeName() === ThemeName.Dark && darkTheme,

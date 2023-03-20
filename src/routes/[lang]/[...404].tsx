@@ -14,7 +14,7 @@ export default function NotFound() {
 			<HttpStatusCode code={404} />
 			<Heading variant="title">{t("notFound.title")}</Heading>
 			<p>
-				<A href={rootPath}>{t("notFound.links.backToHome")}</A>
+				<A href={rootPath()}>{t("notFound.links.backToHome")}</A>
 			</p>
 		</>
 	);

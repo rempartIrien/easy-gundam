@@ -1,3 +1,4 @@
+import { createSignal } from "solid-js";
 import { cleanup, render, screen } from "solid-testing-library";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
@@ -21,8 +22,11 @@ describe("useRootPath", () => {
 
 	describe("when LocaleContext has a value", () => {
 		it("should return the root suffixed by the current locale", () => {
+			const [language, setLanguage] = createSignal<Language | undefined>(
+				Language.English,
+			);
 			render(() => (
-				<LocaleContext.Provider value={Language.English}>
+				<LocaleContext.Provider value={[language, setLanguage]}>
 					<LocaleConsumer />
 				</LocaleContext.Provider>
 			));
@@ -34,8 +38,9 @@ describe("useRootPath", () => {
 
 	describe("when LocaleContext does not have any value", () => {
 		it("should return the root", () => {
+			const [language, setLanguage] = createSignal<Language | undefined>();
 			render(() => (
-				<LocaleContext.Provider value={undefined}>
+				<LocaleContext.Provider value={[language, setLanguage]}>
 					<LocaleConsumer />
 				</LocaleContext.Provider>
 			));

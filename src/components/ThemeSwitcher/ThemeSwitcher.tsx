@@ -30,9 +30,8 @@ export default function ThemeSwitcher() {
 	const [, act] = createServerAction$(async (form: ThemePayload) => {
 		const { themeName } = form;
 
-		// const redirectTo: string = request.headers.get("Referer") ?? "/";
 		return new Response(null, {
-			status: 200,
+			status: 200, // 204 status triggers some redirection
 			headers: {
 				// eslint-disable-next-line @typescript-eslint/naming-convention
 				"Set-Cookie": await colorSchemeCookie.serialize(

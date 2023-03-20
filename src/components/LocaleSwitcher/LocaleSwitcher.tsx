@@ -1,6 +1,7 @@
 import { useI18n } from "@solid-primitives/i18n";
 import { For, createSignal, useContext } from "solid-js";
-import { createServerAction$, redirect } from "solid-start/server";
+import { useLocation, useNavigate } from "solid-start";
+import { createServerAction$ } from "solid-start/server";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
 import type { Language } from "~/i18n/i18n.config";
@@ -14,7 +15,6 @@ import MenuItem from "../menu/MenuItem";
 import MenuTrigger from "../menu/MenuTrigger";
 
 interface LocalePayload {
-	currentLocale?: Language;
 	newLocale?: Language;
 }
 
@@ -23,27 +23,46 @@ interface LocalePayload {
  * we need to hack a little and trigger the server action by ourselves.
  */
 export default function LocaleSwitcher() {
-	const [, act] = createServerAction$(
-		async (form: LocalePayload, { request }) => {
-			const { currentLocale, newLocale } = form;
-			const redirectTo: string =
-				request.headers
-					.get("Referer")
-					?.replace(currentLocale as Language, newLocale as Language) ??
-				`/${newLocale as Language}`;
+	const [, act] = createServerAction$(async (form: LocalePayload) => {
+		const { newLocale } = form;
 
-			return redirect(redirectTo, {
-				headers: {
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					"Set-Cookie": await localeCookie.serialize(newLocale),
-				},
-			});
-		},
-	);
+		return new Response(null, {
+			status: 200, // 204 status triggers some redirection
+			headers: {
+				// eslint-disable-next-line @typescript-eslint/naming-convention
+				"Set-Cookie": await localeCookie.serialize(newLocale),
+			},
+		});
+	});
 
+	const navigate = useNavigate();
+	const location = useLocation();
 	const [t] = useI18n();
 
-	const currentLocale = useContext(LocaleContext);
+	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
+
+	const switchLanguage = async (newLocale: Language) => {
+		try {
+			// Save the current locale
+			const oldLocale = currentLocale();
+			// Update the current locale
+			setCurrentlocale(newLocale);
+			// Navigate to reflect the new locale in url
+			navigate(
+				location.pathname.replace(oldLocale as Language, newLocale) ??
+					`/${newLocale}`,
+				{ scroll: false },
+			);
+			// Save the settings.
+			// TODO: do this if cookie is asked by user.
+			await act({ newLocale });
+			// TODO:
+			// toastSuccess("OK");
+		} catch (e) {
+			/// TODO:
+			// toastError("Not good...");
+		}
+	};
 
 	const [open, setOpen] = createSignal(false);
 	return (
@@ -55,10 +74,8 @@ export default function LocaleSwitcher() {
 				<For each={Object.entries(LanguageNmes)}>
 					{([locale, name]) => (
 						<MenuItem
-							isActive={currentLocale === locale}
-							onSelect={() =>
-								void act({ currentLocale, newLocale: locale as Language })
-							}
+							isActive={currentLocale() === locale}
+							onSelect={() => switchLanguage(locale as Language)}
 						>
 							{name}
 						</MenuItem>
