@@ -9,7 +9,7 @@ import { activeButtonStyle, buttonStyle } from "./MenuItem.css";
 
 interface MenuItemProps extends ButtonProps {
 	isActive?: boolean;
-	onSelect: () => void | (() => Promise<void>);
+	onSelect: (() => void) | (() => Promise<void>);
 }
 
 export default function MenuItem(props: MenuItemProps) {
@@ -20,7 +20,10 @@ export default function MenuItem(props: MenuItemProps) {
 		"isActive",
 	]);
 	return (
-		<DropdownMenu.Item onSelect={local.onSelect} asChild>
+		<DropdownMenu.Item
+			onSelect={local.onSelect as (() => void) | undefined}
+			asChild
+		>
 			<As
 				component={Button}
 				class={clsx([buttonStyle, local.isActive && activeButtonStyle])}
