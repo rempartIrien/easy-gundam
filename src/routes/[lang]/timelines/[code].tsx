@@ -10,22 +10,22 @@ import Heading from "~/components/Heading";
 import Nav from "~/components/Nav";
 import NavItem from "~/components/NavItem";
 import { getTimelineByCode } from "~/graphql/timeline.server";
-import { getLocale } from "~/i18n/i18n.cookie";
+import type { Language } from "~/i18n/i18n.config";
 
 import { contentStyle, navStyle } from "./[code].css";
 
 export function routeData({ params }: RouteDataArgs) {
+	invariant(params.lang, "Expected params.lang");
 	invariant(params.code, "Expected params.code");
 	const timeline = createServerData$(
-		async ([, code]: string[], { request }) => {
-			const locale = await getLocale(request);
-			const t = await getTimelineByCode(code, locale);
+		async ([locale, , code]: string[]) => {
+			const t = await getTimelineByCode(code, locale as Language);
 			return {
 				...t,
 				description: marked(t.description || ""),
 			};
 		},
-		{ key: () => ["timelines", params.code] },
+		{ key: () => [params.lang, "timelines", params.code] },
 	);
 	return timeline;
 }
