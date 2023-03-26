@@ -9,14 +9,17 @@ import {
 import { createServerAction$ } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
+import { useToaster } from "~/contexts/ToasterContext";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
+import CookieToasterContent from "../CookieToasterContent";
 import Icon from "../Icon";
 import Menu from "../menu/Menu";
 import MenuContent from "../menu/MenuContent";
 import MenuItem from "../menu/MenuItem";
 import MenuTrigger from "../menu/MenuTrigger";
+import Text from "../Text";
 
 interface ThemePayload {
 	themeName?: ThemeName;
@@ -48,6 +51,8 @@ export default function ThemeSwitcher() {
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
 	const [isDarkMode, setIsDarkMode] = createSignal(false);
 	const [ready, setReady] = createSignal(false);
+	const { toastSuccess, toastInfo, toastError, dimissToast } = useToaster();
+	const [toastId, setToastId] = createSignal<number>();
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -65,18 +70,30 @@ export default function ThemeSwitcher() {
 		setReady(true);
 	});
 
-	const switchTheme = async (themeName?: ThemeName) => {
-		try {
-			// Update theme.
-			setCurrentTheme(themeName);
-			// Save the settings.
-			// TODO: do this if cookie is asked by user.
-			await act({ themeName });
-			// TODO:
-			// toastSuccess("OK");
-		} catch (e) {
-			// TODO:
-			// toastError("Not good...");
+	const switchTheme = (themeName?: ThemeName) => {
+		setCurrentTheme(themeName);
+		const id = toastInfo(
+			() => <Text>{t("header.cookies.question")}</Text>,
+			() => (
+				<CookieToasterContent
+					onSave={() => saveAsCookie(themeName)}
+					onCancel={() => dimissToast(id)}
+				/>
+			),
+		);
+		setToastId(id);
+	};
+
+	const saveAsCookie = async (themeName?: ThemeName) => {
+		const id = toastId();
+		if (id !== undefined) {
+			dimissToast(id);
+			try {
+				await act({ themeName });
+				toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
+			} catch (e) {
+				toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
+			}
 		}
 	};
 

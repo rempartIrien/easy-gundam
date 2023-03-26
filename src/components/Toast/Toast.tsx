@@ -1,4 +1,5 @@
 import { Toast as KobalteToast } from "@kobalte/core";
+import { Show } from "solid-js";
 import type { JSX } from "solid-js";
 
 import Icon from "../Icon";
@@ -34,7 +35,9 @@ export default function Toast(props: ToastProps) {
 				<KobalteToast.Title class={titleStyle}>
 					{props.title}
 				</KobalteToast.Title>
-				<KobalteToast.Description>{props.content}</KobalteToast.Description>
+				<Show when={!!props.content}>
+					<KobalteToast.Description>{props.content}</KobalteToast.Description>
+				</Show>
 			</div>
 		</KobalteToast.Root>
 	);

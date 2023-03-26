@@ -88,6 +88,10 @@
 			"actions": {
 				"cancel": "Ne rien faire",
 				"save": "Sauvegarder"
+			},
+			"results": {
+				"success": "Votre choix a été sauvegardé",
+				"error": "Une erreur est survenue"
 			}
 		},
 		"nav": {

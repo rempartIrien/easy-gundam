@@ -88,6 +88,10 @@
 			"actions": {
 				"cancel": "Do nothing",
 				"save": "Save"
+			},
+			"results": {
+				"success": "Your choice has been saved",
+				"error": "An error occured"
 			}
 		},
 		"nav": {

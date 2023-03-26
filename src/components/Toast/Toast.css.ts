@@ -60,7 +60,7 @@ export const closeButtonStyle = style({
 });
 
 export const titleStyle = style({
-	paddingRight: relativeSpace(2),
+	paddingRight: fixedSpace(3),
 	fontWeight: "bold",
 });
 

@@ -75,9 +75,9 @@ export default function LocaleSwitcher() {
 			dimissToast(id);
 			try {
 				await act({ newLocale });
-				toastSuccess("OK");
+				toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
 			} catch (e) {
-				toastError("Not good...");
+				toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
 			}
 		}
 	};
