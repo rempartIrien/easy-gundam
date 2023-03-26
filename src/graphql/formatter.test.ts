@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { format } from "./formatter.seerver";
+import { format } from "./formatter.server";
 
 interface Output {
 	id: string;

@@ -4,8 +4,8 @@ import {
 	GET_ADAPTATION_BY_CODE_QUERY,
 	LIST_ADAPTATION_QUERY,
 } from "./adaptations/queries";
-import type { InlineTranslatedPropertyObject } from "./formatter.seerver";
-import { format } from "./formatter.seerver";
+import type { InlineTranslatedPropertyObject } from "./formatter.server";
+import { format } from "./formatter.server";
 import type {
 	GetAdaptationByCodeQuery,
 	GetAdaptationByCodeQueryVariables,
@@ -46,10 +46,10 @@ export async function getAdaptationByCode(
 	>(GET_ADAPTATION_BY_CODE_QUERY, variables);
 
 	if (!adaptations[0]) {
-		throw new Error(`Cannot retrieve any timeline for code ${code}`);
+		throw new Error(`Cannot retrieve any adaptation for code ${code}`);
 	}
 	if (adaptations.length > 1) {
-		throw new Error(`Too many series found for code ${code}`);
+		throw new Error(`Too many adaptations found for code ${code}`);
 	}
 
 	return format(adaptations[0]);

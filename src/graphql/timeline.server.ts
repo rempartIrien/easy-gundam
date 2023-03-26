@@ -1,7 +1,7 @@
 import type { Language } from "../i18n/i18n.config";
 
-import type { InlineTranslatedPropertyObject } from "./formatter.seerver";
-import { format } from "./formatter.seerver";
+import type { InlineTranslatedPropertyObject } from "./formatter.server";
+import { format } from "./formatter.server";
 import type {
 	GetTimelineByCodeQuery,
 	GetTimelineByCodeQueryVariables,

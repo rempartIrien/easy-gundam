@@ -1,10 +1,10 @@
 import type { Language } from "../i18n/i18n.config";
 
-import type { InlineTranslatedPropertyObject } from "./formatter.seerver";
-import { format } from "./formatter.seerver";
+import type { InlineTranslatedPropertyObject } from "./formatter.server";
+import { format } from "./formatter.server";
 import type {
-	GetSerieByCodeQuery,
-	GetSerieByCodeQueryVariables,
+	GetSeriesByCodeQuery,
+	GetSeriesByCodeQueryVariables,
 	ListSeriesQuery,
 	ListSeriesQueryVariables,
 } from "./generated/types";
@@ -29,13 +29,13 @@ export async function getSeriesByCode(
 	code: string,
 	language: Language,
 ): Promise<
-	InlineTranslatedPropertyObject<GetSerieByCodeQuery["series"][number]>
+	InlineTranslatedPropertyObject<GetSeriesByCodeQuery["series"][number]>
 > {
 	const variables = { language, code };
 
 	const { series } = await graphQLClient.request<
-		GetSerieByCodeQuery,
-		GetSerieByCodeQueryVariables
+		GetSeriesByCodeQuery,
+		GetSeriesByCodeQueryVariables
 	>(GET_SERIES_BY_CODE_QUERY, variables);
 
 	if (!series[0]) {

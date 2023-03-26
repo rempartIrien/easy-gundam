@@ -15,7 +15,7 @@ export const LIST_SERIES_QUERY = gql`
 `;
 
 export const GET_SERIES_BY_CODE_QUERY = gql`
-	query getSerieByCode($code: String!, $language: String!) {
+	query getSeriesByCode($code: String!, $language: String!) {
 		series(limit: 1, filter: { code: { _eq: $code } }) {
 			...seriesFull
 		}
