@@ -1,80 +1,80 @@
 {
 	"about": {
-		"title": "About",
 		"legal": {
-			"title": "Legal information",
-			"texts": {
-				"website": "{{ appName }} is an independent website and is in no way supported, endorsed or affiliated in with Sunrise or Bandai. The aim of {{ appName }} is to inform and share our passion towards Gundam. This site is not for profit or commercial purposes.",
-				"gundam": "Gundam and all associated names, images and trademarks are copyright of Sunrise and Bandai",
-				"copyright": "Rights management in France is owned by Bandai. If any media available on this website could harm the rights holders, we undertake to remove it at their request.",
-				"texts": "All texts of {{ appName }} are under CC BY-NC-ND 4.0 license.",
-				"media": "Images that are displayed on this site are copyrighted to Sunrise or Bandai, or to the creator of the image and are used on this website as defined by the French fair use (droit de citation)."
-			},
 			"resources": {
 				"fairUse": "Fair use (France)",
 				"license": "Common Creative BY-NC-ND 4.0 license"
-			}
+			},
+			"texts": {
+				"copyright": "Rights management in France is owned by Bandai. If any media available on this website could harm the rights holders, we undertake to remove it at their request.",
+				"gundam": "Gundam and all associated names, images and trademarks are copyright of Sunrise and Bandai",
+				"media": "Images that are displayed on this site are copyrighted to Sunrise or Bandai, or to the creator of the image and are used on this website as defined by the French fair use (droit de citation).",
+				"texts": "All texts of {{ appName }} are under CC BY-NC-ND 4.0 license.",
+				"website": "{{ appName }} is an independent website and is in no way supported, endorsed or affiliated in with Sunrise or Bandai. The aim of {{ appName }} is to inform and share our passion towards Gundam. This site is not for profit or commercial purposes."
+			},
+			"title": "Legal information"
 		},
 		"privacy": {
-			"title": "Privacy and data",
-			"texts": {
-				"cookies": {
-					"list": "{{ appName }} uses two kinds of cookies:",
-					"theme": "a cookie that saves the theme used (preference cookie); if it is not present, the site uses the operating system theme from the user's device",
-					"language": "a cookie that saves the language used by the user so that he/she can be redirected from the default page to the good language (preference cookie); if it is not present, he/she is redirected with the language detected from his/her browser",
-					"expiration": "Cookies last one year. They are saved on the user's device when he/she chooses a language or a theme and if he/she accepts cookies.",
-					"noCookies": "{{ appName }} can work without any cookie. Cookies can be deleted from the cookie management page."
-				},
-				"dataSharing": "{{ appName }} does not collect or process any user-related information outside of user's theme and language, as described above."
-			},
 			"resources": {
 				"cookieManagement": "Cookie management page",
 				"gdpr": "GDPR"
-			}
+			},
+			"texts": {
+				"cookies": {
+					"expiration": "Cookies last one year. They are saved on the user's device when he/she chooses a language or a theme and if he/she accepts cookies.",
+					"language": "a cookie that saves the language used by the user so that he/she can be redirected from the default page to the good language (preference cookie); if it is not present, he/she is redirected with the language detected from his/her browser",
+					"list": "{{ appName }} uses two kinds of cookies:",
+					"noCookies": "{{ appName }} can work without any cookie. Cookies can be deleted from the cookie management page.",
+					"theme": "a cookie that saves the theme used (preference cookie); if it is not present, the site uses the operating system theme from the user's device"
+				},
+				"dataSharing": "{{ appName }} does not collect or process any user-related information outside of user's theme and language, as described above."
+			},
+			"title": "Privacy and data"
 		},
 		"purpose": {
-			"title": "Website purpose",
-			"texts": {
-				"share": "{{ appName }}'s purpose is to let people discover and improve their knowledge about Gundam and to make the community bigger.",
-				"exhaustiveness": "{{ appName }} does not want to cover all Gundam universes or medias. Other Gundam sites do it very well.",
-				"free": "{{ appName }} is not for profit or commercial purposes, you can access it for free."
-			},
 			"resources": {
 				"aeug": "AEUG",
 				"gundamFrance": "Gundam France",
 				"wiki": "The Gundam Wikia"
-			}
-		}
+			},
+			"texts": {
+				"exhaustiveness": "{{ appName }} does not want to cover all Gundam universes or medias. Other Gundam sites do it very well.",
+				"free": "{{ appName }} is not for profit or commercial purposes, you can access it for free.",
+				"share": "{{ appName }}'s purpose is to let people discover and improve their knowledge about Gundam and to make the community bigger."
+			},
+			"title": "Website purpose"
+		},
+		"title": "About"
 	},
 	"appName": "Easy Gundam",
 	"cookies": {
-		"title": "Cookie management",
-		"list": {
-			"text": "{{ appName }} can add two cookies:",
-			"language": "a cookie to save the language you want to use",
-			"theme": "a cookie to save the theme you want to use"
-		},
-		"text": "You can delete all the cookies saved on your device here:",
-		"language": {
-			"title": "Language cookie",
-			"text": "This cookie is used to save the language you use so that you can be redirected to the good language when you first arrive on the website default page. On other pages, the language in the address of the visited page is used. If this cookie is not present, your browser language is detected and used."
-		},
-		"theme": {
-			"title": "Theme cookie",
-			"text": "this cookie is used to save the theme you use. If this cookie is not present, your operating system theme is used instead."
-		},
-		"noCookie": "You do not use such a cookie on your device.",
 		"actions": {
 			"deleteAll": "Delete all cookies",
 			"deleteLanguage": "Delete the language cookie",
 			"deleteTheme": "Delete the theme cookie"
-		}
+		},
+		"language": {
+			"text": "This cookie is used to save the language you use so that you can be redirected to the good language when you first arrive on the website default page. On other pages, the language in the address of the visited page is used. If this cookie is not present, your browser language is detected and used.",
+			"title": "Language cookie"
+		},
+		"list": {
+			"language": "a cookie to save the language you want to use",
+			"text": "{{ appName }} can add two cookies:",
+			"theme": "a cookie to save the theme you want to use"
+		},
+		"noCookie": "You do not use such a cookie on your device.",
+		"text": "You can delete all the cookies saved on your device here:",
+		"theme": {
+			"text": "this cookie is used to save the theme you use. If this cookie is not present, your operating system theme is used instead.",
+			"title": "Theme cookie"
+		},
+		"title": "Cookie management"
 	},
 	"error": {
-		"title": "Error",
 		"links": {
 			"backToHome": "Back to home"
-		}
+		},
+		"title": "Error"
 	},
 	"header": {
 		"actions": {
@@ -82,23 +82,23 @@
 			"switchTheme": "Switch theme"
 		},
 		"cookies": {
-			"question": "Do you want to save your préference with a cookie?",
-			"more": "Cookies are optional. You can manage them at any time.",
-			"link": "Cookie management page",
 			"actions": {
 				"cancel": "Do nothing",
 				"save": "Save"
 			},
+			"link": "Cookie management page",
+			"more": "Cookies are optional. You can manage them at any time.",
+			"question": "Do you want to save your préference with a cookie?",
 			"results": {
+				"error": "An error occured",
 				"link": "Manage cookies",
-				"success": "Your choice has been saved",
-				"error": "An error occured"
+				"success": "Your choice has been saved"
 			}
 		},
 		"nav": {
+			"about": "About",
 			"home": "Home",
-			"timelines": "Timelines",
-			"about": "About"
+			"timelines": "Timelines"
 		},
 		"themes": {
 			"dark": "Dark",
@@ -107,20 +107,20 @@
 		}
 	},
 	"home": {
-		"title": "Welcome to Easy Gundam!",
-		"subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸)."
+		"subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸).",
+		"title": "Welcome to Easy Gundam!"
 	},
 	"notFound": {
-		"title": "Page not found",
 		"links": {
 			"backToHome": "Back to home"
-		}
+		},
+		"title": "Page not found"
 	},
 	"timelines": {
-		"title": "Timelines",
 		"nav": {
 			"description": "Description",
 			"series": "Series"
-		}
+		},
+		"title": "Timelines"
 	}
 }
