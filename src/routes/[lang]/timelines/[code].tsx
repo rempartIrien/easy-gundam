@@ -30,7 +30,7 @@ export function routeData({ params }: RouteDataArgs) {
 	return timeline;
 }
 
-export default function Timelines() {
+export default function Timeline() {
 	const [t] = useI18n();
 	const timeline = useRouteData<typeof routeData>();
 	return (

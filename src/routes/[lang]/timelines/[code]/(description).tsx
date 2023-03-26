@@ -8,7 +8,7 @@ export function routeData({ data }: RouteDataArgs<typeof parentRouteData>) {
 	return data;
 }
 
-export default function Timelines() {
+export default function TimelineDescription() {
 	const timeline = useRouteData<typeof routeData>();
 	return (
 		<Show when={timeline()}>

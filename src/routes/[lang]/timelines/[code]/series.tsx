@@ -20,7 +20,7 @@ export function routeData({ params }: RouteDataArgs) {
 	return series;
 }
 
-export default function Timelines() {
+export default function TimelineSeries() {
 	const params = useParams<{ code: string }>();
 	const series = useRouteData<typeof routeData>();
 	return <Chronology timelineCode={params.code} items={series()} />;
