@@ -39,7 +39,7 @@ export async function getSeriesByCode(
 	>(GET_SERIES_BY_CODE_QUERY, variables);
 
 	if (!series[0]) {
-		throw new Error(`Cannot retrieve any timeline for code ${code}`);
+		throw new Error(`Cannot retrieve any series for code ${code}`);
 	}
 	if (series.length > 1) {
 		throw new Error(`Too many series found for code ${code}`);
