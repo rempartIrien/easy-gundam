@@ -81,6 +81,15 @@
 			"switchLocale": "Changer de langue",
 			"switchTheme": "Changer de thème"
 		},
+		"cookies": {
+			"question": "Voulez-vous sauvegarder cette préférence dans un cookie ?",
+			"more": "Vous pouvez à tout moment gérer vos cookies.",
+			"link": "Aller à la page de gestion des cookies",
+			"actions": {
+				"cancel": "Ne rien faire",
+				"save": "Sauvegarder"
+			}
+		},
 		"nav": {
 			"home": "Accueil",
 			"timelines": "Univers",

@@ -11,6 +11,7 @@ import "sanitize.css/ui-monospace.css";
 
 import ErrorPage from "./components/ErrorPage";
 import HtmlRoot from "./components/HtmlRoot";
+import { ToasterProvider } from "./contexts/ToasterContext";
 import { bodyStyle } from "./root.css";
 import "./font.css";
 
@@ -23,11 +24,13 @@ export default function Root() {
 				<Meta name="color-scheme" content="dark light" />
 			</Head>
 			<Body class={bodyStyle}>
-				<ErrorBoundary fallback={() => <ErrorPage />}>
-					<Routes>
-						<FileRoutes />
-					</Routes>
-				</ErrorBoundary>
+				<ToasterProvider>
+					<ErrorBoundary fallback={() => <ErrorPage />}>
+						<Routes>
+							<FileRoutes />
+						</Routes>
+					</ErrorBoundary>
+				</ToasterProvider>
 				<Scripts />
 			</Body>
 		</HtmlRoot>
