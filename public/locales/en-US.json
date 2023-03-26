@@ -81,6 +81,20 @@
 			"switchLocale": "Switch language",
 			"switchTheme": "Switch theme"
 		},
+		"cookies": {
+			"question": "Do you want to save your préference with a cookie?",
+			"more": "Cookies are optional. You can manage them at any time.",
+			"link": "Cookie management page",
+			"actions": {
+				"cancel": "Do nothing",
+				"save": "Save"
+			},
+			"results": {
+				"link": "Manage cookies",
+				"success": "Your choice has been saved",
+				"error": "An error occured"
+			}
+		},
 		"nav": {
 			"home": "Home",
 			"timelines": "Timelines",

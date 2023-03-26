@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "solid-start";
 import { createServerAction$ } from "solid-start/server";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
+import useCookieToaster from "~/hooks/useCookieToast";
 import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
@@ -38,30 +39,22 @@ export default function LocaleSwitcher() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [t] = useI18n();
+	const showCookieToast = useCookieToaster();
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
 
-	const switchLanguage = async (newLocale: Language) => {
-		try {
-			// Save the current locale
-			const oldLocale = currentLocale();
-			// Update the current locale
-			setCurrentlocale(newLocale);
-			// Navigate to reflect the new locale in url
-			navigate(
-				location.pathname.replace(oldLocale as Language, newLocale) ??
-					`/${newLocale}`,
-				{ scroll: false },
-			);
-			// Save the settings.
-			// TODO: do this if cookie is asked by user.
-			await act({ newLocale });
-			// TODO:
-			// toastSuccess("OK");
-		} catch (e) {
-			/// TODO:
-			// toastError("Not good...");
-		}
+	const switchLanguage = (newLocale: Language) => {
+		// Save the current locale
+		const oldLocale = currentLocale();
+		// Update the current locale
+		setCurrentlocale(newLocale);
+		// Navigate to reflect the new locale in url
+		navigate(
+			location.pathname.replace(oldLocale as Language, newLocale) ??
+				`/${newLocale}`,
+			{ scroll: false },
+		);
+		showCookieToast({ onSave: () => act({ newLocale }) });
 	};
 
 	const [open, setOpen] = createSignal(false);

@@ -17,6 +17,7 @@ export const vars = createThemeContract({
 		success: { main: null, text: null, background: null },
 		warning: { main: null, text: null, background: null },
 		error: { main: null, text: null, background: null },
+		toaster: { error: null, info: null, success: null, warning: null },
 	},
 	font: {
 		title: { family: null, size: null, lineHeight: null },
@@ -62,7 +63,7 @@ const white = "#ffffff";
 
 const candyApple = "#FF0800";
 const candyAppleLight = "#ffdad9";
-const candyAppleDark = "##660300";
+const candyAppleDark = "#660300";
 
 const apricot = "#ED820E";
 const apricotLight = "#fdecda";
@@ -170,6 +171,12 @@ const lightThemeVars = {
 			text: candyAppleDark,
 			background: candyAppleLight,
 		},
+		toaster: {
+			error: hexToRgba(candyApple, 0.5),
+			info: hexToRgba(cerulean, 0.5),
+			success: hexToRgba(emerald, 0.5),
+			warning: hexToRgba(apricot, 0.5),
+		},
 	},
 	font,
 	space,
@@ -200,12 +207,18 @@ const darkThemeVars = {
 			text: candyAppleLight,
 			background: candyAppleDark,
 		},
+		toaster: {
+			error: hexToRgba(candyApple, 0.5),
+			info: hexToRgba(cerulean, 0.5),
+			success: hexToRgba(emerald, 0.5),
+			warning: hexToRgba(apricot, 0.5),
+		},
 	},
 	font,
 	space,
 	borderRadius,
 	boxShadow: { base: "none", header: "none" },
-	border: { base: `1px solid ${grayDark}` },
+	border: { base: `1px solid rgba(${white}, 0.125)` },
 };
 export const darkTheme = createTheme(vars, darkThemeVars);
 

@@ -9,6 +9,7 @@ import {
 import { createServerAction$ } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
+import useCookieToaster from "~/hooks/useCookieToast";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
@@ -48,6 +49,7 @@ export default function ThemeSwitcher() {
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
 	const [isDarkMode, setIsDarkMode] = createSignal(false);
 	const [ready, setReady] = createSignal(false);
+	const showCookieToast = useCookieToaster();
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -65,19 +67,9 @@ export default function ThemeSwitcher() {
 		setReady(true);
 	});
 
-	const switchTheme = async (themeName?: ThemeName) => {
-		try {
-			// Update theme.
-			setCurrentTheme(themeName);
-			// Save the settings.
-			// TODO: do this if cookie is asked by user.
-			await act({ themeName });
-			// TODO:
-			// toastSuccess("OK");
-		} catch (e) {
-			// TODO:
-			// toastError("Not good...");
-		}
+	const switchTheme = (themeName?: ThemeName) => {
+		setCurrentTheme(themeName);
+		showCookieToast({ onSave: () => act({ themeName }) });
 	};
 
 	const [open, setOpen] = createSignal(false);
