@@ -1,3 +1,4 @@
+import { I18nProvider as KobalteI18nProvider } from "@kobalte/core";
 import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
@@ -46,17 +47,19 @@ export default function Providers(props: {
 		<ThemeContext.Provider value={[themeName, setThemeName]}>
 			<LocaleContext.Provider value={[locale, setlocale]}>
 				<I18nContext.Provider value={context}>
-					<Html
-						lang={locale()}
-						class={clsx([
-							htmlRootStyle,
-							themeName() === ThemeName.Dark && darkTheme,
-							themeName() === ThemeName.Light && lightTheme,
-							!themeName() && defaultTheme,
-						])}
-					>
-						{props.children}
-					</Html>
+					<KobalteI18nProvider locale={locale()}>
+						<Html
+							lang={locale()}
+							class={clsx([
+								htmlRootStyle,
+								themeName() === ThemeName.Dark && darkTheme,
+								themeName() === ThemeName.Light && lightTheme,
+								!themeName() && defaultTheme,
+							])}
+						>
+							{props.children}
+						</Html>
+					</KobalteI18nProvider>
 				</I18nContext.Provider>
 			</LocaleContext.Provider>
 		</ThemeContext.Provider>

@@ -1,5 +1,8 @@
 import { toaster } from "@kobalte/core";
 import type { JSX } from "solid-js";
+import type { Owner } from "solid-js";
+import { getOwner } from "solid-js";
+import { runWithOwner } from "solid-js";
 import { useContext } from "solid-js";
 import { createContext } from "solid-js";
 
@@ -8,6 +11,7 @@ import Toast from "~/components/Toast";
 import Toaster from "~/components/Toaster";
 
 const DEFAULT_DURATION = 4000;
+let owner: Owner | null;
 
 function displayToast(
 	type: "error" | "info" | "success" | "warning",
@@ -15,7 +19,7 @@ function displayToast(
 	content?: JSX.Element | string,
 	duration: number = DEFAULT_DURATION,
 ) {
-	return toaster.show((props) => (
+	const element = runWithOwner(owner, () => (props: { toastId: number }) => (
 		<Toast
 			toastId={props.toastId}
 			duration={duration}
@@ -24,6 +28,7 @@ function displayToast(
 			content={content}
 		/>
 	));
+	return element ? toaster.show((props) => element(props)) : -1;
 }
 
 const toasterService = {
@@ -67,6 +72,7 @@ export function useToaster() {
 }
 
 export function ToasterProvider(props: { children: JSX.Element }) {
+	owner = getOwner();
 	return (
 		<ToasterContext.Provider value={toasterService}>
 			{props.children}

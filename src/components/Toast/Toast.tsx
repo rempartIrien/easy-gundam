@@ -3,7 +3,13 @@ import type { JSX } from "solid-js";
 
 import Icon from "../Icon";
 
-import { iconStyle, toastStyle } from "./Toast.css";
+import {
+	closeButtonStyle,
+	contentStyle,
+	iconStyle,
+	titleStyle,
+	toastStyle,
+} from "./Toast.css";
 
 export interface ToastProps {
 	toastId: number;
@@ -15,11 +21,19 @@ export interface ToastProps {
 
 export default function Toast(props: ToastProps) {
 	return (
-		<KobalteToast.Root toastId={props.toastId} class={toastStyle[props.type]}>
-			<KobalteToast.CloseButton />
+		<KobalteToast.Root
+			toastId={props.toastId}
+			class={toastStyle[props.type]}
+			duration={props.duration}
+		>
+			<KobalteToast.CloseButton class={closeButtonStyle}>
+				<Icon name="close" />
+			</KobalteToast.CloseButton>
 			<Icon class={iconStyle} name={props.type} />
-			<div>
-				<KobalteToast.Title>{props.title}</KobalteToast.Title>
+			<div class={contentStyle}>
+				<KobalteToast.Title class={titleStyle}>
+					{props.title}
+				</KobalteToast.Title>
 				<KobalteToast.Description>{props.content}</KobalteToast.Description>
 			</div>
 		</KobalteToast.Root>

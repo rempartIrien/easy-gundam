@@ -1,3 +1,4 @@
+import Close from "../../../assets/icons/close.svg";
 import Error from "../../../assets/icons/error.svg";
 import ExternalLink from "../../../assets/icons/external-link.svg";
 import Info from "../../../assets/icons/info.svg";
@@ -8,6 +9,7 @@ import Sun from "../../../assets/icons/sun.svg";
 import Warning from "../../../assets/icons/warning.svg";
 
 const ICON_REGISTRY = {
+	close: Close,
 	error: Error,
 	externalLink: ExternalLink,
 	info: Info,

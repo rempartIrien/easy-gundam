@@ -47,4 +47,25 @@ export const toastStyle = styleVariants({
 export const iconStyle = style({
 	width: relativeSpace(3),
 	height: relativeSpace(3),
+	flexShrink: 0,
+});
+
+export const closeButtonStyle = style({
+	position: "absolute",
+	right: fixedSpace(0.5),
+	top: fixedSpace(0.5),
+	borderStyle: "none",
+	display: "block",
+	lineHeight: 1,
+});
+
+export const titleStyle = style({
+	paddingRight: relativeSpace(2),
+	fontWeight: "bold",
+});
+
+export const contentStyle = style({
+	display: "flex",
+	flexDirection: "column",
+	gap: relativeSpace(2),
 });

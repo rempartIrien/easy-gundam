@@ -4,15 +4,18 @@ import { useLocation, useNavigate } from "solid-start";
 import { createServerAction$ } from "solid-start/server";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
+import { useToaster } from "~/contexts/ToasterContext";
 import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
 
+import CookieToasterContent from "../CookieToasterContent";
 import Icon from "../Icon";
 import Menu from "../menu/Menu";
 import MenuContent from "../menu/MenuContent";
 import MenuItem from "../menu/MenuItem";
 import MenuTrigger from "../menu/MenuTrigger";
+import Text from "../Text";
 
 interface LocalePayload {
 	newLocale?: Language;
@@ -38,29 +41,44 @@ export default function LocaleSwitcher() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [t] = useI18n();
+	const { toastSuccess, toastInfo, toastError, dimissToast } = useToaster();
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
+	const [toastId, setToastId] = createSignal<number>();
 
-	const switchLanguage = async (newLocale: Language) => {
-		try {
-			// Save the current locale
-			const oldLocale = currentLocale();
-			// Update the current locale
-			setCurrentlocale(newLocale);
-			// Navigate to reflect the new locale in url
-			navigate(
-				location.pathname.replace(oldLocale as Language, newLocale) ??
-					`/${newLocale}`,
-				{ scroll: false },
-			);
-			// Save the settings.
-			// TODO: do this if cookie is asked by user.
-			await act({ newLocale });
-			// TODO:
-			// toastSuccess("OK");
-		} catch (e) {
-			/// TODO:
-			// toastError("Not good...");
+	const switchLanguage = (newLocale: Language) => {
+		// Save the current locale
+		const oldLocale = currentLocale();
+		// Update the current locale
+		setCurrentlocale(newLocale);
+		// Navigate to reflect the new locale in url
+		navigate(
+			location.pathname.replace(oldLocale as Language, newLocale) ??
+				`/${newLocale}`,
+			{ scroll: false },
+		);
+		const id = toastInfo(
+			() => <Text>{t("header.cookies.question")}</Text>,
+			() => (
+				<CookieToasterContent
+					onSave={() => saveAsCookie(newLocale)}
+					onCancel={() => dimissToast(id)}
+				/>
+			),
+		);
+		setToastId(id);
+	};
+
+	const saveAsCookie = async (newLocale: Language) => {
+		const id = toastId();
+		if (id !== undefined) {
+			dimissToast(id);
+			try {
+				await act({ newLocale });
+				toastSuccess("OK");
+			} catch (e) {
+				toastError("Not good...");
+			}
 		}
 	};
 
