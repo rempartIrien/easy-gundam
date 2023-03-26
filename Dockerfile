@@ -39,7 +39,9 @@ COPY --from=deps /app/node_modules /app/node_modules
 
 ADD . .
 RUN --mount=type=secret,id=VITE_API \
-  VITE_API="$(cat /run/secrets/VITE_API)" npm run build
+	--mount=type=secret,id=VITE_SECRETS \
+  VITE_API="$(cat /run/secrets/VITE_API)" \
+  VITE_SECRETS="$(cat /run/secrets/VITE_SECRETS)" npm run build
 
 # Finally, build the production image with minimal footprint
 FROM base
