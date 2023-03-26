@@ -35,7 +35,7 @@
 		"purpose": {
 			"title": "Website purpose",
 			"texts": {
-				"share": "{{ appName }}'s prupose is to let people discover and improve their knowledge about Gundam and to make the community bigger.",
+				"share": "{{ appName }}'s purpose is to let people discover and improve their knowledge about Gundam and to make the community bigger.",
 				"exhaustiveness": "{{ appName }} does not want to cover all Gundam universes or medias. Other Gundam sites do it very well.",
 				"free": "{{ appName }} is not for profit or commercial purposes, you can access it for free."
 			},
