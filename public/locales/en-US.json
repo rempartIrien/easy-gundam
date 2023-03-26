@@ -90,6 +90,7 @@
 				"save": "Save"
 			},
 			"results": {
+				"link": "Manage cookies",
 				"success": "Your choice has been saved",
 				"error": "An error occured"
 			}

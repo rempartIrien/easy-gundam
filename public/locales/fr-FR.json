@@ -90,6 +90,7 @@
 				"save": "Sauvegarder"
 			},
 			"results": {
+				"link": "Gérer les cookies",
 				"success": "Votre choix a été sauvegardé",
 				"error": "Une erreur est survenue"
 			}

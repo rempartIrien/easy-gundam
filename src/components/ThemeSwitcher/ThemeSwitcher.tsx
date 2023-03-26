@@ -9,17 +9,15 @@ import {
 import { createServerAction$ } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
-import { useToaster } from "~/contexts/ToasterContext";
+import useCookieToaster from "~/hooks/useCookieToast";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
-import CookieToasterContent from "../CookieToasterContent";
 import Icon from "../Icon";
 import Menu from "../menu/Menu";
 import MenuContent from "../menu/MenuContent";
 import MenuItem from "../menu/MenuItem";
 import MenuTrigger from "../menu/MenuTrigger";
-import Text from "../Text";
 
 interface ThemePayload {
 	themeName?: ThemeName;
@@ -51,7 +49,7 @@ export default function ThemeSwitcher() {
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
 	const [isDarkMode, setIsDarkMode] = createSignal(false);
 	const [ready, setReady] = createSignal(false);
-	const { toastSuccess, toastInfo, toastError, dimissToast } = useToaster();
+	const showCookieToast = useCookieToaster();
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -71,28 +69,7 @@ export default function ThemeSwitcher() {
 
 	const switchTheme = (themeName?: ThemeName) => {
 		setCurrentTheme(themeName);
-		const toastId = toastInfo(
-			() => <Text>{t("header.cookies.question")}</Text>,
-			() => (
-				<CookieToasterContent
-					onSave={() => saveAsCookie(themeName, toastId)}
-					onCancel={() => dimissToast(toastId)}
-				/>
-			),
-		);
-	};
-
-	const saveAsCookie = async (
-		themeName: ThemeName | undefined,
-		toastId: number,
-	) => {
-		dimissToast(toastId);
-		try {
-			await act({ themeName });
-			toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
-		} catch (e) {
-			toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
-		}
+		showCookieToast({ onSave: () => act({ themeName }) });
 	};
 
 	const [open, setOpen] = createSignal(false);

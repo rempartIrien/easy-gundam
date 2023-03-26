@@ -4,18 +4,16 @@ import { useLocation, useNavigate } from "solid-start";
 import { createServerAction$ } from "solid-start/server";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
-import { useToaster } from "~/contexts/ToasterContext";
+import useCookieToaster from "~/hooks/useCookieToast";
 import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
 
-import CookieToasterContent from "../CookieToasterContent";
 import Icon from "../Icon";
 import Menu from "../menu/Menu";
 import MenuContent from "../menu/MenuContent";
 import MenuItem from "../menu/MenuItem";
 import MenuTrigger from "../menu/MenuTrigger";
-import Text from "../Text";
 
 interface LocalePayload {
 	newLocale?: Language;
@@ -41,7 +39,7 @@ export default function LocaleSwitcher() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [t] = useI18n();
-	const { toastSuccess, toastInfo, toastError, dimissToast } = useToaster();
+	const showCookieToast = useCookieToaster();
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
 
@@ -56,25 +54,7 @@ export default function LocaleSwitcher() {
 				`/${newLocale}`,
 			{ scroll: false },
 		);
-		const toastId = toastInfo(
-			() => <Text>{t("header.cookies.question")}</Text>,
-			() => (
-				<CookieToasterContent
-					onSave={() => saveAsCookie(newLocale, toastId)}
-					onCancel={() => dimissToast(toastId)}
-				/>
-			),
-		);
-	};
-
-	const saveAsCookie = async (newLocale: Language, toastId: number) => {
-		dimissToast(toastId);
-		try {
-			await act({ newLocale });
-			toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
-		} catch (e) {
-			toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
-		}
+		showCookieToast({ onSave: () => act({ newLocale }) });
 	};
 
 	const [open, setOpen] = createSignal(false);
