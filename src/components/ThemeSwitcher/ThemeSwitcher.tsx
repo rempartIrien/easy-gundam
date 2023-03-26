@@ -52,7 +52,6 @@ export default function ThemeSwitcher() {
 	const [isDarkMode, setIsDarkMode] = createSignal(false);
 	const [ready, setReady] = createSignal(false);
 	const { toastSuccess, toastInfo, toastError, dimissToast } = useToaster();
-	const [toastId, setToastId] = createSignal<number>();
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -72,28 +71,27 @@ export default function ThemeSwitcher() {
 
 	const switchTheme = (themeName?: ThemeName) => {
 		setCurrentTheme(themeName);
-		const id = toastInfo(
+		const toastId = toastInfo(
 			() => <Text>{t("header.cookies.question")}</Text>,
 			() => (
 				<CookieToasterContent
-					onSave={() => saveAsCookie(themeName)}
-					onCancel={() => dimissToast(id)}
+					onSave={() => saveAsCookie(themeName, toastId)}
+					onCancel={() => dimissToast(toastId)}
 				/>
 			),
 		);
-		setToastId(id);
 	};
 
-	const saveAsCookie = async (themeName?: ThemeName) => {
-		const id = toastId();
-		if (id !== undefined) {
-			dimissToast(id);
-			try {
-				await act({ themeName });
-				toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
-			} catch (e) {
-				toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
-			}
+	const saveAsCookie = async (
+		themeName: ThemeName | undefined,
+		toastId: number,
+	) => {
+		dimissToast(toastId);
+		try {
+			await act({ themeName });
+			toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
+		} catch (e) {
+			toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
 		}
 	};
 

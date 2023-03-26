@@ -44,7 +44,6 @@ export default function LocaleSwitcher() {
 	const { toastSuccess, toastInfo, toastError, dimissToast } = useToaster();
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
-	const [toastId, setToastId] = createSignal<number>();
 
 	const switchLanguage = (newLocale: Language) => {
 		// Save the current locale
@@ -57,28 +56,24 @@ export default function LocaleSwitcher() {
 				`/${newLocale}`,
 			{ scroll: false },
 		);
-		const id = toastInfo(
+		const toastId = toastInfo(
 			() => <Text>{t("header.cookies.question")}</Text>,
 			() => (
 				<CookieToasterContent
-					onSave={() => saveAsCookie(newLocale)}
-					onCancel={() => dimissToast(id)}
+					onSave={() => saveAsCookie(newLocale, toastId)}
+					onCancel={() => dimissToast(toastId)}
 				/>
 			),
 		);
-		setToastId(id);
 	};
 
-	const saveAsCookie = async (newLocale: Language) => {
-		const id = toastId();
-		if (id !== undefined) {
-			dimissToast(id);
-			try {
-				await act({ newLocale });
-				toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
-			} catch (e) {
-				toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
-			}
+	const saveAsCookie = async (newLocale: Language, toastId: number) => {
+		dimissToast(toastId);
+		try {
+			await act({ newLocale });
+			toastSuccess(() => <Text>{t("header.cookies.results.success")}</Text>);
+		} catch (e) {
+			toastError(() => <Text>{t("header.cookies.results.error")}</Text>);
 		}
 	};
 
