@@ -16,6 +16,7 @@ export const headingStyle = styleVariants({
 			lineHeight: vars.font.title.lineHeight,
 			color: vars.color.primary.main,
 			marginBottom: relativeSpace(4),
+			width: "100%",
 		},
 	],
 	subtitle: [

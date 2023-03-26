@@ -116,6 +116,12 @@
 		},
 		"title": "Page introuvable"
 	},
+	"series": {
+		"nav": {
+			"description": "Description",
+			"adaptations": "Adaptations"
+		}
+	},
 	"timelines": {
 		"nav": {
 			"description": "Description",

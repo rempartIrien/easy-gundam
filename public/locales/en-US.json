@@ -116,6 +116,12 @@
 		},
 		"title": "Page not found"
 	},
+	"series": {
+		"nav": {
+			"description": "Description",
+			"adaptations": "Adaptations"
+		}
+	},
 	"timelines": {
 		"nav": {
 			"description": "Description",
