@@ -10,19 +10,19 @@ import Section from "~/components/Section";
 import { listAdaptations } from "~/graphql/adaptation.server";
 import type { Language } from "~/i18n/i18n.config";
 
-import type { routeData as parentRouteData } from "../[code]";
+import type { routeData as parentRouteData } from "../[seriesCode]";
 
 export function routeData({
 	params,
 	data: series,
 }: RouteDataArgs<typeof parentRouteData>) {
 	invariant(params.lang, "Expected params.lang");
-	invariant(params.code, "Expected params.code");
+	invariant(params.seriesCode, "Expected params.seriesCode");
 	const adaptations = createServerData$(
 		async ([locale, , code]: string[]) => {
 			return listAdaptations(code, locale as Language);
 		},
-		{ key: () => [params.lang, "series", params.code, "adaptations"] },
+		{ key: () => [params.lang, "series", params.seriesCode, "adaptations"] },
 	);
 	return { series, adaptations };
 }

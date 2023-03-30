@@ -21,9 +21,6 @@ export const FULL_SERIES_FRAGMENT = gql`
 		code
 		year
 		dateCreated: date_created
-		timeline {
-			code
-		}
 		translations(filter: { language_code: { code: { _eq: $language } } }) {
 			title
 			description

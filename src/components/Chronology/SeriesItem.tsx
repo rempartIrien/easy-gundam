@@ -19,6 +19,7 @@ export interface BaseSeries {
 
 interface SeriesItemProps {
 	series: BaseSeries;
+	timelineCode: string;
 	class?: string;
 }
 
@@ -31,7 +32,9 @@ export default function SeriesItem(props: SeriesItemProps) {
 			component={Link}
 			noStyle
 			class={clsx([seriesItemStyle, props.class])}
-			href={`${rootPath()}series/${props.series.code}`}
+			href={`${rootPath()}timelines/${props.timelineCode}/series/${
+				props.series.code
+			}`}
 		>
 			<Show when={props.series.image?.id}>
 				<img

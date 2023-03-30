@@ -12,11 +12,11 @@ import NavItem from "~/components/NavItem";
 import { getTimelineByCode } from "~/graphql/timeline.server";
 import type { Language } from "~/i18n/i18n.config";
 
-import { contentStyle, navStyle } from "./[code].css";
+import { contentStyle, navStyle } from "./(ltimelineLayout).css";
 
 export function routeData({ params }: RouteDataArgs) {
 	invariant(params.lang, "Expected params.lang");
-	invariant(params.code, "Expected params.code");
+	invariant(params.timelineCode, "Expected params.timelineCode");
 	const timeline = createServerData$(
 		async ([locale, , code]: string[]) => {
 			const t = await getTimelineByCode(code, locale as Language);
@@ -25,7 +25,7 @@ export function routeData({ params }: RouteDataArgs) {
 				description: marked(t.description || ""),
 			};
 		},
-		{ key: () => [params.lang, "timelines", params.code] },
+		{ key: () => [params.lang, "timelines", params.timelineCode] },
 	);
 	return timeline;
 }

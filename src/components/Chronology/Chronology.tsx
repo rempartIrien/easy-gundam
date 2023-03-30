@@ -45,7 +45,11 @@ export default function Chronology(props: ChronologyProps) {
 								<For each={items}>
 									{(item) => (
 										<li class={seriesListItemStyle}>
-											<SeriesItem class={seriesStyle} series={item} />
+											<SeriesItem
+												class={seriesStyle}
+												series={item}
+												timelineCode={local.timelineCode}
+											/>
 										</li>
 									)}
 								</For>

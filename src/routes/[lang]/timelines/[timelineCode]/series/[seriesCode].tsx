@@ -12,11 +12,11 @@ import NavItem from "~/components/NavItem";
 import { getSeriesByCode } from "~/graphql/series.server";
 import type { Language } from "~/i18n/i18n.config";
 
-import { contentStyle, navStyle } from "./[code].css";
+import { contentStyle, navStyle } from "./[seriesCode].css";
 
 export function routeData({ params }: RouteDataArgs) {
 	invariant(params.lang, "Expected params.lang");
-	invariant(params.code, "Expected params.code");
+	invariant(params.seriesCode, "Expected params.seriesCode");
 	const series = createServerData$(
 		async ([locale, , code]: string[]) => {
 			const t = await getSeriesByCode(code, locale as Language);
@@ -25,7 +25,7 @@ export function routeData({ params }: RouteDataArgs) {
 				description: marked(t.description || ""),
 			};
 		},
-		{ key: () => [params.lang, "series", params.code] },
+		{ key: () => [params.lang, "series", params.seriesCode] },
 	);
 	return series;
 }

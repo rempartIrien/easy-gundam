@@ -5,7 +5,7 @@ import { useRouteData } from "solid-start";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 
-import type { routeData as parentRouteData } from "../[code]";
+import type { routeData as parentRouteData } from "../(ltimelineLayout)";
 
 export function routeData({ data }: RouteDataArgs<typeof parentRouteData>) {
 	return data;
