@@ -3,6 +3,7 @@ import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
 
 import MarkdownViewer from "~/components/MarkdownViewer";
+import Section from "~/components/Section";
 
 import type { routeData as parentRouteData } from "../[code]";
 
@@ -14,7 +15,9 @@ export default function TimelineDescription() {
 	const timeline = useRouteData<typeof routeData>();
 	return (
 		<Show when={timeline()}>
-			<MarkdownViewer content={timeline()?.description} />
+			<Section>
+				<MarkdownViewer content={timeline()?.description} />
+			</Section>
 		</Show>
 	);
 }

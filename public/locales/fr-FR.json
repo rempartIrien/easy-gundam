@@ -118,8 +118,9 @@
 	},
 	"series": {
 		"nav": {
-			"description": "Description",
-			"adaptations": "Adaptations"
+			"analysis": "Analyse",
+			"overview": "Introduction",
+			"insights": "Éclairages"
 		}
 	},
 	"timelines": {

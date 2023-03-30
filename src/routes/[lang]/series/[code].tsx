@@ -40,9 +40,10 @@ export default function Series() {
 				class={navStyle}
 				items={[
 					<NavItem href="" end>
-						{t("series.nav.description")}
+						{t("series.nav.overview")}
 					</NavItem>,
-					<NavItem href="adaptations">{t("series.nav.adaptations")}</NavItem>,
+					<NavItem href="insights">{t("series.nav.insights")}</NavItem>,
+					<NavItem href="analysis">{t("series.nav.analysis")}</NavItem>,
 				]}
 			/>
 			<section class={contentStyle}>
