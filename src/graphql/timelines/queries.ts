@@ -19,3 +19,12 @@ export const GET_TIMELINE_BY_CODE_QUERY = gql`
 	}
 	${FULL_TIMELINE_FRAGMENT}
 `;
+
+export const GET_MULTI_TIMELINES_BY_CODES_QUERY = gql`
+	query getMultiTimelinesByCodes($codes: [String]!, $language: String!) {
+		timelines(limit: 1, filter: { code: { _in: $codes } }) {
+			...timelineBase
+		}
+	}
+	${BASE_TIMELINE_FRAGMENT}
+`;

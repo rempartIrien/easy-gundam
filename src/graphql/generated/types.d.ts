@@ -659,10 +659,14 @@ export type Series_Filter = {
 
 export type Series_Translations = {
   __typename?: 'series_translations';
+  analysis: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
   id: Maybe<Scalars['ID']>;
+  insights: Maybe<Scalars['String']>;
   language_code: Maybe<Languages>;
   serie_id: Maybe<Series>;
+  staff: Maybe<Scalars['String']>;
+  synopsis: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
@@ -702,10 +706,14 @@ export type Series_Translations_Aggregated = {
 
 export type Series_Translations_Aggregated_Count = {
   __typename?: 'series_translations_aggregated_count';
+  analysis: Maybe<Scalars['Int']>;
   description: Maybe<Scalars['Int']>;
   id: Maybe<Scalars['Int']>;
+  insights: Maybe<Scalars['Int']>;
   language_code: Maybe<Scalars['Int']>;
   serie_id: Maybe<Scalars['Int']>;
+  staff: Maybe<Scalars['Int']>;
+  synopsis: Maybe<Scalars['Int']>;
   title: Maybe<Scalars['Int']>;
 };
 
@@ -717,10 +725,14 @@ export type Series_Translations_Aggregated_Fields = {
 export type Series_Translations_Filter = {
   _and: InputMaybe<Array<InputMaybe<Series_Translations_Filter>>>;
   _or: InputMaybe<Array<InputMaybe<Series_Translations_Filter>>>;
+  analysis: InputMaybe<String_Filter_Operators>;
   description: InputMaybe<String_Filter_Operators>;
   id: InputMaybe<Number_Filter_Operators>;
+  insights: InputMaybe<String_Filter_Operators>;
   language_code: InputMaybe<Languages_Filter>;
   serie_id: InputMaybe<Series_Filter>;
+  staff: InputMaybe<String_Filter_Operators>;
+  synopsis: InputMaybe<String_Filter_Operators>;
   title: InputMaybe<String_Filter_Operators>;
 };
 
@@ -918,7 +930,9 @@ export type GetAdaptationByCodeQuery = { __typename?: 'Query', adaptations: Arra
 
 export type SeriesBaseFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
 
-export type SeriesFullFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
+export type SeriesFullFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
+
+export type SeriesLinkFragment = { __typename?: 'series', code: string, translations: Array<{ __typename?: 'series_translations', title: string } | null> | null, timeline: { __typename?: 'timelines', code: string } | null };
 
 export type ListSeriesQueryVariables = Exact<{
   timelineCode: Scalars['String'];
@@ -934,7 +948,15 @@ export type GetSeriesByCodeQueryVariables = Exact<{
 }>;
 
 
-export type GetSeriesByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null }> };
+export type GetSeriesByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null }> };
+
+export type GetMultiSeriesByCodesQueryVariables = Exact<{
+  codes: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;
+  language: Scalars['String'];
+}>;
+
+
+export type GetMultiSeriesByCodesQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, translations: Array<{ __typename?: 'series_translations', title: string } | null> | null, timeline: { __typename?: 'timelines', code: string } | null }> };
 
 export type TimelineBaseFragment = { __typename?: 'timelines', code: string, dateCreated: any | null, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null };
 
@@ -954,3 +976,11 @@ export type GetTimelineByCodeQueryVariables = Exact<{
 
 
 export type GetTimelineByCodeQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated: any | null, image: { __typename?: 'directus_files', filename_download: string, title: string | null } | null, translations: Array<{ __typename?: 'timelines_translations', name: string, description: string | null } | null> | null }> };
+
+export type GetMultiTimelinesByCodesQueryVariables = Exact<{
+  codes: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;
+  language: Scalars['String'];
+}>;
+
+
+export type GetMultiTimelinesByCodesQuery = { __typename?: 'Query', timelines: Array<{ __typename?: 'timelines', code: string, dateCreated: any | null, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null }> };

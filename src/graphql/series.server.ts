@@ -3,13 +3,19 @@ import type { Language } from "../i18n/i18n.config";
 import type { InlineTranslatedPropertyObject } from "./formatter.server";
 import { format } from "./formatter.server";
 import type {
+	GetMultiSeriesByCodesQuery,
+	GetMultiSeriesByCodesQueryVariables,
 	GetSeriesByCodeQuery,
 	GetSeriesByCodeQueryVariables,
 	ListSeriesQuery,
 	ListSeriesQueryVariables,
 } from "./generated/types";
 import graphQLClient from "./graphql-client.server";
-import { GET_SERIES_BY_CODE_QUERY, LIST_SERIES_QUERY } from "./series/queries";
+import {
+	GET_MULTI_SERIES_BY_CODES_QUERY,
+	GET_SERIES_BY_CODE_QUERY,
+	LIST_SERIES_QUERY,
+} from "./series/queries";
 
 export async function listSeries(
 	timelineCode: string,
@@ -46,4 +52,20 @@ export async function getSeriesByCode(
 	}
 
 	return format(series[0]);
+}
+
+export async function getMultiSeriesByCodes(
+	codes: string[],
+	language: Language,
+): Promise<
+	InlineTranslatedPropertyObject<GetMultiSeriesByCodesQuery["series"]>
+> {
+	const variables = { language, codes };
+
+	const { series } = await graphQLClient.request<
+		GetMultiSeriesByCodesQuery,
+		GetMultiSeriesByCodesQueryVariables
+	>(GET_MULTI_SERIES_BY_CODES_QUERY, variables);
+
+	return format(series);
 }

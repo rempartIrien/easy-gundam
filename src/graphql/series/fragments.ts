@@ -23,11 +23,26 @@ export const FULL_SERIES_FRAGMENT = gql`
 		dateCreated: date_created
 		translations(filter: { language_code: { code: { _eq: $language } } }) {
 			title
-			description
+			synopsis
+			staff
+			insights
+			analysis
 		}
 		image {
 			id
 			description
+		}
+	}
+`;
+
+export const LINK_SERIES_FRAGMENT = gql`
+	fragment seriesLink on series {
+		code
+		translations(filter: { language_code: { code: { _eq: $language } } }) {
+			title
+		}
+		timeline {
+			code
 		}
 	}
 `;

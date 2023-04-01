@@ -3,6 +3,8 @@ import type { Language } from "../i18n/i18n.config";
 import type { InlineTranslatedPropertyObject } from "./formatter.server";
 import { format } from "./formatter.server";
 import type {
+	GetMultiTimelinesByCodesQuery,
+	GetMultiTimelinesByCodesQueryVariables,
 	GetTimelineByCodeQuery,
 	GetTimelineByCodeQueryVariables,
 	ListTimelinesQuery,
@@ -10,6 +12,7 @@ import type {
 } from "./generated/types";
 import graphQLClient from "./graphql-client.server";
 import {
+	GET_MULTI_TIMELINES_BY_CODES_QUERY,
 	GET_TIMELINE_BY_CODE_QUERY,
 	LIST_TIMELINES_QUERY,
 } from "./timelines/queries";
@@ -48,4 +51,20 @@ export async function getTimelineByCode(
 	}
 
 	return format(timelines[0]);
+}
+
+export async function getMultiTimelinesByCodes(
+	codes: string[],
+	language: Language,
+): Promise<
+	InlineTranslatedPropertyObject<GetMultiTimelinesByCodesQuery["timelines"]>
+> {
+	const variables = { language, codes };
+
+	const { timelines } = await graphQLClient.request<
+		GetMultiTimelinesByCodesQuery,
+		GetMultiTimelinesByCodesQueryVariables
+	>(GET_MULTI_TIMELINES_BY_CODES_QUERY, variables);
+
+	return format(timelines);
 }
