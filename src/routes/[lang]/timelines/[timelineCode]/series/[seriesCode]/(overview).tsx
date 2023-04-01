@@ -32,7 +32,7 @@ export default function SeriesOverview() {
 	return (
 		<Section>
 			<Show when={series()}>
-				<MarkdownViewer content={series()?.description} />
+				<MarkdownViewer content={series()?.synopsis} />
 			</Show>
 			<Show when={adaptations()}>
 				<List>

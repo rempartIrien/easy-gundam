@@ -4,17 +4,15 @@ import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import { listSeries } from "~/api/series.server";
 import Chronology from "~/components/Chronology";
-import { listSeries } from "~/graphql/series.server";
 import type { Language } from "~/i18n/i18n.config";
 
 export function routeData({ params }: RouteDataArgs) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
 	const series = createServerData$(
-		async ([locale, , code]: string[]) => {
-			return listSeries(code, locale as Language);
-		},
+		async ([locale, , code]: string[]) => listSeries(code, locale as Language),
 		{ key: () => [params.lang, "timelines", params.timelineCode, "series"] },
 	);
 	return series;
