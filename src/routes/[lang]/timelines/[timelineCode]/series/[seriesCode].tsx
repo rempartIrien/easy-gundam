@@ -30,16 +30,22 @@ export default function Series() {
 	return (
 		<Show when={series()}>
 			<Heading variant="title">{series()?.title}</Heading>
-			<Nav
-				class={navStyle}
-				items={[
-					<NavItem href="" end>
-						{t("series.nav.overview")}
-					</NavItem>,
-					<NavItem href="insights">{t("series.nav.insights")}</NavItem>,
-					<NavItem href="analysis">{t("series.nav.analysis")}</NavItem>,
-				]}
-			/>
+			<Show when={series()?.insights || series()?.analysis}>
+				<Nav
+					class={navStyle}
+					items={[
+						<NavItem href="" end>
+							{t("series.nav.overview")}
+						</NavItem>,
+						series()?.insights && (
+							<NavItem href="insights">{t("series.nav.insights")}</NavItem>
+						),
+						series()?.analysis && (
+							<NavItem href="analysis">{t("series.nav.analysis")}</NavItem>
+						),
+					]}
+				/>
+			</Show>
 			<section class={contentStyle}>
 				<Outlet />
 			</section>

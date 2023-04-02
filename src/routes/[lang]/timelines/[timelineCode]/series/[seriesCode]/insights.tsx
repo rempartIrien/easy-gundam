@@ -1,5 +1,6 @@
 import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
+import { Navigate } from "solid-start";
 import { useRouteData } from "solid-start";
 
 import MarkdownViewer from "~/components/MarkdownViewer";
@@ -15,8 +16,8 @@ export default function SeriesInsights() {
 	const series = useRouteData<typeof routeData>();
 	return (
 		<Section>
-			<Show when={series()?.insights} keyed>
-				{(insights) => <MarkdownViewer content={insights} />}
+			<Show when={series()?.insights} fallback={<Navigate href=".." />}>
+				<MarkdownViewer content={series()?.insights} />
 			</Show>
 		</Section>
 	);
