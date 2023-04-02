@@ -11,6 +11,7 @@ import "sanitize.css/ui-monospace.css";
 
 import ErrorPage from "./components/ErrorPage";
 import HtmlRoot from "./components/HtmlRoot";
+import MenuRegion from "./components/menu/MenuRegion";
 import { ToasterProvider } from "./contexts/ToasterContext";
 import { bodyStyle } from "./root.css";
 import "./font.css";
@@ -29,6 +30,7 @@ export default function Root() {
 						<Routes>
 							<FileRoutes />
 						</Routes>
+						<MenuRegion />
 					</ErrorBoundary>
 				</ToasterProvider>
 				<Scripts />

@@ -9,5 +9,4 @@ export const menuContentStyle = style({
 	listStyle: "none",
 	margin: 0,
 	padding: fixedSpace(1, 0),
-	zIndex: 1, // Be above header that also has a zIndex
 });

@@ -2,6 +2,8 @@ import { As, DropdownMenu } from "@kobalte/core";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
 
+import { MENU_REGION_CLASS } from "../MenuRegion";
+
 import { menuContentStyle } from "./MenuContent.css";
 
 interface MenuContentProps {
@@ -11,7 +13,9 @@ interface MenuContentProps {
 
 export default function MenuContent(props: MenuContentProps) {
 	return (
-		<DropdownMenu.Portal>
+		<DropdownMenu.Portal
+			mount={document.getElementsByClassName(MENU_REGION_CLASS)[0]}
+		>
 			<DropdownMenu.Content asChild>
 				<As component="ol" class={clsx([menuContentStyle, props.class])}>
 					{props.children}
