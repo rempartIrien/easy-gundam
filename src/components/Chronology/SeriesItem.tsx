@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { Show } from "solid-js";
 
 import useRootPath from "~/hooks/useRootPath";
 
 import Card from "../Card";
+import Image from "../Image";
 import Link from "../Link";
 import Text from "../Text";
 
@@ -36,13 +36,11 @@ export default function SeriesItem(props: SeriesItemProps) {
 				props.series.code
 			}`}
 		>
-			<Show when={props.series.image?.id}>
-				<img
-					src={`/api/images/${props.series.image?.id as string}/extraSmall`}
-					alt={props.series.image?.description || props.series.title}
-					srcset={`/api/images/${props.series.image?.id as string}/small 2x`}
-				/>
-			</Show>
+			<Image
+				imageId={props.series.image?.id}
+				alt={props.series.image?.description || props.series.title}
+				size="extraSmall"
+			/>
 			<div class={textBlockStyle}>
 				<Text component="div" variant="big" class={titleStyle}>
 					{props.series.title}
