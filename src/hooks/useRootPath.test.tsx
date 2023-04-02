@@ -8,7 +8,7 @@ import useRootPath from "./useRootPath";
 
 function LocaleConsumer() {
 	const rootPath = useRootPath();
-	return <p>Root path is: {rootPath}</p>;
+	return <p>Root path is: {rootPath()}</p>;
 }
 
 describe("useRootPath", () => {

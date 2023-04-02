@@ -15,8 +15,8 @@ let owner: Owner | null;
 
 function displayToast(
 	type: "error" | "info" | "success" | "warning",
-	title: JSX.Element | string,
-	content?: JSX.Element | string,
+	title: (() => JSX.Element) | string,
+	content?: (() => JSX.Element) | string,
 	duration: number = DEFAULT_DURATION,
 ) {
 	const element = runWithOwner(owner, () => (props: { toastId: number }) => (
@@ -24,8 +24,8 @@ function displayToast(
 			toastId={props.toastId}
 			duration={duration}
 			type={type}
-			title={title}
-			content={content}
+			title={title as JSX.Element | string}
+			content={content as JSX.Element | string}
 		/>
 	));
 	return element ? toaster.show((props) => element(props)) : -1;
@@ -33,29 +33,29 @@ function displayToast(
 
 const toasterService = {
 	toastError: (
-		title: JSX.Element | string,
-		content?: JSX.Element | string,
+		title: (() => JSX.Element) | string,
+		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("error", title, content, duration);
 	},
 	toastInfo: (
-		title: JSX.Element | string,
-		content?: JSX.Element | string,
+		title: (() => JSX.Element) | string,
+		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("info", title, content, duration);
 	},
 	toastSuccess: (
-		title: JSX.Element | string,
-		content?: JSX.Element | string,
+		title: (() => JSX.Element) | string,
+		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("success", title, content, duration);
 	},
 	toastWarning: (
-		title: JSX.Element | string,
-		content?: JSX.Element | string,
+		title: (() => JSX.Element) | string,
+		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("warning", title, content, duration);
