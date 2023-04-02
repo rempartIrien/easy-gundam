@@ -1,15 +1,10 @@
 import { useI18n } from "@solid-primitives/i18n";
-import {
-	Show,
-	createEffect,
-	createSignal,
-	onMount,
-	useContext,
-} from "solid-js";
+import { Show, createSignal, useContext } from "solid-js";
 import { createServerAction$ } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
 import useCookieToaster from "~/hooks/useCookieToast";
+import useIsDarkMode from "~/hooks/useIsDarkMode";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
@@ -46,26 +41,8 @@ export default function ThemeSwitcher() {
 	const [t] = useI18n();
 
 	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
-	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
-	const [isDarkMode, setIsDarkMode] = createSignal(false);
-	const [ready, setReady] = createSignal(false);
+	const isDarkMode = useIsDarkMode();
 	const showCookieToast = useCookieToaster();
-
-	onMount(() => {
-		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-		// Set value at init
-		setPrefersDarkMode(mediaQuery.matches);
-		// Detect changes to update the icon
-		mediaQuery.addEventListener("change", (e) => setPrefersDarkMode(e.matches));
-	});
-
-	createEffect(() => {
-		setIsDarkMode(
-			currentTheme() === ThemeName.Dark ||
-				(!currentTheme() && prefersDarkMode()),
-		);
-		setReady(true);
-	});
 
 	const switchTheme = (themeName?: ThemeName) => {
 		setCurrentTheme(themeName);
@@ -74,7 +51,7 @@ export default function ThemeSwitcher() {
 
 	const [open, setOpen] = createSignal(false);
 	return (
-		<Show when={ready()}>
+		<Show when={isDarkMode() !== undefined}>
 			<Menu isOpen={open()} onOpenChange={setOpen}>
 				<MenuTrigger aria-label={t("header.actions.switchTheme")}>
 					<Show when={isDarkMode()} fallback={<Icon name="sun" />}>
