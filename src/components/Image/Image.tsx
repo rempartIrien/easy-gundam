@@ -18,6 +18,7 @@ interface ImageProps {
 	imageId?: string | null;
 	alt: string;
 	size: ImageSizeName;
+	class?: string;
 }
 
 export default function Image(props: ImageProps) {
@@ -33,13 +34,17 @@ export default function Image(props: ImageProps) {
 			when={!fallback()}
 			fallback={
 				<img
-					class={clsx([isDarkMode() === undefined && hiddenFallbackStyle])}
+					class={clsx([
+						isDarkMode() === undefined && hiddenFallbackStyle,
+						props.class,
+					])}
 					width={imageSizeMap[props.size]}
 					src={`/assets/images/no-image-${isDarkMode() ? "dark" : "light"}.svg`}
 				/>
 			}
 		>
 			<img
+				class={props.class}
 				src={`/api/images/${props.imageId as string}/${props.size}`}
 				alt={props.alt}
 				srcset={`/api/images/${props.imageId as string}/${size2x()} 2x`}
