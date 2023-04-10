@@ -10,7 +10,7 @@ export type TextProps<T extends ValidComponent = "span"> = {
 } & {
 	component?: T;
 } & ComponentProps<T> &
-	JSX.HTMLAttributes<HTMLElement>;
+	JSX.HTMLAttributes<T>;
 
 export default function Text<T extends ValidComponent = "span">(
 	props: TextProps<T>,
