@@ -12,7 +12,7 @@ export function routeData({ params }: RouteDataArgs) {
 		([locale]) => {
 			throw redirect(`/${locale as Language}/home`);
 		},
-		{ key: [params.lang] },
+		{ key: () => [params.lang] },
 	);
 }
 

@@ -18,7 +18,7 @@ export function routeData({ params }: RouteDataArgs) {
 		async ([locale]) => {
 			return listTimelines(locale as Language);
 		},
-		{ key: [params.lang, "timlines"] },
+		{ key: () => [params.lang, "timlines"] },
 	);
 	return timelines;
 }

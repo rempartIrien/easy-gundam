@@ -23,7 +23,7 @@ export default function HtmlRoot(props: RootProps) {
 			]);
 			return { dict, locale, themeName };
 		},
-		{ key: "init" },
+		{ key: () => "init" },
 	);
 
 	return (
