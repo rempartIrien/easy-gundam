@@ -2,10 +2,10 @@
 
 Next steps:
 
+- Use `Show` and `Suspense` properly
 - Add a footer
 - Add a breadcrumb
 - Page titles
-- Rework the way markdown strings are rendered once solid-markdown@1.3.0 is available
 - Decrease title size on low resolutions
 - use [lucide-solid](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-solid) once [https://github.com/vitejs/vite/issues/8237](https://github.com/vitejs/vite/issues/8237) is solved
 

@@ -17,8 +17,7 @@ export function routeData({ params }: RouteDataArgs) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
 	const series = createServerData$(
-		async ([locale, , code]: string[]) =>
-			getSeriesByCode(code, locale as Language),
+		([locale, , code]: string[]) => getSeriesByCode(code, locale as Language),
 		{ key: () => [params.lang, "series", params.seriesCode] },
 	);
 	return series;

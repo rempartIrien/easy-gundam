@@ -28,9 +28,7 @@ export function routeData({
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
 	const adaptations = createServerData$(
-		async ([locale, , code]: string[]) => {
-			return listAdaptations(code, locale as Language);
-		},
+		([locale, , code]: string[]) => listAdaptations(code, locale as Language),
 		{ key: () => [params.lang, "series", params.seriesCode, "adaptations"] },
 	);
 	return { series, adaptations };
@@ -40,19 +38,21 @@ export default function SeriesOverview() {
 	const { series, adaptations } = useRouteData<typeof routeData>();
 	return (
 		<Section class={containerstyle}>
-			<Show when={series()} keyed>
-				{(s) => (
-					<>
-						<MarkdownViewer class={synopsisStyle} content={s.synopsis} />
-						<Image
-							class={imageStyle}
-							imageId={s.image?.id}
-							alt={s.image?.description || s.title}
-							size="medium"
-						/>
-						<MarkdownViewer class={staffStyle} content={s.staff} />
-					</>
+			<Show when={series()?.synopsis}>
+				{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
+			</Show>
+			<Show when={series()?.image}>
+				{(i) => (
+					<Image
+						class={imageStyle}
+						imageId={i()?.id}
+						alt={i()?.description || series()?.title || ""}
+						size="medium"
+					/>
 				)}
+			</Show>
+			<Show when={series()?.staff}>
+				{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
 			</Show>
 			<Show when={adaptations()}>
 				<List class={adaptationsStyle}>
