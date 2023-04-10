@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import SolidMarkdown from "solid-markdown";
 
 import { viewerStyles } from "./MarkdownViewer.css";
 
@@ -9,7 +10,9 @@ interface MarkdownViewerProps {
 
 export default function MarkdownViewer(props: MarkdownViewerProps) {
 	return (
-		// eslint-disable-next-line solid/no-innerhtml
-		<div class={clsx([viewerStyles, props.class])} innerHTML={props.content} />
+		<SolidMarkdown
+			class={clsx([viewerStyles, props.class])}
+			children={props.content}
+		/>
 	);
 }

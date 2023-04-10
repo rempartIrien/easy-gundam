@@ -1,5 +1,3 @@
-import { marked } from "marked";
-
 import { getMultiSeriesByCodes } from "~/graphql/series.server";
 import { getMultiTimelinesByCodes } from "~/graphql/timeline.server";
 import type { Language } from "~/i18n/i18n.config";
@@ -76,7 +74,7 @@ export default async function convertLinks(
 		})
 		.join("");
 
-	return marked(result);
+	return result;
 }
 
 function generateTimelineLink(
