@@ -59,7 +59,7 @@ export default function LocaleSwitcher() {
 
 	const [open, setOpen] = createSignal(false);
 	return (
-		<Menu isOpen={open()} onOpenChange={setOpen}>
+		<Menu open={open()} onOpenChange={setOpen}>
 			<MenuTrigger aria-label={t("header.actions.switchLocale")}>
 				<Icon name="languages" />
 			</MenuTrigger>

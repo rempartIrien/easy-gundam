@@ -52,7 +52,7 @@ export default function ThemeSwitcher() {
 	const [open, setOpen] = createSignal(false);
 	return (
 		<Show when={isDarkMode() !== undefined}>
-			<Menu isOpen={open()} onOpenChange={setOpen}>
+			<Menu open={open()} onOpenChange={setOpen}>
 				<MenuTrigger aria-label={t("header.actions.switchTheme")}>
 					<Show when={isDarkMode()} fallback={<Icon name="sun" />}>
 						<Icon name="moon" />
