@@ -1,5 +1,6 @@
 {
 	"about": {
+		"documentTitle": "À Propos",
 		"legal": {
 			"resources": {
 				"fairUse": "Droit de citation (France)",
@@ -53,6 +54,7 @@
 			"deleteLanguage": "Supprimer le cookie de langue",
 			"deleteTheme": "Supprimer le cookie de thème"
 		},
+		"documentTitle": "Gestion des cookies",
 		"language": {
 			"text": "Ce cookie sert à sauvegarder la langue utilisée afin de vous rediriger vers la bonne langue lorsque vous arrivez sur la page par défaut du site. Sur les autres pages, la langue présente dans l'adresse de la page visitée prévaut. En l'absence de ce cookie, la langue de votre navigateur sera détectée et utilisée pour la redirection.",
 			"title": "Cookie de langue"
@@ -107,6 +109,7 @@
 		}
 	},
 	"home": {
+		"documentTitle": "Accueil",
 		"subtitle": "Ce site parle de Mobile Suit Gundam (機動戦士ガンダム), une série créée par Yoshiyuki Tomino (富野 由悠季 ou 富野 喜幸).",
 		"title": "Bienvenue sur Easy Gundam!"
 	},
@@ -117,13 +120,35 @@
 		"title": "Page introuvable"
 	},
 	"series": {
+		"details": {
+			"analysis": {
+				"documentTitle": "Analyse"
+			},
+			"insights": {
+				"documentTitle": "Éclairages"
+			},
+			"overview": {
+				"documentTitle": "Introduction"
+			}
+		},
 		"nav": {
 			"analysis": "Analyse",
-			"overview": "Introduction",
-			"insights": "Éclairages"
+			"insights": "Éclairages",
+			"overview": "Introduction"
 		}
 	},
 	"timelines": {
+		"details": {
+			"description": {
+				"documentTitle": "Description"
+			},
+			"series": {
+				"documentTitle": "Séries"
+			}
+		},
+		"list": {
+			"documentTitle": "Univers"
+		},
 		"nav": {
 			"description": "Description",
 			"series": "Séries"

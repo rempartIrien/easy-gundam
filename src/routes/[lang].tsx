@@ -1,18 +1,15 @@
-import { useI18n } from "@solid-primitives/i18n";
-import { Title } from "solid-start";
 import { Outlet } from "solid-start";
 
 import CenterContent from "~/components/CenterContent";
+import DocumentTitle from "~/components/DocumentTitle";
 import Header from "~/components/Header";
 
 import { contentStyle, headerStyle } from "./[lang].css";
 
 export default function I18nLayout() {
-	const [t] = useI18n();
-
 	return (
 		<>
-			<Title>{t("appName")}</Title>
+			<DocumentTitle />
 			<Header class={headerStyle} />
 			<CenterContent class={contentStyle}>
 				<Outlet />

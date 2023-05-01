@@ -1,5 +1,6 @@
 import { useI18n } from "@solid-primitives/i18n";
 
+import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
 import Link from "~/components/Link";
 import List from "~/components/List";
@@ -12,6 +13,7 @@ export default function About() {
 	const appName = t("appName");
 	return (
 		<>
+			<DocumentTitle>{t("about.documentTitle")}</DocumentTitle>
 			<Heading variant="title">{t("about.title")}</Heading>
 			<Section>
 				<Heading variant="subtitle">{t("about.legal.title")}</Heading>

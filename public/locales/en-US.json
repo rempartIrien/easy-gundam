@@ -1,5 +1,6 @@
 {
 	"about": {
+		"documentTitle": "About",
 		"legal": {
 			"resources": {
 				"fairUse": "Fair use (France)",
@@ -53,6 +54,7 @@
 			"deleteLanguage": "Delete the language cookie",
 			"deleteTheme": "Delete the theme cookie"
 		},
+		"documentTitle": "Cookie management",
 		"language": {
 			"text": "This cookie is used to save the language you use so that you can be redirected to the good language when you first arrive on the website default page. On other pages, the language in the address of the visited page is used. If this cookie is not present, your browser language is detected and used.",
 			"title": "Language cookie"
@@ -107,6 +109,7 @@
 		}
 	},
 	"home": {
+		"documentTitle": "Home",
 		"subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸).",
 		"title": "Welcome to Easy Gundam!"
 	},
@@ -117,13 +120,35 @@
 		"title": "Page not found"
 	},
 	"series": {
+		"details": {
+			"analysis": {
+				"documentTitle": "Analysis"
+			},
+			"insights": {
+				"documentTitle": "Insights"
+			},
+			"overview": {
+				"documentTitle": "Overview"
+			}
+		},
 		"nav": {
 			"analysis": "Analysis",
-			"overview": "Overview",
-			"insights": "Insights"
+			"insights": "Insights",
+			"overview": "Overview"
 		}
 	},
 	"timelines": {
+		"details": {
+			"description": {
+				"documentTitle": "Description"
+			},
+			"series": {
+				"documentTitle": "Series"
+			}
+		},
+		"list": {
+			"documentTitle": "Timelines"
+		},
 		"nav": {
 			"description": "Description",
 			"series": "Series"

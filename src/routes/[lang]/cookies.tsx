@@ -8,6 +8,7 @@ import {
 } from "solid-start/server";
 
 import Button from "~/components/Button";
+import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
 import List from "~/components/List";
 import Paragraph from "~/components/Paragraph";
@@ -68,62 +69,65 @@ export default function Cookies() {
 	const [t] = useI18n();
 	const cookies = useRouteData<typeof routeData>();
 	return (
-		<CookieForm>
-			<Heading variant="title">{t("cookies.title")}</Heading>
-			<Show when={cookies()}>
-				<Section>
-					<Paragraph>
-						{t("cookies.list.text", { appName: t("appName") })}
-					</Paragraph>
-					<List>
-						<li>{t("cookies.list.language")}</li>
-						<li>{t("cookies.list.theme")}</li>
-					</List>
-					<Paragraph>{t("cookies.text")}</Paragraph>
-					<Button
-						class={buttonStyles}
-						type="submit"
-						name={buttonName}
-						value={allCookie}
-					>
-						{t("cookies.actions.deleteAll")}
-					</Button>
-				</Section>
-				<Section>
-					<Heading variant="subtitle">{t("cookies.language.title")}</Heading>
-					<Paragraph>{t("cookies.language.text")}</Paragraph>
-					<Show
-						when={cookies()?.locale}
-						fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
-					>
+		<>
+			<DocumentTitle>{t("cookies.documentTitle")}</DocumentTitle>
+			<CookieForm>
+				<Heading variant="title">{t("cookies.title")}</Heading>
+				<Show when={cookies()}>
+					<Section>
+						<Paragraph>
+							{t("cookies.list.text", { appName: t("appName") })}
+						</Paragraph>
+						<List>
+							<li>{t("cookies.list.language")}</li>
+							<li>{t("cookies.list.theme")}</li>
+						</List>
+						<Paragraph>{t("cookies.text")}</Paragraph>
 						<Button
 							class={buttonStyles}
 							type="submit"
 							name={buttonName}
-							value={languageCookie}
+							value={allCookie}
 						>
-							{t("cookies.actions.deleteLanguage")}
+							{t("cookies.actions.deleteAll")}
 						</Button>
-					</Show>
-				</Section>
-				<Section>
-					<Heading variant="subtitle">{t("cookies.theme.title")}</Heading>
-					<Paragraph>{t("cookies.theme.text")}</Paragraph>
-					<Show
-						when={cookies()?.theme}
-						fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
-					>
-						<Button
-							class={buttonStyles}
-							type="submit"
-							name={buttonName}
-							value={themeCookie}
+					</Section>
+					<Section>
+						<Heading variant="subtitle">{t("cookies.language.title")}</Heading>
+						<Paragraph>{t("cookies.language.text")}</Paragraph>
+						<Show
+							when={cookies()?.locale}
+							fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
 						>
-							{t("cookies.actions.deleteTheme")}
-						</Button>
-					</Show>
-				</Section>
-			</Show>
-		</CookieForm>
+							<Button
+								class={buttonStyles}
+								type="submit"
+								name={buttonName}
+								value={languageCookie}
+							>
+								{t("cookies.actions.deleteLanguage")}
+							</Button>
+						</Show>
+					</Section>
+					<Section>
+						<Heading variant="subtitle">{t("cookies.theme.title")}</Heading>
+						<Paragraph>{t("cookies.theme.text")}</Paragraph>
+						<Show
+							when={cookies()?.theme}
+							fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
+						>
+							<Button
+								class={buttonStyles}
+								type="submit"
+								name={buttonName}
+								value={themeCookie}
+							>
+								{t("cookies.actions.deleteTheme")}
+							</Button>
+						</Show>
+					</Section>
+				</Show>
+			</CookieForm>
+		</>
 	);
 }

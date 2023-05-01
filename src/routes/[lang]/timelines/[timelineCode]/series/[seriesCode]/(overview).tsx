@@ -1,9 +1,11 @@
+import { useI18n } from "@solid-primitives/i18n";
 import { For, Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import DocumentTitle from "~/components/DocumentTitle";
 import Image from "~/components/Image";
 import List from "~/components/List";
 import MarkdownViewer from "~/components/MarkdownViewer";
@@ -36,31 +38,43 @@ export function routeData({
 
 export default function SeriesOverview() {
 	const { series, adaptations } = useRouteData<typeof routeData>();
+	const [t] = useI18n();
 	return (
-		<Section class={containerstyle}>
-			<Show when={series()?.synopsis}>
-				{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
-			</Show>
-			<Show when={series()?.image}>
-				{(i) => (
-					<Image
-						class={imageStyle}
-						imageId={i()?.id}
-						alt={i()?.description || series()?.title || ""}
-						size="medium"
-					/>
-				)}
-			</Show>
-			<Show when={series()?.staff}>
-				{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
-			</Show>
-			<Show when={adaptations()}>
-				<List class={adaptationsStyle}>
-					<For each={adaptations()}>
-						{(adaptation) => <li>{adaptation.title}</li>}
-					</For>
-				</List>
-			</Show>
-		</Section>
+		<Show when={series()}>
+			{(nonNullSeries) => (
+				<>
+					<DocumentTitle>
+						{`${nonNullSeries().title} - ${String(
+							t("series.details.overview.documentTitle"),
+						)}`}
+					</DocumentTitle>
+					<Section class={containerstyle}>
+						<Show when={nonNullSeries().synopsis}>
+							{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
+						</Show>
+						<Show when={nonNullSeries().image}>
+							{(i) => (
+								<Image
+									class={imageStyle}
+									imageId={i()?.id}
+									alt={i()?.description || nonNullSeries().title || ""}
+									size="medium"
+								/>
+							)}
+						</Show>
+						<Show when={nonNullSeries().staff}>
+							{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
+						</Show>
+						<Show when={adaptations()}>
+							<List class={adaptationsStyle}>
+								<For each={adaptations()}>
+									{(adaptation) => <li>{adaptation.title}</li>}
+								</For>
+							</List>
+						</Show>
+					</Section>
+				</>
+			)}
+		</Show>
 	);
 }
