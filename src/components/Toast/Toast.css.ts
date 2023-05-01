@@ -11,6 +11,7 @@ const baseToasterStyle = style({
 	alignItems: "flex-start",
 	maxWidth: `min(${relativeSpace(50)}, 100%)`,
 	gap: fixedSpace(1),
+	position: "relative",
 });
 
 export const toastStyle = styleVariants({
