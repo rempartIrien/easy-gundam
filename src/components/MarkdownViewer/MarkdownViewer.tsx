@@ -1,5 +1,8 @@
 import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
+import { Show } from "solid-js";
+import { createSignal } from "solid-js";
+import { children, createEffect } from "solid-js";
 import { splitProps } from "solid-js";
 import SolidMarkdown from "solid-markdown";
 
@@ -44,12 +47,32 @@ const componentMap: ComponentProps<typeof SolidMarkdown>["components"] = {
 };
 
 export default function MarkdownViewer(props: MarkdownViewerProps) {
+	// FIXME: Workaround for https://github.com/andi23rosca/solid-markdown/issues/7
+	// and https://github.com/andi23rosca/solid-markdown/pull/10
+	const content = children(() => props.content);
+	const [updating, setUpdating] = createSignal(0);
+	const [updated, setUpdated] = createSignal(0);
+
+	createEffect(() => {
+		if (content()) {
+			setUpdating((prev) => prev + 1);
+		}
+	});
+
+	createEffect(() => {
+		if (updating()) {
+			setTimeout(() => setUpdated((prev) => prev + 1));
+		}
+	});
+
 	return (
-		<SolidMarkdown
-			class={clsx([viewerStyles, props.class])}
-			components={componentMap}
-		>
-			{props.content}
-		</SolidMarkdown>
+		<Show when={updating() === updated()}>
+			<SolidMarkdown
+				class={clsx([viewerStyles, props.class])}
+				components={componentMap}
+			>
+				{props.content}
+			</SolidMarkdown>
+		</Show>
 	);
 }
