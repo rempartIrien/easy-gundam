@@ -8,6 +8,8 @@ export const bodyStyle = style({
 	backgroundColor: vars.color.background.main,
 	color: vars.color.text.main,
 	minHeight: "100%",
+	display: "flex",
+	flexDirection: "column",
 });
 
 // We cannot target other element than the one that has the class in a regular

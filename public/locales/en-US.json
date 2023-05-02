@@ -11,7 +11,7 @@
 				"gundam": "Gundam and all associated names, images and trademarks are copyright of Sunrise and Bandai",
 				"media": "Images that are displayed on this site are copyrighted to Sunrise or Bandai, or to the creator of the image and are used on this website as defined by the French fair use (droit de citation).",
 				"texts": "All texts of {{ appName }} are under CC BY-NC-ND 4.0 license.",
-				"website": "{{ appName }} is an independent website and is in no way supported, endorsed or affiliated in with Sunrise or Bandai. The aim of {{ appName }} is to inform and share our passion towards Gundam. This site is not for profit or commercial purposes."
+				"website": "{{ appName }} is an independent website and is in no way supported, endorsed or affiliated with Sunrise or Bandai. The aim of {{ appName }} is to inform and share our passion towards Gundam. This site is not for profit or commercial purposes."
 			},
 			"title": "Legal information"
 		},
@@ -67,7 +67,7 @@
 		"noCookie": "You do not use such a cookie on your device.",
 		"text": "You can delete all the cookies saved on your device here:",
 		"theme": {
-			"text": "this cookie is used to save the theme you use. If this cookie is not present, your operating system theme is used instead.",
+			"text": "This cookie is used to save the theme you use. If this cookie is not present, your operating system theme is used instead.",
 			"title": "Theme cookie"
 		},
 		"title": "Cookie management"
@@ -77,6 +77,17 @@
 			"backToHome": "Back to home"
 		},
 		"title": "Error"
+	},
+	"footer": {
+		"copyrights": {
+			"gundam": "Mobile Suit Gundam © 1979 Sunrise, Sōtsu Agency, Bandai - All media are copyrighted by their respective owners.",
+			"site": "{{ appName }} is in no way supported, endorsed or affiliated with these companies and its texts are under the Common Creative BY-NC-ND 4.0 license."
+		},
+		"links": {
+			"about": "About",
+			"contact": "Contact",
+			"cookies": "Cookies"
+		}
 	},
 	"header": {
 		"actions": {
