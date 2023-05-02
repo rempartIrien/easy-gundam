@@ -58,6 +58,7 @@ export const closeButtonStyle = style({
 	borderStyle: "none",
 	display: "block",
 	lineHeight: 1,
+	cursor: "pointer",
 });
 
 export const titleStyle = style({
