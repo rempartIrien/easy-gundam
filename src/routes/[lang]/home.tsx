@@ -8,7 +8,7 @@ export default function Home() {
 	const [t] = useI18n();
 	return (
 		<main>
-			<DocumentTitle>{t("home.documentTitle")}</DocumentTitle>
+			<DocumentTitle content={t("home.documentTitle")} />
 			<h1 class={titleStyle}>{t("home.title")}</h1>
 			<p class={paragraphStyle}>{t("home.subtitle")}</p>
 		</main>

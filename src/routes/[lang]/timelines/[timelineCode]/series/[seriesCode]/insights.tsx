@@ -1,8 +1,7 @@
 import { useI18n } from "@solid-primitives/i18n";
 import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
-import { Navigate } from "solid-start";
-import { useRouteData } from "solid-start";
+import { Navigate, useRouteData } from "solid-start";
 
 import DocumentTitle from "~/components/DocumentTitle";
 import MarkdownViewer from "~/components/MarkdownViewer";
@@ -21,11 +20,12 @@ export default function SeriesInsights() {
 		<Show when={series()}>
 			{(nonNullSeries) => (
 				<>
-					<DocumentTitle>
-						{`${nonNullSeries().title} - ${String(
+					<DocumentTitle
+						content={[
+							nonNullSeries().title,
 							t("series.details.insights.documentTitle"),
-						)}`}
-					</DocumentTitle>
+						]}
+					/>
 					<Section>
 						<Show when={series()?.insights} fallback={<Navigate href=".." />}>
 							<MarkdownViewer content={series()?.insights} />

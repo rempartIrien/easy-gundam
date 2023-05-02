@@ -30,7 +30,7 @@ export default function Timelines() {
 
 	return (
 		<>
-			<DocumentTitle>{t("timelines.list.documentTitle")}</DocumentTitle>
+			<DocumentTitle content={t("timelines.list.documentTitle")} />
 			<Heading variant="title">{t("timelines.title")}</Heading>
 			<Section>
 				<List>

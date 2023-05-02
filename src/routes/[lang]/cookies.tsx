@@ -70,7 +70,7 @@ export default function Cookies() {
 	const cookies = useRouteData<typeof routeData>();
 	return (
 		<>
-			<DocumentTitle>{t("cookies.documentTitle")}</DocumentTitle>
+			<DocumentTitle content={t("cookies.documentTitle")} />
 			<CookieForm>
 				<Heading variant="title">{t("cookies.title")}</Heading>
 				<Show when={cookies()}>

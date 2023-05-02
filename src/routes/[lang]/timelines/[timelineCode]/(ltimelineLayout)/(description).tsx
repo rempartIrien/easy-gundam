@@ -20,11 +20,12 @@ export default function TimelineDescription() {
 		<Show when={timeline()}>
 			{(nonNullTimeline) => (
 				<>
-					<DocumentTitle>
-						{`${nonNullTimeline().name} - ${String(
+					<DocumentTitle
+						content={[
+							nonNullTimeline().name,
 							t("timelines.details.description.documentTitle"),
-						)}`}
-					</DocumentTitle>
+						]}
+					/>
 					<Section>
 						<MarkdownViewer content={nonNullTimeline().description} />
 					</Section>

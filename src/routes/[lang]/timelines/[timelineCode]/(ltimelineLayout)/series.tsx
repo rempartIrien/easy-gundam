@@ -32,11 +32,12 @@ export default function TimelineSeries() {
 		<Show when={timeline()}>
 			{(nonNullTimeline) => (
 				<>
-					<DocumentTitle>
-						{`${nonNullTimeline().name} - ${String(
+					<DocumentTitle
+						content={[
+							nonNullTimeline().name,
 							t("timelines.details.series.documentTitle"),
-						)}`}
-					</DocumentTitle>
+						]}
+					/>
 					<Chronology timelineCode={nonNullTimeline().code} items={series()} />
 				</>
 			)}

@@ -13,7 +13,7 @@ export default function About() {
 	const appName = t("appName");
 	return (
 		<>
-			<DocumentTitle>{t("about.documentTitle")}</DocumentTitle>
+			<DocumentTitle content={t("about.documentTitle")} />
 			<Heading variant="title">{t("about.title")}</Heading>
 			<Section>
 				<Heading variant="subtitle">{t("about.legal.title")}</Heading>

@@ -43,11 +43,12 @@ export default function SeriesOverview() {
 		<Show when={series()}>
 			{(nonNullSeries) => (
 				<>
-					<DocumentTitle>
-						{`${nonNullSeries().title} - ${String(
+					<DocumentTitle
+						content={[
+							nonNullSeries().title,
 							t("series.details.overview.documentTitle"),
-						)}`}
-					</DocumentTitle>
+						]}
+					/>
 					<Section class={containerstyle}>
 						<Show when={nonNullSeries().synopsis}>
 							{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
