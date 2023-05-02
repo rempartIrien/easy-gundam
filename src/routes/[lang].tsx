@@ -19,8 +19,8 @@ export default function I18nLayout() {
 			<Header class={headerStyle} />
 			<CenterContent class={contentStyle}>
 				<Outlet />
-				<Footer class={footerStyle} />
 			</CenterContent>
+			<Footer class={footerStyle} />
 		</section>
 	);
 }

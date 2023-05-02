@@ -4,6 +4,11 @@ import { vars } from "~/theme/theme.css";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 
 export const footerStyle = style({
+	paddingTop: relativeSpace(4),
+	paddingBottom: relativeSpace(4),
+});
+
+export const containerStyle = style({
 	display: "flex",
 	gap: fixedSpace(4),
 	flexDirection: "column",

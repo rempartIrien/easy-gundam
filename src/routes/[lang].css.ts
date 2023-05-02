@@ -11,10 +11,7 @@ export const containerStyle = style({
 export const contentStyle = style({
 	paddingTop: relativeSpace(4),
 	paddingBottom: relativeSpace(4),
-	display: "flex",
-	flexDirection: "column",
 	flex: 1,
-	justifyContent: "space-between",
 });
 
 export const headerStyle = style({
@@ -24,5 +21,5 @@ export const headerStyle = style({
 });
 
 export const footerStyle = style({
-	marginTop: relativeSpace(8),
+	marginTop: relativeSpace(4),
 });
