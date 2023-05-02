@@ -81,7 +81,7 @@
 	"footer": {
 		"copyrights": {
 			"gundam": "Mobile Suit Gundam © 1979 Sunrise, Sōtsu Agency, Bandai - Les médias de ce site sont la propriété de leurs auteurs respectifs.",
-			"site": "{{ appName }} n'est pas affilié à l'une de ces sociétés et ses textes sont sous licence Common Creative BY-NC-ND 4.0."
+			"site": "{{ appName }} n'est affilié aucune de ces sociétés et ses textes sont sous licence Common Creative BY-NC-ND 4.0."
 		},
 		"links": {
 			"about": "À propos",
