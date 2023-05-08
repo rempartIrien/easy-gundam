@@ -8,6 +8,8 @@ export const buttonStyle = style([
 	linkStyle.styled,
 	{
 		display: "block",
+		width: "100%",
+		textAlign: "start",
 		borderStyle: "none",
 		color: vars.color.text.main,
 		padding: `${relativeSpace(1)} ${fixedSpace(2)}`,
