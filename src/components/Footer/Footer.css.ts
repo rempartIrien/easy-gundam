@@ -14,7 +14,7 @@ export const containerStyle = style({
 	flexDirection: "column",
 	"@media": {
 		[from("lg")]: {
-			flexDirection: "row",
+			flexDirection: "row-reverse",
 			alignItems: "flex-start",
 			justifyContent: "space-between",
 		},

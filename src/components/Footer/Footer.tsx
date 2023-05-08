@@ -29,14 +29,6 @@ export default function Footer(props: FooterProps) {
 	return (
 		<footer class={clsx([footerStyle, local.class])} {...others}>
 			<CenterContent class={containerStyle}>
-				<div class={copyrightStyle}>
-					<div>
-						© {firstYear}
-						<Show when={year !== firstYear}>-{year}</Show> {appName}
-					</div>
-					<div>{t("footer.copyrights.gundam", { appName })}</div>
-					<div>{t("footer.copyrights.site", { appName })}</div>
-				</div>
 				<ul class={linkListStyle}>
 					<li>
 						<Link href={`${rootPath()}about`}>{t("footer.links.about")}</Link>
@@ -52,6 +44,14 @@ export default function Footer(props: FooterProps) {
 						</Link>
 					</li>
 				</ul>
+				<div class={copyrightStyle}>
+					<div>
+						© {firstYear}
+						<Show when={year !== firstYear}>-{year}</Show> {appName}
+					</div>
+					<div>{t("footer.copyrights.gundam", { appName })}</div>
+					<div>{t("footer.copyrights.site", { appName })}</div>
+				</div>
 			</CenterContent>
 		</footer>
 	);
