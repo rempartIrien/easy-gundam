@@ -49,6 +49,7 @@ const componentMap: ComponentProps<typeof SolidMarkdown>["components"] = {
 export default function MarkdownViewer(props: MarkdownViewerProps) {
 	// FIXME: Workaround for https://github.com/andi23rosca/solid-markdown/issues/7
 	// and https://github.com/andi23rosca/solid-markdown/pull/10
+	// Also do not access `props.content` twice https://github.com/solidjs/solid/issues/1485
 	const content = children(() => props.content);
 	const [updating, setUpdating] = createSignal(0);
 	const [updated, setUpdated] = createSignal(0);
@@ -71,7 +72,7 @@ export default function MarkdownViewer(props: MarkdownViewerProps) {
 				class={clsx([viewerStyles, props.class])}
 				components={componentMap}
 			>
-				{props.content}
+				{content() as string}
 			</SolidMarkdown>
 		</Show>
 	);
