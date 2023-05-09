@@ -6,11 +6,8 @@ import { createSignal } from "solid-js";
 import { Show, splitProps } from "solid-js";
 
 import CenterContent from "../CenterContent";
-import Icon from "../Icon";
-import LocaleSwitcher from "../LocaleSwitcher";
 import Nav from "../Nav";
 import NavItem from "../NavItem";
-import ThemeSwitcher from "../ThemeSwitcher";
 
 import {
 	collapsedHeaderStyle,
@@ -22,6 +19,9 @@ import {
 	menuIconStyle,
 	mobileNavStyle,
 } from "./Header.css";
+import HeaderIcon from "./HeaderIcon";
+import LocaleSwitcher from "./LocaleSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 type HeaderProps = JSX.IntrinsicElements["header"];
 
@@ -55,8 +55,8 @@ export default function Header(props: HeaderProps) {
 				))}
 			/>
 			<button class={menuIconStyle} onClick={toggleMenu}>
-				<Show when={open()} fallback={<Icon name="menu" />}>
-					<Icon name="close" />
+				<Show when={open()} fallback={<HeaderIcon name="menu" />}>
+					<HeaderIcon name="close" />
 				</Show>
 			</button>
 			<ThemeSwitcher />

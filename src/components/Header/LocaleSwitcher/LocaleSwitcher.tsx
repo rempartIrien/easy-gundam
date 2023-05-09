@@ -9,11 +9,12 @@ import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
 
-import Icon from "../Icon";
-import Menu from "../menu/Menu";
-import MenuContent from "../menu/MenuContent";
-import MenuItem from "../menu/MenuItem";
-import MenuTrigger from "../menu/MenuTrigger";
+import Menu from "../../menu/Menu";
+import MenuContent from "../../menu/MenuContent";
+import MenuItem from "../../menu/MenuItem";
+import MenuTrigger from "../../menu/MenuTrigger";
+import HeaderIcon from "../HeaderIcon";
+import { menuTriggerStyle } from "../MenuTrigger.css";
 
 interface LocalePayload {
 	newLocale?: Language;
@@ -60,8 +61,11 @@ export default function LocaleSwitcher() {
 	const [open, setOpen] = createSignal(false);
 	return (
 		<Menu open={open()} onOpenChange={setOpen}>
-			<MenuTrigger aria-label={t("header.actions.switchLocale")}>
-				<Icon name="languages" />
+			<MenuTrigger
+				class={menuTriggerStyle}
+				aria-label={t("header.actions.switchLocale")}
+			>
+				<HeaderIcon name="languages" />
 			</MenuTrigger>
 			<MenuContent>
 				<For each={Object.entries(LanguageNmes)}>

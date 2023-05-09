@@ -3,7 +3,7 @@ import clsx from "clsx";
 import ICON_REGISTRY from "./icon-registry";
 import { iconStyle } from "./Icon.css";
 
-interface IconProps {
+export interface IconProps {
 	name: keyof typeof ICON_REGISTRY;
 	class?: string;
 }

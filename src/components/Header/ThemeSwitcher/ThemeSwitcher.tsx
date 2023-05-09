@@ -8,11 +8,12 @@ import useIsDarkMode from "~/hooks/useIsDarkMode";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
-import Icon from "../Icon";
-import Menu from "../menu/Menu";
-import MenuContent from "../menu/MenuContent";
-import MenuItem from "../menu/MenuItem";
-import MenuTrigger from "../menu/MenuTrigger";
+import Menu from "../../menu/Menu";
+import MenuContent from "../../menu/MenuContent";
+import MenuItem from "../../menu/MenuItem";
+import MenuTrigger from "../../menu/MenuTrigger";
+import HeaderIcon from "../HeaderIcon";
+import { menuTriggerStyle } from "../MenuTrigger.css";
 
 interface ThemePayload {
 	themeName?: ThemeName;
@@ -53,9 +54,12 @@ export default function ThemeSwitcher() {
 	return (
 		<Show when={isDarkMode() !== undefined}>
 			<Menu open={open()} onOpenChange={setOpen}>
-				<MenuTrigger aria-label={t("header.actions.switchTheme")}>
-					<Show when={isDarkMode()} fallback={<Icon name="sun" />}>
-						<Icon name="moon" />
+				<MenuTrigger
+					class={menuTriggerStyle}
+					aria-label={t("header.actions.switchTheme")}
+				>
+					<Show when={isDarkMode()} fallback={<HeaderIcon name="sun" />}>
+						<HeaderIcon name="moon" />
 					</Show>
 				</MenuTrigger>
 				<MenuContent>

@@ -4,6 +4,8 @@ import { style } from "@vanilla-extract/css";
 import { glassEffectStyles } from "~/theme/theme.css";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 
+import { menuTriggerStyle } from "./MenuTrigger.css";
+
 const glassEffectWithBottomBorder: StyleRule = {
 	...glassEffectStyles,
 	borderTopStyle: "none",
@@ -56,6 +58,7 @@ export const expandedHeaderContainerStyle = style({
 
 export const mainRowContainerStyle = style({
 	display: "flex",
+	alignItems: "center",
 	paddingTop: fixedSpace(2),
 	paddingBottom: fixedSpace(2),
 	gap: fixedSpace(1),
@@ -71,17 +74,19 @@ export const desktopNavStyle = style({
 	},
 });
 
-export const menuIconStyle = style({
-	cursor: "pointer",
-	borderStyle: "none",
-	marginRight: "auto",
-	display: "block",
-	"@media": {
-		[smallBreakpoint]: {
-			display: "none",
+export const menuIconStyle = style([
+	menuTriggerStyle,
+	{
+		cursor: "pointer",
+		borderStyle: "none",
+		marginRight: "auto",
+		"@media": {
+			[smallBreakpoint]: {
+				display: "none",
+			},
 		},
 	},
-});
+]);
 
 export const mobileNavStyle = style({
 	flexDirection: "column",
