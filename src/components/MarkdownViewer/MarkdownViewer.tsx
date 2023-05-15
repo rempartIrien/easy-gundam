@@ -12,7 +12,7 @@ import List from "../List";
 import Paragraph from "../Paragraph/Paragraph";
 import Text from "../Text";
 
-import { viewerStyles } from "./MarkdownViewer.css";
+import { linkStyle, viewerStyle } from "./MarkdownViewer.css";
 
 interface MarkdownViewerProps {
 	class?: string;
@@ -29,11 +29,15 @@ const componentMap: ComponentProps<typeof SolidMarkdown>["components"] = {
 		return <Paragraph {...others} />;
 	},
 	a: (props) => {
-		const [local, others] = splitProps(props, ["node", "href"]);
+		const [local, others] = splitProps(props, ["node", "href", "class"]);
 		return (
 			<>
 				{local.href ? (
-					<Link href={local.href} {...others} />
+					<Link
+						href={local.href}
+						class={clsx([linkStyle, local.class])}
+						{...others}
+					/>
 				) : (
 					<Text {...others} />
 				)}
@@ -69,7 +73,7 @@ export default function MarkdownViewer(props: MarkdownViewerProps) {
 	return (
 		<Show when={updating() === updated()}>
 			<SolidMarkdown
-				class={clsx([viewerStyles, props.class])}
+				class={clsx([viewerStyle, props.class])}
 				components={componentMap}
 			>
 				{content() as string}
