@@ -1,3 +1,5 @@
+import ChevronLeft from "../../../assets/icons/chevron-left.svg";
+import ChevronRight from "../../../assets/icons/chevron-right.svg";
 import Close from "../../../assets/icons/close.svg";
 import Error from "../../../assets/icons/error.svg";
 import ExternalLink from "../../../assets/icons/external-link.svg";
@@ -10,6 +12,8 @@ import Sun from "../../../assets/icons/sun.svg";
 import Warning from "../../../assets/icons/warning.svg";
 
 const ICON_REGISTRY = {
+	chevronLeft: ChevronLeft,
+	chevronRight: ChevronRight,
 	close: Close,
 	error: Error,
 	externalLink: ExternalLink,
