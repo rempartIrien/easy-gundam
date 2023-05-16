@@ -28,8 +28,8 @@ export default function Link(props: LinkProps) {
 			rel={rel()}
 			{...others}
 		>
-			<Show when={isExternal()} fallback={local.children}>
-				{local.children}
+			{local.children}
+			<Show when={isExternal()}>
 				<Icon name="externalLink" />
 			</Show>
 		</A>
