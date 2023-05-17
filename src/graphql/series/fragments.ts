@@ -32,6 +32,12 @@ export const FULL_SERIES_FRAGMENT = gql`
 			id
 			description
 		}
+		timeline {
+			code
+			translations(filter: { language_code: { code: { _eq: $language } } }) {
+				name
+			}
+		}
 	}
 `;
 

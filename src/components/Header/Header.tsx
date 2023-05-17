@@ -32,9 +32,9 @@ export default function Header(props: HeaderProps) {
 	let ref: HTMLDivElement | undefined;
 
 	const links = [
-		{ href: "home", label: t("header.nav.home") },
-		{ href: "timelines", label: t("header.nav.timelines") },
-		{ href: "about", label: t("header.nav.about") },
+		{ href: "home", label: t("navigation.home") },
+		{ href: "timelines", label: t("navigation.timelines") },
+		{ href: "about", label: t("navigation.about") },
 	];
 
 	const toggleMenu = () => {

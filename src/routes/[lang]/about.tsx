@@ -1,5 +1,6 @@
 import { useI18n } from "@solid-primitives/i18n";
 
+import Breadcrumb from "~/components/Breadcrumb";
 import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
 import Link from "~/components/Link";
@@ -14,6 +15,7 @@ export default function About() {
 	return (
 		<>
 			<DocumentTitle content={t("about.documentTitle")} />
+			<Breadcrumb items={[{ text: t("navigation.about") }]} />
 			<Heading variant="title">{t("about.title")}</Heading>
 			<Section>
 				<Heading variant="subtitle">{t("about.legal.title")}</Heading>

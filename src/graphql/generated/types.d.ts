@@ -930,7 +930,7 @@ export type GetAdaptationByCodeQuery = { __typename?: 'Query', adaptations: Arra
 
 export type SeriesBaseFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
 
-export type SeriesFullFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
+export type SeriesFullFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null, timeline: { __typename?: 'timelines', code: string, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null } | null };
 
 export type SeriesLinkFragment = { __typename?: 'series', code: string, translations: Array<{ __typename?: 'series_translations', title: string } | null> | null, timeline: { __typename?: 'timelines', code: string } | null };
 
@@ -948,7 +948,7 @@ export type GetSeriesByCodeQueryVariables = Exact<{
 }>;
 
 
-export type GetSeriesByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null }> };
+export type GetSeriesByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null, timeline: { __typename?: 'timelines', code: string, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null } | null }> };
 
 export type GetMultiSeriesByCodesQueryVariables = Exact<{
   codes: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;

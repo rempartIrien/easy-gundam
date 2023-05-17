@@ -2,7 +2,10 @@ import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
-import { A, useLocation, useResolvedPath } from "solid-start";
+import type { A } from "solid-start";
+import { useLocation, useResolvedPath } from "solid-start";
+
+import Link from "../Link";
 
 import { navItemActiveClass, navItemStyle } from "./NavItem.css";
 
@@ -36,16 +39,17 @@ export default function NavItem(props: NavItemProps) {
 	});
 
 	return (
-		<A
-			{...others}
+		<Link
+			noStyle
 			class={clsx(
 				navItemStyle,
-				local.class,
 				isActive() && navItemActiveClass,
 				isActive() && local.activeClass,
+				local.class,
 			)}
+			{...others}
 		>
 			{local.children}
-		</A>
+		</Link>
 	);
 }

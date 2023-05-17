@@ -7,6 +7,7 @@ import {
 	redirect,
 } from "solid-start/server";
 
+import Breadcrumb from "~/components/Breadcrumb";
 import Button from "~/components/Button";
 import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
@@ -72,6 +73,7 @@ export default function Cookies() {
 		<>
 			<DocumentTitle content={t("cookies.documentTitle")} />
 			<CookieForm>
+				<Breadcrumb items={[{ text: t("navigation.cookies") }]} />
 				<Heading variant="title">{t("cookies.title")}</Heading>
 				<Show when={cookies()}>
 					<Section>

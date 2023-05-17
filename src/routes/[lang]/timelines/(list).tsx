@@ -5,6 +5,7 @@ import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import Breadcrumb from "~/components/Breadcrumb";
 import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
 import Link from "~/components/Link";
@@ -31,6 +32,7 @@ export default function Timelines() {
 	return (
 		<>
 			<DocumentTitle content={t("timelines.list.documentTitle")} />
+			<Breadcrumb items={[{ text: t("navigation.timelines") }]} />
 			<Heading variant="title">{t("timelines.title")}</Heading>
 			<Section>
 				<List>
