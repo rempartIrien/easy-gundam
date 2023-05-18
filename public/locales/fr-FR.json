@@ -34,9 +34,12 @@
 		},
 		"purpose": {
 			"resources": {
-				"aeug": "AEUG",
-				"gundamFrance": "Gundam France",
-				"wiki": "The Gundam Wikia"
+				"aeug": "AEUG (FR)",
+				"cosmicEra": "Cosmic Era (FR)",
+				"gundamFrance": "Gundam France (FR)",
+				"mahq": "MAHQ (EN)",
+				"tsukiNoMayu": "Moon's Cocoon (EN)",
+				"wiki": "The Gundam Wikia (EN)"
 			},
 			"texts": {
 				"exhaustiveness": "{{ appName }} n'a pas vocation à couvrir la totalité de l'univers Gundam, ni en terme d'univers, ni en terme de média. D'autres sites internet remplissent déjà ce rôle.",

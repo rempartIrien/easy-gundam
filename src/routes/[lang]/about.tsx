@@ -95,6 +95,21 @@ export default function About() {
 							{t("about.purpose.resources.wiki")}
 						</Link>
 					</li>
+					<li>
+						<Link href="https://www.mahq.net">
+							{t("about.purpose.resources.mahq")}
+						</Link>
+					</li>
+					<li>
+						<Link href="https://tsukinomayu.com">
+							{t("about.purpose.resources.tsukiNoMayu")}
+						</Link>
+					</li>
+					<li>
+						<Link href="http://www.cosmic-era.com">
+							{t("about.purpose.resources.cosmicEra")}
+						</Link>
+					</li>
 				</List>
 			</Section>
 		</>
