@@ -1,7 +1,8 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { glassEffectStyles, vars } from "~/theme/theme.css";
+import { glassEffectStyles } from "~/theme/styles.css";
 import { fixedSpace, relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 const baseToasterStyle = style({
 	...glassEffectStyles,

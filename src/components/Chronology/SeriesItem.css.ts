@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
-import { vars } from "~/theme/theme.css";
 import { fixedSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 export const seriesItemStyle = style({
 	display: "flex",

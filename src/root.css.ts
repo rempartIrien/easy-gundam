@@ -1,6 +1,6 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 
-import { vars } from "./theme/theme.css";
+import vars from "./theme/variables.css";
 
 // We cannot use theme variables in global style so we need regular style.
 export const bodyStyle = style({

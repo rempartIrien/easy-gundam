@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("./theme.css", () => ({
-	vars: {
+vi.mock("./variables.css", () => ({
+	default: {
 		color: {
 			background: {
 				main: "var(--color-background-main)",
@@ -11,16 +11,9 @@ vi.mock("./theme.css", () => ({
 		space: { fixed: "var(--space-fixed)", relative: "var(--space-relative)" },
 		boxShadow: { base: "var(--boxShadow-base)" },
 	},
-	breakpoints: {
-		xs: "320px",
-		sm: "481px",
-		md: "769px",
-		lg: "1025px",
-		xl: "1201px",
-	},
 }));
 
-import type { Breakpoint } from "./theme.css";
+import type { Breakpoint } from "./breakpoints";
 import { fixedSpace, from, hexToRgba, relativeSpace } from "./utils";
 
 describe("fixedSpace", () => {
@@ -125,11 +118,11 @@ describe("from", () => {
 	});
 
 	it("should return breakpoint value matching the given key", () => {
-		expect(from("xs")).toBe("screen and (min-width: 320px)");
-		expect(from("sm")).toBe("screen and (min-width: 481px)");
-		expect(from("md")).toBe("screen and (min-width: 769px)");
-		expect(from("lg")).toBe("screen and (min-width: 1025px)");
-		expect(from("xl")).toBe("screen and (min-width: 1201px)");
+		expect(from("xs")).toBe("screen and (min-width: 20rem)");
+		expect(from("sm")).toBe("screen and (min-width: 30rem)");
+		expect(from("md")).toBe("screen and (min-width: 48rem)");
+		expect(from("lg")).toBe("screen and (min-width: 64rem)");
+		expect(from("xl")).toBe("screen and (min-width: 75rem)");
 	});
 
 	it("should throw if no value matching the given key is found", () => {

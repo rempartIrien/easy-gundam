@@ -1,7 +1,8 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { textBlockStyles, vars } from "~/theme/theme.css";
+import { textBlockStyles } from "~/theme/styles.css";
 import { relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 const baseHeadingStyle = style({
 	...textBlockStyles,

@@ -1,8 +1,8 @@
 import { style } from "@vanilla-extract/css";
 
 import { linkStyle } from "~/components/Link/Link.css";
-import { vars } from "~/theme/theme.css";
 import { fixedSpace, relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 export const buttonStyle = style([
 	linkStyle.styled,

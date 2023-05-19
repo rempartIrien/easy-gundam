@@ -2,8 +2,8 @@ import type { StyleRule } from "@vanilla-extract/css";
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-import { vars } from "~/theme/theme.css";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 const borderWidth = "4px";
 const yearWidth = calc(borderWidth).divide(2).add("50%").toString();

@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { vars } from "~/theme/theme.css";
+import vars from "~/theme/variables.css";
 
 const baseTextStyle = style({});
 
