@@ -3,7 +3,9 @@ import type { ComponentProps, JSX, ValidComponent } from "solid-js";
 import { splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { textStyle } from "./Text.css";
+import useIsDarkMode from "~/hooks/useIsDarkMode";
+
+import { darkModeStyle, textStyle } from "./Text.css";
 
 export type TextProps<T extends ValidComponent = "span"> = {
 	variant?: "small" | "normal" | "big";
@@ -21,10 +23,16 @@ export default function Text<T extends ValidComponent = "span">(
 		"variant",
 		"children",
 	]);
+	const isDarkMode = useIsDarkMode();
+
 	return (
 		<Dynamic
 			component={local.component || "span"}
-			class={clsx([textStyle[local.variant || "normal"], local.class])}
+			class={clsx([
+				textStyle[local.variant || "normal"],
+				isDarkMode() && darkModeStyle,
+				local.class,
+			])}
 			{...otherProps}
 		>
 			{local.children}

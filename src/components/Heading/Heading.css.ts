@@ -6,6 +6,12 @@ import vars from "~/theme/variables.css";
 
 const baseHeadingStyle = style({
 	...textBlockStyles,
+	fontWeight: 700,
+});
+
+// See https://css-tricks.com/dark-mode-and-variable-fonts/
+export const darkModeStyle = style({
+	fontWeight: 600,
 });
 
 export const headingStyle = styleVariants({
