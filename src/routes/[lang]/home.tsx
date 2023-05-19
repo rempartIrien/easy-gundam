@@ -1,6 +1,8 @@
 import { useI18n } from "@solid-primitives/i18n";
 
 import DocumentTitle from "~/components/DocumentTitle";
+import Heading from "~/components/Heading";
+import Text from "~/components/Text";
 
 import { paragraphStyle, titleStyle } from "./home.css";
 
@@ -9,8 +11,10 @@ export default function Home() {
 	return (
 		<main>
 			<DocumentTitle content={t("home.documentTitle")} />
-			<h1 class={titleStyle}>{t("home.title")}</h1>
-			<p class={paragraphStyle}>{t("home.subtitle")}</p>
+			<Heading variant="title" class={titleStyle}>
+				{t("home.title")}
+			</Heading>
+			<Text class={paragraphStyle}>{t("home.subtitle")}</Text>
 		</main>
 	);
 }
