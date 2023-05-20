@@ -2,15 +2,15 @@ const emojiFontStack =
 	"'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'";
 
 // See https://github.com/system-fonts/modern-font-stacks#geometric-humanist
-export const sansSerifFontStack =
+const sansSerifFontStack =
 	`system-ui, Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif, ${emojiFontStack}` as const;
 
 // See https://github.com/system-fonts/modern-font-stacks#didone
-export const serifFontStack =
+const serifFontStack =
 	`Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif, ${emojiFontStack}` as const;
 
 // See https://github.com/system-fonts/modern-font-stacks#monospace-code
-export const monoFontStack =
+const monoFontStack =
 	`ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace, ${emojiFontStack}` as const;
 
 type FontFamily =
@@ -18,20 +18,48 @@ type FontFamily =
 	| typeof serifFontStack
 	| typeof monoFontStack;
 
-interface FontVariables {
-	family: FontFamily;
-	size: `${number}rem`;
-	lineHeight: `${number}`;
-}
-
-export const fonts: Record<
+type FontVariables = Record<
 	"title" | "subtitle" | "bigText" | "normalText" | "smallText",
-	FontVariables
-> = {
+	{
+		family: FontFamily;
+		size: `${number}rem`;
+		lineHeight: `${number}`;
+	}
+>;
+
+export const smallScreenFonts: FontVariables = {
+	title: {
+		family: sansSerifFontStack,
+		size: "3rem",
+		lineHeight: "1.2",
+	},
+	subtitle: {
+		family: sansSerifFontStack,
+		size: "1.8rem",
+		lineHeight: "1.35",
+	},
+	bigText: {
+		family: sansSerifFontStack,
+		size: "1.25rem",
+		lineHeight: "1.7",
+	},
+	normalText: {
+		family: sansSerifFontStack,
+		size: "1.125rem",
+		lineHeight: "1.7",
+	},
+	smallText: {
+		family: sansSerifFontStack,
+		size: "0.9rem",
+		lineHeight: "1.7",
+	},
+};
+
+export const regularScreenFonts: FontVariables = {
 	title: {
 		family: sansSerifFontStack,
 		size: "4rem",
-		lineHeight: "1.3",
+		lineHeight: "1.2",
 	},
 	subtitle: {
 		family: sansSerifFontStack,

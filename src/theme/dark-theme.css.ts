@@ -1,4 +1,4 @@
-import { createTheme, style } from "@vanilla-extract/css";
+import { assignVars, style } from "@vanilla-extract/css";
 
 import {
 	apricot,
@@ -25,8 +25,9 @@ import {
 	white,
 } from "./colors";
 import commonVars from "./common-variables.css";
+import { regularScreenFonts, smallScreenFonts } from "./fonts";
 import toasts from "./toasts";
-import { hexToRgba } from "./utils";
+import { from, hexToRgba } from "./utils";
 import vars from "./variables.css";
 
 export const darkThemeVars = {
@@ -54,4 +55,14 @@ export const darkThemeVars = {
 	border: { base: `1px solid rgba(${white}, 0.125)` },
 };
 
-export const darkTheme = style([createTheme(vars, darkThemeVars)]);
+export const darkTheme = style({
+	vars: assignVars(vars, {
+		...darkThemeVars,
+		font: smallScreenFonts,
+	}),
+	"@media": {
+		[from("md")]: {
+			vars: assignVars(vars.font, regularScreenFonts),
+		},
+	},
+});

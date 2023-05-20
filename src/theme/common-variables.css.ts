@@ -1,7 +1,4 @@
-import { fonts } from "./fonts";
-
 const commonVars = {
-	font: fonts,
 	space: {
 		fixed: "8px",
 		relative: "0.5rem",
