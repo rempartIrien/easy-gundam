@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { vars } from "~/theme/theme.css";
+import vars from "~/theme/variables.css";
 
 export const navItemStyle = style({
 	display: "inline-block",

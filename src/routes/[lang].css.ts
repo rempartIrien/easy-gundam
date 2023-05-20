@@ -1,8 +1,9 @@
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-import { breakpoints, vars } from "~/theme/theme.css";
+import breakpoints from "~/theme/breakpoints";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 export const containerStyle = style({
 	display: "flex",

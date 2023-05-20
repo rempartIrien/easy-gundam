@@ -1,8 +1,15 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { vars } from "~/theme/theme.css";
+import vars from "~/theme/variables.css";
 
-const baseTextStyle = style({});
+const baseTextStyle = style({
+	fontWeight: 400,
+});
+
+// See https://css-tricks.com/dark-mode-and-variable-fonts/
+export const darkModeStyle = style({
+	fontWeight: 300,
+});
 
 export const textStyle = styleVariants({
 	big: [

@@ -10,7 +10,9 @@ import { LocaleContext } from "~/contexts/LocaleContext";
 import { ThemeContext } from "~/contexts/ThemeContext";
 import type { Language } from "~/i18n/i18n.config";
 import type { I18nDictionary } from "~/i18n/i18n.server";
-import { darkTheme, defaultTheme, lightTheme } from "~/theme/theme.css";
+import { darkTheme } from "~/theme/dark-theme.css";
+import { defaultTheme } from "~/theme/default-theme.css";
+import { lightTheme } from "~/theme/light-theme.css";
 import { ThemeName } from "~/theme/ThemeName";
 
 import { htmlRootStyle } from "./HtmlRoot.css";

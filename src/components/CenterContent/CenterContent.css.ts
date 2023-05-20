@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { breakpoints } from "~/theme/theme.css";
+import breakpoints from "~/theme/breakpoints";
 import { fixedSpace, from } from "~/theme/utils";
 
 export const containerStyle = style({

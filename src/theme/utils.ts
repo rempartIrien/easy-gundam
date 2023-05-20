@@ -1,8 +1,8 @@
 import { calc } from "@vanilla-extract/css-utils";
 
-import type { Breakpoint } from "./theme.css";
-import { breakpoints } from "./theme.css";
-import { vars } from "./theme.css";
+import breakpoints from "./breakpoints";
+import type { Breakpoint } from "./breakpoints";
+import vars from "./variables.css";
 
 export function fixedSpace(multiplier: number): string;
 export function fixedSpace(topBottom: number, rightLeft: number): string;

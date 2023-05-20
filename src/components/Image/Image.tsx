@@ -12,7 +12,7 @@ import type { ImageSizeName } from "~/types/ImageSize";
 import { imageSizeMap } from "~/types/ImageSize";
 import getSize2x from "~/utils/get-size-2x";
 
-import { hiddenFallbackStyle } from "./Image.css";
+import { darkModeStyle, hiddenFallbackStyle } from "./Image.css";
 
 interface ImageProps {
 	imageId?: string | null;
@@ -36,6 +36,7 @@ export default function Image(props: ImageProps) {
 				<img
 					class={clsx([
 						isDarkMode() === undefined && hiddenFallbackStyle,
+						isDarkMode() && darkModeStyle,
 						props.class,
 					])}
 					width={imageSizeMap[props.size]}
@@ -44,7 +45,7 @@ export default function Image(props: ImageProps) {
 			}
 		>
 			<img
-				class={props.class}
+				class={clsx([isDarkMode() && darkModeStyle, props.class])}
 				src={`/api/images/${props.imageId as string}/${props.size}`}
 				alt={props.alt}
 				srcset={`/api/images/${props.imageId as string}/${size2x()} 2x`}
