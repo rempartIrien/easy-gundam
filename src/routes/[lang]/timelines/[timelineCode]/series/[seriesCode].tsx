@@ -40,7 +40,7 @@ export default function Series() {
 				},
 				{
 					text: nonNullSeries.timeline.name,
-					href: `${rootPath()}timelines/${nonNullSeries.timeline.code}`,
+					href: `${rootPath()}timelines/${nonNullSeries.timeline.code}/series`,
 				},
 				{ text: nonNullSeries.title },
 			];
