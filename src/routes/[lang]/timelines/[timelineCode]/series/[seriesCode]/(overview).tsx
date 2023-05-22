@@ -21,6 +21,7 @@ import {
 	imageStyle,
 	staffStyle,
 	synopsisStyle,
+	textBlockStyle,
 } from "./(overview).css";
 
 export function routeData({
@@ -50,29 +51,31 @@ export default function SeriesOverview() {
 						]}
 					/>
 					<Section class={containerstyle}>
-						<Show when={nonNullSeries().synopsis}>
-							{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
-						</Show>
 						<Show when={nonNullSeries().image}>
 							{(i) => (
 								<Image
 									class={imageStyle}
-									imageId={i()?.id}
-									alt={i()?.description || nonNullSeries().title || ""}
+									imageId={i().id}
+									alt={i().description || nonNullSeries().title || ""}
 									size="medium"
 								/>
 							)}
 						</Show>
-						<Show when={nonNullSeries().staff}>
-							{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
-						</Show>
-						<Show when={adaptations()}>
-							<List class={adaptationsStyle}>
-								<For each={adaptations()}>
-									{(adaptation) => <li>{adaptation.title}</li>}
-								</For>
-							</List>
-						</Show>
+						<div class={textBlockStyle}>
+							<Show when={nonNullSeries().synopsis}>
+								{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
+							</Show>
+							<Show when={nonNullSeries().staff}>
+								{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
+							</Show>
+							<Show when={adaptations()}>
+								<List class={adaptationsStyle}>
+									<For each={adaptations()}>
+										{(adaptation) => <li>{adaptation.title}</li>}
+									</For>
+								</List>
+							</Show>
+						</div>
 					</Section>
 				</>
 			)}
