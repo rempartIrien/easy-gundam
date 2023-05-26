@@ -143,7 +143,11 @@
 				"documentTitle": "Insights"
 			},
 			"overview": {
-				"documentTitle": "Overview"
+				"documentTitle": "Overview",
+				"subtitles": {
+					"adaptations": "Adaptations",
+					"crew": "Crew"
+				}
 			}
 		},
 		"nav": {

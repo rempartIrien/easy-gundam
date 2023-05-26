@@ -143,7 +143,11 @@
 				"documentTitle": "Éclairages"
 			},
 			"overview": {
-				"documentTitle": "Introduction"
+				"documentTitle": "Introduction",
+				"subtitles": {
+					"adaptations": "Adaptations",
+					"crew": "Équipe de production"
+				}
 			}
 		},
 		"nav": {

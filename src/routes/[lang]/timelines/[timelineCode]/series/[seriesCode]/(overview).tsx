@@ -6,6 +6,7 @@ import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
 import DocumentTitle from "~/components/DocumentTitle";
+import Heading from "~/components/Heading";
 import Image from "~/components/Image";
 import List from "~/components/List";
 import MarkdownViewer from "~/components/MarkdownViewer";
@@ -66,14 +67,26 @@ export default function SeriesOverview() {
 								{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
 							</Show>
 							<Show when={nonNullSeries().staff}>
-								{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
+								{(s) => (
+									<>
+										<Heading variant="subtitle">
+											{t("series.details.overview.subtitles.crew")}
+										</Heading>
+										<MarkdownViewer class={staffStyle} content={s()} />
+									</>
+								)}
 							</Show>
 							<Show when={adaptations()}>
-								<List class={adaptationsStyle}>
-									<For each={adaptations()}>
-										{(adaptation) => <li>{adaptation.title}</li>}
-									</For>
-								</List>
+								<>
+									<Heading variant="subtitle">
+										{t("series.details.overview.subtitles.adaptations")}
+									</Heading>
+									<List class={adaptationsStyle}>
+										<For each={adaptations()}>
+											{(adaptation) => <li>{adaptation.title}</li>}
+										</For>
+									</List>
+								</>
 							</Show>
 						</div>
 					</Section>
