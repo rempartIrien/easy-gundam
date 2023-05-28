@@ -1,15 +1,14 @@
 import { useI18n } from "@solid-primitives/i18n";
-import { For, Show } from "solid-js";
+import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import Adaptations from "~/components/Adaptations";
 import Crew from "~/components/Crew";
 import DocumentTitle from "~/components/DocumentTitle";
-import Heading from "~/components/Heading";
 import Image from "~/components/Image";
-import List from "~/components/List";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 import { listAdaptations } from "~/graphql/adaptation.server";
@@ -75,16 +74,9 @@ export default function SeriesOverview() {
 								{(s) => <Crew class={crewStyle} crew={s()} />}
 							</Show>
 							<Show when={adaptations()}>
-								<>
-									<Heading variant="subtitle">
-										{t("series.details.overview.subtitles.adaptations")}
-									</Heading>
-									<List class={adaptationsStyle}>
-										<For each={adaptations()}>
-											{(adaptation) => <li>{adaptation.title}</li>}
-										</For>
-									</List>
-								</>
+								{(a) => (
+									<Adaptations class={adaptationsStyle} adaptations={a()} />
+								)}
 							</Show>
 						</div>
 					</Section>
