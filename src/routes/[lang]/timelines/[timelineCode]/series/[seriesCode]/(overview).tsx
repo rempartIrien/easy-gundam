@@ -5,6 +5,7 @@ import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import Crew from "~/components/Crew";
 import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
 import Image from "~/components/Image";
@@ -19,8 +20,8 @@ import type { routeData as parentRouteData } from "../[seriesCode]";
 import {
 	adaptationsStyle,
 	containerstyle,
+	crewStyle,
 	imageStyle,
-	staffStyle,
 	synopsisStyle,
 	textBlockStyle,
 } from "./(overview).css";
@@ -64,17 +65,14 @@ export default function SeriesOverview() {
 						</Show>
 						<div class={textBlockStyle}>
 							<Show when={nonNullSeries().synopsis}>
-								{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
+								{(s) => (
+									<section class={synopsisStyle}>
+										<MarkdownViewer class={synopsisStyle} content={s()} />
+									</section>
+								)}
 							</Show>
 							<Show when={nonNullSeries().staff}>
-								{(s) => (
-									<>
-										<Heading variant="subtitle">
-											{t("series.details.overview.subtitles.crew")}
-										</Heading>
-										<MarkdownViewer class={staffStyle} content={s()} />
-									</>
-								)}
+								{(s) => <Crew class={crewStyle} crew={s()} />}
 							</Show>
 							<Show when={adaptations()}>
 								<>

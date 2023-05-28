@@ -2,6 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 import { textBlockStyles } from "~/theme/styles.css";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 export const containerstyle = style({
 	gap: fixedSpace(4),
@@ -20,10 +21,14 @@ export const textBlockStyle = style({
 	flex: 1,
 });
 
-export const synopsisStyle = style({});
+export const synopsisStyle = style({
+	marginBottom: vars.space.sectionBottom,
+});
 
 export const imageStyle = style({});
 
-export const staffStyle = style({});
+export const crewStyle = style({
+	marginBottom: vars.space.sectionBottom,
+});
 
 export const adaptationsStyle = style({});

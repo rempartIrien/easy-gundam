@@ -14,5 +14,8 @@ export const paragraphStyle = style({
 				.add(vars.space.midSectionBottom)
 				.toString(),
 		},
+		"&:last-child": {
+			marginBottom: 0,
+		},
 	},
 });
