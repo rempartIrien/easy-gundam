@@ -34,7 +34,7 @@ export const imageStyle = style({
 	},
 });
 
-export const crewStyle = style({
+export const staffStyle = style({
 	marginBottom: vars.space.sectionBottom,
 });
 

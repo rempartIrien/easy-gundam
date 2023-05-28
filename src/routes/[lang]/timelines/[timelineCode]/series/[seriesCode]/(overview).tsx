@@ -6,11 +6,11 @@ import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
 import Adaptations from "~/components/Adaptations";
-import Crew from "~/components/Crew";
 import DocumentTitle from "~/components/DocumentTitle";
 import Image from "~/components/Image";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
+import Staff from "~/components/Staff";
 import { listAdaptations } from "~/graphql/adaptation.server";
 import type { Language } from "~/i18n/i18n.config";
 
@@ -19,8 +19,8 @@ import type { routeData as parentRouteData } from "../[seriesCode]";
 import {
 	adaptationsStyle,
 	containerstyle,
-	crewStyle,
 	imageStyle,
+	staffStyle,
 	synopsisStyle,
 	textBlockStyle,
 } from "./(overview).css";
@@ -71,7 +71,7 @@ export default function SeriesOverview() {
 								)}
 							</Show>
 							<Show when={nonNullSeries().staff}>
-								{(s) => <Crew class={crewStyle} crew={s()} />}
+								{(s) => <Staff class={staffStyle} staff={s()} />}
 							</Show>
 							<Show when={adaptations()}>
 								{(a) => (

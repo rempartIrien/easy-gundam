@@ -4,21 +4,21 @@ import clsx from "clsx";
 import Heading from "../Heading";
 import MarkdownViewer from "../MarkdownViewer";
 
-import { crewStyle } from "./Crew.css";
+import { staffStyle } from "./Staff.css";
 
-interface CrewProps {
-	crew: string;
+interface StaffProps {
+	staff: string;
 	class?: string;
 }
 
-export default function Crew(props: CrewProps) {
+export default function Staff(props: StaffProps) {
 	const [t] = useI18n();
 	return (
 		<section class={clsx(props.class)}>
 			<Heading variant="subtitle">
-				{t("series.details.overview.subtitles.crew")}
+				{t("series.details.overview.subtitles.staff")}
 			</Heading>
-			<MarkdownViewer class={crewStyle} content={props.crew} />
+			<MarkdownViewer class={staffStyle} content={props.staff} />
 		</section>
 	);
 }
