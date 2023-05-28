@@ -25,7 +25,14 @@ export const synopsisStyle = style({
 	marginBottom: vars.space.sectionBottom,
 });
 
-export const imageStyle = style({});
+export const imageStyle = style({
+	"@media": {
+		[from("lg")]: {
+			position: "sticky",
+			top: relativeSpace(10),
+		},
+	},
+});
 
 export const crewStyle = style({
 	marginBottom: vars.space.sectionBottom,
