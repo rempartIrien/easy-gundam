@@ -1,4 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { Show, createMemo } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { Outlet, useRouteData } from "solid-start";
@@ -12,6 +11,7 @@ import Heading from "~/components/Heading";
 import Nav from "~/components/Nav";
 import NavItem from "~/components/NavItem";
 import useRootPath from "~/hooks/useRootPath";
+import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
 import { contentStyle, navStyle } from "./(ltimelineLayout).css";
@@ -28,7 +28,7 @@ export function routeData({ params }: RouteDataArgs) {
 }
 
 export default function Timeline() {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const timeline = useRouteData<typeof routeData>();
 	const rootPath = useRootPath();
 

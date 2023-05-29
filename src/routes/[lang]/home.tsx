@@ -1,13 +1,12 @@
-import { useI18n } from "@solid-primitives/i18n";
-
 import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
 import Text from "~/components/Text";
+import useTranslation from "~/hooks/useTranslation";
 
 import { paragraphStyle, titleStyle } from "./home.css";
 
 export default function Home() {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<main>
 			<DocumentTitle content={t("home.documentTitle")} />

@@ -1,5 +1,6 @@
-import { useI18n } from "@solid-primitives/i18n";
 import clsx from "clsx";
+
+import useTranslation from "~/hooks/useTranslation";
 
 import Heading from "../Heading";
 import MarkdownViewer from "../MarkdownViewer";
@@ -12,7 +13,7 @@ interface StaffProps {
 }
 
 export default function Staff(props: StaffProps) {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<section class={clsx(props.class)}>
 			<Heading variant="subtitle">

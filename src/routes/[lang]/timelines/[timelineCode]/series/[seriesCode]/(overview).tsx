@@ -1,4 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
@@ -12,6 +11,7 @@ import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 import Staff from "~/components/Staff";
 import { listAdaptations } from "~/graphql/adaptation.server";
+import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
 import type { routeData as parentRouteData } from "../[seriesCode]";
@@ -40,7 +40,7 @@ export function routeData({
 
 export default function SeriesOverview() {
 	const { series, adaptations } = useRouteData<typeof routeData>();
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<Show when={series()}>
 			{(nonNullSeries) => (

@@ -1,4 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
@@ -6,6 +5,7 @@ import { useRouteData } from "solid-start";
 import DocumentTitle from "~/components/DocumentTitle";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
+import useTranslation from "~/hooks/useTranslation";
 
 import type { routeData as parentRouteData } from "../(ltimelineLayout)";
 
@@ -15,7 +15,7 @@ export function routeData({ data }: RouteDataArgs<typeof parentRouteData>) {
 
 export default function TimelineDescription() {
 	const timeline = useRouteData<typeof routeData>();
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<Show when={timeline()}>
 			{(nonNullTimeline) => (

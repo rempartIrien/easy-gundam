@@ -1,6 +1,7 @@
-import { useI18n } from "@solid-primitives/i18n";
 import clsx from "clsx";
 import { For } from "solid-js";
+
+import useTranslation from "~/hooks/useTranslation";
 
 import Heading from "../Heading";
 import List from "../List";
@@ -17,7 +18,7 @@ interface AdaptationsProps {
 }
 
 export default function Adaptations(props: AdaptationsProps) {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<section class={clsx(props.class)}>
 			<Heading variant="subtitle">

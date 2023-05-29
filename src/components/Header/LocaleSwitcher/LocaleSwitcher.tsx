@@ -1,10 +1,10 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { For, createSignal, useContext } from "solid-js";
 import { useLocation, useNavigate } from "solid-start";
 import { createServerAction$ } from "solid-start/server";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
 import useCookieToaster from "~/hooks/useCookieToast";
+import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
 import { localeCookie } from "~/i18n/i18n.cookie";
@@ -39,7 +39,7 @@ export default function LocaleSwitcher() {
 
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const showCookieToast = useCookieToaster();
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);

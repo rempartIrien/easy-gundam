@@ -1,5 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
-
 import Breadcrumb from "~/components/Breadcrumb";
 import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
@@ -8,9 +6,10 @@ import List from "~/components/List";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
 import Text from "~/components/Text";
+import useTranslation from "~/hooks/useTranslation";
 
 export default function About() {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const appName = t("appName");
 	return (
 		<>

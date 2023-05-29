@@ -1,9 +1,10 @@
-import { useI18n } from "@solid-primitives/i18n";
 import type { JSX } from "solid-js";
 import { createEffect } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
 import { Title } from "solid-start";
+
+import useTranslation from "~/hooks/useTranslation";
 
 type TitleProps = Omit<JSX.IntrinsicElements["title"], "children"> & {
 	content?: string | string[];
@@ -22,7 +23,7 @@ function getContentArray(content: TitleProps["content"]): string[] {
 }
 
 export default function DocumentTitle(props: TitleProps) {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const [local, others] = splitProps(props, ["content"]);
 
 	// For some reasons, Solid dislikes nodes with several children.
