@@ -3,8 +3,9 @@
 Next steps:
 
 - Use `Show` and `Suspense` properly
-- rework adaptations
-- rework whitespaces
+- get rid of `LocaleContext` and use URL params instead
+- fix cookie toast genericity
+- fix cookie toast whitespaces
 - use [lucide-solid](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-solid) once [https://github.com/vitejs/vite/issues/8237](https://github.com/vitejs/vite/issues/8237) is solved
 
 - Hydration errors: [https://github.com/solidjs/solid-start/issues/881](https://github.com/solidjs/solid-start/issues/881)

@@ -146,7 +146,20 @@
 				"documentTitle": "Introduction",
 				"subtitles": {
 					"adaptations": "Adaptations",
+					"information": "Informations",
 					"staff": "Équipe de production"
+				},
+				"releasedOn": {
+					"movie_one": "Film sorti le {{ date }}",
+					"movie_other": "{{ count }} films sortis à partir du {{ date }}",
+					"ona_one": "ONA sorti le {{ date }}",
+					"ona_other": "{{ count }} ONA disponibles à partir du {{ date }}",
+					"ova_one": "OVA sorti le {{ date }}",
+					"ova_other": "{{ count }} OVA disponibles à partir du {{ date }}",
+					"tv_one": "Épisode TV diffusé le {{ date }}",
+					"tv_other": "{{ count }} épisodes TV diffusés à partir du {{ date }}",
+					"tvShort_one": "Mini-épisode TV diffusé le {{ date }}",
+					"tvShort_other": "{{ count }} mini-épisodes TV diffusés à partir du {{ date }}"
 				}
 			}
 		},

@@ -1,15 +1,20 @@
 import clsx from "clsx";
-import { For } from "solid-js";
+import { For, Show } from "solid-js";
 
 import useTranslation from "~/hooks/useTranslation";
 
 import Heading from "../Heading";
 import List from "../List";
 
+import Adaptation from "./Adaptation";
 import { adaptationsStyle } from "./Adaptations.css";
 
 interface Adaptation {
 	title: string;
+	description?: string | null;
+	parutionDate: Date;
+	format: string;
+	episodeNumber: number;
 }
 
 interface AdaptationsProps {
@@ -19,16 +24,35 @@ interface AdaptationsProps {
 
 export default function Adaptations(props: AdaptationsProps) {
 	const [t] = useTranslation();
+
 	return (
-		<section class={clsx(props.class)}>
-			<Heading variant="subtitle">
-				{t("series.details.overview.subtitles.adaptations")}
-			</Heading>
-			<List class={adaptationsStyle}>
-				<For each={props.adaptations}>
-					{(adaptation) => <li>{adaptation.title}</li>}
-				</For>
-			</List>
-		</section>
+		<Show when={props.adaptations.length}>
+			<section class={clsx(props.class)}>
+				<Show
+					when={props.adaptations.length !== 1}
+					fallback={
+						<>
+							<Heading variant="subtitle">
+								{t("series.details.overview.subtitles.information")}
+							</Heading>
+							<Adaptation adaptation={props.adaptations[0]} noTitle />
+						</>
+					}
+				>
+					<Heading variant="subtitle">
+						{t("series.details.overview.subtitles.adaptations")}
+					</Heading>
+					<List class={adaptationsStyle}>
+						<For each={props.adaptations}>
+							{(adaptation) => (
+								<li>
+									<Adaptation adaptation={adaptation} />
+								</li>
+							)}
+						</For>
+					</List>
+				</Show>
+			</section>
+		</Show>
 	);
 }
