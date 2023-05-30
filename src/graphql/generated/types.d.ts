@@ -12,6 +12,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Date: any;
+  GraphQLBigInt: any;
   GraphQLStringOrFloat: any;
   JSON: any;
 };
@@ -56,6 +57,8 @@ export type QueryAdaptations_AggregatedArgs = {
   filter: InputMaybe<Adaptations_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -80,6 +83,8 @@ export type QueryAdaptations_Translations_AggregatedArgs = {
   filter: InputMaybe<Adaptations_Translations_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -104,6 +109,8 @@ export type QueryLanguages_AggregatedArgs = {
   filter: InputMaybe<Languages_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -128,6 +135,8 @@ export type QuerySeries_AggregatedArgs = {
   filter: InputMaybe<Series_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -152,6 +161,8 @@ export type QuerySeries_Translations_AggregatedArgs = {
   filter: InputMaybe<Series_Translations_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -176,6 +187,8 @@ export type QueryTimelines_AggregatedArgs = {
   filter: InputMaybe<Timelines_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -200,6 +213,8 @@ export type QueryTimelines_Translations_AggregatedArgs = {
   filter: InputMaybe<Timelines_Translations_Filter>;
   groupBy: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  page: InputMaybe<Scalars['Int']>;
   search: InputMaybe<Scalars['String']>;
   sort: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -218,13 +233,13 @@ export type Adaptations = {
   date_updated_func: Maybe<Datetime_Functions>;
   episode_number: Scalars['Int'];
   format: Scalars['String'];
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   image: Maybe<Directus_Files>;
   parution_date: Scalars['Date'];
   parution_date_func: Maybe<Date_Functions>;
   series: Maybe<Series>;
   sort: Maybe<Scalars['Int']>;
-  status: Scalars['String'];
+  status: Maybe<Scalars['String']>;
   translations: Maybe<Array<Maybe<Adaptations_Translations>>>;
   translations_func: Maybe<Count_Functions>;
   user_created: Maybe<Scalars['String']>;
@@ -326,7 +341,7 @@ export type Adaptations_Translations = {
   __typename?: 'adaptations_translations';
   adaptation_id: Maybe<Adaptations>;
   description: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   language_code: Maybe<Languages>;
   title: Scalars['String'];
 };
@@ -403,10 +418,12 @@ export type Date_Filter_Operators = {
   _eq: InputMaybe<Scalars['String']>;
   _gt: InputMaybe<Scalars['String']>;
   _gte: InputMaybe<Scalars['String']>;
+  _in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _lt: InputMaybe<Scalars['String']>;
   _lte: InputMaybe<Scalars['String']>;
   _nbetween: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']>>>;
   _neq: InputMaybe<Scalars['String']>;
+  _nin: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _nnull: InputMaybe<Scalars['Boolean']>;
   _null: InputMaybe<Scalars['Boolean']>;
 };
@@ -459,15 +476,15 @@ export type Directus_Files = {
   embed: Maybe<Scalars['String']>;
   filename_disk: Maybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize: Maybe<Scalars['String']>;
+  filesize: Maybe<Scalars['GraphQLBigInt']>;
   folder: Maybe<Scalars['String']>;
   height: Maybe<Scalars['Int']>;
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   location: Maybe<Scalars['String']>;
   metadata: Maybe<Scalars['JSON']>;
   metadata_func: Maybe<Count_Functions>;
   modified_by: Maybe<Scalars['String']>;
-  modified_on: Scalars['Date'];
+  modified_on: Maybe<Scalars['Date']>;
   modified_on_func: Maybe<Datetime_Functions>;
   storage: Scalars['String'];
   tags: Maybe<Scalars['JSON']>;
@@ -475,7 +492,7 @@ export type Directus_Files = {
   title: Maybe<Scalars['String']>;
   type: Maybe<Scalars['String']>;
   uploaded_by: Maybe<Scalars['String']>;
-  uploaded_on: Scalars['Date'];
+  uploaded_on: Maybe<Scalars['Date']>;
   uploaded_on_func: Maybe<Datetime_Functions>;
   width: Maybe<Scalars['Int']>;
 };
@@ -489,7 +506,7 @@ export type Directus_Files_Filter = {
   embed: InputMaybe<String_Filter_Operators>;
   filename_disk: InputMaybe<String_Filter_Operators>;
   filename_download: InputMaybe<String_Filter_Operators>;
-  filesize: InputMaybe<String_Filter_Operators>;
+  filesize: InputMaybe<Number_Filter_Operators>;
   folder: InputMaybe<String_Filter_Operators>;
   height: InputMaybe<Number_Filter_Operators>;
   id: InputMaybe<String_Filter_Operators>;
@@ -512,7 +529,7 @@ export type Directus_Files_Filter = {
 
 export type Languages = {
   __typename?: 'languages';
-  code: Maybe<Scalars['ID']>;
+  code: Scalars['ID'];
   name: Maybe<Scalars['String']>;
 };
 
@@ -559,10 +576,10 @@ export type Series = {
   date_created_func: Maybe<Datetime_Functions>;
   date_updated: Maybe<Scalars['Date']>;
   date_updated_func: Maybe<Datetime_Functions>;
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   image: Maybe<Directus_Files>;
   sort: Maybe<Scalars['Int']>;
-  status: Scalars['String'];
+  status: Maybe<Scalars['String']>;
   timeline: Maybe<Timelines>;
   translations: Maybe<Array<Maybe<Series_Translations>>>;
   translations_func: Maybe<Count_Functions>;
@@ -661,7 +678,7 @@ export type Series_Translations = {
   __typename?: 'series_translations';
   analysis: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   insights: Maybe<Scalars['String']>;
   language_code: Maybe<Languages>;
   serie_id: Maybe<Series>;
@@ -741,6 +758,7 @@ export type String_Filter_Operators = {
   _empty: InputMaybe<Scalars['Boolean']>;
   _ends_with: InputMaybe<Scalars['String']>;
   _eq: InputMaybe<Scalars['String']>;
+  _icontains: InputMaybe<Scalars['String']>;
   _in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _ncontains: InputMaybe<Scalars['String']>;
   _nempty: InputMaybe<Scalars['Boolean']>;
@@ -760,10 +778,10 @@ export type Timelines = {
   date_created_func: Maybe<Datetime_Functions>;
   date_updated: Maybe<Scalars['Date']>;
   date_updated_func: Maybe<Datetime_Functions>;
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   image: Maybe<Directus_Files>;
   sort: Maybe<Scalars['Int']>;
-  status: Scalars['String'];
+  status: Maybe<Scalars['String']>;
   translations: Maybe<Array<Maybe<Timelines_Translations>>>;
   translations_func: Maybe<Count_Functions>;
   user_created: Maybe<Scalars['String']>;
@@ -844,7 +862,7 @@ export type Timelines_Filter = {
 export type Timelines_Translations = {
   __typename?: 'timelines_translations';
   description: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   language_code: Maybe<Languages>;
   name: Scalars['String'];
   timeline_id: Maybe<Timelines>;
@@ -908,9 +926,7 @@ export type Timelines_Translations_Filter = {
   timeline_id: InputMaybe<Timelines_Filter>;
 };
 
-export type AdaptationBaseFragment = { __typename?: 'adaptations', code: string, format: string, dateCreated: any | null, episodeNumber: number, translations: Array<{ __typename?: 'adaptations_translations', title: string } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
-
-export type AdaptationFullFragment = { __typename?: 'adaptations', code: string, format: string, dateCreated: any | null, episodeNumber: number, parutionDate: any, series: { __typename?: 'series', code: string } | null, translations: Array<{ __typename?: 'adaptations_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
+export type AdaptationFullFragment = { __typename?: 'adaptations', code: string, format: string, dateCreated: any | null, episodeNumber: number, parutionDate: any, translations: Array<{ __typename?: 'adaptations_translations', title: string, description: string | null } | null> | null };
 
 export type ListAdaptationsQueryVariables = Exact<{
   seriesCode: Scalars['String'];
@@ -918,19 +934,11 @@ export type ListAdaptationsQueryVariables = Exact<{
 }>;
 
 
-export type ListAdaptationsQuery = { __typename?: 'Query', adaptations: Array<{ __typename?: 'adaptations', code: string, format: string, dateCreated: any | null, episodeNumber: number, translations: Array<{ __typename?: 'adaptations_translations', title: string } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null }> };
+export type ListAdaptationsQuery = { __typename?: 'Query', adaptations: Array<{ __typename?: 'adaptations', code: string, format: string, dateCreated: any | null, episodeNumber: number, parutionDate: any, translations: Array<{ __typename?: 'adaptations_translations', title: string, description: string | null } | null> | null }> };
 
-export type GetAdaptationByCodeQueryVariables = Exact<{
-  code: Scalars['String'];
-  language: Scalars['String'];
-}>;
+export type SeriesBaseFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string, description: string | null } | null };
 
-
-export type GetAdaptationByCodeQuery = { __typename?: 'Query', adaptations: Array<{ __typename?: 'adaptations', code: string, format: string, dateCreated: any | null, episodeNumber: number, parutionDate: any, series: { __typename?: 'series', code: string } | null, translations: Array<{ __typename?: 'adaptations_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null }> };
-
-export type SeriesBaseFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null };
-
-export type SeriesFullFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null, timeline: { __typename?: 'timelines', code: string, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null } | null };
+export type SeriesFullFragment = { __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string, description: string | null } | null, timeline: { __typename?: 'timelines', code: string, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null } | null };
 
 export type SeriesLinkFragment = { __typename?: 'series', code: string, translations: Array<{ __typename?: 'series_translations', title: string } | null> | null, timeline: { __typename?: 'timelines', code: string } | null };
 
@@ -940,7 +948,7 @@ export type ListSeriesQueryVariables = Exact<{
 }>;
 
 
-export type ListSeriesQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null }> };
+export type ListSeriesQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, description: string | null } | null> | null, image: { __typename?: 'directus_files', id: string, description: string | null } | null }> };
 
 export type GetSeriesByCodeQueryVariables = Exact<{
   code: Scalars['String'];
@@ -948,7 +956,7 @@ export type GetSeriesByCodeQueryVariables = Exact<{
 }>;
 
 
-export type GetSeriesByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string | null, description: string | null } | null, timeline: { __typename?: 'timelines', code: string, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null } | null }> };
+export type GetSeriesByCodeQuery = { __typename?: 'Query', series: Array<{ __typename?: 'series', code: string, year: number, dateCreated: any | null, translations: Array<{ __typename?: 'series_translations', title: string, synopsis: string | null, staff: string | null, insights: string | null, analysis: string | null } | null> | null, image: { __typename?: 'directus_files', id: string, description: string | null } | null, timeline: { __typename?: 'timelines', code: string, translations: Array<{ __typename?: 'timelines_translations', name: string } | null> | null } | null }> };
 
 export type GetMultiSeriesByCodesQueryVariables = Exact<{
   codes: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;
