@@ -6,6 +6,7 @@ Next steps:
 - get rid of `LocaleContext` and use URL params instead
 - fix cookie toast genericity
 - fix cookie toast whitespaces
+- update favicon and add manifest
 - use [lucide-solid](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-solid) once [https://github.com/vitejs/vite/issues/8237](https://github.com/vitejs/vite/issues/8237) is solved
 
 - Hydration errors: [https://github.com/solidjs/solid-start/issues/881](https://github.com/solidjs/solid-start/issues/881)
