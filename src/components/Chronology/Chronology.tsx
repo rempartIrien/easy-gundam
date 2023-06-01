@@ -38,7 +38,7 @@ export default function Chronology(props: ChronologyProps) {
 				<For each={seriesByYear()}>
 					{([year, items]) => (
 						<li class={chronologyItemStyle}>
-							<Text variant="big" class={yearStyle}>
+							<Text component="div" variant="big" class={yearStyle}>
 								{`${local.timelineCode}\u00A0${year}`}
 							</Text>
 							<ol class={seriesListStyle}>
