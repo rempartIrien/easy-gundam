@@ -13,6 +13,7 @@ import {
 	emerald,
 	emeraldDark,
 	emeraldLight,
+	gray,
 	grayDark,
 	grayDarker,
 	grayLight,
@@ -33,7 +34,11 @@ import vars from "./variables.css";
 export const darkThemeVars = {
 	...commonVars,
 	color: {
-		background: { main: grayDarker, emphasis: hexToRgba(grayDark, 0.5) },
+		background: {
+			main: grayDarker,
+			emphasis: hexToRgba(grayDark, 0.5),
+			button: hexToRgba(gray, 0.25),
+		},
 		text: { main: white, disabled: grayLight },
 		primary: { main: merigold, text: merigoldLight, background: merigoldDark },
 		secondary: {

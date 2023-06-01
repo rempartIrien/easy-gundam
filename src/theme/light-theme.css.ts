@@ -35,7 +35,11 @@ import vars from "./variables.css";
 export const lightThemeVars = {
 	...commonVars,
 	color: {
-		background: { main: grayLighter, emphasis: hexToRgba(white, 0.6) },
+		background: {
+			main: grayLighter,
+			emphasis: hexToRgba(white, 0.6),
+			button: hexToRgba(grayLight, 0.5),
+		},
 		text: { main: black, disabled: grayDark },
 		primary: {
 			main: imperialRed,

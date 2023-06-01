@@ -61,7 +61,7 @@ export const mainRowContainerStyle = style({
 	alignItems: "center",
 	paddingTop: fixedSpace(2),
 	paddingBottom: fixedSpace(2),
-	gap: fixedSpace(1),
+	gap: fixedSpace(2),
 });
 
 export const desktopNavStyle = style({
@@ -77,7 +77,6 @@ export const desktopNavStyle = style({
 export const menuIconStyle = style([
 	menuTriggerStyle,
 	{
-		cursor: "pointer",
 		borderStyle: "none",
 		marginRight: "auto",
 		"@media": {

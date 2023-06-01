@@ -2,7 +2,7 @@ import { createThemeContract } from "@vanilla-extract/css";
 
 const vars = createThemeContract({
 	color: {
-		background: { main: null, emphasis: null },
+		background: { main: null, emphasis: null, button: null },
 		text: { main: null, disabled: null },
 		primary: { main: null, text: null, background: null },
 		secondary: { main: null, text: null, background: null },
