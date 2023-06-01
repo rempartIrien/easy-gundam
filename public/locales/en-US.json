@@ -104,7 +104,10 @@
 			},
 			"link": "Cookie management page",
 			"more": "Cookies are optional. You can manage them at any time.",
-			"question": "Do you want to save your préference with a cookie?",
+			"question": {
+				"locale": "Do you want to save your language with a cookie?",
+				"theme": "Do you want to save your theme with a cookie?"
+			},
 			"results": {
 				"error": "An error occured",
 				"link": "Manage cookies",

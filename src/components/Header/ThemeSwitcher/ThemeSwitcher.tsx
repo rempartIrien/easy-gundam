@@ -43,7 +43,7 @@ export default function ThemeSwitcher() {
 
 	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
 	const isDarkMode = useIsDarkMode();
-	const showCookieToast = useCookieToaster();
+	const showCookieToast = useCookieToaster("theme");
 
 	const switchTheme = (themeName?: ThemeName) => {
 		setCurrentTheme(themeName);

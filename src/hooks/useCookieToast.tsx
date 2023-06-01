@@ -10,7 +10,7 @@ interface ShowCookieToasterParams {
 	onCancel?: (() => void) | (() => Promise<void>);
 }
 
-export default function useCookieToaster() {
+export default function useCookieToaster(type: "theme" | "locale") {
 	const [t] = useTranslation();
 	const { dimissToast, toastSuccess, toastError, toastInfo } = useToaster();
 	const rootPath = useRootPath();
@@ -49,7 +49,7 @@ export default function useCookieToaster() {
 		toastId !== undefined && dimissToast(toastId);
 
 	return ({ onSave, onCancel }: ShowCookieToasterParams) => {
-		toastId = toastInfo(t("header.cookies.question"), () => (
+		toastId = toastInfo(t(`header.cookies.question.${type}`), () => (
 			<CookieToasterContent
 				onSave={() => save(toastId, onSave)}
 				onCancel={() => cancel(toastId, onCancel)}

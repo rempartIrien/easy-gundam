@@ -40,7 +40,7 @@ export default function LocaleSwitcher() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [t] = useTranslation();
-	const showCookieToast = useCookieToaster();
+	const showCookieToast = useCookieToaster("locale");
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
 
