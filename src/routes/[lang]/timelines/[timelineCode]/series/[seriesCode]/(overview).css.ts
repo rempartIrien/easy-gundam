@@ -1,36 +1,41 @@
 import { style } from "@vanilla-extract/css";
 
+import { textBlockStyles } from "~/theme/styles.css";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 export const containerstyle = style({
+	gap: fixedSpace(4),
+	alignItems: "center",
 	"@media": {
 		[from("lg")]: {
-			display: "grid",
-			gridTemplateColumns: "400px 1fr",
-			gridTemplateRows: "auto 1fr",
-			gridTemplateAreas: `
-			"image synopsis"
-			"image staff"
-			"image adaptations"
-			`,
-			placeItems: "start stretch",
-			gap: `${relativeSpace(4)} ${fixedSpace(4)}`,
+			alignItems: "flex-start",
+			flexDirection: "row",
 		},
 	},
 });
 
+export const textBlockStyle = style({
+	...textBlockStyles,
+	gap: relativeSpace(4),
+	flex: 1,
+});
+
 export const synopsisStyle = style({
-	gridArea: "synopsis",
+	marginBottom: vars.space.sectionBottom,
 });
 
 export const imageStyle = style({
-	gridArea: "image",
+	"@media": {
+		[from("lg")]: {
+			position: "sticky",
+			top: relativeSpace(10),
+		},
+	},
 });
 
 export const staffStyle = style({
-	gridArea: "staff",
+	marginBottom: vars.space.sectionBottom,
 });
 
-export const adaptationsStyle = style({
-	gridArea: "adaptations",
-});
+export const adaptationsStyle = style({});

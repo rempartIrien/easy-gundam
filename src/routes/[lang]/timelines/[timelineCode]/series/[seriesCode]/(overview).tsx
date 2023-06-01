@@ -1,16 +1,17 @@
-import { useI18n } from "@solid-primitives/i18n";
-import { For, Show } from "solid-js";
+import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
+import Adaptations from "~/components/Adaptations";
 import DocumentTitle from "~/components/DocumentTitle";
 import Image from "~/components/Image";
-import List from "~/components/List";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
+import Staff from "~/components/Staff";
 import { listAdaptations } from "~/graphql/adaptation.server";
+import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
 import type { routeData as parentRouteData } from "../[seriesCode]";
@@ -21,6 +22,7 @@ import {
 	imageStyle,
 	staffStyle,
 	synopsisStyle,
+	textBlockStyle,
 } from "./(overview).css";
 
 export function routeData({
@@ -38,7 +40,7 @@ export function routeData({
 
 export default function SeriesOverview() {
 	const { series, adaptations } = useRouteData<typeof routeData>();
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<Show when={series()}>
 			{(nonNullSeries) => (
@@ -50,29 +52,33 @@ export default function SeriesOverview() {
 						]}
 					/>
 					<Section class={containerstyle}>
-						<Show when={nonNullSeries().synopsis}>
-							{(s) => <MarkdownViewer class={synopsisStyle} content={s()} />}
-						</Show>
 						<Show when={nonNullSeries().image}>
 							{(i) => (
 								<Image
 									class={imageStyle}
-									imageId={i()?.id}
-									alt={i()?.description || nonNullSeries().title || ""}
+									imageId={i().id}
+									alt={i().description || nonNullSeries().title || ""}
 									size="medium"
 								/>
 							)}
 						</Show>
-						<Show when={nonNullSeries().staff}>
-							{(s) => <MarkdownViewer class={staffStyle} content={s()} />}
-						</Show>
-						<Show when={adaptations()}>
-							<List class={adaptationsStyle}>
-								<For each={adaptations()}>
-									{(adaptation) => <li>{adaptation.title}</li>}
-								</For>
-							</List>
-						</Show>
+						<div class={textBlockStyle}>
+							<Show when={nonNullSeries().synopsis}>
+								{(s) => (
+									<section class={synopsisStyle}>
+										<MarkdownViewer class={synopsisStyle} content={s()} />
+									</section>
+								)}
+							</Show>
+							<Show when={nonNullSeries().staff}>
+								{(s) => <Staff class={staffStyle} staff={s()} />}
+							</Show>
+							<Show when={adaptations()}>
+								{(a) => (
+									<Adaptations class={adaptationsStyle} adaptations={a()} />
+								)}
+							</Show>
+						</div>
 					</Section>
 				</>
 			)}

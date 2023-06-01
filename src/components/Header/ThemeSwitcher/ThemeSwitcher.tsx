@@ -1,10 +1,10 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { Show, createSignal, useContext } from "solid-js";
 import { createServerAction$ } from "solid-start/server";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
 import useCookieToaster from "~/hooks/useCookieToast";
 import useIsDarkMode from "~/hooks/useIsDarkMode";
+import useTranslation from "~/hooks/useTranslation";
 import { colorSchemeCookie } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
@@ -39,7 +39,7 @@ export default function ThemeSwitcher() {
 		});
 	});
 
-	const [t] = useI18n();
+	const [t] = useTranslation();
 
 	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
 	const isDarkMode = useIsDarkMode();

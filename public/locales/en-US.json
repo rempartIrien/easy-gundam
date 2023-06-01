@@ -143,7 +143,24 @@
 				"documentTitle": "Insights"
 			},
 			"overview": {
-				"documentTitle": "Overview"
+				"documentTitle": "Overview",
+				"subtitles": {
+					"adaptations": "Adaptations",
+					"information": "Information",
+					"staff": "Staff"
+				},
+				"releasedOn": {
+					"movie_one": "Movie released on {{ date }}",
+					"movie_other": "{{ count }} movies released from {{ date }}",
+					"ona_one": "ONA released on {{ date }}",
+					"ona_other": "{{ count }} ONAs released from {{ date }}",
+					"ova_one": "OVA released on {{ date }}",
+					"ova_other": "{{ count }} OVAs released from {{ date }}",
+					"tv_one": "TV episode broadcasted {{ date }}",
+					"tv_other": "{{ count }} TV episodes broadcasted from {{ date }}",
+					"tvShort_one": "Short TV episode broadcasted {{ date }}",
+					"tvShort_other": "{{ count }} short TV episodes broadcasted from {{ date }}"
+				}
 			}
 		},
 		"nav": {

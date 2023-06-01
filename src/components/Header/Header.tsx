@@ -1,9 +1,10 @@
 import { createPreventScroll } from "@kobalte/core";
-import { useI18n } from "@solid-primitives/i18n";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { createSignal } from "solid-js";
 import { Show, splitProps } from "solid-js";
+
+import useTranslation from "~/hooks/useTranslation";
 
 import CenterContent from "../CenterContent";
 import Nav from "../Nav";
@@ -26,7 +27,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 type HeaderProps = JSX.IntrinsicElements["header"];
 
 export default function Header(props: HeaderProps) {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const [local, others] = splitProps(props, ["class"]);
 	const [open, setOpen] = createSignal(false);
 	let ref: HTMLDivElement | undefined;

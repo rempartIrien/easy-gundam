@@ -22,6 +22,8 @@ const vars = createThemeContract({
 	space: {
 		fixed: null,
 		relative: null,
+		sectionBottom: null,
+		midSectionBottom: null,
 	},
 	borderRadius: {
 		base: null,

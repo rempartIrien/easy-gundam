@@ -1,13 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-import { fixedSpace, from, relativeSpace } from "~/theme/utils";
+import { fixedSpace, from } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 
 const mediumBreakpoint = from("md");
 const gap = fixedSpace(0.5);
 
 export const breadcrumbStyle = style({
-	marginBottom: relativeSpace(4),
+	marginBottom: vars.space.sectionBottom,
 });
 
 export const listStyle = style({

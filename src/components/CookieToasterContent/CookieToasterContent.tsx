@@ -1,6 +1,5 @@
-import { useI18n } from "@solid-primitives/i18n";
-
 import useRootPath from "~/hooks/useRootPath";
+import useTranslation from "~/hooks/useTranslation";
 
 import Button from "../Button";
 import Link from "../Link";
@@ -19,7 +18,7 @@ interface CookieToasterContentProps {
 }
 
 export default function CookieToasterContent(props: CookieToasterContentProps) {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const rootPath = useRootPath();
 	return (
 		<div class={contentStyle}>

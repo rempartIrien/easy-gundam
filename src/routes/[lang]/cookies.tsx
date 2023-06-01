@@ -1,4 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { Show } from "solid-js";
 import { useRouteData } from "solid-start";
 import {
@@ -14,6 +13,7 @@ import Heading from "~/components/Heading";
 import List from "~/components/List";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
+import useTranslation from "~/hooks/useTranslation";
 import { getLocaleToken, localeCookie } from "~/i18n/i18n.cookie";
 import { colorSchemeCookie, getColorSchemeToken } from "~/theme/theme.cookie";
 
@@ -67,7 +67,7 @@ export default function Cookies() {
 		},
 	);
 
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const cookies = useRouteData<typeof routeData>();
 	return (
 		<>

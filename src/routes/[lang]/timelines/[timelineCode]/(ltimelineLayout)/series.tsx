@@ -1,4 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { Show } from "solid-js";
 import type { RouteDataArgs } from "solid-start";
 import { useRouteData } from "solid-start";
@@ -8,6 +7,7 @@ import invariant from "tiny-invariant";
 import { listSeries } from "~/api/series.server";
 import Chronology from "~/components/Chronology";
 import DocumentTitle from "~/components/DocumentTitle";
+import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
 import type { routeData as parentRouteData } from "../(ltimelineLayout)";
@@ -27,7 +27,7 @@ export function routeData({
 
 export default function TimelineSeries() {
 	const { timeline, series } = useRouteData<typeof routeData>();
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	return (
 		<Show when={timeline()}>
 			{(nonNullTimeline) => (

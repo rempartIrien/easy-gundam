@@ -1,11 +1,10 @@
-import { useI18n } from "@solid-primitives/i18n";
-
 import CookieToasterContent from "~/components/CookieToasterContent";
 import Link from "~/components/Link";
 import Text from "~/components/Text";
 import { useToaster } from "~/contexts/ToasterContext";
 
 import useRootPath from "./useRootPath";
+import useTranslation from "./useTranslation";
 
 interface ShowCookieToasterParams {
 	onSave: (() => void) | (() => Promise<void>);
@@ -13,7 +12,7 @@ interface ShowCookieToasterParams {
 }
 
 export default function useCookieToaster() {
-	const [t] = useI18n();
+	const [t] = useTranslation();
 	const { dimissToast, toastSuccess, toastError, toastInfo } = useToaster();
 	const rootPath = useRootPath();
 	let toastId: number | undefined;
