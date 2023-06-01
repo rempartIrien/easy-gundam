@@ -42,7 +42,7 @@ export default function Adaptations(props: AdaptationsProps) {
 					<Heading variant="subtitle">
 						{t("series.details.overview.subtitles.adaptations")}
 					</Heading>
-					<List class={adaptationsStyle}>
+					<List component="ol" class={adaptationsStyle}>
 						<For each={props.adaptations}>
 							{(adaptation) => (
 								<li>

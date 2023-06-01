@@ -1,6 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
+import vars from "~/theme/variables.css";
+
 export const adaptationsStyle = style({
-	listStyle: "none",
-	padding: 0,
+	display: "flex",
+	flexDirection: "column",
+	gap: vars.space.midSectionBottom,
 });
