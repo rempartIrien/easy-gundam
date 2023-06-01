@@ -1,6 +1,5 @@
 import CookieToasterContent from "~/components/CookieToasterContent";
 import Link from "~/components/Link";
-import Text from "~/components/Text";
 import { useToaster } from "~/contexts/ToasterContext";
 
 import useRootPath from "./useRootPath";
@@ -24,23 +23,17 @@ export default function useCookieToaster() {
 		dimissCookieToast(toastId);
 		try {
 			await onSave();
-			toastSuccess(
-				() => <Text>{t("header.cookies.results.success")}</Text>,
-				() => (
-					<Link href={`${rootPath()}cookies`}>
-						{t("header.cookies.results.link")}
-					</Link>
-				),
-			);
+			toastSuccess(t("header.cookies.results.success"), () => (
+				<Link href={`${rootPath()}cookies`}>
+					{t("header.cookies.results.link")}
+				</Link>
+			));
 		} catch (e) {
-			toastError(
-				() => <Text>{t("header.cookies.results.error")}</Text>,
-				() => (
-					<Link href={`${rootPath()}cookies`}>
-						{t("header.cookies.results.link")}
-					</Link>
-				),
-			);
+			toastError(t("header.cookies.results.error"), () => (
+				<Link href={`${rootPath()}cookies`}>
+					{t("header.cookies.results.link")}
+				</Link>
+			));
 		}
 	};
 
@@ -56,15 +49,12 @@ export default function useCookieToaster() {
 		toastId !== undefined && dimissToast(toastId);
 
 	return ({ onSave, onCancel }: ShowCookieToasterParams) => {
-		toastId = toastInfo(
-			() => <Text>{t("header.cookies.question")}</Text>,
-			() => (
-				<CookieToasterContent
-					onSave={() => save(toastId, onSave)}
-					onCancel={() => cancel(toastId, onCancel)}
-				/>
-			),
-		);
+		toastId = toastInfo(t("header.cookies.question"), () => (
+			<CookieToasterContent
+				onSave={() => save(toastId, onSave)}
+				onCancel={() => cancel(toastId, onCancel)}
+			/>
+		));
 
 		return toastId;
 	};

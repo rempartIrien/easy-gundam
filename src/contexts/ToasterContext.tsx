@@ -15,7 +15,7 @@ let owner: Owner | null;
 
 function displayToast(
 	type: "error" | "info" | "success" | "warning",
-	title: (() => JSX.Element) | string,
+	title: string,
 	content?: (() => JSX.Element) | string,
 	duration: number = DEFAULT_DURATION,
 ) {
@@ -33,28 +33,28 @@ function displayToast(
 
 const toasterService = {
 	toastError: (
-		title: (() => JSX.Element) | string,
+		title: string,
 		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("error", title, content, duration);
 	},
 	toastInfo: (
-		title: (() => JSX.Element) | string,
+		title: string,
 		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("info", title, content, duration);
 	},
 	toastSuccess: (
-		title: (() => JSX.Element) | string,
+		title: string,
 		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {
 		return displayToast("success", title, content, duration);
 	},
 	toastWarning: (
-		title: (() => JSX.Element) | string,
+		title: string,
 		content?: (() => JSX.Element) | string,
 		duration?: number,
 	) => {

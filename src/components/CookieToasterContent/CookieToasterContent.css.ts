@@ -1,16 +1,22 @@
 import { style } from "@vanilla-extract/css";
+import { calc } from "@vanilla-extract/css-utils";
 
-import { fixedSpace, relativeSpace } from "~/theme/utils";
+import { fixedSpace } from "~/theme/utils";
+import vars from "~/theme/variables.css";
 
 export const contentStyle = style({
-	display: "flex",
+	display: "block",
 	flexDirection: "column",
-	gap: relativeSpace(2),
 });
 
 export const textStyle = style({
-	padding: 0,
 	margin: 0,
+	marginBottom: calc(vars.space.midSectionBottom).divide(2).toString(),
+	selectors: {
+		"&:last-of-type": {
+			marginBottom: calc(vars.space.midSectionBottom).toString(),
+		},
+	},
 });
 
 export const actionListStyle = style({

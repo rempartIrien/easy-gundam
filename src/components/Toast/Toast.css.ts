@@ -1,4 +1,5 @@
 import { style, styleVariants } from "@vanilla-extract/css";
+import { calc } from "@vanilla-extract/css-utils";
 
 import { glassEffectStyles } from "~/theme/styles.css";
 import { fixedSpace, relativeSpace } from "~/theme/utils";
@@ -46,20 +47,29 @@ export const toastStyle = styleVariants({
 	],
 });
 
-export const iconStyle = style({
-	width: relativeSpace(3),
-	height: relativeSpace(3),
+export const toastIconStyle = style({
+	width: calc(vars.font.normalText.size)
+		.multiply(vars.font.normalText.lineHeight)
+		.toString(),
+	height: calc(vars.font.normalText.size)
+		.multiply(vars.font.normalText.lineHeight)
+		.toString(),
 	flexShrink: 0,
 });
 
 export const closeButtonStyle = style({
 	position: "absolute",
-	right: fixedSpace(0.5),
-	top: fixedSpace(0.5),
+	right: fixedSpace(1),
+	top: fixedSpace(1),
 	borderStyle: "none",
 	display: "block",
 	lineHeight: 1,
 	cursor: "pointer",
+});
+
+export const closeIconStyle = style({
+	width: "1.25rem",
+	height: "1.25rem",
 });
 
 export const titleStyle = style({

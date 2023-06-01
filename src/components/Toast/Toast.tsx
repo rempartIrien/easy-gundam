@@ -3,12 +3,14 @@ import { Show } from "solid-js";
 import type { JSX } from "solid-js";
 
 import Icon from "../Icon";
+import Text from "../Text";
 
 import {
 	closeButtonStyle,
+	closeIconStyle,
 	contentStyle,
-	iconStyle,
 	titleStyle,
+	toastIconStyle,
 	toastStyle,
 } from "./Toast.css";
 
@@ -28,11 +30,13 @@ export default function Toast(props: ToastProps) {
 			duration={props.duration}
 		>
 			<KobalteToast.CloseButton class={closeButtonStyle}>
-				<Icon name="close" />
+				<Icon class={closeIconStyle} name="close" />
 			</KobalteToast.CloseButton>
-			<Icon class={iconStyle} name={props.type} />
+			<div>
+				<Icon class={toastIconStyle} name={props.type} />
+			</div>
 			<div class={contentStyle}>
-				<KobalteToast.Title class={titleStyle}>
+				<KobalteToast.Title class={titleStyle} as={Text}>
 					{props.title}
 				</KobalteToast.Title>
 				<Show when={!!props.content}>

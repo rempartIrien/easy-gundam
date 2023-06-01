@@ -3,7 +3,7 @@ import useTranslation from "~/hooks/useTranslation";
 
 import Button from "../Button";
 import Link from "../Link";
-import Paragraph from "../Paragraph/Paragraph";
+import Text from "../Text";
 
 import {
 	actionListStyle,
@@ -22,10 +22,12 @@ export default function CookieToasterContent(props: CookieToasterContentProps) {
 	const rootPath = useRootPath();
 	return (
 		<div class={contentStyle}>
-			<Paragraph class={textStyle}>{t("header.cookies.more")}</Paragraph>
-			<Paragraph class={textStyle}>
+			<Text component="p" class={textStyle}>
+				{t("header.cookies.more")}
+			</Text>
+			<Text component="p" class={textStyle}>
 				<Link href={`${rootPath()}cookies`}>{t("header.cookies.link")}</Link>
-			</Paragraph>
+			</Text>
 			<div class={actionListStyle}>
 				<Button class={actionStyle} onClick={props.onSave}>
 					{t("header.cookies.actions.save")}
