@@ -4,7 +4,6 @@ Next steps:
 
 - Use `Show` and `Suspense` properly
 - get rid of `LocaleContext` and use URL params instead
-- remove existing toast when a new one appears
 - update favicon and add manifest
 - use [lucide-solid](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-solid) once [https://github.com/vitejs/vite/issues/8237](https://github.com/vitejs/vite/issues/8237) is solved
 

@@ -14,7 +14,6 @@ export default function useCookieToaster(type: "theme" | "locale") {
 	const [t] = useTranslation();
 	const { dimissToast, toastSuccess, toastError, toastInfo } = useToaster();
 	const rootPath = useRootPath();
-	let toastId: number | undefined;
 
 	const save = async (
 		toastId: number | undefined,
@@ -45,17 +44,20 @@ export default function useCookieToaster(type: "theme" | "locale") {
 		void onCancel?.();
 	};
 
-	const dimissCookieToast = (toastId?: number) =>
-		toastId !== undefined && dimissToast(toastId);
+	const dimissCookieToast = (toastId?: number) => {
+		if (toastId !== undefined) {
+			dimissToast(toastId);
+		}
+	};
 
 	return ({ onSave, onCancel }: ShowCookieToasterParams) => {
-		toastId = toastInfo(t(`header.cookies.question.${type}`), () => (
+		const id = toastInfo(t(`header.cookies.question.${type}`), () => (
 			<CookieToasterContent
-				onSave={() => save(toastId, onSave)}
-				onCancel={() => cancel(toastId, onCancel)}
+				onSave={() => save(id, onSave)}
+				onCancel={() => cancel(id, onCancel)}
 			/>
 		));
 
-		return toastId;
+		return () => dimissCookieToast(id);
 	};
 }

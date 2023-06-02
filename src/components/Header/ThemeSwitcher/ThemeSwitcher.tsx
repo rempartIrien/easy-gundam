@@ -43,14 +43,19 @@ export default function ThemeSwitcher() {
 
 	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
 	const isDarkMode = useIsDarkMode();
+	const [open, setOpen] = createSignal(false);
 	const showCookieToast = useCookieToaster("theme");
+	const [dismissToast, setDismissToast] = createSignal<() => void>();
 
 	const switchTheme = (themeName?: ThemeName) => {
+		// Dismiss extsing toast if any.
+		dismissToast()?.();
+
 		setCurrentTheme(themeName);
-		showCookieToast({ onSave: () => act({ themeName }) });
+		const removeToast = showCookieToast({ onSave: () => act({ themeName }) });
+		setDismissToast(() => removeToast);
 	};
 
-	const [open, setOpen] = createSignal(false);
 	return (
 		<Show when={isDarkMode() !== undefined}>
 			<Menu open={open()} onOpenChange={setOpen}>

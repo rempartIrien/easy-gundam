@@ -40,11 +40,16 @@ export default function LocaleSwitcher() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [t] = useTranslation();
+	const [open, setOpen] = createSignal(false);
 	const showCookieToast = useCookieToaster("locale");
+	const [dismissToast, setDismissToast] = createSignal<() => void>();
 
 	const [currentLocale, setCurrentlocale] = useContext(LocaleContext);
 
 	const switchLanguage = (newLocale: Language) => {
+		// Dismiss extsing toast if any.
+		dismissToast()?.();
+
 		// Save the current locale
 		const oldLocale = currentLocale();
 		// Update the current locale
@@ -55,10 +60,10 @@ export default function LocaleSwitcher() {
 				`/${newLocale}`,
 			{ scroll: false },
 		);
-		showCookieToast({ onSave: () => act({ newLocale }) });
+		const removeToast = showCookieToast({ onSave: () => act({ newLocale }) });
+		setDismissToast(() => removeToast);
 	};
 
-	const [open, setOpen] = createSignal(false);
 	return (
 		<Menu open={open()} onOpenChange={setOpen}>
 			<MenuTrigger
