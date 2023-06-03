@@ -109,6 +109,11 @@ export default function About() {
 							{t("about.purpose.resources.cosmicEra")}
 						</Link>
 					</li>
+					<li>
+						<Link href="https://gundam-fr.fandom.com/fr/wiki/Wiki_Gundam_FR">
+							{t("about.purpose.resources.wikiFr")}
+						</Link>
+					</li>
 				</List>
 			</Section>
 		</>

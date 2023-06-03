@@ -39,7 +39,8 @@
 				"gundamFrance": "Gundam France (FR)",
 				"mahq": "MAHQ (EN)",
 				"tsukiNoMayu": "Moon's Cocoon (EN)",
-				"wiki": "The Gundam Wiki (EN)"
+				"wiki": "The Gundam Wiki (EN)",
+				"wikiFr": "Wiki Gundam FR (FR)"
 			},
 			"texts": {
 				"exhaustiveness": "{{ appName }} does not want to cover all Gundam universes or medias. Other Gundam sites do it very well.",
