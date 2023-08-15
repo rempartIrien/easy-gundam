@@ -37,9 +37,9 @@ export default function Header(props: HeaderProps) {
 	let ref: HTMLDivElement | undefined;
 
 	const links = [
-		{ href: "home", label: t("navigation.home") },
-		{ href: "timelines", label: t("navigation.timelines") },
-		{ href: "about", label: t("navigation.about") },
+		{ href: "home", labelKey: "navigation.home" },
+		{ href: "timelines", labelKey: "navigation.timelines" },
+		{ href: "about", labelKey: "navigation.about" },
 	];
 
 	const toggleMenu = () => {
@@ -59,7 +59,7 @@ export default function Header(props: HeaderProps) {
 			<Nav
 				class={desktopNavStyle}
 				items={links.map((link) => (
-					<NavItem href={link.href}>{link.label}</NavItem>
+					<NavItem href={link.href}>{t(link.labelKey)}</NavItem>
 				))}
 			/>
 			<button class={menuIconStyle} onClick={toggleMenu}>
@@ -88,7 +88,7 @@ export default function Header(props: HeaderProps) {
 							listClass={mobileNavStyle}
 							items={links.map((props) => (
 								<NavItem href={props.href} onClick={toggleMenu}>
-									{props.label}
+									{props.labelKey}
 								</NavItem>
 							))}
 						/>
