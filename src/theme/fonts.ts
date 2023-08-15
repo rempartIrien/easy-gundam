@@ -1,9 +1,9 @@
 const emojiFontStack =
 	"'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'";
 
-// See https://github.com/system-fonts/modern-font-stacks#geometric-humanist
+// See https://github.com/system-fonts/modern-font-stacks#system-ui
 const sansSerifFontStack =
-	`system-ui, Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif, ${emojiFontStack}` as const;
+	`system-ui, 'San Francisco', 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Noto Sans', ${emojiFontStack}` as const;
 
 // See https://github.com/system-fonts/modern-font-stacks#didone
 const serifFontStack =
