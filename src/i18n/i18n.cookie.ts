@@ -47,8 +47,8 @@ export async function getLocale(request: Request): Promise<Language> {
 	) as Language | undefined;
 
 	// Locale set by referer header
-	const referrerBasedLocale = Object.keys(LanguageNmes).find((lang) =>
-		request.headers.get("Referer")?.match(`/${lang}/`),
+	const referrerBasedLocale = Object.keys(LanguageNmes).find(
+		(lang) => request.headers.get("Referer")?.match(`/${lang}/`),
 	) as Language | undefined;
 
 	// Manually selected locale

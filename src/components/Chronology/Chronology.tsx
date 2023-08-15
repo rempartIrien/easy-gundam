@@ -26,9 +26,12 @@ export default function Chronology(props: ChronologyProps) {
 
 	const seriesByYear = createMemo(() => {
 		return Object.entries(
-			(local.items || []).reduce((acc, cur) => {
-				return { ...acc, [cur.year]: (acc[cur.year] || []).concat(cur) };
-			}, {} as Record<BaseSeries["year"], BaseSeries[]>),
+			(local.items || []).reduce(
+				(acc, cur) => {
+					return { ...acc, [cur.year]: (acc[cur.year] || []).concat(cur) };
+				},
+				{} as Record<BaseSeries["year"], BaseSeries[]>,
+			),
 		);
 	});
 
