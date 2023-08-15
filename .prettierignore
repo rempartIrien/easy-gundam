@@ -8,3 +8,4 @@ src/graphql/generated
 *.css
 dist
 .solid
+public/site.webmanifest
