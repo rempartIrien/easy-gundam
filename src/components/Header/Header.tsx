@@ -7,15 +7,19 @@ import { Show, splitProps } from "solid-js";
 import useTranslation from "~/hooks/useTranslation";
 
 import CenterContent from "../CenterContent";
+import Link from "../Link";
+import Logo from "../Logo";
 import Nav from "../Nav";
 import NavItem from "../NavItem";
 
 import {
+	actionContainerStyle,
 	collapsedHeaderStyle,
 	desktopNavStyle,
 	expandedHeaderContainerStyle,
 	expandedHeaderMainRowStyle,
 	headerStyle,
+	logoContainerStyle,
 	mainRowContainerStyle,
 	menuIconStyle,
 	mobileNavStyle,
@@ -49,6 +53,9 @@ export default function Header(props: HeaderProps) {
 
 	const MainRow = (props: { class?: string }) => (
 		<CenterContent class={clsx([mainRowContainerStyle, props.class])}>
+			<Link class={logoContainerStyle} href="/">
+				<Logo />
+			</Link>
 			<Nav
 				class={desktopNavStyle}
 				items={links.map((link) => (
@@ -60,8 +67,10 @@ export default function Header(props: HeaderProps) {
 					<HeaderIcon name="close" />
 				</Show>
 			</button>
-			<ThemeSwitcher />
-			<LocaleSwitcher />
+			<div class={actionContainerStyle}>
+				<ThemeSwitcher />
+				<LocaleSwitcher />
+			</div>
 		</CenterContent>
 	);
 

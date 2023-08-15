@@ -8,6 +8,17 @@ export const footerStyle = style({
 	paddingBottom: relativeSpace(4),
 });
 
+export const logoContainerStyle = style({
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "center",
+});
+
+export const logoStyle = style({
+	width: "300px",
+	marginBottom: relativeSpace(4),
+});
+
 export const containerStyle = style({
 	display: "flex",
 	gap: fixedSpace(4),
