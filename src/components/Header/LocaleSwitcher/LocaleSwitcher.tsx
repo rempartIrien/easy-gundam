@@ -76,7 +76,7 @@ export default function LocaleSwitcher() {
 				<For each={Object.entries(LanguageNmes)}>
 					{([locale, name]) => (
 						<MenuItem
-							isActive={currentLocale() === locale}
+							isActive={currentLocale() === (locale as Language)}
 							onSelect={() => switchLanguage(locale as Language)}
 						>
 							{name}
