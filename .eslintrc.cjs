@@ -1,7 +1,7 @@
 /**
   npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser \
     eslint eslint-config-prettier eslint-config-typescript eslint-plugin-import \
-    prettier typescript eslint-plugin-testing-library
+    eslint-import-resolver-typescript eslint-plugin-solid prettier typescript eslint-plugin-testing-library
  */
 
 module.exports = {
