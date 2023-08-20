@@ -1,13 +1,15 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { textBlockStyles } from "~/theme/styles.css";
+import { headingTextBlockStyle } from "~/theme/styles.css";
 import vars from "~/theme/variables.css";
 
-const baseHeadingStyle = style({
-	...textBlockStyles,
-	fontWeight: 700,
-	color: vars.color.primary.main,
-});
+const baseHeadingStyle = style([
+	headingTextBlockStyle,
+	{
+		fontWeight: 700,
+		color: vars.color.primary.main,
+	},
+]);
 
 // See https://css-tricks.com/dark-mode-and-variable-fonts/
 export const darkModeStyle = style({
