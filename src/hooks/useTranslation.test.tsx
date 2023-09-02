@@ -1,6 +1,6 @@
 import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
+import { cleanup, render, screen } from "@solidjs/testing-library";
 import { createSignal } from "solid-js";
-import { cleanup, render, screen } from "solid-testing-library";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
 import { Language } from "~/i18n/i18n.config";
