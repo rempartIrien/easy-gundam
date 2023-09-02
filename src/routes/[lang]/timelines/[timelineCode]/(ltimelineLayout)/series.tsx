@@ -1,5 +1,5 @@
 import { Show } from "solid-js";
-import type { RouteDataArgs } from "solid-start";
+import type { RouteDataFuncArgs } from "solid-start";
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
@@ -15,7 +15,7 @@ import type { routeData as parentRouteData } from "../(ltimelineLayout)";
 export function routeData({
 	params,
 	data: timeline,
-}: RouteDataArgs<typeof parentRouteData>) {
+}: RouteDataFuncArgs<typeof parentRouteData>) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
 	const series = createServerData$(

@@ -1,5 +1,5 @@
 import { Show } from "solid-js";
-import type { RouteDataArgs } from "solid-start";
+import type { RouteDataFuncArgs } from "solid-start";
 import { Navigate, useRouteData } from "solid-start";
 
 import DocumentTitle from "~/components/DocumentTitle";
@@ -9,7 +9,7 @@ import useTranslation from "~/hooks/useTranslation";
 
 import type { routeData as parentRouteData } from "../[seriesCode]";
 
-export function routeData({ data }: RouteDataArgs<typeof parentRouteData>) {
+export function routeData({ data }: RouteDataFuncArgs<typeof parentRouteData>) {
 	return data;
 }
 

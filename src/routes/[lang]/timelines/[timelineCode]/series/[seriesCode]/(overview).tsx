@@ -1,5 +1,5 @@
 import { Show } from "solid-js";
-import type { RouteDataArgs } from "solid-start";
+import type { RouteDataFuncArgs } from "solid-start";
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
@@ -28,7 +28,7 @@ import {
 export function routeData({
 	params,
 	data: series,
-}: RouteDataArgs<typeof parentRouteData>) {
+}: RouteDataFuncArgs<typeof parentRouteData>) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
 	const adaptations = createServerData$(
