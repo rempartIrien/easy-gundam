@@ -22,6 +22,13 @@ module.exports = {
 			version: "18.1.0",
 		},
 	},
+	parserOptions: {
+		ecmaVersion: 2020,
+		sourceType: "module",
+		ecmaFeatures: {
+			jsx: true,
+		},
+	},
 	rules: {
 		"no-console": "error",
 		"max-classes-per-file": "error",
