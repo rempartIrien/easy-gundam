@@ -14,8 +14,8 @@ export default function Logo(props: LogoProps) {
 
 	const url = createMemo(() => {
 		const variantPart = local.variant === "text" ? "Text" : "";
-		const themePart = isDarkMode() ? "Dark" : "Light";
-		return `/logos/Logo${variantPart}${themePart}.svg`;
+		const themePart = isDarkMode() ? "dark" : "light";
+		return `/logos/${themePart}/Logo${variantPart}.svg`;
 	});
 
 	// FIXME: hardcoded string
