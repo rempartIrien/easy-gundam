@@ -1,7 +1,3 @@
 // From https://markus.oberlehner.net/blog/using-testing-library-jest-dom-with-vitest/
-
-import matchers from "@testing-library/jest-dom/matchers";
-import { expect } from "vitest";
-import "@testing-library/jest-dom";
-
-expect.extend(matchers);
+// And https://github.com/testing-library/jest-dom/issues/537#issuecomment-1728355083
+import "@testing-library/jest-dom/vitest";
