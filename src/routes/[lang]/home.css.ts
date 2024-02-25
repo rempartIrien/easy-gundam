@@ -8,8 +8,4 @@ export const titleStyle = style({
 	lineHeight: vars.font.title.lineHeight,
 });
 
-export const paragraphStyle = style({
-	fontFamily: vars.font.normalText.family,
-	fontSize: vars.font.normalText.size,
-	lineHeight: vars.font.normalText.lineHeight,
-});
+export const paragraphStyle = style({});
