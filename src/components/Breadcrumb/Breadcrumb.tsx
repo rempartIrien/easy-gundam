@@ -20,7 +20,7 @@ import {
 } from "./Breadcrumb.css";
 
 export interface BreadcrumbItem {
-	text: string;
+	text?: string;
 	href?: string;
 }
 

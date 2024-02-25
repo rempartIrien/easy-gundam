@@ -7,7 +7,7 @@ import { Title } from "solid-start";
 import useTranslation from "~/hooks/useTranslation";
 
 type TitleProps = Omit<JSX.IntrinsicElements["title"], "children"> & {
-	content?: string | string[];
+	content?: string | string[] | (string | undefined)[];
 };
 
 const delimiter = " ･ ";
@@ -19,7 +19,7 @@ function getContentArray(content: TitleProps["content"]): string[] {
 	if (!Array.isArray(content)) {
 		return [content];
 	}
-	return content;
+	return content.filter((v) => v) as string[];
 }
 
 export default function DocumentTitle(props: TitleProps) {
