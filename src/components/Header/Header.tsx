@@ -88,7 +88,7 @@ export default function Header(props: HeaderProps) {
 							listClass={mobileNavStyle}
 							items={links.map((props) => (
 								<NavItem href={props.href} onClick={toggleMenu}>
-									{props.labelKey}
+									{t(props.labelKey)}
 								</NavItem>
 							))}
 						/>
