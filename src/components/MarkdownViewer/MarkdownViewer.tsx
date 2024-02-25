@@ -28,7 +28,12 @@ const componentMap: ComponentProps<typeof SolidMarkdown>["components"] = {
 		return <Paragraph {...others} />;
 	},
 	a: (props) => {
-		const [local, others] = splitProps(props, ["node", "href", "class"]);
+		const [local, others] = splitProps(props, [
+			"node",
+			"href",
+			"class",
+			"target",
+		]);
 		return (
 			<>
 				{local.href ? (
