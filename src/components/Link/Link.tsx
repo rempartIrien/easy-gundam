@@ -1,12 +1,10 @@
 import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
-import { Show, createMemo } from "solid-js";
+import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
 import { A } from "solid-start";
 
-import Icon from "../Icon";
-
-import { linkStyle } from "./Link.css";
+import { externalLinkStyle, linkStyle } from "./Link.css";
 
 interface LinkProps extends Omit<ComponentProps<typeof A>, "target" | "rel"> {
 	noStyle?: boolean;
@@ -23,15 +21,16 @@ export default function Link(props: LinkProps) {
 
 	return (
 		<A
-			class={clsx(linkStyle[variant()], local.class)}
+			class={clsx(
+				linkStyle[variant()],
+				isExternal() && externalLinkStyle,
+				local.class,
+			)}
 			target={target()}
 			rel={rel()}
 			{...others}
 		>
 			{local.children}
-			<Show when={isExternal()}>
-				<Icon name="externalLink" />
-			</Show>
 		</A>
 	);
 }
