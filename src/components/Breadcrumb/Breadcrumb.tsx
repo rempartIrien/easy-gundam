@@ -38,7 +38,7 @@ export default function Breadcrumb(props: BreadcrumbProps) {
 			<nav class={clsx([breadcrumbStyle, local.class])} {...others}>
 				<ol class={listStyle}>
 					<li class={listItemStyle}>
-						<Link href={rootPath()}>
+						<Link class={linkStyle} href={rootPath()}>
 							<Icon class={chevronLeftStyle} name="chevronLeft" />
 							{t("navigation.home")}
 						</Link>
