@@ -26,10 +26,14 @@ export const linkStyle = styleVariants({
 export const externalLinkStyle = style({
 	"::after": {
 		display: "inline", // Use inline to stick to the end of the link content.
-		content: "---", // Add enough characters since we stay in `display: inline`.
+		content: "___", // Add enough characters since we stay in `display: inline`. Use non breakable characters.
 		verticalAlign: "baseline",
-		marginLeft: "0.25ch",
-		mask: "url(/assets/icons/external-link.svg) center no-repeat",
+		maskImage:
+			"linear-gradient(black, black), url(/assets/icons/external-link.svg)", //For safari create a mask that fit all the element (in height and width)
+		maskComposite: "intersect",
+		maskSize: "cover, contain",
+		maskPosition: "center",
+		maskRepeat: "no-repeat",
 		backgroundColor: vars.color.primary.text,
 	},
 	selectors: {
