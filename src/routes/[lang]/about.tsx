@@ -110,7 +110,7 @@ export default function About() {
 						</Link>
 					</li>
 					<li>
-						<Link href="https://gundam-fr.fandom.com/fr/wiki/Wiki_Gundam_FR">
+						<Link href="https://gundamfr.miraheze.org">
 							{t("about.purpose.resources.wikiFr")}
 						</Link>
 					</li>
