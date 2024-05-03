@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "solid-start/server";
+import { HttpStatusCode } from "@solidjs/start";
 
 import Heading from "~/components/Heading";
 import Link from "~/components/Link";

@@ -1,8 +1,8 @@
+import { Title } from "@solidjs/meta";
 import type { JSX } from "solid-js";
 import { createEffect } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
-import { Title } from "solid-start";
 
 import useTranslation from "~/hooks/useTranslation";
 

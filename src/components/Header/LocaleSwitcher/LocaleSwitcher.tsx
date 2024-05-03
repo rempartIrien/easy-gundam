@@ -1,13 +1,13 @@
+import { action, useAction, useLocation, useNavigate } from "@solidjs/router";
 import { For, createSignal, useContext } from "solid-js";
-import { useLocation, useNavigate } from "solid-start";
-import { createServerAction$ } from "solid-start/server";
+import { getRequestEvent } from "solid-js/web";
 
 import { LocaleContext } from "~/contexts/LocaleContext";
 import useCookieToaster from "~/hooks/useCookieToast";
 import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 import { LanguageNmes } from "~/i18n/i18n.config";
-import { localeCookie } from "~/i18n/i18n.cookie";
+import { setLocale } from "~/i18n/i18n.cookie";
 
 import Menu from "../../menu/Menu";
 import MenuContent from "../../menu/MenuContent";
@@ -16,27 +16,24 @@ import MenuTrigger from "../../menu/MenuTrigger";
 import HeaderIcon from "../HeaderIcon";
 import { menuTriggerStyle } from "../MenuTrigger.css";
 
-interface LocalePayload {
-	newLocale?: Language;
-}
+const localeAction = action(async (newLocale: Language) => {
+	"use server";
+
+	const event = await Promise.resolve(getRequestEvent());
+	if (!event) {
+		return new Error("No event"); // TODO: oops do something
+	}
+	const { nativeEvent } = event;
+
+	setLocale(nativeEvent, newLocale);
+});
 
 /**
- * Because Kobalte cannot handle progressively nehanced form in DropdownMenu,
+ * Because Kobalte cannot handle progressively enhanced form in DropdownMenu,
  * we need to hack a little and trigger the server action by ourselves.
  */
 export default function LocaleSwitcher() {
-	const [, act] = createServerAction$(async (form: LocalePayload) => {
-		const { newLocale } = form;
-
-		return new Response(null, {
-			status: 200, // 204 status triggers some redirection
-			headers: {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				"Set-Cookie": await localeCookie.serialize(newLocale),
-			},
-		});
-	});
-
+	const act = useAction(localeAction);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [t] = useTranslation();
@@ -60,7 +57,7 @@ export default function LocaleSwitcher() {
 				`/${newLocale}`,
 			{ scroll: false },
 		);
-		const removeToast = showCookieToast({ onSave: () => act({ newLocale }) });
+		const removeToast = showCookieToast({ onSave: () => act(newLocale) });
 		setDismissToast(() => removeToast);
 	};
 

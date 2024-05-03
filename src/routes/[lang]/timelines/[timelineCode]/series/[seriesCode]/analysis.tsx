@@ -1,20 +1,30 @@
+import type { Params, RouteDefinition } from "@solidjs/router";
+import { Navigate, createAsync, useParams } from "@solidjs/router";
 import { Show } from "solid-js";
-import type { RouteDataFuncArgs } from "solid-start";
-import { Navigate, useRouteData } from "solid-start";
+import invariant from "tiny-invariant";
 
 import DocumentTitle from "~/components/DocumentTitle";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 import useTranslation from "~/hooks/useTranslation";
+import type { Language } from "~/i18n/i18n.config";
 
-import type { routeData as parentRouteData } from "../[seriesCode]";
+import { getSeries } from "../series.server";
 
-export function routeData({ data }: RouteDataFuncArgs<typeof parentRouteData>) {
-	return data;
+const routeData = getSeries;
+
+function loadFunction(params: Params) {
+	invariant(params.lang, "Expected params.lang");
+	invariant(params.seriesCode, "Expected params.seriesCode");
+	return routeData(params.seriesCode, params.lang as Language);
 }
+export const route = {
+	load: ({ params }) => loadFunction(params),
+} satisfies RouteDefinition;
 
 export default function SeriesAnalysis() {
-	const series = useRouteData<typeof routeData>();
+	const params = useParams();
+	const series = createAsync(() => loadFunction(params));
 	const [t] = useTranslation();
 	return (
 		<Show when={series()}>

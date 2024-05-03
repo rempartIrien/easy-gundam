@@ -1,7 +1,6 @@
+import type { Params, RouteDefinition } from "@solidjs/router";
+import { cache, createAsync, useParams } from "@solidjs/router";
 import { Show } from "solid-js";
-import type { RouteDataFuncArgs } from "solid-start";
-import { useRouteData } from "solid-start";
-import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
 import Adaptations from "~/components/Adaptations";
@@ -14,7 +13,7 @@ import { listAdaptations } from "~/graphql/adaptation.server";
 import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
-import type { routeData as parentRouteData } from "../[seriesCode]";
+import { getSeries } from "../series.server";
 
 import {
 	adaptationsStyle,
@@ -25,24 +24,32 @@ import {
 	textBlockStyle,
 } from "./(overview).css";
 
-export function routeData({
-	params,
-	data: series,
-}: RouteDataFuncArgs<typeof parentRouteData>) {
+const routeData = cache((code: string, locale: Language) => {
+	"use server";
+	return listAdaptations(code, locale);
+}, "series");
+
+async function loadFunction(params: Params) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
-	const adaptations = createServerData$(
-		([locale, , code]: string[]) => listAdaptations(code, locale as Language),
-		{ key: () => [params.lang, "series", params.seriesCode, "adaptations"] },
+	const series = await getSeries(params.seriesCode, params.lang as Language);
+	const adaptations = await routeData(
+		params.seriesCode,
+		params.lang as Language,
 	);
 	return { series, adaptations };
 }
 
+export const route = {
+	load: ({ params }) => loadFunction(params),
+} satisfies RouteDefinition;
+
 export default function SeriesOverview() {
-	const { series, adaptations } = useRouteData<typeof routeData>();
+	const params = useParams();
+	const data = createAsync(() => loadFunction(params));
 	const [t] = useTranslation();
 	return (
-		<Show when={series()}>
+		<Show when={data()?.series}>
 			{(nonNullSeries) => (
 				<>
 					<DocumentTitle
@@ -73,7 +80,7 @@ export default function SeriesOverview() {
 							<Show when={nonNullSeries().staff}>
 								{(s) => <Staff class={staffStyle} staff={s()} />}
 							</Show>
-							<Show when={adaptations()}>
+							<Show when={data()?.adaptations}>
 								{(a) => (
 									<Adaptations class={adaptationsStyle} adaptations={a()} />
 								)}

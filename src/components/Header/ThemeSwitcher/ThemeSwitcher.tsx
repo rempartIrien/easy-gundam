@@ -1,11 +1,12 @@
+import { action, useAction } from "@solidjs/router";
 import { Show, createSignal, useContext } from "solid-js";
-import { createServerAction$ } from "solid-start/server";
+import { getRequestEvent } from "solid-js/web";
 
 import { ThemeContext } from "~/contexts/ThemeContext";
 import useCookieToaster from "~/hooks/useCookieToast";
 import useIsDarkMode from "~/hooks/useIsDarkMode";
 import useTranslation from "~/hooks/useTranslation";
-import { colorSchemeCookie } from "~/theme/theme.cookie";
+import { deleteColorScheme, setColorScheme } from "~/theme/theme.cookie";
 import { ThemeName } from "~/theme/ThemeName";
 
 import Menu from "../../menu/Menu";
@@ -15,30 +16,27 @@ import MenuTrigger from "../../menu/MenuTrigger";
 import HeaderIcon from "../HeaderIcon";
 import { menuTriggerStyle } from "../MenuTrigger.css";
 
-interface ThemePayload {
-	themeName?: ThemeName;
-}
+const themeAction = action(async (newTheme?: ThemeName) => {
+	"use server";
+
+	const event = await Promise.resolve(getRequestEvent());
+	if (!event) {
+		return new Error("No event"); // TODO: oops do something
+	}
+	const { nativeEvent } = event;
+	if (newTheme) {
+		setColorScheme(nativeEvent, newTheme);
+	} else {
+		deleteColorScheme(nativeEvent);
+	}
+});
 
 /**
  * Because Kobalte cannot handle progressively nehanced form in DropdownMenu,
  * we need to hack a little and trigger the server action by ourselves.
  */
 export default function ThemeSwitcher() {
-	const [, act] = createServerAction$(async (form: ThemePayload) => {
-		const { themeName } = form;
-
-		return new Response(null, {
-			status: 200, // 204 status triggers some redirection
-			headers: {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				"Set-Cookie": await colorSchemeCookie.serialize(
-					themeName,
-					!themeName ? { maxAge: -1 } : {},
-				),
-			},
-		});
-	});
-
+	const updateTheme = useAction(themeAction);
 	const [t] = useTranslation();
 
 	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
@@ -48,11 +46,13 @@ export default function ThemeSwitcher() {
 	const [dismissToast, setDismissToast] = createSignal<() => void>();
 
 	const switchTheme = (themeName?: ThemeName) => {
-		// Dismiss extsing toast if any.
+		// Dismiss existing toast if any.
 		dismissToast()?.();
 
 		setCurrentTheme(themeName);
-		const removeToast = showCookieToast({ onSave: () => act({ themeName }) });
+		const removeToast = showCookieToast({
+			onSave: () => updateTheme(themeName),
+		});
 		setDismissToast(() => removeToast);
 	};
 

@@ -1,7 +1,6 @@
+import type { Params, RouteDefinition } from "@solidjs/router";
+import { cache, createAsync, useParams } from "@solidjs/router";
 import { Show } from "solid-js";
-import type { RouteDataFuncArgs } from "solid-start";
-import { useRouteData } from "solid-start";
-import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
 import { listSeries } from "~/api/series.server";
@@ -10,26 +9,34 @@ import DocumentTitle from "~/components/DocumentTitle";
 import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
-import type { routeData as parentRouteData } from "../(ltimelineLayout)";
+import { getTimeline } from "../timeline.server";
 
-export function routeData({
-	params,
-	data: timeline,
-}: RouteDataFuncArgs<typeof parentRouteData>) {
+const routeData = cache((code: string, locale: Language) => {
+	"use server";
+	return listSeries(code, locale);
+}, "timelineSeries");
+
+async function loadFunction(params: Params) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
-	const series = createServerData$(
-		async ([locale, , code]: string[]) => listSeries(code, locale as Language),
-		{ key: () => [params.lang, "timelines", params.timelineCode, "series"] },
+	const timeline = await getTimeline(
+		params.timelineCode,
+		params.lang as Language,
 	);
+	const series = await routeData(params.timelineCode, params.lang as Language);
 	return { timeline, series };
 }
 
+export const route = {
+	load: ({ params }) => loadFunction(params),
+} as RouteDefinition;
+
 export default function TimelineSeries() {
-	const { timeline, series } = useRouteData<typeof routeData>();
+	const params = useParams();
+	const data = createAsync(() => loadFunction(params));
 	const [t] = useTranslation();
 	return (
-		<Show when={timeline()}>
+		<Show when={data()?.timeline}>
 			{(nonNullTimeline) => (
 				<>
 					<DocumentTitle
@@ -38,7 +45,10 @@ export default function TimelineSeries() {
 							t("timelines.details.series.documentTitle"),
 						]}
 					/>
-					<Chronology timelineCode={nonNullTimeline().code} items={series()} />
+					<Chronology
+						timelineCode={nonNullTimeline().code}
+						items={data()?.series}
+					/>
 				</>
 			)}
 		</Show>

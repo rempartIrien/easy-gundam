@@ -1,30 +1,29 @@
+import { createAsync } from "@solidjs/router";
 import type { JSX } from "solid-js";
 import { Show, Suspense } from "solid-js";
-import { createServerData$ } from "solid-start/server";
 
 import { getLocale } from "~/i18n/i18n.cookie";
 import { retrieveTranslsations } from "~/i18n/i18n.server";
 import { getColorScheme } from "~/theme/theme.cookie";
 
-import "./HtmlRoot.css";
 import Providers from "./Providers";
+
+import "./HtmlRoot.css";
 
 interface RootProps {
 	children: JSX.Element;
 }
 
 export default function HtmlRoot(props: RootProps) {
-	const init = createServerData$(
-		async (_, { request }) => {
-			const [dict, locale, themeName] = await Promise.all([
-				retrieveTranslsations(),
-				getLocale(request),
-				getColorScheme(request),
-			]);
-			return { dict, locale, themeName };
-		},
-		{ key: () => "init" },
-	);
+	const init = createAsync(async () => {
+		// FIXME: cache?
+		const [dict, locale, themeName] = await Promise.all([
+			retrieveTranslsations(),
+			getLocale(),
+			getColorScheme(),
+		]);
+		return { dict, locale, themeName };
+	});
 
 	return (
 		<Suspense>

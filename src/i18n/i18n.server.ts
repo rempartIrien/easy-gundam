@@ -7,6 +7,7 @@ interface RecursiveString {
 export type I18nDictionary = Record<Language, RecursiveString>;
 
 export async function retrieveTranslsations(): Promise<I18nDictionary> {
+	"use server";
 	try {
 		// Retrieve all locale files
 		const locales = Object.values(Language);

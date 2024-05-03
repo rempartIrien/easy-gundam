@@ -1,4 +1,4 @@
-import type { APIEvent } from "solid-start/api";
+import type { APIEvent } from "@solidjs/start/server";
 import invariant from "tiny-invariant";
 
 import { API } from "~/constants.server";

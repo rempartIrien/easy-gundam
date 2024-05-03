@@ -1,8 +1,8 @@
+import { A } from "@solidjs/router";
 import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
-import { A } from "solid-start";
 
 import { externalLinkStyle, linkStyle } from "./Link.css";
 

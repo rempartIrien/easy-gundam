@@ -1,34 +1,52 @@
-// See https://rossmoody.com/writing/remix-stitches
-import { createCookie } from "solid-start";
+import { getRequestEvent } from "solid-js/web";
+import type { HTTPEvent } from "vinxi/http";
+import { deleteCookie, parseCookies, setCookie } from "vinxi/http";
 
 import type { ThemeName } from "./ThemeName";
 
 const ONE_YEAR = 365 * 24 * 60 * 60;
 
-// Create a cookie to track color scheme state
-export const colorSchemeCookie = createCookie("color-scheme", {
-	httpOnly: true,
-	maxAge: ONE_YEAR, // in seconds
-	path: "/",
-	sameSite: "strict",
-	secrets: [import.meta.env.VITE_SECRETS],
-	secure: import.meta.env.PROD,
-});
+// Create a cookie to track locale
+export function colorSchemeCookie(event: HTTPEvent, value: ThemeName) {
+	"use server";
 
-// Helper function to get the value of the color scheme cookie
-export function getColorSchemeToken(
-	request: Request,
-): Promise<ThemeName | null> {
-	return colorSchemeCookie.parse(
-		request.headers.get("Cookie"),
-	) as Promise<ThemeName | null>;
+	setCookie(event, "color-scheme", value, {
+		httpOnly: true,
+		maxAge: ONE_YEAR, // in seconds
+		path: "/",
+		sameSite: "strict",
+		secure: import.meta.env.PROD,
+	});
 }
 
-export async function getColorScheme(
-	request: Request,
-): Promise<ThemeName | null> {
+// Helper function to get the value of the color scheme cookie
+export function getColorSchemeToken(event: HTTPEvent): ThemeName | null {
+	"use server";
+
+	const cookies = parseCookies(event);
+	return (cookies["color-scheme"] as ThemeName) ?? null;
+}
+
+export function setColorScheme(event: HTTPEvent, value: ThemeName) {
+	setCookie(event, "color-scheme", value);
+}
+
+export function deleteColorScheme(event: HTTPEvent) {
+	"use server";
+	deleteCookie(event, "color-scheme");
+}
+
+export function getColorScheme(): ThemeName | null {
+	"use server";
+
+	const event = getRequestEvent();
+	if (!event) {
+		throw new Error("Cannot retieve request context");
+	}
+	const { request, nativeEvent } = event;
+
 	// Manually selected theme
-	const userSelectedColorScheme = await getColorSchemeToken(request);
+	const userSelectedColorScheme = getColorSchemeToken(nativeEvent);
 
 	// System preferred color scheme header
 	const systemPreferredColorScheme = request.headers.get(

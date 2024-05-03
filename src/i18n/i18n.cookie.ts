@@ -1,26 +1,31 @@
-// See https://rossmoody.com/writing/remix-stitches
-import { createCookie } from "solid-start";
+import { getRequestEvent } from "solid-js/web";
+import type { HTTPEvent } from "vinxi/http";
+import { deleteCookie, parseCookies, setCookie } from "vinxi/http";
 
 import { Language, LanguageNmes } from "~/i18n/i18n.config";
 
 const ONE_YEAR = 365 * 24 * 60 * 60;
 export const DEFAULT_LOCALE: Language = Language.French;
 
-// Create a cookie to track color scheme state
-export const localeCookie = createCookie("locale", {
-	httpOnly: true,
-	maxAge: ONE_YEAR, // in seconds
-	path: "/",
-	sameSite: "strict",
-	secrets: [import.meta.env.VITE_SECRETS],
-	secure: import.meta.env.PROD,
-});
+// Create a cookie to track locale
+export function createLocaleCookie(event: HTTPEvent, value: Language) {
+	"use server";
+
+	setCookie(event, "locale", value, {
+		httpOnly: true,
+		maxAge: ONE_YEAR, // in seconds
+		path: "/",
+		sameSite: "strict",
+		secure: import.meta.env.PROD,
+	});
+}
 
 // Helper function to get the value of the locale cookie
-export function getLocaleToken(request: Request): Promise<Language | null> {
-	return localeCookie.parse(
-		request.headers.get("Cookie"),
-	) as Promise<Language | null>;
+export function getLocaleToken(event: HTTPEvent): Language | null {
+	"use server";
+
+	const cookies = parseCookies(event);
+	return (cookies["locale"] as Language) ?? null;
 }
 
 function extractPreferredLocale(
@@ -40,19 +45,34 @@ function extractPreferredLocale(
 		.find((value) => Object.keys(LanguageNmes).includes(value)) as Language;
 }
 
-export async function getLocale(request: Request): Promise<Language> {
+export function setLocale(event: HTTPEvent, value: Language) {
+	setCookie(event, "locale", value);
+}
+
+export function deleteLocale(event: HTTPEvent) {
+	deleteCookie(event, "locale");
+}
+
+export function getLocale(): Language {
+	"use server";
+
+	const event = getRequestEvent();
+	if (!event) {
+		throw new Error("Cannot retrieve request context");
+	}
+	const { request, nativeEvent } = event;
 	// Locale set by given URL
 	const urlBasedLocale = Object.keys(LanguageNmes).find((lang) =>
 		request.url.match(`/${lang}/`),
 	) as Language | undefined;
 
 	// Locale set by referer header
-	const referrerBasedLocale = Object.keys(LanguageNmes).find(
-		(lang) => request.headers.get("Referer")?.match(`/${lang}/`),
+	const referrerBasedLocale = Object.keys(LanguageNmes).find((lang) =>
+		request.headers.get("Referer")?.match(`/${lang}/`),
 	) as Language | undefined;
 
 	// Manually selected locale
-	const userSelectedLocale = await getLocaleToken(request);
+	const userSelectedLocale = getLocaleToken(nativeEvent);
 
 	// System preferred locale header
 	const systemPreferredLocale = extractPreferredLocale(

@@ -1,7 +1,6 @@
+import type { Params, RouteDefinition } from "@solidjs/router";
+import { cache, createAsync, useParams } from "@solidjs/router";
 import { For } from "solid-js";
-import type { RouteDataArgs } from "solid-start";
-import { useRouteData } from "solid-start";
-import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
 import Breadcrumb from "~/components/Breadcrumb";
@@ -14,20 +13,24 @@ import { listTimelines } from "~/graphql/timeline.server";
 import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
-export function routeData({ params }: RouteDataArgs) {
+const routeData = cache(async ([locale]) => {
+	"use server";
+	return listTimelines(locale as Language);
+}, "timelines");
+
+function loadFunction(params: Params) {
 	invariant(params.lang, "Expected params.lang");
-	const timelines = createServerData$(
-		async ([locale]) => {
-			return listTimelines(locale as Language);
-		},
-		{ key: () => [params.lang, "timlines"] },
-	);
-	return timelines;
+	return routeData(params.lang);
 }
+
+export const route = {
+	load: ({ params }) => loadFunction(params),
+} satisfies RouteDefinition;
 
 export default function Timelines() {
 	const [t] = useTranslation();
-	const timelines = useRouteData<typeof routeData>();
+	const params = useParams();
+	const timelines = createAsync(() => loadFunction(params));
 
 	return (
 		<>

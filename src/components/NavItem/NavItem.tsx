@@ -1,9 +1,9 @@
+import type { A } from "@solidjs/router";
+import { useLocation, useResolvedPath } from "@solidjs/router";
 import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
-import type { A } from "solid-start";
-import { useLocation, useResolvedPath } from "solid-start";
 
 import Link from "../Link";
 

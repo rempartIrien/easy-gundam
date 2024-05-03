@@ -1,10 +1,9 @@
+import type { Params, RouteDefinition } from "@solidjs/router";
+import { cache, createAsync, useParams } from "@solidjs/router";
+import type { JSX } from "solid-js";
 import { Show, createMemo } from "solid-js";
-import type { RouteDataArgs } from "solid-start";
-import { Outlet, useRouteData } from "solid-start";
-import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
-import { getTimelineByCode } from "~/api/timeline.server";
 import Breadcrumb from "~/components/Breadcrumb";
 import type { BreadcrumbItem } from "~/components/Breadcrumb/Breadcrumb";
 import Heading from "~/components/Heading";
@@ -15,21 +14,31 @@ import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
 
 import { contentStyle, navStyle } from "./(ltimelineLayout).css";
+import { getTimeline } from "./timeline.server";
 
-export function routeData({ params }: RouteDataArgs) {
+const routeData = cache(({ code, locale }: Params) => {
+	"use server";
+	return getTimeline(code, locale as Language);
+}, "timelineLayout");
+
+function loadFunction(params: Params) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
-	const timeline = createServerData$(
-		async ([locale, , code]: string[]) =>
-			getTimelineByCode(code, locale as Language),
-		{ key: () => [params.lang, "timelines", params.timelineCode] },
-	);
-	return timeline;
+	return routeData(params);
 }
 
-export default function Timeline() {
+export const route = {
+	load: ({ params }) => loadFunction(params),
+} satisfies RouteDefinition;
+
+interface TimelineProps {
+	children: JSX.Element;
+}
+
+export default function Timeline(props: TimelineProps) {
 	const [t] = useTranslation();
-	const timeline = useRouteData<typeof routeData>();
+	const params = useParams();
+	const timeline = createAsync(() => loadFunction(params));
 	const rootPath = useRootPath();
 
 	const breadcrumbItems = createMemo<BreadcrumbItem[] | undefined>(() => {
@@ -58,9 +67,7 @@ export default function Timeline() {
 					<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
 				]}
 			/>
-			<section class={contentStyle}>
-				<Outlet />
-			</section>
+			<section class={contentStyle}>{props.children}</section>
 		</Show>
 	);
 }

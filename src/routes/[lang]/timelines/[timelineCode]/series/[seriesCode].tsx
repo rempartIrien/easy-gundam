@@ -1,7 +1,7 @@
+import type { Params, RouteDefinition } from "@solidjs/router";
+import { cache, createAsync, useParams } from "@solidjs/router";
+import type { JSX } from "solid-js";
 import { Show, createMemo } from "solid-js";
-import type { RouteDataArgs } from "solid-start";
-import { Outlet, useRouteData } from "solid-start";
-import { createServerData$ } from "solid-start/server";
 import invariant from "tiny-invariant";
 
 import { getSeriesByCode } from "~/api/series.server";
@@ -16,20 +16,30 @@ import type { Language } from "~/i18n/i18n.config";
 
 import { contentStyle, navStyle } from "./[seriesCode].css";
 
-export function routeData({ params }: RouteDataArgs) {
+const routeData = cache((code: string, locale: Language) => {
+	"use server";
+	return getSeriesByCode(code, locale as Language);
+}, "series");
+
+function loadFunction(params: Params) {
 	invariant(params.lang, "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
-	const series = createServerData$(
-		([locale, , code]: string[]) => getSeriesByCode(code, locale as Language),
-		{ key: () => [params.lang, "series", params.seriesCode] },
-	);
-	return series;
+	return routeData(params.seriesCode, params.lang as Language);
 }
 
-export default function Series() {
+export const route = {
+	load: ({ params }) => loadFunction(params),
+} satisfies RouteDefinition;
+
+interface SeriesProps {
+	children: JSX.Element;
+}
+
+export default function Series(props: SeriesProps) {
 	const [t] = useTranslation();
 	const rootPath = useRootPath();
-	const series = useRouteData<typeof routeData>();
+	const params = useParams();
+	const series = createAsync(() => loadFunction(params));
 	const breadcrumbItems = createMemo<BreadcrumbItem[] | undefined>(() => {
 		const nonNullSeries = series();
 		if (nonNullSeries && nonNullSeries.timeline) {
@@ -67,9 +77,7 @@ export default function Series() {
 					]}
 				/>
 			</Show>
-			<section class={contentStyle}>
-				<Outlet />
-			</section>
+			<section class={contentStyle}>{props.children}</section>
 		</Show>
 	);
 }

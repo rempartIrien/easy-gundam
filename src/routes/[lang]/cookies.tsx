@@ -1,10 +1,7 @@
+import type { RouteDefinition } from "@solidjs/router";
+import { action, createAsync, redirect } from "@solidjs/router";
 import { Show } from "solid-js";
-import { useRouteData } from "solid-start";
-import {
-	createServerAction$,
-	createServerData$,
-	redirect,
-} from "solid-start/server";
+import { getRequestEvent } from "solid-js/web";
 
 import Breadcrumb from "~/components/Breadcrumb";
 import Button from "~/components/Button";
@@ -14,8 +11,8 @@ import List from "~/components/List";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
 import useTranslation from "~/hooks/useTranslation";
-import { getLocaleToken, localeCookie } from "~/i18n/i18n.cookie";
-import { colorSchemeCookie, getColorSchemeToken } from "~/theme/theme.cookie";
+import { deleteLocale, getLocaleToken } from "~/i18n/i18n.cookie";
+import { deleteColorScheme, getColorSchemeToken } from "~/theme/theme.cookie";
 
 import { buttonStyles } from "./cookies.css";
 
@@ -29,50 +26,60 @@ type DeleteCookie =
 	| typeof themeCookie;
 
 export function routeData() {
-	const cookies = createServerData$(
-		async (_, { request }) =>
-			Promise.all([getLocaleToken(request), getColorSchemeToken(request)]).then(
-				([locale, theme]) => ({ locale: !!locale, theme: !!theme }),
-			),
-		{ key: () => ["cookies"] },
-	);
-	return cookies;
+	"use server";
+	const event = getRequestEvent();
+	if (!event) {
+		return { locale: false, theme: false };
+	}
+	const { nativeEvent } = event;
+	return {
+		locale: !!getLocaleToken(nativeEvent),
+		theme: !!getColorSchemeToken(nativeEvent),
+	};
 }
 
+function loadFunction() {
+	return Promise.resolve(routeData());
+}
+
+export const route = {
+	load: () => loadFunction(),
+} satisfies RouteDefinition;
+
+const updateCookies = action(async (form: FormData) => {
+	"use server";
+
+	const event = await Promise.resolve(getRequestEvent());
+	if (!event) {
+		return new Error("No event"); // TODO: oops do something
+	}
+	const { request, nativeEvent } = event;
+
+	const deleteCookie = form.get(buttonName) as DeleteCookie;
+	const redirectTo: string = request.headers.get("Referer") ?? "/";
+
+	switch (deleteCookie) {
+		case languageCookie:
+			deleteLocale(nativeEvent);
+			break;
+		case themeCookie:
+			deleteColorScheme(nativeEvent);
+			break;
+		default:
+			deleteColorScheme(nativeEvent);
+			deleteLocale(nativeEvent);
+	}
+
+	throw redirect(redirectTo);
+});
+
 export default function Cookies() {
-	const [, { Form: CookieForm }] = createServerAction$(
-		async (form: FormData, { request }) => {
-			const deleteCookie = form.get(buttonName) as DeleteCookie;
-			const redirectTo: string = request.headers.get("Referer") ?? "/";
-
-			const setCookies = async () => {
-				switch (deleteCookie) {
-					case languageCookie:
-						return await localeCookie.serialize("", { maxAge: 0 });
-					case themeCookie:
-						return await colorSchemeCookie.serialize("", { maxAge: 0 });
-					default:
-						return `${await localeCookie.serialize("", {
-							maxAge: 0,
-						})}, ${await colorSchemeCookie.serialize("", { maxAge: 0 })}`;
-				}
-			};
-
-			return redirect(redirectTo, {
-				headers: {
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					"Set-Cookie": await setCookies(),
-				},
-			});
-		},
-	);
-
 	const [t] = useTranslation();
-	const cookies = useRouteData<typeof routeData>();
+	const cookies = createAsync(() => loadFunction());
 	return (
 		<>
 			<DocumentTitle content={t("cookies.documentTitle")} />
-			<CookieForm>
+			<form action={updateCookies} method="post">
 				<Breadcrumb items={[{ text: t("navigation.cookies") }]} />
 				<Heading variant="title">{t("cookies.title")}</Heading>
 				<Show when={cookies()}>
@@ -129,7 +136,7 @@ export default function Cookies() {
 						</Show>
 					</Section>
 				</Show>
-			</CookieForm>
+			</form>
 		</>
 	);
 }
