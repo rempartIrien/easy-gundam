@@ -11,7 +11,7 @@ Next steps:
 - Hydration errors: [https://github.com/solidjs/solid-start/issues/881](https://github.com/solidjs/solid-start/issues/881)
 
 - redirect
-- css
+- css https://github.com/vanilla-extract-css/vanilla-extract/pull/1395
 - i18n
 - kobalte
 

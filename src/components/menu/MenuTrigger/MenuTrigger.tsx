@@ -5,7 +5,10 @@ import { splitProps } from "solid-js";
 
 import { buttonStyle } from "./MenuTrigger.css";
 
-type MenuTriggerProps = JSX.IntrinsicElements["button"];
+interface MenuTriggerProps {
+	children: JSX.Element;
+	class?: string;
+}
 
 export default function MenuTrigger(props: MenuTriggerProps) {
 	const [local, others] = splitProps(props, ["class", "children"]);
@@ -14,7 +17,7 @@ export default function MenuTrigger(props: MenuTriggerProps) {
 	// `As`.
 	return (
 		<DropdownMenu.Trigger class={clsx([buttonStyle, local.class])} {...others}>
-			{props.children}
+			{local.children}
 		</DropdownMenu.Trigger>
 	);
 }
