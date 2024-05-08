@@ -18,7 +18,8 @@
 
 export default function useTranslation() {
 	// FIXME: rework this. Upgrade dep?
-	return [(s: string) => s];
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	return [(s: string, ...args: unknown[]) => s];
 	// const [t, actions] = useI18n();
 	// const [currentLocale] = useContext(LocaleContext);
 

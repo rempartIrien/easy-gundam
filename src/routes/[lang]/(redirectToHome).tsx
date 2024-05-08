@@ -1,14 +1,14 @@
 import type { Params, RouteDefinition } from "@solidjs/router";
-import { createAsync, redirect, useParams } from "@solidjs/router";
+import { cache, createAsync, redirect, useParams } from "@solidjs/router";
 import { Show } from "solid-js";
 import invariant from "tiny-invariant";
 
 import type { Language } from "~/i18n/i18n.config";
 
-function routeData(locale: Language) {
+const routeData = cache((locale: Language) => {
 	"use server";
 	throw redirect(`/${locale}/home`);
-}
+}, "redirectToHome");
 
 // eslint-disable-next-line @typescript-eslint/require-await
 async function loadFunction(params: Params) {

@@ -1,9 +1,10 @@
 /// <reference types="vitest" />
 import solid from "vite-plugin-solid";
+import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-	plugins: [solid()],
+	plugins: [solid(), tsconfigPaths()],
 	test: {
 		environment: "jsdom",
 		setupFiles: ["./test/setup-test-env.ts"],
