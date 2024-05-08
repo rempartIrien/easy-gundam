@@ -1,8 +1,8 @@
-import { createPreventScroll } from "@kobalte/core";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { createSignal } from "solid-js";
 import { Show, splitProps } from "solid-js";
+import createPreventScroll from "solid-prevent-scroll";
 
 import useTranslation from "~/hooks/useTranslation";
 
@@ -46,8 +46,8 @@ export default function Header(props: HeaderProps) {
 		setOpen((prev) => !prev);
 
 		createPreventScroll({
-			ownerRef: () => ref,
-			isDisabled: () => !open(),
+			element: ref,
+			enabled: () => open(),
 		});
 	};
 

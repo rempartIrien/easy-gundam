@@ -6,7 +6,7 @@ import { LocaleContext } from "~/contexts/LocaleContext";
 import useCookieToaster from "~/hooks/useCookieToast";
 import useTranslation from "~/hooks/useTranslation";
 import type { Language } from "~/i18n/i18n.config";
-import { LanguageNmes } from "~/i18n/i18n.config";
+import { LanguageNames } from "~/i18n/i18n.config";
 import { setLocale } from "~/i18n/i18n.cookie";
 
 import Menu from "../../menu/Menu";
@@ -70,7 +70,7 @@ export default function LocaleSwitcher() {
 				<HeaderIcon name="languages" />
 			</MenuTrigger>
 			<MenuContent>
-				<For each={Object.entries(LanguageNmes)}>
+				<For each={Object.entries(LanguageNames)}>
 					{([locale, name]) => (
 						<MenuItem
 							isActive={currentLocale() === (locale as Language)}

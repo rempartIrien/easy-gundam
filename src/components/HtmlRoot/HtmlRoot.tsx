@@ -14,16 +14,17 @@ interface RootProps {
 	children: JSX.Element;
 }
 
+const initFunction = async () => {
+	const [dict, locale, themeName] = await Promise.all([
+		retrieveTranslsations(),
+		getLocale(),
+		getColorScheme(),
+	]);
+	return { dict, locale, themeName };
+};
+
 export default function HtmlRoot(props: RootProps) {
-	const init = createAsync(async () => {
-		// FIXME: cache?
-		const [dict, locale, themeName] = await Promise.all([
-			retrieveTranslsations(),
-			getLocale(),
-			getColorScheme(),
-		]);
-		return { dict, locale, themeName };
-	});
+	const init = createAsync(async () => initFunction());
 
 	return (
 		<Suspense>

@@ -11,15 +11,16 @@ import List from "~/components/List";
 import Section from "~/components/Section";
 import { listTimelines } from "~/graphql/timeline.server";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { type Language, isLanguage } from "~/i18n/i18n.config";
 
-const routeData = cache(async ([locale]) => {
+const routeData = cache(async (locale) => {
 	"use server";
 	return listTimelines(locale as Language);
 }, "timelines");
 
 function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+	invariant(isLanguage(params.lang), "Expected params.lang");
+
 	return routeData(params.lang);
 }
 

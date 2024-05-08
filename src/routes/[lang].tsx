@@ -8,7 +8,7 @@ import DocumentTitle from "~/components/DocumentTitle";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import type { Language } from "~/i18n/i18n.config";
-import { LanguageNmes } from "~/i18n/i18n.config";
+import { LanguageNames } from "~/i18n/i18n.config";
 import { getLocale } from "~/i18n/i18n.cookie";
 
 import {
@@ -23,7 +23,7 @@ const routeData = cache(async (lang: Language) => {
 	"use server";
 
 	const locale = getLocale();
-	if (!Object.keys(LanguageNmes).includes(lang)) {
+	if (!Object.keys(LanguageNames).includes(lang)) {
 		throw redirect(`/${locale}/home`);
 	}
 	return locale;

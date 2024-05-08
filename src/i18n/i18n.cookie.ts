@@ -2,7 +2,7 @@ import { getRequestEvent } from "solid-js/web";
 import type { HTTPEvent } from "vinxi/http";
 import { deleteCookie, parseCookies, setCookie } from "vinxi/http";
 
-import { Language, LanguageNmes } from "~/i18n/i18n.config";
+import { Language, LanguageNames } from "~/i18n/i18n.config";
 
 const ONE_YEAR = 365 * 24 * 60 * 60;
 export const DEFAULT_LOCALE: Language = Language.French;
@@ -42,7 +42,7 @@ function extractPreferredLocale(
 	return headerValue
 		.split(",")
 		.map((value) => value.split(";")[0].trim())
-		.find((value) => Object.keys(LanguageNmes).includes(value)) as Language;
+		.find((value) => Object.keys(LanguageNames).includes(value)) as Language;
 }
 
 export function setLocale(event: HTTPEvent, value: Language) {
@@ -62,12 +62,12 @@ export function getLocale(): Language {
 	}
 	const { request, nativeEvent } = event;
 	// Locale set by given URL
-	const urlBasedLocale = Object.keys(LanguageNmes).find((lang) =>
+	const urlBasedLocale = Object.keys(LanguageNames).find((lang) =>
 		request.url.match(`/${lang}/`),
 	) as Language | undefined;
 
 	// Locale set by referer header
-	const referrerBasedLocale = Object.keys(LanguageNmes).find((lang) =>
+	const referrerBasedLocale = Object.keys(LanguageNames).find((lang) =>
 		request.headers.get("Referer")?.match(`/${lang}/`),
 	) as Language | undefined;
 

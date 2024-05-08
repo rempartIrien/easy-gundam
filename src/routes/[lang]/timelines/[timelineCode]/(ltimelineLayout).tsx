@@ -1,5 +1,5 @@
 import type { Params, RouteDefinition } from "@solidjs/router";
-import { cache, createAsync, useParams } from "@solidjs/router";
+import { createAsync, useParams } from "@solidjs/router";
 import type { JSX } from "solid-js";
 import { Show, createMemo } from "solid-js";
 import invariant from "tiny-invariant";
@@ -11,20 +11,16 @@ import Nav from "~/components/Nav";
 import NavItem from "~/components/NavItem";
 import useRootPath from "~/hooks/useRootPath";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { isLanguage } from "~/i18n/i18n.config";
 
 import { contentStyle, navStyle } from "./(ltimelineLayout).css";
 import { getTimeline } from "./timeline.server";
 
-const routeData = cache(({ code, locale }: Params) => {
-	"use server";
-	return getTimeline(code, locale as Language);
-}, "timelineLayout");
-
 function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+	invariant(isLanguage(params.lang), "Expected params.lang");
+
 	invariant(params.timelineCode, "Expected params.timelineCode");
-	return routeData(params);
+	return getTimeline(params.timelineCode, params.lang);
 }
 
 export const route = {

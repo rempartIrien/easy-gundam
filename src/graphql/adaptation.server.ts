@@ -15,7 +15,7 @@ export async function listAdaptations(
 ): Promise<
 	InlineTranslatedPropertyObject<ListAdaptationsQuery["adaptations"]>
 > {
-	const variables = { seriesCode: seriesCode, language };
+	const variables = { seriesCode, language };
 
 	const { adaptations } = await graphQLClient.request<
 		ListAdaptationsQuery,

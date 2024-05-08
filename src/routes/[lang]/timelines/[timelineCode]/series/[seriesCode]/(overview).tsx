@@ -11,7 +11,7 @@ import Section from "~/components/Section";
 import Staff from "~/components/Staff";
 import { listAdaptations } from "~/graphql/adaptation.server";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { type Language, isLanguage } from "~/i18n/i18n.config";
 
 import { getSeries } from "../series.server";
 
@@ -24,24 +24,24 @@ import {
 	textBlockStyle,
 } from "./(overview).css";
 
-const routeData = cache((code: string, locale: Language) => {
+const routeData = (code: string, locale: Language) => {
 	"use server";
 	return listAdaptations(code, locale);
-}, "series");
+};
 
-async function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+const loadFunction = cache(async (params: Params) => {
+	"use server";
+	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
-	const series = await getSeries(params.seriesCode, params.lang as Language);
-	const adaptations = await routeData(
-		params.seriesCode,
-		params.lang as Language,
-	);
+	const series = await getSeries(params.seriesCode, params.lang);
+	const adaptations = await routeData(params.seriesCode, params.lang);
 	return { series, adaptations };
-}
+}, "foo");
 
 export const route = {
-	load: ({ params }) => loadFunction(params),
+	load: ({ params }) => {
+		return loadFunction(params);
+	},
 } satisfies RouteDefinition;
 
 export default function SeriesOverview() {

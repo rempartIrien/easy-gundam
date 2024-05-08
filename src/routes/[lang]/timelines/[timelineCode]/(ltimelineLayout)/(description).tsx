@@ -7,14 +7,15 @@ import DocumentTitle from "~/components/DocumentTitle";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { isLanguage } from "~/i18n/i18n.config";
 
 import { getTimeline } from "../timeline.server";
 
 async function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
-	return getTimeline(params.timelineCode, params.lang as Language);
+
+	return getTimeline(params.timelineCode, params.lang);
 }
 
 export const route = {

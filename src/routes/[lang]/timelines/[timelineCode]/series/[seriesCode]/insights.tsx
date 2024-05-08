@@ -7,16 +7,17 @@ import DocumentTitle from "~/components/DocumentTitle";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { isLanguage } from "~/i18n/i18n.config";
 
 import { getSeries } from "../series.server";
 
 const routeData = getSeries;
 
 function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
-	return routeData(params.seriesCode, params.lang as Language);
+
+	return routeData(params.seriesCode, params.lang);
 }
 export const route = {
 	load: ({ params }) => loadFunction(params),

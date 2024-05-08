@@ -3,7 +3,7 @@ import { cache, createAsync, redirect, useParams } from "@solidjs/router";
 import { Show } from "solid-js";
 import invariant from "tiny-invariant";
 
-import type { Language } from "~/i18n/i18n.config";
+import { type Language, isLanguage } from "~/i18n/i18n.config";
 
 const routeData = cache((locale: Language) => {
 	"use server";
@@ -12,8 +12,9 @@ const routeData = cache((locale: Language) => {
 
 // eslint-disable-next-line @typescript-eslint/require-await
 async function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
-	return routeData(params.lang as Language);
+	invariant(isLanguage(params.lang), "Expected params.lang");
+
+	return routeData(params.lang);
 }
 
 export const route = {

@@ -7,7 +7,7 @@ import { listSeries } from "~/api/series.server";
 import Chronology from "~/components/Chronology";
 import DocumentTitle from "~/components/DocumentTitle";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { type Language, isLanguage } from "~/i18n/i18n.config";
 
 import { getTimeline } from "../timeline.server";
 
@@ -17,13 +17,11 @@ const routeData = cache((code: string, locale: Language) => {
 }, "timelineSeries");
 
 async function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
-	const timeline = await getTimeline(
-		params.timelineCode,
-		params.lang as Language,
-	);
-	const series = await routeData(params.timelineCode, params.lang as Language);
+
+	const timeline = await getTimeline(params.timelineCode, params.lang);
+	const series = await routeData(params.timelineCode, params.lang);
 	return { timeline, series };
 }
 

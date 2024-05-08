@@ -9,7 +9,7 @@ import MarkdownViewer from "~/components/MarkdownViewer";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
 import useTranslation from "~/hooks/useTranslation";
-import type { Language } from "~/i18n/i18n.config";
+import { type Language, isLanguage } from "~/i18n/i18n.config";
 
 import { paragraphStyle, titleStyle } from "./home.css";
 
@@ -25,9 +25,9 @@ const routeData = cache((lang: Language) => {
 }, "home");
 
 function loadFunction(params: Params) {
-	invariant(params.lang, "Expected params.lang");
+	invariant(isLanguage(params.lang), "Expected params.lang");
 
-	return routeData(params.lang as Language);
+	return routeData(params.lang);
 }
 
 export const route = {

@@ -3,7 +3,11 @@ export enum Language {
 	French = "fr-FR",
 }
 
-export const LanguageNmes: Record<Language, string> = {
+export const LanguageNames: Record<Language, string> = {
 	[Language.English]: "English",
 	[Language.French]: "Français",
 };
+
+export function isLanguage(value: string): value is Language {
+	return Object.keys(LanguageNames).includes(value);
+}
