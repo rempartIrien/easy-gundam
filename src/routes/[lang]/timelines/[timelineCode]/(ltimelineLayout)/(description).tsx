@@ -25,7 +25,7 @@ export const route = {
 export default function TimelineDescription() {
 	const params = useParams();
 	const timeline = createAsync(() => loadFunction(params));
-	const [t] = useTranslation();
+	const t = useTranslation();
 	return (
 		<Show when={timeline()}>
 			{(nonNullTimeline) => (

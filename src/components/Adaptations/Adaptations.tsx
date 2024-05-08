@@ -23,7 +23,7 @@ interface AdaptationsProps {
 }
 
 export default function Adaptations(props: AdaptationsProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 
 	return (
 		<Show when={props.adaptations.length}>

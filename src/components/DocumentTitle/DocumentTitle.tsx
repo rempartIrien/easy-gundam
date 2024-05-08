@@ -4,7 +4,7 @@ import { createEffect } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
 
-import useTranslation from "~/hooks/useTranslation";
+import useAppName from "~/hooks/useAppName";
 
 type TitleProps = Omit<JSX.IntrinsicElements["title"], "children"> & {
 	content?: string | string[] | (string | undefined)[];
@@ -23,15 +23,13 @@ function getContentArray(content: TitleProps["content"]): string[] {
 }
 
 export default function DocumentTitle(props: TitleProps) {
-	const [t] = useTranslation();
+	const appName = useAppName();
 	const [local, others] = splitProps(props, ["content"]);
 
 	// For some reasons, Solid dislikes nodes with several children.
 	// Compute a single string to make it happy.
 	const title = createMemo(() =>
-		getContentArray(local.content)
-			.concat(String(t("appName")))
-			.join(delimiter),
+		getContentArray(local.content).concat(String(appName)).join(delimiter),
 	);
 
 	// FIXME: Remove this line when SolidStart use something else than Solid Meta

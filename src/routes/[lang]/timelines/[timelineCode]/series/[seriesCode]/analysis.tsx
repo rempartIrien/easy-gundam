@@ -26,7 +26,7 @@ export const route = {
 export default function SeriesAnalysis() {
 	const params = useParams();
 	const series = createAsync(() => loadFunction(params));
-	const [t] = useTranslation();
+	const t = useTranslation();
 	return (
 		<Show when={series()}>
 			{(nonNullSeries) => (

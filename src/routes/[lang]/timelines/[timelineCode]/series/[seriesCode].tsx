@@ -32,7 +32,7 @@ interface SeriesProps {
 }
 
 export default function Series(props: SeriesProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const rootPath = useRootPath();
 	const params = useParams();
 	const series = createAsync(() => loadFunction(params));

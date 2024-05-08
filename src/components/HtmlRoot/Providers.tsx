@@ -1,11 +1,10 @@
 import { I18nProvider as KobalteI18nProvider } from "@kobalte/core";
-import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
 import { MetaProvider } from "@solidjs/meta";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
-import { createEffect } from "solid-js";
 import { createSignal } from "solid-js";
 
+import { I18nProvider } from "~/contexts/I18nContext";
 import { LocaleContext } from "~/contexts/LocaleContext";
 import { ThemeContext } from "~/contexts/ThemeContext";
 import type { Language } from "~/i18n/i18n.config";
@@ -36,20 +35,11 @@ export default function Providers(props: {
 		props.initialProps?.locale,
 	);
 
-	const context = createI18nContext(
-		props.initialProps?.dict,
-		props.initialProps?.locale,
-	);
-
-	createEffect(() => {
-		context[1].locale(locale());
-	});
-
 	return (
 		<MetaProvider>
 			<ThemeContext.Provider value={[themeName, setThemeName]}>
 				<LocaleContext.Provider value={[locale, setlocale]}>
-					<I18nContext.Provider value={context}>
+					<I18nProvider value={props.initialProps?.dict}>
 						<KobalteI18nProvider locale={locale()}>
 							<html
 								lang={locale()}
@@ -63,7 +53,7 @@ export default function Providers(props: {
 								{props.children}
 							</html>
 						</KobalteI18nProvider>
-					</I18nContext.Provider>
+					</I18nProvider>
 				</LocaleContext.Provider>
 			</ThemeContext.Provider>
 		</MetaProvider>

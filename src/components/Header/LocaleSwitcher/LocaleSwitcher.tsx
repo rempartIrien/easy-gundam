@@ -36,7 +36,7 @@ export default function LocaleSwitcher() {
 	const act = useAction(localeAction);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const [open, setOpen] = createSignal(false);
 	const showCookieToast = useCookieToaster("locale");
 	const [dismissToast, setDismissToast] = createSignal<() => void>();

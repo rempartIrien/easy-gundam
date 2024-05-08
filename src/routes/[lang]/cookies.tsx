@@ -10,6 +10,7 @@ import Heading from "~/components/Heading";
 import List from "~/components/List";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
+import useAppName from "~/hooks/useAppName";
 import useTranslation from "~/hooks/useTranslation";
 import { deleteLocale, getLocaleToken } from "~/i18n/i18n.cookie";
 import { deleteColorScheme, getColorSchemeToken } from "~/theme/theme.cookie";
@@ -74,7 +75,8 @@ const updateCookies = action(async (form: FormData) => {
 });
 
 export default function Cookies() {
-	const [t] = useTranslation();
+	const t = useTranslation();
+	const appName = useAppName();
 	const cookies = createAsync(() => loadFunction());
 	return (
 		<>
@@ -84,9 +86,7 @@ export default function Cookies() {
 				<Heading variant="title">{t("cookies.title")}</Heading>
 				<Show when={cookies()}>
 					<Section>
-						<Paragraph>
-							{t("cookies.list.text", { appName: t("appName") })}
-						</Paragraph>
+						<Paragraph>{t("cookies.list.text", { appName })}</Paragraph>
 						<List>
 							<li>{t("cookies.list.language")}</li>
 							<li>{t("cookies.list.theme")}</li>

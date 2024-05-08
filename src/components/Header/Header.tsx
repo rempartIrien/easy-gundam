@@ -31,7 +31,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 type HeaderProps = JSX.IntrinsicElements["header"];
 
 export default function Header(props: HeaderProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const [local, others] = splitProps(props, ["class"]);
 	const [open, setOpen] = createSignal(false);
 	let ref: HTMLDivElement | undefined;
@@ -47,7 +47,7 @@ export default function Header(props: HeaderProps) {
 
 		createPreventScroll({
 			element: ref,
-			enabled: () => open(),
+			enabled: open(),
 		});
 	};
 

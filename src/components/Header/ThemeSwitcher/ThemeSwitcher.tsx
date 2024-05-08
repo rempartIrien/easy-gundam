@@ -37,7 +37,7 @@ const themeAction = action(async (newTheme?: ThemeName) => {
  */
 export default function ThemeSwitcher() {
 	const updateTheme = useAction(themeAction);
-	const [t] = useTranslation();
+	const t = useTranslation();
 
 	const [currentTheme, setCurrentTheme] = useContext(ThemeContext);
 	const isDarkMode = useIsDarkMode();

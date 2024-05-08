@@ -6,7 +6,7 @@ import useRootPath from "~/hooks/useRootPath";
 import useTranslation from "~/hooks/useTranslation";
 
 export default function NotFound() {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const rootPath = useRootPath();
 
 	return (

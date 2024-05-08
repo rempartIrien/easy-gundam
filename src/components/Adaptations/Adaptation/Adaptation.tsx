@@ -23,7 +23,7 @@ interface AdaptationProps {
 }
 
 export default function Adaptation(props: AdaptationProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const [currentLocale] = useContext(LocaleContext);
 
 	const dateString = createMemo(() => {

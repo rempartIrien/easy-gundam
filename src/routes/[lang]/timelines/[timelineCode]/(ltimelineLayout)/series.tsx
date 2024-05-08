@@ -32,7 +32,7 @@ export const route = {
 export default function TimelineSeries() {
 	const params = useParams();
 	const data = createAsync(() => loadFunction(params));
-	const [t] = useTranslation();
+	const t = useTranslation();
 	return (
 		<Show when={data()?.timeline}>
 			{(nonNullTimeline) => (

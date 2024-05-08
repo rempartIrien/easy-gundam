@@ -29,7 +29,7 @@ export const route = {
 } satisfies RouteDefinition;
 
 export default function Timelines() {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const params = useParams();
 	const timelines = createAsync(() => loadFunction(params));
 

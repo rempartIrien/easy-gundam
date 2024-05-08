@@ -3,6 +3,7 @@ import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 import { Show } from "solid-js";
 
+import useAppName from "~/hooks/useAppName";
 import useRootPath from "~/hooks/useRootPath";
 import useTranslation from "~/hooks/useTranslation";
 
@@ -23,9 +24,9 @@ type FooterProps = Omit<JSX.IntrinsicElements["footer"], "children">;
 
 export default function Footer(props: FooterProps) {
 	const [local, others] = splitProps(props, ["class"]);
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const rootPath = useRootPath();
-	const appName = t("appName");
+	const appName = useAppName();
 	const year = new Date().getFullYear();
 	const firstYear = 2023;
 

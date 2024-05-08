@@ -11,7 +11,7 @@ interface ShowCookieToasterParams {
 }
 
 export default function useCookieToaster(type: "theme" | "locale") {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const { dimissToast, toastSuccess, toastError, toastInfo } = useToaster();
 	const rootPath = useRootPath();
 

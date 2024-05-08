@@ -6,11 +6,12 @@ import List from "~/components/List";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
 import Text from "~/components/Text";
+import useAppName from "~/hooks/useAppName";
 import useTranslation from "~/hooks/useTranslation";
 
 export default function About() {
-	const [t] = useTranslation();
-	const appName = t("appName");
+	const t = useTranslation();
+	const appName = useAppName();
 	return (
 		<>
 			<DocumentTitle content={t("about.documentTitle")} />

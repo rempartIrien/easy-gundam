@@ -35,7 +35,7 @@ export const route = {
 } satisfies RouteDefinition;
 
 export default function Home() {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const params = useParams();
 	const content = createAsync(() => loadFunction(params));
 

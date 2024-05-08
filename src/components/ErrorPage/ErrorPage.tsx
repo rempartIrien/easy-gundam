@@ -4,7 +4,7 @@ import useTranslation from "~/hooks/useTranslation";
 import Link from "../Link";
 
 export default function ErrorPage() {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const rootPath = useRootPath();
 
 	// TODO: HttpStatus according to kind of error (make two Error classes)

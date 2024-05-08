@@ -13,7 +13,7 @@ interface StaffProps {
 }
 
 export default function Staff(props: StaffProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	return (
 		<section class={clsx(props.class)}>
 			<Heading variant="subtitle">

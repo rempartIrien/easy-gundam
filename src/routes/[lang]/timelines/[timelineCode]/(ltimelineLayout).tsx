@@ -32,7 +32,7 @@ interface TimelineProps {
 }
 
 export default function Timeline(props: TimelineProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const params = useParams();
 	const timeline = createAsync(() => loadFunction(params));
 	const rootPath = useRootPath();

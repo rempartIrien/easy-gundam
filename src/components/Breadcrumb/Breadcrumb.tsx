@@ -29,7 +29,7 @@ type BreadcrumbProps = JSX.IntrinsicElements["nav"] & {
 };
 
 export default function Breadcrumb(props: BreadcrumbProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const [local, others] = splitProps(props, ["class", "items"]);
 	const rootPath = useRootPath();
 

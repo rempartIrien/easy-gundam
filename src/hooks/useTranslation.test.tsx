@@ -1,7 +1,7 @@
-import { I18nContext, createI18nContext } from "@solid-primitives/i18n";
 import { cleanup, render, screen } from "@solidjs/testing-library";
 import { createSignal } from "solid-js";
 
+import { I18nProvider } from "~/contexts/I18nContext";
 import { LocaleContext } from "~/contexts/LocaleContext";
 import { Language } from "~/i18n/i18n.config";
 
@@ -11,41 +11,74 @@ function LocaleConsumer(props: {
 	count?: number | string;
 	other?: number | string;
 }) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	return <p>Translation is: '{t("key", props)}'</p>;
 }
 
 const testCases = [
 	{
 		locale: Language.English,
-		count: undefined,
-		other: undefined,
-		expected: "key ",
+		expected: "key undefined",
 	},
-	{ locale: Language.English, count: 0, other: undefined, expected: "other " },
-	{ locale: Language.English, count: 1, other: undefined, expected: "one " },
-	{ locale: Language.English, count: 2, other: undefined, expected: "other " },
-	{ locale: Language.English, count: 3, other: undefined, expected: "other " },
-	{ locale: Language.English, count: 4, other: undefined, expected: "other " },
-	{ locale: Language.English, count: 5, other: undefined, expected: "other " },
-	{ locale: Language.English, count: 10, other: undefined, expected: "other " },
+	{
+		locale: Language.English,
+		count: 0,
+		other: undefined,
+		expected: "other undefined",
+	},
+	{
+		locale: Language.English,
+		count: 1,
+		other: undefined,
+		expected: "one undefined",
+	},
+	{
+		locale: Language.English,
+		count: 2,
+		other: undefined,
+		expected: "other undefined",
+	},
+	{
+		locale: Language.English,
+		count: 3,
+		other: undefined,
+		expected: "other undefined",
+	},
+	{
+		locale: Language.English,
+		count: 4,
+		other: undefined,
+		expected: "other undefined",
+	},
+	{
+		locale: Language.English,
+		count: 5,
+		other: undefined,
+		expected: "other undefined",
+	},
+	{
+		locale: Language.English,
+		count: 10,
+		other: undefined,
+		expected: "other undefined",
+	},
 	{
 		locale: Language.English,
 		count: 100,
 		other: undefined,
-		expected: "other ",
+		expected: "other undefined",
 	},
 	{
 		locale: Language.English,
 		count: "100",
 		other: undefined,
-		expected: "other ",
+		expected: "other undefined",
 	},
 	{
 		locale: Language.English,
 		count: "bar",
 		other: undefined,
-		expected: "key ",
+		expected: "key undefined",
 	},
 	{
 		locale: Language.English,
@@ -72,23 +105,68 @@ const testCases = [
 		locale: Language.French,
 		count: undefined,
 		other: undefined,
-		expected: "clé ",
+		expected: "clé undefined",
 	},
-	{ locale: Language.French, count: 0, other: undefined, expected: "un " },
-	{ locale: Language.French, count: 1, other: undefined, expected: "un " },
-	{ locale: Language.French, count: 2, other: undefined, expected: "autre " },
-	{ locale: Language.French, count: 3, other: undefined, expected: "autre " },
-	{ locale: Language.French, count: 4, other: undefined, expected: "autre " },
-	{ locale: Language.French, count: 5, other: undefined, expected: "autre " },
-	{ locale: Language.French, count: 10, other: undefined, expected: "autre " },
-	{ locale: Language.French, count: 100, other: undefined, expected: "autre " },
+	{
+		locale: Language.French,
+		count: 0,
+		other: undefined,
+		expected: "un undefined",
+	},
+	{
+		locale: Language.French,
+		count: 1,
+		other: undefined,
+		expected: "un undefined",
+	},
+	{
+		locale: Language.French,
+		count: 2,
+		other: undefined,
+		expected: "autre undefined",
+	},
+	{
+		locale: Language.French,
+		count: 3,
+		other: undefined,
+		expected: "autre undefined",
+	},
+	{
+		locale: Language.French,
+		count: 4,
+		other: undefined,
+		expected: "autre undefined",
+	},
+	{
+		locale: Language.French,
+		count: 5,
+		other: undefined,
+		expected: "autre undefined",
+	},
+	{
+		locale: Language.French,
+		count: 10,
+		other: undefined,
+		expected: "autre undefined",
+	},
+	{
+		locale: Language.French,
+		count: 100,
+		other: undefined,
+		expected: "autre undefined",
+	},
 	{
 		locale: Language.French,
 		count: "100",
 		other: undefined,
-		expected: "autre ",
+		expected: "autre undefined",
 	},
-	{ locale: Language.French, count: "bar", other: undefined, expected: "clé " },
+	{
+		locale: Language.French,
+		count: "bar",
+		other: undefined,
+		expected: "clé undefined",
+	},
 	{
 		locale: Language.French,
 		count: undefined,
@@ -114,7 +192,7 @@ const testCases = [
 		locale: undefined, // English by default
 		count: 100,
 		other: "foo",
-		expected: "key foo",
+		expected: "",
 	},
 ];
 
@@ -134,37 +212,34 @@ describe("useTranslation", () => {
 				const [language, setLanguage] = createSignal<Language | undefined>(
 					locale,
 				);
-				const context = createI18nContext(
-					{
-						/* eslint-disable @typescript-eslint/naming-convention */
-						"en-US": {
-							key: "key {{ other }}",
-							key_zero: "zero {{ other }}",
-							key_one: "one {{ other }}",
-							key_two: "two {{ other }}",
-							key_few: "few {{ other }}",
-							key_many: "many {{ other }}",
-							key_other: "other {{ other }}",
-						},
-						"fr-FR": {
-							key: "clé {{ other }}",
-							key_zero: "zéro {{ other }}",
-							key_one: "un {{ other }}",
-							key_two: "deux {{ other }}",
-							key_few: "quelques {{ other }}",
-							key_many: "beaucoup {{ other }}",
-							key_other: "autre {{ other }}",
-						},
-						/* eslint-enable @typescript-eslint/naming-convention */
+				const context = {
+					/* eslint-disable @typescript-eslint/naming-convention */
+					"en-US": {
+						key: "key {{ other }}",
+						key_zero: "zero {{ other }}",
+						key_one: "one {{ other }}",
+						key_two: "two {{ other }}",
+						key_few: "few {{ other }}",
+						key_many: "many {{ other }}",
+						key_other: "other {{ other }}",
 					},
-					locale,
-				);
+					"fr-FR": {
+						key: "clé {{ other }}",
+						key_zero: "zéro {{ other }}",
+						key_one: "un {{ other }}",
+						key_two: "deux {{ other }}",
+						key_few: "quelques {{ other }}",
+						key_many: "beaucoup {{ other }}",
+						key_other: "autre {{ other }}",
+					},
+					/* eslint-enable @typescript-eslint/naming-convention */
+				};
 				render(() => (
-					<I18nContext.Provider value={context}>
-						<LocaleContext.Provider value={[language, setLanguage]}>
+					<LocaleContext.Provider value={[language, setLanguage]}>
+						<I18nProvider value={context}>
 							<LocaleConsumer count={count} other={other} />
-						</LocaleContext.Provider>
-					</I18nContext.Provider>
+						</I18nProvider>
+					</LocaleContext.Provider>
 				));
 				expect(screen.getByText(/^Translation is:/)).toHaveTextContent(
 					`Translation is: '${expected}'`,

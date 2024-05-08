@@ -18,7 +18,7 @@ interface CookieToasterContentProps {
 }
 
 export default function CookieToasterContent(props: CookieToasterContentProps) {
-	const [t] = useTranslation();
+	const t = useTranslation();
 	const rootPath = useRootPath();
 	return (
 		<div class={contentStyle}>

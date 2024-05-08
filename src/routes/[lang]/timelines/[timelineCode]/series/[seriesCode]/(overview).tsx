@@ -47,7 +47,7 @@ export const route = {
 export default function SeriesOverview() {
 	const params = useParams();
 	const data = createAsync(() => loadFunction(params));
-	const [t] = useTranslation();
+	const t = useTranslation();
 	return (
 		<Show when={data()?.series}>
 			{(nonNullSeries) => (
