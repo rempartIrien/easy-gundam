@@ -3,8 +3,8 @@ import type { ComponentProps } from "solid-js";
 import { Show } from "solid-js";
 import { children } from "solid-js";
 import { splitProps } from "solid-js";
+import { SolidMarkdown } from "solid-markdown";
 
-import SolidMarkdown from "../../markdown-lib";
 import Heading from "../Heading";
 import Link from "../Link";
 import List from "../List";
