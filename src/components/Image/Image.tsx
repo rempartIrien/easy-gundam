@@ -23,7 +23,7 @@ interface ImageProps {
 
 export default function Image(props: ImageProps) {
 	const size2x = createMemo(() => getSize2x(props.size));
-	const [fallback, setFallback] = createSignal(true);
+	const [fallback, setFallback] = createSignal(false);
 	const isDarkMode = useIsDarkMode();
 
 	onMount(() => setFallback(!props.imageId));
