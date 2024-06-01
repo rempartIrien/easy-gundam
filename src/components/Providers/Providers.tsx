@@ -11,6 +11,7 @@ import { ToasterProvider } from "~/contexts/ToasterContext";
 import type { Language } from "~/i18n/i18n.config";
 import { getLocale } from "~/i18n/i18n.cookie";
 import { retrieveTranslsations } from "~/i18n/i18n.server";
+import getHtmlTagClasses from "~/theme/getHtmlTagClasses";
 import { getColorScheme } from "~/theme/theme.cookie";
 import type { ThemeName } from "~/theme/ThemeName";
 
@@ -29,12 +30,29 @@ const load = cache(() => initFunction(), "init");
 // using a function in `Show` create hydration issues, so this component is here
 // to allow signal creations "inside" JSX.
 export default function Providers(props: { children: JSX.Element }) {
-	const [themeName, setThemeName] = createSignal<
+	const [themeName, setThemeNameBase] = createSignal<
 		ThemeName | null | undefined
 	>();
-	const [locale, setLocale] = createSignal<Language | undefined>();
+	const [locale, setLocaleBase] = createSignal<Language | undefined>();
 
 	const init = createAsync(() => load());
+
+	const setThemeName = (theme?: ThemeName | null) => {
+		setThemeNameBase(theme);
+		// Update html tag classes
+		window?.document
+			.getElementsByTagName("html")?.[0]
+			.setAttribute("class", getHtmlTagClasses(theme));
+	};
+
+	const setLocale = (locale?: Language) => {
+		setLocaleBase(locale);
+		// Update html lang attribute
+		locale &&
+			window?.document
+				.getElementsByTagName("html")?.[0]
+				.setAttribute("lang", locale);
+	};
 
 	onMount(() => {
 		const i = init();

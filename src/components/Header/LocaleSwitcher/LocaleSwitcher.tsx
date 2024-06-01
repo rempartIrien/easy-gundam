@@ -57,6 +57,7 @@ export default function LocaleSwitcher() {
 				`/${newLocale}`,
 			{ scroll: false },
 		);
+
 		const removeToast = showCookieToast({ onSave: () => act(newLocale) });
 		setDismissToast(() => removeToast);
 	};

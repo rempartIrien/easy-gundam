@@ -1,15 +1,11 @@
 // @refresh reload
 import { StartServer, createHandler } from "@solidjs/start/server";
-import { clsx } from "clsx";
 
 import Favicons from "./components/Favicons";
 import { getLocale } from "./i18n/i18n.cookie";
-import { bodyStyle, htmlRootStyle } from "./root.css";
-import { darkTheme } from "./theme/dark-theme.css";
-import { defaultTheme } from "./theme/default-theme.css";
-import { lightTheme } from "./theme/light-theme.css";
+import { bodyStyle } from "./root.css";
+import getHtmlTagClasses from "./theme/getHtmlTagClasses";
 import { getColorScheme } from "./theme/theme.cookie";
-import { ThemeName } from "./theme/ThemeName";
 
 export default createHandler(
 	() => {
@@ -18,15 +14,7 @@ export default createHandler(
 		return (
 			<StartServer
 				document={({ assets, children, scripts }) => (
-					<html
-						lang={locale}
-						class={clsx([
-							htmlRootStyle,
-							themeName === ThemeName.Dark && darkTheme,
-							themeName === ThemeName.Light && lightTheme,
-							!themeName && defaultTheme,
-						])}
-					>
+					<html lang={locale} class={getHtmlTagClasses(themeName)}>
 						<head>
 							<meta charset="utf-8" />
 							<meta
