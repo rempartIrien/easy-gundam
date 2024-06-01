@@ -1,5 +1,5 @@
 import type { Params, RouteDefinition } from "@solidjs/router";
-import { cache, createAsync, useParams } from "@solidjs/router";
+import { cache } from "@solidjs/router";
 import { Show } from "solid-js";
 import invariant from "tiny-invariant";
 
@@ -10,8 +10,9 @@ import MarkdownViewer from "~/components/MarkdownViewer";
 import Section from "~/components/Section";
 import Staff from "~/components/Staff";
 import { listAdaptations } from "~/graphql/adaptation.server";
+import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useTranslation from "~/hooks/useTranslation";
-import { type Language, isLanguage } from "~/i18n/i18n.config";
+import { isLanguage } from "~/i18n/i18n.config";
 
 import { getSeries } from "../series.server";
 
@@ -24,29 +25,23 @@ import {
 	textBlockStyle,
 } from "./(overview).css";
 
-const routeData = (code: string, locale: Language) => {
-	"use server";
-	return listAdaptations(code, locale);
-};
-
-const loadFunction = cache(async (params: Params) => {
+const routeData = cache(async (params: Params) => {
 	"use server";
 	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.seriesCode, "Expected params.seriesCode");
 	const series = await getSeries(params.seriesCode, params.lang);
-	const adaptations = await routeData(params.seriesCode, params.lang);
+	const adaptations = await listAdaptations(params.seriesCode, params.lang);
 	return { series, adaptations };
-}, "foo");
+}, "overview");
 
 export const route = {
 	load: ({ params }) => {
-		return loadFunction(params);
+		return routeData(params);
 	},
 } satisfies RouteDefinition;
 
 export default function SeriesOverview() {
-	const params = useParams();
-	const data = createAsync(() => loadFunction(params));
+	const data = useLocalizedRouteData(routeData);
 	const t = useTranslation();
 	return (
 		<Show when={data()?.series}>

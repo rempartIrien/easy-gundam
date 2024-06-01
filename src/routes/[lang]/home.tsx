@@ -1,5 +1,5 @@
 import type { Params, RouteDefinition } from "@solidjs/router";
-import { cache, createAsync, useParams } from "@solidjs/router";
+import { cache } from "@solidjs/router";
 import { Show } from "solid-js";
 import invariant from "tiny-invariant";
 
@@ -8,36 +8,31 @@ import Heading from "~/components/Heading";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
+import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useTranslation from "~/hooks/useTranslation";
-import { type Language, isLanguage } from "~/i18n/i18n.config";
+import { isLanguage } from "~/i18n/i18n.config";
 
 import { paragraphStyle, titleStyle } from "./home.css";
 
 // FIXME: This is not intended to stay here, it's just to tell people what to
 // check when landing on the site.
-const routeData = cache((lang: Language) => {
+const routeData = cache((params: Params) => {
 	"use server";
+	invariant(isLanguage(params.lang), "Expected params.lang");
 	// Import Markdown file dynamically according to current locale.
 	// See https://vitejs.dev/guide/assets.html#importing-asset-as-string
-	return import(`../../../assets/markdown/${lang}/home.md?raw`).then(
+	return import(`../../../assets/markdown/${params.lang}/home.md?raw`).then(
 		(response: { default: string }) => response.default,
 	);
 }, "home");
 
-function loadFunction(params: Params) {
-	invariant(isLanguage(params.lang), "Expected params.lang");
-
-	return routeData(params.lang);
-}
-
 export const route = {
-	load: ({ params }) => loadFunction(params),
+	load: ({ params }) => routeData(params),
 } satisfies RouteDefinition;
 
 export default function Home() {
 	const t = useTranslation();
-	const params = useParams();
-	const content = createAsync(() => loadFunction(params));
+	const content = useLocalizedRouteData(routeData);
 
 	return (
 		<main>

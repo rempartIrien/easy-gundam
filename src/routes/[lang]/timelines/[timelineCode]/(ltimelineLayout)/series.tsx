@@ -1,37 +1,33 @@
 import type { Params, RouteDefinition } from "@solidjs/router";
-import { cache, createAsync, useParams } from "@solidjs/router";
+import { cache } from "@solidjs/router";
 import { Show } from "solid-js";
 import invariant from "tiny-invariant";
 
 import { listSeries } from "~/api/series.server";
 import Chronology from "~/components/Chronology";
 import DocumentTitle from "~/components/DocumentTitle";
+import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useTranslation from "~/hooks/useTranslation";
-import { type Language, isLanguage } from "~/i18n/i18n.config";
+import { isLanguage } from "~/i18n/i18n.config";
 
 import { getTimeline } from "../timeline.server";
 
-const routeData = cache((code: string, locale: Language) => {
+const routeData = cache(async (params: Params) => {
 	"use server";
-	return listSeries(code, locale);
-}, "timelineSeries");
-
-async function loadFunction(params: Params) {
 	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
 
 	const timeline = await getTimeline(params.timelineCode, params.lang);
-	const series = await routeData(params.timelineCode, params.lang);
+	const series = await listSeries(params.timelineCode, params.lang);
 	return { timeline, series };
-}
+}, "timelineSeries");
 
 export const route = {
-	load: ({ params }) => loadFunction(params),
+	load: ({ params }) => routeData(params),
 } as RouteDefinition;
 
 export default function TimelineSeries() {
-	const params = useParams();
-	const data = createAsync(() => loadFunction(params));
+	const data = useLocalizedRouteData(routeData);
 	const t = useTranslation();
 	return (
 		<Show when={data()?.timeline}>
