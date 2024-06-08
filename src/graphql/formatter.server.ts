@@ -3,16 +3,16 @@ import isObject from "../utils/is-object.server";
 export type InlineTranslatedPropertyObject<T> = T extends (infer U)[]
 	? InlineTranslatedPropertyObject<U>[]
 	: T extends {
-			translations?: null | undefined | (null | infer U)[];
-	  }
-	? (U extends Record<string, unknown>
-			? InlineTranslatedPropertyObject<U>
-			: never) &
-			Omit<
-				{ [K in keyof T]: InlineTranslatedPropertyObject<T[K]> },
-				"translations"
-			>
-	: T;
+				translations?: null | undefined | (null | infer U)[];
+		  }
+		? (U extends Record<string, unknown>
+				? InlineTranslatedPropertyObject<U>
+				: never) &
+				Omit<
+					{ [K in keyof T]: InlineTranslatedPropertyObject<T[K]> },
+					"translations"
+				>
+		: T;
 
 export function format<T extends unknown[]>(
 	source: T,
