@@ -19,7 +19,7 @@
 		"test:coverage": "vitest run --coverage",
 		"lint": "prettier --check . && eslint --ext=js,jsx,ts,tsx  --max-warnings=0 .",
 		"lint-staged": "lint-staged --config lint-staged.js",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"codegen": "graphql-codegen"
 	},
 	"type": "module",
@@ -57,7 +57,7 @@
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-solid": "^0.13.0",
 		"eslint-plugin-testing-library": "^6.0.0",
-		"husky": "^8.0.0",
+		"husky": "^9.0.0",
 		"jsdom": "^24.0.0",
 		"lint-staged": "^15.0.1",
 		"prettier": "3.3",
