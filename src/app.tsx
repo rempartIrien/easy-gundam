@@ -11,6 +11,7 @@ import "sanitize.css/system-ui.css";
 import "sanitize.css/ui-monospace.css";
 
 import ErrorPage from "./components/ErrorPage";
+import Favicons from "./components/Favicons";
 import MenuRegion from "./components/menu/MenuRegion";
 import Providers from "./components/Providers/Providers";
 
@@ -20,6 +21,7 @@ export default function App() {
 			root={(props) => (
 				<Providers>
 					<ErrorBoundary fallback={() => <ErrorPage />}>
+						<Favicons />
 						<MenuRegion />
 						<Suspense>{props.children}</Suspense>
 					</ErrorBoundary>

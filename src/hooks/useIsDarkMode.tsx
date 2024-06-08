@@ -7,7 +7,9 @@ import { ThemeName } from "~/theme/ThemeName";
 export default function useIsDarkMode(): Accessor<boolean | undefined> {
 	const [currentTheme] = useContext(ThemeContext);
 	const [prefersDarkMode, setPrefersDarkMode] = createSignal(false);
-	const [isDarkMode, setIsDarkMode] = createSignal<boolean>();
+	const [isDarkMode, setIsDarkMode] = createSignal<boolean>(
+		currentTheme() === ThemeName.Dark,
+	);
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

@@ -1,7 +1,6 @@
 // @refresh reload
 import { StartServer, createHandler } from "@solidjs/start/server";
 
-import Favicons from "./components/Favicons";
 import { getLocale } from "./i18n/i18n.cookie";
 import { bodyStyle } from "./root.css";
 import getHtmlTagClasses from "./theme/getHtmlTagClasses";
@@ -22,7 +21,6 @@ export default createHandler(
 								content="width=device-width, initial-scale=1"
 							/>
 							<meta name="color-scheme" content="dark light" />
-							<Favicons />
 							{assets}
 						</head>
 						<body class={bodyStyle}>
