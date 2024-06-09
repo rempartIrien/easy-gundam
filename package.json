@@ -47,7 +47,7 @@
 		"@testing-library/user-event": "^14.5.2",
 		"@typescript-eslint/eslint-plugin": "^6.4.0",
 		"@typescript-eslint/parser": "^6.4.0",
-		"@vanilla-extract/vite-plugin": "^3.0.0",
+		"@vanilla-extract/vite-plugin": "^4.0.10",
 		"@vitest/ui": "^1.6.0",
 		"dotenv": "^16.0.3",
 		"eslint": "^8.35.0",
