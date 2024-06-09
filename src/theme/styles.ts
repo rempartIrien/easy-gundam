@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+/* eslint-disable @typescript-eslint/naming-convention */
 import { calc } from "@vanilla-extract/css-utils";
 
 import { fixedSpace, relativeSpace } from "./utils";
@@ -12,16 +12,16 @@ export const glassEffectStyles = {
 	boxShadow: vars.boxShadow.base,
 };
 
-const textBlockStyle = style({
+const textBlockStyles = {
 	padding: 0,
 	margin: 0,
 	width: `min(${relativeSpace(88)}, 100%)`,
-});
+};
 
-export const headingTextBlockStyle = style([textBlockStyle]);
+export const headingTextBlockStyles = [textBlockStyles];
 
-export const contentTextBlockStyle = style([
-	textBlockStyle,
+export const contentTextBlockStyles = [
+	textBlockStyles,
 	{
 		marginBottom: vars.space.sectionBottom,
 		selectors: {
@@ -36,4 +36,4 @@ export const contentTextBlockStyle = style([
 			},
 		},
 	},
-]);
+];

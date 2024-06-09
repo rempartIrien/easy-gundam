@@ -4,14 +4,14 @@ import vars from "~/theme/variables.css";
 
 const baseLinkStyle = style({
 	textDecoration: "none",
-	// Keep it inline so that it wraps properly (https://stackoverflow.com/questions/62433455/is-it-possible-to-made-inline-block-elements-line-wrap-like-inline-text).
-	display: "inline",
 });
 
 export const linkStyle = styleVariants({
 	styled: [
 		baseLinkStyle,
 		{
+			// Keep it inline so that it wraps properly (https://stackoverflow.com/questions/62433455/is-it-possible-to-made-inline-block-elements-line-wrap-like-inline-text).
+			display: "inline",
 			color: vars.color.primary.text,
 			selectors: {
 				"&:hover": {

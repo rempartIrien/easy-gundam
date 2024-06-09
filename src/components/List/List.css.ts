@@ -1,11 +1,11 @@
 import { style } from "@vanilla-extract/css";
 
-import { contentTextBlockStyle } from "~/theme/styles.css";
+import { contentTextBlockStyles } from "~/theme/styles";
 import { relativeSpace } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 
 export const listStyle = style([
-	contentTextBlockStyle,
+	...contentTextBlockStyles,
 	{
 		paddingLeft: relativeSpace(4),
 		fontSize: vars.font.normalText.size,

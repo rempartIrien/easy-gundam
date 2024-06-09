@@ -1,11 +1,11 @@
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-import { contentTextBlockStyle } from "~/theme/styles.css";
+import { contentTextBlockStyles } from "~/theme/styles";
 import vars from "~/theme/variables.css";
 
 export const paragraphStyle = style([
-	contentTextBlockStyle,
+	...contentTextBlockStyles,
 	{
 		marginBottom: vars.space.sectionBottom,
 		selectors: {

@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { glassEffectStyles } from "~/theme/styles.css";
+import { glassEffectStyles } from "~/theme/styles";
 import { fixedSpace } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 

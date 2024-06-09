@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { contentTextBlockStyle } from "~/theme/styles.css";
+import { contentTextBlockStyles } from "~/theme/styles";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 
@@ -16,7 +16,7 @@ export const containerstyle = style({
 });
 
 export const textBlockStyle = style([
-	contentTextBlockStyle,
+	...contentTextBlockStyles,
 	{
 		gap: relativeSpace(4),
 		flex: 1,

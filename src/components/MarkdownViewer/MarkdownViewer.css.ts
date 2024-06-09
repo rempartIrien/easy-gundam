@@ -1,3 +1,5 @@
-import { contentTextBlockStyle } from "~/theme/styles.css";
+import { style } from "@vanilla-extract/css";
 
-export const viewerStyle = contentTextBlockStyle;
+import { contentTextBlockStyles } from "~/theme/styles";
+
+export const viewerStyle = style(contentTextBlockStyles);

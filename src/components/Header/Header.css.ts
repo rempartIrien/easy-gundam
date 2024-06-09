@@ -1,7 +1,7 @@
 import type { StyleRule } from "@vanilla-extract/css";
 import { style } from "@vanilla-extract/css";
 
-import { glassEffectStyles } from "~/theme/styles.css";
+import { glassEffectStyles } from "~/theme/styles";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 
 import { menuTriggerStyle } from "./MenuTrigger.css";

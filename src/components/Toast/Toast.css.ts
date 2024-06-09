@@ -1,7 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-import { glassEffectStyles } from "~/theme/styles.css";
+import { glassEffectStyles } from "~/theme/styles";
 import { fixedSpace, relativeSpace } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 

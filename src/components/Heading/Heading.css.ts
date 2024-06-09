@@ -1,10 +1,10 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { headingTextBlockStyle } from "~/theme/styles.css";
+import { headingTextBlockStyles } from "~/theme/styles";
 import vars from "~/theme/variables.css";
 
 const baseHeadingStyle = style([
-	headingTextBlockStyle,
+	...headingTextBlockStyles,
 	{
 		fontWeight: 700,
 		color: vars.color.primary.main,
