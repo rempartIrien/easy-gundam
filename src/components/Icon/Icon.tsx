@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Dynamic } from "solid-js/web";
 
 import ICON_REGISTRY from "./icon-registry";
 import { iconStyle } from "./Icon.css";
@@ -10,8 +11,9 @@ export interface IconProps {
 
 export default function Icon(props: IconProps) {
 	return (
-		<svg class={clsx([iconStyle, props.class])}>
-			<use href={`${ICON_REGISTRY[props.name]}#icon`} />
-		</svg>
+		<Dynamic
+			component={ICON_REGISTRY[props.name]}
+			class={clsx([iconStyle, props.class])}
+		/>
 	);
 }
