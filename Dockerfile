@@ -56,7 +56,7 @@ COPY --from=production-deps /app/node_modules /app/node_modules
 # Uncomment if using Prisma
 # COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
 
-COPY --from=build /app/dist /app/dist
+COPY --from=build /app/.output /app/.output
 ADD . .
 
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "start"]
