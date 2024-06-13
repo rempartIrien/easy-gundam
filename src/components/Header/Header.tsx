@@ -42,13 +42,13 @@ export default function Header(props: HeaderProps) {
 		{ href: "about", labelKey: "navigation.about" },
 	];
 
+	createPreventScroll({
+		element: ref,
+		enabled: open,
+	});
+
 	const toggleMenu = () => {
 		setOpen((prev) => !prev);
-
-		createPreventScroll({
-			element: ref,
-			enabled: open(),
-		});
 	};
 
 	const MainRow = (props: { class?: string }) => (
