@@ -3,6 +3,8 @@ import { style } from "@vanilla-extract/css";
 import { fixedSpace, from } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 
+import { linkStyle as baseLinkStyle } from "../Link/Link.css";
+
 const mediumBreakpoint = from("md");
 const gap = fixedSpace(0.5);
 
@@ -17,13 +19,13 @@ export const listStyle = style({
 	gap,
 });
 
-const flexItem = style({
+const flexItemStyles = {
 	display: "flex",
 	alignItems: "center",
-});
+};
 
 export const listItemStyle = style([
-	flexItem,
+	flexItemStyles,
 	{
 		gap,
 		selectors: {
@@ -44,7 +46,11 @@ export const listItemStyle = style([
 	},
 ]);
 
-export const linkStyle = style([flexItem]);
+export const linkStyle = style({
+	selectors: {
+		[`&.${baseLinkStyle.styled}`]: flexItemStyles,
+	},
+});
 
 const chevronStyle = style({
 	width: "1.25rem",
