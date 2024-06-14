@@ -1,16 +1,21 @@
 import { style } from "@vanilla-extract/css";
 
+import { sectionStyle } from "~/components/Section/Section.css";
 import { contentTextBlockStyles } from "~/theme/styles";
 import { fixedSpace, from, relativeSpace } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 
 export const containerstyle = style({
-	gap: fixedSpace(4),
-	alignItems: "center",
-	"@media": {
-		[from("lg")]: {
-			alignItems: "flex-start",
-			flexDirection: "row",
+	selectors: {
+		[`&.${sectionStyle}`]: {
+			gap: fixedSpace(4),
+			alignItems: "center",
+			"@media": {
+				[from("lg")]: {
+					alignItems: "flex-start",
+					flexDirection: "row",
+				},
+			},
 		},
 	},
 });
