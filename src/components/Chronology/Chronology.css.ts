@@ -57,10 +57,11 @@ export const chronologyItemStyle = style({
 
 export const yearStyle = style({
 	marginBottom: vars.space.midSectionBottom,
-	color: vars.color.primary.text,
+	color: vars.color.primary.main,
 	textAlign: "center",
 	"@media": {
 		[from("md")]: {
+			color: vars.color.primary.text,
 			marginBottom: 0,
 			borderRightWidth: borderWidth,
 			borderRightStyle: "solid",
