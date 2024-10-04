@@ -24,7 +24,7 @@ const routeData = cache(async (params: Params) => {
 
 	const locale = getLocale();
 	if (!Object.keys(LanguageNames).includes(params.lang)) {
-		throw redirect(`/${locale}/home`);
+		return redirect(`/${locale}/home`);
 	}
 	return locale;
 }, "lang");

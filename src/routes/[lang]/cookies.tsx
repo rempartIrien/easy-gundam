@@ -71,7 +71,7 @@ const updateCookies = action(async (form: FormData) => {
 			deleteLocale(nativeEvent);
 	}
 
-	throw redirect(redirectTo);
+	return redirect(redirectTo);
 });
 
 export default function Cookies() {

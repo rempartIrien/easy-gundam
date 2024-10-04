@@ -7,7 +7,7 @@ const routeData = cache(() => {
 	"use server";
 
 	const locale = getLocale();
-	throw redirect(`/${locale}/home`);
+	return redirect(`/${locale}/home`);
 }, "lang");
 
 export const route = {

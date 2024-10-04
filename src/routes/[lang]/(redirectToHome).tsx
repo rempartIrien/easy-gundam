@@ -10,7 +10,7 @@ import { isLanguage } from "~/i18n/i18n.config";
 const routeData = cache(async (params: Params) => {
 	"use server";
 	invariant(isLanguage(params.lang), "Expected params.lang");
-	throw redirect(`/${params.lang}/home`);
+	return redirect(`/${params.lang}/home`);
 }, "redirectToHome");
 
 export const route = {
