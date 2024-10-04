@@ -20,7 +20,7 @@ async function routeData(params: Params) {
 }
 
 export const route = {
-	load: ({ params }) => routeData(params),
+	preload: ({ params }) => routeData(params),
 } as RouteDefinition;
 
 export default function TimelineDescription() {

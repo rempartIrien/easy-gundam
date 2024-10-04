@@ -14,7 +14,7 @@ const routeData = cache(async (params: Params) => {
 }, "redirectToHome");
 
 export const route = {
-	load: ({ params }) => routeData(params),
+	preload: ({ params }) => routeData(params),
 } satisfies RouteDefinition;
 
 export default function Index() {

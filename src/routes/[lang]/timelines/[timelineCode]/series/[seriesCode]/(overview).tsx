@@ -35,7 +35,7 @@ const routeData = cache(async (params: Params) => {
 }, "overview");
 
 export const route = {
-	load: ({ params }) => {
+	preload: ({ params }) => {
 		return routeData(params);
 	},
 } satisfies RouteDefinition;

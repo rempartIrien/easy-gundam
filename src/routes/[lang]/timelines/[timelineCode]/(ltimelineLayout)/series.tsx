@@ -23,7 +23,7 @@ const routeData = cache(async (params: Params) => {
 }, "timelineSeries");
 
 export const route = {
-	load: ({ params }) => routeData(params),
+	preload: ({ params }) => routeData(params),
 } as RouteDefinition;
 
 export default function TimelineSeries() {
