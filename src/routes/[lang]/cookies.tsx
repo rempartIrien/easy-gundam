@@ -1,5 +1,5 @@
 import type { RouteDefinition } from "@solidjs/router";
-import { action, createAsync, redirect } from "@solidjs/router";
+import { action, cache, createAsync, redirect } from "@solidjs/router";
 import { Show } from "solid-js";
 import { getRequestEvent } from "solid-js/web";
 
@@ -26,7 +26,7 @@ type DeleteCookie =
 	| typeof languageCookie
 	| typeof themeCookie;
 
-export function routeData() {
+const routeData = cache(() => {
 	"use server";
 	const event = getRequestEvent();
 	if (!event) {
@@ -37,14 +37,14 @@ export function routeData() {
 		locale: !!getLocaleToken(nativeEvent),
 		theme: !!getColorSchemeToken(nativeEvent),
 	};
-}
+}, "cookies");
 
 function loadFunction() {
 	return Promise.resolve(routeData());
 }
 
 export const route = {
-	load: () => loadFunction(),
+	preload: () => loadFunction(),
 } satisfies RouteDefinition;
 
 const updateCookies = action(async (form: FormData) => {

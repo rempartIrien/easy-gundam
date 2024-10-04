@@ -11,7 +11,7 @@ const routeData = cache(() => {
 }, "lang");
 
 export const route = {
-	load: () => routeData(),
+	preload: () => routeData(),
 };
 
 export default function Index() {
