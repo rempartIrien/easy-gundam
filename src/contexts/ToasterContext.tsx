@@ -1,4 +1,4 @@
-import { toaster } from "@kobalte/core";
+import { toaster } from "@kobalte/core/toast";
 import type { JSX } from "solid-js";
 import type { Owner } from "solid-js";
 import { getOwner } from "solid-js";

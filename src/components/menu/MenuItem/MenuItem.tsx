@@ -1,4 +1,4 @@
-import { DropdownMenu } from "@kobalte/core";
+import { DropdownMenu } from "@kobalte/core/dropdown-menu";
 import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";

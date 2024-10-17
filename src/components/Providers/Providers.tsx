@@ -1,4 +1,4 @@
-import { I18nProvider as KobalteI18nProvider } from "@kobalte/core";
+import { I18nProvider as KobalteI18nProvider } from "@kobalte/core/i18n";
 import { MetaProvider } from "@solidjs/meta";
 import { cache, createAsync } from "@solidjs/router";
 import type { JSX } from "solid-js";

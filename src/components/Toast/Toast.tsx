@@ -1,4 +1,4 @@
-import { Toast as KobalteToast } from "@kobalte/core";
+import { Toast as KobalteToast } from "@kobalte/core/toast";
 import { Show } from "solid-js";
 import type { JSX } from "solid-js";
 
@@ -24,7 +24,7 @@ export interface ToastProps {
 
 export default function Toast(props: ToastProps) {
 	return (
-		<KobalteToast.Root
+		<KobalteToast
 			toastId={props.toastId}
 			class={toastStyle[props.type]}
 			duration={props.duration}
@@ -43,6 +43,6 @@ export default function Toast(props: ToastProps) {
 					<KobalteToast.Description>{props.content}</KobalteToast.Description>
 				</Show>
 			</div>
-		</KobalteToast.Root>
+		</KobalteToast>
 	);
 }

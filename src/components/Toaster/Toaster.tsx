@@ -1,4 +1,4 @@
-import { Toast } from "@kobalte/core";
+import { Toast } from "@kobalte/core/toast";
 import { Portal } from "solid-js/web";
 
 import { listStyle, regionStyle } from "./Toaster.css";
