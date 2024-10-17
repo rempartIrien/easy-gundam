@@ -15,6 +15,8 @@ import Favicons from "./components/Favicons";
 import MenuRegion from "./components/menu/MenuRegion";
 import Providers from "./components/Providers/Providers";
 
+import "./index.css";
+
 export default function App() {
 	return (
 		<Router
