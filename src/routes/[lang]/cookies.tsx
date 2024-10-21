@@ -15,8 +15,6 @@ import useTranslation from "~/hooks/useTranslation";
 import { deleteLocale, getLocaleToken } from "~/i18n/i18n.cookie";
 import { deleteColorScheme, getColorSchemeToken } from "~/theme/theme.cookie";
 
-import { buttonStyles } from "./cookies.css";
-
 const buttonName = "deleteCookie";
 const allCookie = "all" as const;
 const languageCookie = "language" as const;
@@ -92,12 +90,7 @@ export default function Cookies() {
 							<li>{t("cookies.list.theme")}</li>
 						</List>
 						<Paragraph>{t("cookies.text")}</Paragraph>
-						<Button
-							class={buttonStyles}
-							type="submit"
-							name={buttonName}
-							value={allCookie}
-						>
+						<Button type="submit" name={buttonName} value={allCookie}>
 							{t("cookies.actions.deleteAll")}
 						</Button>
 					</Section>
@@ -108,12 +101,7 @@ export default function Cookies() {
 							when={cookies()?.locale}
 							fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
 						>
-							<Button
-								class={buttonStyles}
-								type="submit"
-								name={buttonName}
-								value={languageCookie}
-							>
+							<Button type="submit" name={buttonName} value={languageCookie}>
 								{t("cookies.actions.deleteLanguage")}
 							</Button>
 						</Show>
@@ -125,12 +113,7 @@ export default function Cookies() {
 							when={cookies()?.theme}
 							fallback={<Paragraph>{t("cookies.noCookie")}</Paragraph>}
 						>
-							<Button
-								class={buttonStyles}
-								type="submit"
-								name={buttonName}
-								value={themeCookie}
-							>
+							<Button type="submit" name={buttonName} value={themeCookie}>
 								{t("cookies.actions.deleteTheme")}
 							</Button>
 						</Show>

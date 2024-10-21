@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-	--breakpoint-medium: "48rem";
+	--space-margin-bottom-section: 4rem;
 
 	/* TODO: execute https://coolors.co/contrast-checker/ */
 	--color-merigold: #FCAE1E;
@@ -39,8 +39,8 @@
 	--color-ceruleanDark: #023a4e;
 
 	--color-background-main: var(--color-grayLighter);
-	--color-background-emphasis: color-mix(in srgb, var(--color-white), transparent 60%);
-	--color-background-button: color-mix(in srgb, var(--color-grayLight), transparent 50%);
+	--color-background-emphasis: color-mix(in srgb, var(--color-white) 60%, transparent);
+	--color-background-button: color-mix(in srgb, var(--color-grayLight) 50%, transparent);
 	--color-text-main: var(--color-black);
 	--color-text-disabled: var(--color-grayDark);
 	--color-primary-main: var(--color-imperialRed);
@@ -52,21 +52,22 @@
 	--color-info-main: var(--color-cerulean);
 	--color-info-text: var(--color-ceruleanDark);
 	--color-info-background: var(--color-ceruleanLight);
-	--color-info-toast: color-mix(in srgb, var(--color-cerulean), transparent 50%);
+	--color-info-toast: color-mix(in srgb, var(--color-cerulean) 50%, transparent);
 	--color-success-main: var(--color-emerald);
 	--color-success-text: var(--color-emeraldDark);
 	--color-success-background: var(--color-emeraldLight);
-	--color-success-toast: color-mix(in srgb, var(--color-emerald), transparent 50%);
+	--color-success-toast: color-mix(in srgb, var(--color-emerald) 50%, transparent);
 	--color-warning-main: var(--color-apricot);
 	--color-warning-text: var(--color-apricotDark);
 	--color-warning-background: var(--color-apricotLight);
-	--color-warning-toast: color-mix(in srgb, var(--color-apricot), transparent 50%);
+	--color-warning-toast: color-mix(in srgb, var(--color-apricot) 50%, transparent);
 	--color-error-main: var(--color-candyApple);
 	--color-error-text: var(--color-candyAppleDark);
 	--color-error-background: var(--color-candyAppleLight);
-	--color-error-toast: color-mix(in srgb, var(--color-candyApple), transparent 50%);
+	--color-error-toast: color-mix(in srgb, var(--color-candyApple) 50%, transparent);
 
-	--box-shadow: 0px 4px 10px 2px color-mix(in srgb, var(--color-gray), transparent 50%);
+	--box-shadow: 0px 4px 10px 2px color-mix(in srgb, var(--color-gray) 50%, transparent);
+	--border: 1px solid var(--color-grayLight);
 
 	--font-size-small: 0.9rem;
 	--font-line-height-small: 1.7;
@@ -80,7 +81,8 @@
 	--font-line-height-title: 1.2;
 }
 
-@media screen and (min-width: var(--breakpoint-medium)) {
+/* Medium breakpoint */
+@media screen and (min-width: 48rem) {
 	:root {
 		--font-size-small: 0.75rem;
 		--font-line-height-small: 1.6;
@@ -97,8 +99,8 @@
 
 html.dark {
 	--color-background-main: var(--color-grayDarker);
-	--color-background-emphasis: color-mix(in srgb, var(--color-grayDarker), transparent 50%);
-	--color-background-button: color-mix(in srgb, var(--color-gray), transparent 25%);
+	--color-background-emphasis: color-mix(in srgb, var(--color-grayDarker) 50%, transparent);
+	--color-background-button: color-mix(in srgb, var(--color-gray) 25%, transparent);
 	--color-text-main: var(--color-white);
 	--color-text-disabled: var(--color-grayLight);
 	--color-primary-main: var(--color-merigold);
@@ -110,21 +112,31 @@ html.dark {
 	--color-info-main: var(--color-cerulean);
 	--color-info-text: var(--color-ceruleanLight);
 	--color-info-background: var(--color-ceruleanDark);
-	--color-info-toast: color-mix(in srgb, var(--color-cerulean), transparent 50%);
+	--color-info-toast: color-mix(in srgb, var(--color-cerulean) 50%, transparent);
 	--color-success-main: var(--color-emerald);
 	--color-success-text: var(--color-emeraldLight);
 	--color-success-background: var(--color-emeraldDark);
-	--color-success-toast: color-mix(in srgb, var(--color-emerald), transparent 50%);
+	--color-success-toast: color-mix(in srgb, var(--color-emerald) 50%, transparent);
 	--color-warning-main: var(--color-apricot);
 	--color-warning-text: var(--color-apricotLight);
 	--color-warning-background: var(--color-apricotDark);
-	--color-warning-toast: color-mix(in srgb, var(--color-apricot), transparent 50%);
+	--color-warning-toast: color-mix(in srgb, var(--color-apricot) 50%, transparent);
 	--color-error-main: var(--color-candyApple);
 	--color-error-text: var(--color-candyAppleLight);
 	--color-error-background: var(--color-candyAppleDark);
-	--color-error-toast: color-mix(in srgb, var(--color-candyApple), transparent 50%);
+	--color-error-toast: color-mix(in srgb, var(--color-candyApple) 50%, transparent);
 
 	--box-shadow: none;
+	--border: 1px solid color-mix(in srgb, var(--color-white) 12.5%, transparent);
+}
+
+@layer utilities {
+  .glass-effect {
+		background-color: var(--color-background-emphasis);
+		backdrop-filter: blur(32px);
+		border: var(--border);
+		box-shadow: var(--box-shadow);
+	}
 }
 
 

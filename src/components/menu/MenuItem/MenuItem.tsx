@@ -3,8 +3,6 @@ import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 
-import Button from "~/components/Button";
-
 import { activeButtonStyle, buttonStyle } from "./MenuItem.css";
 
 interface MenuItemProps {
@@ -24,7 +22,7 @@ export default function MenuItem(props: MenuItemProps) {
 	return (
 		<DropdownMenu.Item
 			onSelect={local.onSelect as (() => void) | undefined}
-			as={Button}
+			as="button"
 			class={clsx([buttonStyle, local.isActive && activeButtonStyle])}
 			{...others}
 		>

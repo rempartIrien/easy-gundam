@@ -8,14 +8,18 @@ import type { KeyValuePair, ResolvableTo } from "tailwindcss/types/config";
 // borderRadiuses ✅ => Tailwind's
 // boxShadows ✅ => see `src/index.css`
 
-const spaces = [...Array(20)].reduce(
-	(acc: ResolvableTo<KeyValuePair>, _, index) => ({
-		...acc,
-		[`${index}f`]: `${index * 8}px`,
-		[`${index}r`]: `${index * 0.5}rem`,
-	}),
-	{},
-);
+const spaces = [...Array(41)]
+	.map((_, value) => value / 2)
+	.reduce((acc: ResolvableTo<KeyValuePair>, value) => {
+		if (!value) {
+			return { ...acc, ["0"]: "0" };
+		}
+		return {
+			...acc,
+			[`${value}f`]: `${value * 8}px`,
+			[`${value}r`]: `${value * 0.5}rem`,
+		};
+	}, {});
 
 export default {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
@@ -26,14 +30,14 @@ export default {
 		screens: {
 			xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
 			sm: "30rem", // iPads, Tablets (480)
-			md: "var(--breakpoint-medium)", // Small screens, laptops (768)
+			md: "48rem", // Small screens, laptops (768)
 			lg: "64rem", // Desktops, large screens (1024)
 			xl: "75rem", // Extra large screens, TV (1200)
 		},
 		spacing: {
 			...spaces,
-			sectionBottom: spaces["8r"],
-			midSectionBottom: spaces["4r"],
+			sectionBottom: "var(--space-margin-bottom-section)",
+			midSectionBottom: "calc(var(--space-margin-bottom-section) / 2)",
 		},
 		fontSize: {
 			sm: ["14px", "20px"],

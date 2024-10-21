@@ -7,7 +7,6 @@ import Heading from "../Heading";
 import List from "../List";
 
 import Adaptation from "./Adaptation";
-import { adaptationsStyle } from "./Adaptations.css";
 
 interface Adaptation {
 	title: string;
@@ -42,7 +41,7 @@ export default function Adaptations(props: AdaptationsProps) {
 					<Heading variant="subtitle">
 						{t("series.details.overview.subtitles.adaptations")}
 					</Heading>
-					<List component="ol" class={adaptationsStyle}>
+					<List component="ol" class="flex flex-col gap-midSectionBottom">
 						<For each={props.adaptations}>
 							{(adaptation) => (
 								<li>

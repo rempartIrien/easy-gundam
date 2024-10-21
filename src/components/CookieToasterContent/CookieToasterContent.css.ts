@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-import { fixedSpace } from "~/theme/utils";
 import vars from "~/theme/variables.css";
 
 export const contentStyle = style({
@@ -17,13 +16,4 @@ export const textStyle = style({
 			marginBottom: calc(vars.space.midSectionBottom).toString(),
 		},
 	},
-});
-
-export const actionListStyle = style({
-	display: "flex",
-	gap: fixedSpace(2),
-});
-
-export const actionStyle = style({
-	flex: 1,
 });

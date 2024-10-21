@@ -7,6 +7,7 @@ import vars from "~/theme/variables.css";
 export const buttonStyle = style([
 	linkStyle.styled,
 	{
+		cursor: "pointer",
 		selectors: {
 			[`&.${linkStyle.styled}`]: {
 				display: "block",
