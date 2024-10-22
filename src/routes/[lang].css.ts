@@ -11,12 +11,6 @@ export const containerStyle = style({
 	flex: 1,
 });
 
-export const contentStyle = style({
-	paddingTop: relativeSpace(4),
-	paddingBottom: relativeSpace(4),
-	flex: 1,
-});
-
 export const headerStyle = style({
 	zIndex: 1, // Be above all absolute-positioned elements
 });

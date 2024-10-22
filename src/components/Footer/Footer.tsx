@@ -12,7 +12,6 @@ import Link from "../Link";
 import Logo from "../Logo";
 
 import {
-	containerStyle,
 	copyrightStyle,
 	footerStyle,
 	linkListStyle,
@@ -35,29 +34,31 @@ export default function Footer(props: FooterProps) {
 			<div class={logoContainerStyle}>
 				<Logo class={logoStyle} variant="text" />
 			</div>
-			<CenterContent class={containerStyle}>
-				<ul class={linkListStyle}>
-					<li>
-						<Link href={`${rootPath()}about`}>{t("footer.links.about")}</Link>
-					</li>
-					<li>
-						<Link href={`${rootPath()}cookies`}>
-							{t("footer.links.cookies")}
-						</Link>
-					</li>
-					<li>
-						<Link href="https://twitter.com/RempartIrien">
-							{t("footer.links.contact")}
-						</Link>
-					</li>
-				</ul>
-				<div class={copyrightStyle}>
-					<div>
-						© {firstYear}
-						<Show when={year !== firstYear}>-{year}</Show> {appName}
+			<CenterContent>
+				<div class="flex flex-col gap-4f lg:flex-row-reverse lg:items-start lg:justify-between lg:gap-4r">
+					<ul class={linkListStyle}>
+						<li>
+							<Link href={`${rootPath()}about`}>{t("footer.links.about")}</Link>
+						</li>
+						<li>
+							<Link href={`${rootPath()}cookies`}>
+								{t("footer.links.cookies")}
+							</Link>
+						</li>
+						<li>
+							<Link href="https://twitter.com/RempartIrien">
+								{t("footer.links.contact")}
+							</Link>
+						</li>
+					</ul>
+					<div class={copyrightStyle}>
+						<div>
+							© {firstYear}
+							<Show when={year !== firstYear}>-{year}</Show> {appName}
+						</div>
+						<div>{t("footer.copyrights.gundam", { appName })}</div>
+						<div>{t("footer.copyrights.site", { appName })}</div>
 					</div>
-					<div>{t("footer.copyrights.gundam", { appName })}</div>
-					<div>{t("footer.copyrights.site", { appName })}</div>
 				</div>
 			</CenterContent>
 		</footer>

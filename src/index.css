@@ -79,10 +79,18 @@
 	--font-line-height-subtitle: 1.35;
 	--font-size-title: 3rem;
 	--font-line-height-title: 1.2;
+
+	--chronology-border-width: 4px;
+	--chronology-bullet-size: theme(spacing.3f);
+	--chronology-year-width: calc(calc(var(--chronology-border-width) / 2 ) + 50%);
+	--chronology-gap: calc(calc(calc(var(--chronology-border-width) / 2 )) + theme(spacing.4f));
+	--chronology-bullet-paddingTop: theme(spacing.2f);
+	--chronology-year-columnWidth: theme(spacing.20r);
+	--chronology-bullet-right: calc(calc(var(--chronology-border-width) + var(--chronology-bullet-size)) / -2);
+	--chronology-bullet-top: calc(calc(calc(var(--font-size-big) * var(--font-line-height-big)) / 2) + var(--chronology-bullet-paddingTop));
 }
 
-/* Medium breakpoint */
-@media screen and (min-width: 48rem) {
+@media screen(md) {
 	:root {
 		--font-size-small: 0.75rem;
 		--font-line-height-small: 1.6;

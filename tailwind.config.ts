@@ -1,5 +1,14 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { Config } from "tailwindcss";
 import type { KeyValuePair, ResolvableTo } from "tailwindcss/types/config";
+
+const breakpoints = {
+	xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
+	sm: "30rem", // iPads, Tablets (480)
+	md: "48rem", // Small screens, laptops (768)
+	lg: "64rem", // Desktops, large screens (1024)
+	xl: "75rem", // Extra large screens, TV (1200)
+} as const;
 
 // colors ✅ => see `src/index.css`
 // font families ✅ => Tailwind's
@@ -27,28 +36,18 @@ export default {
 		preflight: false, // Because we have sanitize.ccs
 	},
 	theme: {
-		screens: {
-			xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
-			sm: "30rem", // iPads, Tablets (480)
-			md: "48rem", // Small screens, laptops (768)
-			lg: "64rem", // Desktops, large screens (1024)
-			xl: "75rem", // Extra large screens, TV (1200)
-		},
+		screens: breakpoints,
 		spacing: {
 			...spaces,
-			sectionBottom: "var(--space-margin-bottom-section)",
-			midSectionBottom: "calc(var(--space-margin-bottom-section) / 2)",
 		},
 		fontSize: {
 			sm: ["14px", "20px"],
 			base: ["16px", "24px"],
 			lg: ["20px", "28px"],
 			xl: ["24px", "32px"],
-			// eslint-disable-next-line @typescript-eslint/naming-convention
 			"2xl": ["1.563rem", "32px"],
 		},
 		boxShadow: {
-			// eslint-disable-next-line @typescript-eslint/naming-convention
 			DEFAULT: "var(--box-shadow)",
 		},
 		colors: {
@@ -98,7 +97,27 @@ export default {
 				warning: "var(--color-warning-toast)",
 			},
 		},
-		extend: {},
+		extend: {
+			spacing: {
+				chronologyGap: "var(--chronology-gap)",
+				chronologyBulletSize: "var(--chronology-bullet-size)",
+				chronologyBulletPaddingTop: "var(--chronology-bullet-paddingTop)",
+				chronologyBulletRight: "var(--chronology-bullet-right)",
+				chronologyBulletTop: "var(--chronology-bullet-top)",
+				sectionBottom: "var(--space-margin-bottom-section)",
+				midSectionBottom: "calc(var(--space-margin-bottom-section) / 2)",
+			},
+			borderWidth: {
+				chronologyBorderWidth: "var(--chronology-border-width)",
+			},
+			maxWidth: {
+				chronologyYearColumnWidth: "var(--chronology-year-columnWidth)",
+			},
+			width: {
+				"min-100-xl": `min(100%, ${breakpoints.xl})`,
+				chronologyYearWidth: "var(--chronology-year-width)",
+			},
+		},
 	},
 	plugins: [],
 } satisfies Config;

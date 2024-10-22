@@ -8,10 +8,16 @@ import { externalLinkStyle, linkStyle } from "./Link.css";
 
 interface LinkProps extends Omit<ComponentProps<typeof A>, "target" | "rel"> {
 	noStyle?: boolean;
+	block?: boolean;
 }
 
 export default function Link(props: LinkProps) {
-	const [local, others] = splitProps(props, ["children", "noStyle", "class"]);
+	const [local, others] = splitProps(props, [
+		"children",
+		"noStyle",
+		"class",
+		"block",
+	]);
 	const variant = createMemo(() => (local.noStyle ? "unstyled" : "styled"));
 	const isExternal = createMemo(() => props.href.startsWith("http"));
 	const target = createMemo(() => (isExternal() ? "_blank" : undefined));
@@ -24,6 +30,7 @@ export default function Link(props: LinkProps) {
 			class={clsx(
 				linkStyle[variant()],
 				isExternal() && externalLinkStyle,
+				local.block && "block", // FIXME: not ideal
 				local.class,
 			)}
 			target={target()}

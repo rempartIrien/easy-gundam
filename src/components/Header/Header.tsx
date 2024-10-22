@@ -52,24 +52,26 @@ export default function Header(props: HeaderProps) {
 	};
 
 	const MainRow = (props: { class?: string }) => (
-		<CenterContent class={clsx([mainRowContainerStyle, props.class])}>
-			<Link class={logoContainerStyle} href="/">
-				<Logo />
-			</Link>
-			<Nav
-				class={desktopNavStyle}
-				items={links.map((link) => (
-					<NavItem href={link.href}>{t(link.labelKey)}</NavItem>
-				))}
-			/>
-			<button class={menuIconStyle} onClick={toggleMenu}>
-				<Show when={open()} fallback={<HeaderIcon name="menu" />}>
-					<HeaderIcon name="close" />
-				</Show>
-			</button>
-			<div class={actionContainerStyle}>
-				<ThemeSwitcher />
-				<LocaleSwitcher />
+		<CenterContent>
+			<div class={clsx([mainRowContainerStyle, props.class])}>
+				<Link class={logoContainerStyle} href="/">
+					<Logo />
+				</Link>
+				<Nav
+					class={desktopNavStyle}
+					items={links.map((link) => (
+						<NavItem href={link.href}>{t(link.labelKey)}</NavItem>
+					))}
+				/>
+				<button class={menuIconStyle} onClick={toggleMenu}>
+					<Show when={open()} fallback={<HeaderIcon name="menu" />}>
+						<HeaderIcon name="close" />
+					</Show>
+				</button>
+				<div class={actionContainerStyle}>
+					<ThemeSwitcher />
+					<LocaleSwitcher />
+				</div>
 			</div>
 		</CenterContent>
 	);

@@ -1,13 +1,9 @@
-import clsx from "clsx";
-
 import useRootPath from "~/hooks/useRootPath";
 
 import Card from "../Card";
 import Image from "../Image";
 import Link from "../Link";
 import Text from "../Text";
-
-import { seriesItemStyle, textBlockStyle, titleStyle } from "./SeriesItem.css";
 
 export interface BaseSeries {
 	code: string;
@@ -20,7 +16,6 @@ export interface BaseSeries {
 interface SeriesItemProps {
 	series: BaseSeries;
 	timelineCode: string;
-	class?: string;
 }
 
 // TODO: fallback when image is null
@@ -31,21 +26,27 @@ export default function SeriesItem(props: SeriesItemProps) {
 		<Card
 			component={Link}
 			noStyle
-			class={clsx([seriesItemStyle, props.class])}
+			block
 			href={`${rootPath()}timelines/${props.timelineCode}/series/${
 				props.series.code
 			}`}
 		>
-			<Image
-				imageId={props.series.image?.id}
-				alt={props.series.image?.description || props.series.title}
-				size="extraSmall"
-			/>
-			<div class={textBlockStyle}>
-				<Text component="div" variant="big" class={titleStyle}>
-					{props.series.title}
-				</Text>
-				<Text component="div">{props.series.description}</Text>
+			<div class="group flex gap-2f">
+				<Image
+					imageId={props.series.image?.id}
+					alt={props.series.image?.description || props.series.title}
+					size="extraSmall"
+				/>
+				<div class="flex-1 self-stretch">
+					<Text
+						component="div"
+						variant="big"
+						class="text-primary-text group-hover:text-primary-main"
+					>
+						{props.series.title}
+					</Text>
+					<Text component="div">{props.series.description}</Text>
+				</div>
 			</div>
 		</Card>
 	);

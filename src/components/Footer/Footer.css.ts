@@ -19,19 +19,6 @@ export const logoStyle = style({
 	marginBottom: relativeSpace(4),
 });
 
-export const containerStyle = style({
-	display: "flex",
-	gap: fixedSpace(4),
-	flexDirection: "column",
-	"@media": {
-		[from("lg")]: {
-			flexDirection: "row-reverse",
-			alignItems: "flex-start",
-			justifyContent: "space-between",
-		},
-	},
-});
-
 export const copyrightStyle = style({
 	fontSize: vars.font.smallText.size,
 	lineHeight: vars.font.smallText.lineHeight,
