@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import type { JSX } from "solid-js";
-import { splitProps } from "solid-js";
 import { Show } from "solid-js";
 
 import useAppName from "~/hooks/useAppName";
@@ -11,18 +9,9 @@ import CenterContent from "../CenterContent";
 import Link from "../Link";
 import Logo from "../Logo";
 
-import {
-	copyrightStyle,
-	footerStyle,
-	linkListStyle,
-	logoContainerStyle,
-	logoStyle,
-} from "./Footer.css";
-
-type FooterProps = Omit<JSX.IntrinsicElements["footer"], "children">;
+type FooterProps = Omit<JSX.IntrinsicElements["footer"], "children" | "class">;
 
 export default function Footer(props: FooterProps) {
-	const [local, others] = splitProps(props, ["class"]);
 	const t = useTranslation();
 	const rootPath = useRootPath();
 	const appName = useAppName();
@@ -30,13 +19,16 @@ export default function Footer(props: FooterProps) {
 	const firstYear = 2023;
 
 	return (
-		<footer class={clsx([footerStyle, local.class])} {...others}>
-			<div class={logoContainerStyle}>
-				<Logo class={logoStyle} variant="text" />
+		<footer
+			class="relative mt-4r py-4r before:absolute before:left-1/2 before:top-[calc(calc(2px-2rem)/2)] before:block before:h-[2px] before:w-[calc(theme(width.min-100-xl)-calc(theme(spacing.2f)*2))] before:-translate-x-1/2 before:bg-primary-background before:content-[''] md:before:w-[calc(theme(width.min-100-xl)-calc(theme(spacing.2f)*3))]"
+			{...props}
+		>
+			<div class="mx-auto mb-4r flex w-37.5f items-center justify-center">
+				<Logo variant="text" />
 			</div>
 			<CenterContent>
 				<div class="flex flex-col gap-4f lg:flex-row-reverse lg:items-start lg:justify-between lg:gap-4r">
-					<ul class={linkListStyle}>
+					<ul class="m-0 flex list-none flex-row justify-center gap-4f p-0 lg:flex-col lg:content-start lg:gap-1r">
 						<li>
 							<Link href={`${rootPath()}about`}>{t("footer.links.about")}</Link>
 						</li>
@@ -51,7 +43,7 @@ export default function Footer(props: FooterProps) {
 							</Link>
 						</li>
 					</ul>
-					<div class={copyrightStyle}>
+					<div class="font-sans text-sm">
 						<div>
 							© {firstYear}
 							<Show when={year !== firstYear}>-{year}</Show> {appName}

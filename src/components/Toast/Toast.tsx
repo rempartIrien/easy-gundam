@@ -5,14 +5,7 @@ import type { JSX } from "solid-js";
 import Icon from "../Icon";
 import Text from "../Text";
 
-import {
-	closeButtonStyle,
-	closeIconStyle,
-	contentStyle,
-	titleStyle,
-	toastIconStyle,
-	toastStyle,
-} from "./Toast.css";
+import { contentStyle, titleStyle, toastStyle } from "./Toast.css";
 
 export interface ToastProps {
 	toastId: number;
@@ -29,11 +22,11 @@ export default function Toast(props: ToastProps) {
 			class={toastStyle[props.type]}
 			duration={props.duration}
 		>
-			<KobalteToast.CloseButton class={closeButtonStyle}>
-				<Icon class={closeIconStyle} name="close" />
+			<KobalteToast.CloseButton class="absolute right-1f top-1f block cursor-pointer border-none text-lg leading-none">
+				<Icon name="close" />
 			</KobalteToast.CloseButton>
-			<div>
-				<Icon class={toastIconStyle} name={props.type} />
+			<div class="flex shrink-0 items-center text-[calc(theme(fontSize.base.0)*theme(fontSize.base.1))]">
+				<Icon name={props.type} />
 			</div>
 			<div class={contentStyle}>
 				<KobalteToast.Title class={titleStyle} as={Text}>

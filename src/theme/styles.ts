@@ -18,8 +18,6 @@ const textBlockStyles = {
 	width: `min(${relativeSpace(88)}, 100%)`,
 };
 
-export const headingTextBlockStyles = [textBlockStyles];
-
 export const contentTextBlockStyles = [
 	textBlockStyles,
 	{

@@ -23,35 +23,30 @@ export default function Breadcrumb(props: BreadcrumbProps) {
 	const [local, others] = splitProps(props, ["items"]);
 	const rootPath = useRootPath();
 
-	const chevronStyle = "w-2.5f h-2.5f text-primary-main";
-
 	return (
 		<Show when={local.items?.length}>
 			<nav class="mb-sectionBottom" {...others}>
 				<ol class="m-0 flex gap-0.5f p-0">
 					<li class="flex items-center gap-0.5f before:hidden [&:not(:nth-last-child(2))]:hidden md:[&:not(:nth-last-child(2))]:flex">
 						<Link class="!flex items-center" href={rootPath()}>
-							<Icon
-								class={`${chevronStyle} block md:hidden`}
-								name="chevronLeft"
-							/>
+							<span class="flex items-center text-base text-primary-main md:hidden">
+								<Icon name="chevronLeft" />
+							</span>
 							{t("navigation.home")}
 						</Link>
 					</li>
 					<For each={local.items}>
 						{(item) => (
 							<li class="flex items-center gap-0.5f before:hidden [&:not(:nth-last-child(2))]:hidden md:[&:not(:nth-last-child(2))]:flex">
-								<Icon
-									class={`${chevronStyle} hidden md:block`}
-									name="chevronRight"
-								/>
+								<span class="flex items-center text-base text-primary-main md:block">
+									<Icon name="chevronRight" />
+								</span>
 								<Show when={item.href} fallback={<Text>{item.text}</Text>}>
 									{(href) => (
 										<Link class="!flex items-center" href={href()}>
-											<Icon
-												class={`${chevronStyle} block md:hidden`}
-												name="chevronLeft"
-											/>
+											<span class="flex items-center text-base text-primary-main md:hidden">
+												<Icon name="chevronLeft" />
+											</span>
 											{item.text}
 										</Link>
 									)}

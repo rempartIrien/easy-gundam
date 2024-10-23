@@ -13,8 +13,6 @@ import Menu from "../../menu/Menu";
 import MenuContent from "../../menu/MenuContent";
 import MenuItem from "../../menu/MenuItem";
 import MenuTrigger from "../../menu/MenuTrigger";
-import HeaderIcon from "../HeaderIcon";
-import { menuTriggerStyle } from "../MenuTrigger.css";
 
 const localeAction = action(async (newLocale: Language) => {
 	"use server";
@@ -65,11 +63,9 @@ export default function LocaleSwitcher() {
 	return (
 		<Menu open={open()} onOpenChange={setOpen}>
 			<MenuTrigger
-				class={menuTriggerStyle}
+				iconName="languages"
 				aria-label={t("header.actions.switchLocale")}
-			>
-				<HeaderIcon name="languages" />
-			</MenuTrigger>
+			/>
 			<MenuContent>
 				<For each={Object.entries(LanguageNames)}>
 					{([locale, name]) => (

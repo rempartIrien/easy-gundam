@@ -12,8 +12,6 @@ import type { ImageSizeName } from "~/types/ImageSize";
 import { imageSizeMap } from "~/types/ImageSize";
 import getSize2x from "~/utils/get-size-2x";
 
-import { darkModeStyle, hiddenFallbackStyle } from "./Image.css";
-
 interface ImageProps {
 	imageId?: string | null;
 	alt: string;
@@ -25,6 +23,10 @@ export default function Image(props: ImageProps) {
 	const size2x = createMemo(() => getSize2x(props.size));
 	const [fallback, setFallback] = createSignal(false);
 	const isDarkMode = useIsDarkMode();
+	// See https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#aa-dark-mode-images
+	const darkModeStyle = createMemo(
+		() => isDarkMode() && "brightness-90 contrast-110",
+	);
 
 	onMount(() => setFallback(!props.imageId));
 	createEffect(() => setFallback(!props.imageId));
@@ -35,7 +37,7 @@ export default function Image(props: ImageProps) {
 			fallback={
 				<img
 					class={clsx([
-						isDarkMode() === undefined && hiddenFallbackStyle,
+						isDarkMode() === undefined && "invisible",
 						isDarkMode() && darkModeStyle,
 						props.class,
 					])}

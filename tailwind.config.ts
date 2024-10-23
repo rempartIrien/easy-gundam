@@ -2,14 +2,6 @@
 import type { Config } from "tailwindcss";
 import type { KeyValuePair, ResolvableTo } from "tailwindcss/types/config";
 
-const breakpoints = {
-	xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
-	sm: "30rem", // iPads, Tablets (480)
-	md: "48rem", // Small screens, laptops (768)
-	lg: "64rem", // Desktops, large screens (1024)
-	xl: "75rem", // Extra large screens, TV (1200)
-} as const;
-
 // colors ✅ => see `src/index.css`
 // font families ✅ => Tailwind's
 // font heights ✅ => see `src/index.css`
@@ -17,7 +9,7 @@ const breakpoints = {
 // borderRadiuses ✅ => Tailwind's
 // boxShadows ✅ => see `src/index.css`
 
-const spaces = [...Array(41)]
+const spaces = [...Array(201)]
 	.map((_, value) => value / 2)
 	.reduce((acc: ResolvableTo<KeyValuePair>, value) => {
 		if (!value) {
@@ -36,19 +28,22 @@ export default {
 		preflight: false, // Because we have sanitize.ccs
 	},
 	theme: {
-		screens: breakpoints,
+		screens: {
+			xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
+			sm: "30rem", // iPads, Tablets (480)
+			md: "48rem", // Small screens, laptops (768)
+			lg: "64rem", // Desktops, large screens (1024)
+			xl: "75rem", // Extra large screens, TV (1200)
+		},
 		spacing: {
 			...spaces,
 		},
 		fontSize: {
-			sm: ["14px", "20px"],
-			base: ["16px", "24px"],
-			lg: ["20px", "28px"],
-			xl: ["24px", "32px"],
-			"2xl": ["1.563rem", "32px"],
-		},
-		boxShadow: {
-			DEFAULT: "var(--box-shadow)",
+			sm: ["var(--font-size-small)", "var(--font-line-height-small)"],
+			base: ["var(--font-size-regular)", "var(--font-line-height-regular)"],
+			lg: ["var(--font-size-big)", "var(--font-line-height-big)"],
+			xl: ["var(--font-size-subtitle)", "var(--font-line-height-subtitle)"],
+			"2xl": ["var(--font-size-title)", "var(--font-line-height-title)"],
 		},
 		colors: {
 			background: {
@@ -114,8 +109,15 @@ export default {
 				chronologyYearColumnWidth: "var(--chronology-year-columnWidth)",
 			},
 			width: {
-				"min-100-xl": `min(100%, ${breakpoints.xl})`,
+				"min-100-xl": `min(100%, theme(screens.xl))`,
+				"min-100-88r": `min(theme(spacing.88r), 100%)`,
 				chronologyYearWidth: "var(--chronology-year-width)",
+			},
+			boxShadow: {
+				DEFAULT: "var(--box-shadow)",
+			},
+			contrast: {
+				110: "1.10",
 			},
 		},
 	},

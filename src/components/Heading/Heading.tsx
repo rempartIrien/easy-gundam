@@ -6,28 +6,26 @@ import { Dynamic } from "solid-js/web";
 
 import useIsDarkMode from "~/hooks/useIsDarkMode";
 
-import { darkModeStyle, headingStyle } from "./Heading.css";
-
-interface HeadingProps extends JSX.HTMLAttributes<HTMLHeadingElement> {
+type HeadingProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "class"> & {
 	variant: "title" | "subtitle";
-}
+};
 
 export default function Heading(props: HeadingProps) {
-	const [local, otherProps] = splitProps(props, [
-		"class",
-		"variant",
-		"children",
-	]);
-	const component = createMemo(() => (local.variant === "title" ? "h1" : "h2"));
+	const [local, otherProps] = splitProps(props, ["variant", "children"]);
+	const tag = createMemo(() =>
+		local.variant === "title"
+			? { component: "h1", style: "text-2xl w-100% mb-sectionBottom" }
+			: { component: "h2", style: "text-xl  mb-midSectionBottom" },
+	);
 	const isDarkMode = useIsDarkMode();
 
 	return (
 		<Dynamic
-			component={component()}
+			component={tag().component}
 			class={clsx([
-				headingStyle[local.variant],
-				isDarkMode() && darkModeStyle,
-				local.class,
+				"m-0 w-min-100-88r p-0 text-primary-main",
+				tag().style,
+				isDarkMode() ? "font-semibold" : "font-bold",
 			])}
 			{...otherProps}
 		>

@@ -12,8 +12,6 @@ import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
 
-import { paragraphStyle, titleStyle } from "./home.css";
-
 // FIXME: This is not intended to stay here, it's just to tell people what to
 // check when landing on the site.
 const routeData = cache((params: Params) => {
@@ -37,11 +35,9 @@ export default function Home() {
 	return (
 		<main>
 			<DocumentTitle content={t("home.documentTitle")} />
-			<Heading variant="title" class={titleStyle}>
-				{t("home.title")}
-			</Heading>
+			<Heading variant="title">{t("home.title")}</Heading>
 			<Section>
-				<Paragraph class={paragraphStyle}>{t("home.subtitle")}</Paragraph>
+				<Paragraph>{t("home.subtitle")}</Paragraph>
 				<Show when={content()}>
 					<MarkdownViewer content={content()} />
 				</Show>
