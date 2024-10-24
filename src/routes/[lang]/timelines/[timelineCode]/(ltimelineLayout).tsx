@@ -13,7 +13,6 @@ import useRootPath from "~/hooks/useRootPath";
 import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
 
-import { contentStyle, navStyle } from "./(ltimelineLayout).css";
 import { getTimeline } from "./timeline.server";
 
 function routeData(params: Params) {
@@ -53,16 +52,17 @@ export default function Timeline(props: TimelineProps) {
 		<Show when={timeline()}>
 			<Breadcrumb items={breadcrumbItems()} />
 			<Heading variant="title">{timeline()?.name}</Heading>
-			<Nav
-				class={navStyle}
-				items={[
-					<NavItem href="" end>
-						{t("timelines.nav.description")}
-					</NavItem>,
-					<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
-				]}
-			/>
-			<section class={contentStyle}>{props.children}</section>
+			<div class="flex w-full justify-center">
+				<Nav
+					items={[
+						<NavItem href="" end>
+							{t("timelines.nav.description")}
+						</NavItem>,
+						<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
+					]}
+				/>
+			</div>
+			<section class="py-4r">{props.children}</section>
 		</Show>
 	);
 }

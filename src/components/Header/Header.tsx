@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type { JSX } from "solid-js";
 import { createSignal } from "solid-js";
 import { Show } from "solid-js";
@@ -45,12 +46,13 @@ export default function Header(props: HeaderProps) {
 						<Logo />
 					</Link>
 				</div>
-				<Nav
-					class="hidden flex-1 sm:flex"
-					items={links.map((link) => (
-						<NavItem href={link.href}>{t(link.labelKey)}</NavItem>
-					))}
-				/>
+				<div class="hidden flex-1 sm:flex">
+					<Nav
+						items={links.map((link) => (
+							<NavItem href={link.href}>{t(link.labelKey)}</NavItem>
+						))}
+					/>
+				</div>
 				<div class="mr-auto border-none sm:hidden">
 					<IconButton
 						iconName={open() ? "close" : "menu"}
@@ -66,11 +68,10 @@ export default function Header(props: HeaderProps) {
 	);
 
 	return (
-		<header
-			class={"glass-effect sticky top-0 z-10 !border-x-0 !border-t-0"}
-			{...props}
-		>
-			<MainRow />
+		<header class={"sticky top-0 z-10 !border-x-0 !border-t-0"} {...props}>
+			<div class={clsx(["glass-effect", open() && "invisible"])}>
+				<MainRow />
+			</div>
 			<Show when={open()}>
 				<div
 					ref={ref}
@@ -79,7 +80,7 @@ export default function Header(props: HeaderProps) {
 					<MainRow />
 					<CenterContent>
 						<Nav
-							listClass="flex-col py-1f px-1r"
+							vertical
 							items={links.map((props) => (
 								<NavItem href={props.href} onClick={toggleMenu}>
 									{t(props.labelKey)}

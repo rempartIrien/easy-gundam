@@ -23,31 +23,32 @@ interface SeriesItemProps {
 export default function SeriesItem(props: SeriesItemProps) {
 	const rootPath = useRootPath();
 	return (
-		<Card
-			component={Link}
+		<Link
 			noStyle
 			block
 			href={`${rootPath()}timelines/${props.timelineCode}/series/${
 				props.series.code
 			}`}
 		>
-			<div class="group flex gap-2f">
-				<Image
-					imageId={props.series.image?.id}
-					alt={props.series.image?.description || props.series.title}
-					size="extraSmall"
-				/>
-				<div class="flex-1 self-stretch">
-					<Text
-						component="div"
-						variant="big"
-						class="text-primary-text group-hover:text-primary-main"
-					>
-						{props.series.title}
-					</Text>
-					<Text component="div">{props.series.description}</Text>
+			<Card>
+				<div class="group flex gap-2f">
+					<Image
+						imageId={props.series.image?.id}
+						alt={props.series.image?.description || props.series.title}
+						size="extraSmall"
+					/>
+					<div class="flex-1 self-stretch">
+						<Text
+							component="div"
+							variant="big"
+							class="text-primary-text group-hover:text-primary-main"
+						>
+							{props.series.title}
+						</Text>
+						<Text component="div">{props.series.description}</Text>
+					</div>
 				</div>
-			</div>
-		</Card>
+			</Card>
+		</Link>
 	);
 }

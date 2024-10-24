@@ -45,7 +45,10 @@ export default {
 			xl: ["var(--font-size-subtitle)", "var(--font-line-height-subtitle)"],
 			"2xl": ["var(--font-size-title)", "var(--font-line-height-title)"],
 		},
-		colors: {
+		colors: ({ colors }) => ({
+			inherit: colors.inherit,
+			current: colors.current,
+			transparent: colors.transparent,
 			background: {
 				main: "var(--color-background-main)",
 				emphasis: "var(--color-background-emphasis)",
@@ -91,7 +94,7 @@ export default {
 				success: "var(--color-success-toast)",
 				warning: "var(--color-warning-toast)",
 			},
-		},
+		}),
 		extend: {
 			spacing: {
 				chronologyGap: "var(--chronology-gap)",

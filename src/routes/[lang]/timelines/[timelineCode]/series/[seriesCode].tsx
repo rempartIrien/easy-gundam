@@ -13,7 +13,6 @@ import useRootPath from "~/hooks/useRootPath";
 import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
 
-import { contentStyle, navStyle } from "./[seriesCode].css";
 import { getSeries } from "./series.server";
 
 function routeData(params: Params) {
@@ -58,22 +57,23 @@ export default function Series(props: SeriesProps) {
 			<Breadcrumb items={breadcrumbItems()} />
 			<Heading variant="title">{series()?.title}</Heading>
 			<Show when={series()?.insights || series()?.analysis}>
-				<Nav
-					class={navStyle}
-					items={[
-						<NavItem href="" end>
-							{t("series.nav.overview")}
-						</NavItem>,
-						series()?.insights && (
-							<NavItem href="insights">{t("series.nav.insights")}</NavItem>
-						),
-						series()?.analysis && (
-							<NavItem href="analysis">{t("series.nav.analysis")}</NavItem>
-						),
-					]}
-				/>
+				<div class="flex w-full justify-center">
+					<Nav
+						items={[
+							<NavItem href="" end>
+								{t("series.nav.overview")}
+							</NavItem>,
+							series()?.insights && (
+								<NavItem href="insights">{t("series.nav.insights")}</NavItem>
+							),
+							series()?.analysis && (
+								<NavItem href="analysis">{t("series.nav.analysis")}</NavItem>
+							),
+						]}
+					/>
+				</div>
 			</Show>
-			<section class={contentStyle}>{props.children}</section>
+			<section class="py-4r">{props.children}</section>
 		</Show>
 	);
 }

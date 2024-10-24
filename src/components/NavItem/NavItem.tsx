@@ -3,21 +3,12 @@ import { useLocation, useResolvedPath } from "@solidjs/router";
 import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
 import { createMemo } from "solid-js";
-import { splitProps } from "solid-js";
 
 import Link from "../Link";
 
-import { navItemActiveClass, navItemStyle } from "./NavItem.css";
-
-type NavItemProps = ComponentProps<typeof A>;
+type NavItemProps = Omit<ComponentProps<typeof A>, "class">;
 
 export default function NavItem(props: NavItemProps) {
-	const [local, others] = splitProps(props, [
-		"children",
-		"class",
-		"activeClass",
-	]);
-
 	// More or less the same logic as in `A.isActive` from `solid-router` but
 	// with trailing slash handling.
 	// See https://github.com/solidjs/solid-router/blob/main/src/components.tsx
@@ -39,17 +30,13 @@ export default function NavItem(props: NavItemProps) {
 	});
 
 	return (
-		<Link
-			noStyle
+		<div
 			class={clsx(
-				navItemStyle,
-				isActive() && navItemActiveClass,
-				isActive() && local.activeClass,
-				local.class,
+				"ease inline-block border-0 border-b-[4px] border-solid text-text-main no-underline transition-[border-color] duration-200 hover:text-primary-main motion-reduce:transition-none motion-reduce:hover:transform-none",
+				isActive() ? "border-b-primary-main" : "border-b-transparent",
 			)}
-			{...others}
 		>
-			{local.children}
-		</Link>
+			<Link noStyle {...props} />
+		</div>
 	);
 }

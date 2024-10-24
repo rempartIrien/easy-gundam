@@ -1,13 +1,9 @@
 import { DropdownMenu } from "@kobalte/core/dropdown-menu";
-import clsx from "clsx";
 import type { JSX } from "solid-js";
 
 import { MENU_REGION_CLASS } from "../MenuRegion";
 
-import { menuContentStyle } from "./MenuContent.css";
-
 interface MenuContentProps {
-	class?: string;
 	children?: JSX.Element;
 }
 
@@ -18,7 +14,7 @@ export default function MenuContent(props: MenuContentProps) {
 		>
 			<DropdownMenu.Content
 				as="ol"
-				class={clsx([menuContentStyle, props.class])}
+				class="glass-effect m-0 list-none rounded px-0 py-1f"
 			>
 				{props.children}
 			</DropdownMenu.Content>

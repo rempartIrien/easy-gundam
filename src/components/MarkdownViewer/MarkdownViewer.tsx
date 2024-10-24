@@ -11,8 +11,6 @@ import List from "../List";
 import Paragraph from "../Paragraph/Paragraph";
 import Text from "../Text";
 
-import { viewerStyle } from "./MarkdownViewer.css";
-
 interface MarkdownViewerProps {
 	class?: string;
 	content?: string;
@@ -52,7 +50,7 @@ export default function MarkdownViewer(props: MarkdownViewerProps) {
 	return (
 		<Show when={content()}>
 			<SolidMarkdown
-				class={clsx([viewerStyle, props.class])}
+				class={clsx(["text-block", props.class])}
 				components={componentMap}
 			>
 				{content() as string}

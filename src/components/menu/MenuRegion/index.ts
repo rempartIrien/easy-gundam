@@ -1,4 +1,4 @@
 import MenuRegion from "./MenuRegion";
 
-export { menuRegionStyle as MENU_REGION_CLASS } from "./MenuRegion.css";
+export { MENU_REGION_CLASS } from "./MenuRegion";
 export default MenuRegion;
