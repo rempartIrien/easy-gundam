@@ -69,7 +69,12 @@ export default function Header(props: HeaderProps) {
 
 	return (
 		<header class={"sticky top-0 z-10 !border-x-0 !border-t-0"} {...props}>
-			<div class={clsx(["glass-effect", open() && "invisible"])}>
+			<div
+				class={clsx([
+					"glass-effect !border-x-0 !border-t-0",
+					open() && "invisible",
+				])}
+			>
 				<MainRow />
 			</div>
 			<Show when={open()}>
