@@ -38,14 +38,10 @@ export default function SeriesItem(props: SeriesItemProps) {
 						size="extraSmall"
 					/>
 					<div class="flex-1 self-stretch">
-						<Text
-							component="div"
-							variant="big"
-							class="text-primary-text group-hover:text-primary-main"
-						>
-							{props.series.title}
-						</Text>
-						<Text component="div">{props.series.description}</Text>
+						<div class="text-primary-text group-hover:text-primary-main">
+							<Text variant="big">{props.series.title}</Text>
+						</div>
+						<Text block>{props.series.description}</Text>
 					</div>
 				</div>
 			</Card>

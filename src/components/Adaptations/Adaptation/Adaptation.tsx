@@ -32,16 +32,18 @@ export default function Adaptation(props: AdaptationProps) {
 	return (
 		<div>
 			<Show when={!props.noTitle}>
-				<Text variant="big" color="primary">
+				<Text variant="big" color="primary-text">
 					{props.adaptation.title}
 				</Text>
 			</Show>
-			<Text component="div" class="[&:not(:last-child)]:mb-midSectionBottom">
-				{t(`series.details.overview.releasedOn.${props.adaptation.format}`, {
-					count: props.adaptation.episodeNumber,
-					date: dateString(),
-				})}
-			</Text>
+			<div class="[&:not(:last-child)]:mb-midSectionBottom">
+				<Text component="div">
+					{t(`series.details.overview.releasedOn.${props.adaptation.format}`, {
+						count: props.adaptation.episodeNumber,
+						date: dateString(),
+					})}
+				</Text>
+			</div>
 			<Show when={props.adaptation.description}>
 				<Paragraph>{props.adaptation.description}</Paragraph>
 			</Show>

@@ -10,7 +10,7 @@ import type { ToastProps } from "~/components/Toast";
 import Toast from "~/components/Toast";
 import Toaster from "~/components/Toaster";
 
-const DEFAULT_DURATION = 4000;
+const DEFAULT_DURATION = 400000;
 let owner: Owner | null;
 
 function displayToast(

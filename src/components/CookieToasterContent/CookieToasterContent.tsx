@@ -15,12 +15,14 @@ export default function CookieToasterContent(props: CookieToasterContentProps) {
 	const rootPath = useRootPath();
 	return (
 		<div>
-			<Text component="p" class="m-0 mb-2r">
-				{t("header.cookies.more")}
-			</Text>
-			<Text component="p" class="m-0 mb-2r">
-				<Link href={`${rootPath()}cookies`}>{t("header.cookies.link")}</Link>
-			</Text>
+			<p class="m-0 mb-2r">
+				<Text>{t("header.cookies.more")}</Text>
+			</p>
+			<p class="m-0 mb-2r">
+				<Text>
+					<Link href={`${rootPath()}cookies`}>{t("header.cookies.link")}</Link>
+				</Text>
+			</p>
 			<div class="flex gap-2f [&>*]:flex-1">
 				<Button onClick={props.onSave}>
 					{t("header.cookies.actions.save")}
