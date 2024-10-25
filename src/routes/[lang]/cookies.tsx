@@ -79,9 +79,9 @@ export default function Cookies() {
 	return (
 		<>
 			<DocumentTitle content={t("cookies.documentTitle")} />
+			<Breadcrumb items={[{ text: t("navigation.cookies") }]} />
+			<Heading variant="title">{t("cookies.title")}</Heading>
 			<form action={updateCookies} method="post">
-				<Breadcrumb items={[{ text: t("navigation.cookies") }]} />
-				<Heading variant="title">{t("cookies.title")}</Heading>
 				<Show when={cookies()}>
 					<Section>
 						<Paragraph>{t("cookies.list.text", { appName })}</Paragraph>
