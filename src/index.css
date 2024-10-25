@@ -104,38 +104,46 @@
 		--font-line-height-title: 1.2;
 	}
 }
+@layer utilities {
+	.dark {
+		--color-background-main: var(--color-grayDarker);
+		--color-background-emphasis: color-mix(in srgb, var(--color-grayDarker) 50%, transparent);
+		--color-background-button: color-mix(in srgb, var(--color-gray) 25%, transparent);
+		--color-text-main: var(--color-white);
+		--color-text-disabled: var(--color-grayLight);
+		--color-primary-main: var(--color-merigold);
+		--color-primary-text: var(--color-merigoldLight);
+		--color-primary-background: var(--color-merigoldDark);
+		--color-secondary-main: var(--color-imperialRed);
+		--color-secondary-text: var(--color-imperialRedLight);
+		--color-secondary-background: var(--color-imperialRedDark);
+		--color-info-main: var(--color-cerulean);
+		--color-info-text: var(--color-ceruleanLight);
+		--color-info-background: var(--color-ceruleanDark);
+		--color-info-toast: color-mix(in srgb, var(--color-cerulean) 50%, transparent);
+		--color-success-main: var(--color-emerald);
+		--color-success-text: var(--color-emeraldLight);
+		--color-success-background: var(--color-emeraldDark);
+		--color-success-toast: color-mix(in srgb, var(--color-emerald) 50%, transparent);
+		--color-warning-main: var(--color-apricot);
+		--color-warning-text: var(--color-apricotLight);
+		--color-warning-background: var(--color-apricotDark);
+		--color-warning-toast: color-mix(in srgb, var(--color-apricot) 50%, transparent);
+		--color-error-main: var(--color-candyApple);
+		--color-error-text: var(--color-candyAppleLight);
+		--color-error-background: var(--color-candyAppleDark);
+		--color-error-toast: color-mix(in srgb, var(--color-candyApple) 50%, transparent);
 
-html.dark {
-	--color-background-main: var(--color-grayDarker);
-	--color-background-emphasis: color-mix(in srgb, var(--color-grayDarker) 50%, transparent);
-	--color-background-button: color-mix(in srgb, var(--color-gray) 25%, transparent);
-	--color-text-main: var(--color-white);
-	--color-text-disabled: var(--color-grayLight);
-	--color-primary-main: var(--color-merigold);
-	--color-primary-text: var(--color-merigoldLight);
-	--color-primary-background: var(--color-merigoldDark);
-	--color-secondary-main: var(--color-imperialRed);
-	--color-secondary-text: var(--color-imperialRedLight);
-	--color-secondary-background: var(--color-imperialRedDark);
-	--color-info-main: var(--color-cerulean);
-	--color-info-text: var(--color-ceruleanLight);
-	--color-info-background: var(--color-ceruleanDark);
-	--color-info-toast: color-mix(in srgb, var(--color-cerulean) 50%, transparent);
-	--color-success-main: var(--color-emerald);
-	--color-success-text: var(--color-emeraldLight);
-	--color-success-background: var(--color-emeraldDark);
-	--color-success-toast: color-mix(in srgb, var(--color-emerald) 50%, transparent);
-	--color-warning-main: var(--color-apricot);
-	--color-warning-text: var(--color-apricotLight);
-	--color-warning-background: var(--color-apricotDark);
-	--color-warning-toast: color-mix(in srgb, var(--color-apricot) 50%, transparent);
-	--color-error-main: var(--color-candyApple);
-	--color-error-text: var(--color-candyAppleLight);
-	--color-error-background: var(--color-candyAppleDark);
-	--color-error-toast: color-mix(in srgb, var(--color-candyApple) 50%, transparent);
-
-	--box-shadow: none;
-	--border: 1px solid color-mix(in srgb, var(--color-white) 12.5%, transparent);
+		--box-shadow: none;
+		--border: 1px solid color-mix(in srgb, var(--color-white) 12.5%, transparent);
+	}
+}
+@layer utilities {
+	@media (prefers-color-scheme: dark) {
+		html:not(.light) {
+			@apply dark;
+		}
+	}
 }
 
 @layer utilities {

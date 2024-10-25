@@ -1,18 +1,14 @@
 import clsx from "clsx";
 
-import { htmlRootStyle } from "~/root.css";
-
-import { darkTheme } from "./dark-theme.css";
-import { defaultTheme } from "./default-theme.css";
-import { lightTheme } from "./light-theme.css";
 import { ThemeName } from "./ThemeName";
 
 function getHtmlTagClasses(themeName?: ThemeName | null) {
 	return clsx([
-		htmlRootStyle,
-		themeName === ThemeName.Dark && darkTheme,
-		themeName === ThemeName.Light && lightTheme,
-		!themeName && defaultTheme,
+		"text-100% h-[100vh]",
+		// https://aykevl.nl/2014/09/fix-jumping-scrollbar
+		"min-[960px]:mr-0 min-[960px]:ml-[calc(100w-100%)]",
+		themeName === ThemeName.Dark && ThemeName.Dark,
+		themeName === ThemeName.Light && ThemeName.Light,
 	]);
 }
 
