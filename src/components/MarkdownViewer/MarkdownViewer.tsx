@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import type { ComponentProps } from "solid-js";
 import { Show } from "solid-js";
 import { children } from "solid-js";
@@ -9,12 +8,8 @@ import Heading from "../Heading";
 import Link from "../Link";
 import List from "../List";
 import Paragraph from "../Paragraph/Paragraph";
-import Text from "../Text";
-
-import { viewerStyle } from "./MarkdownViewer.css";
 
 interface MarkdownViewerProps {
-	class?: string;
 	content?: string;
 }
 
@@ -24,19 +19,20 @@ const componentMap: ComponentProps<typeof SolidMarkdown>["components"] = {
 		return <Heading variant="subtitle" {...others} />;
 	},
 	p: (props) => {
-		const [, others] = splitProps(props, ["node"]);
+		const [, others] = splitProps(props, ["node", "class", "color"]);
 		return <Paragraph {...others} />;
 	},
 	a: (props) => {
-		const [local, others] = splitProps(props, ["node", "href", "target"]);
+		const [local, others] = splitProps(props, [
+			"node",
+			"href",
+			"target",
+			"rel",
+		]);
 		return (
-			<>
-				{local.href ? (
-					<Link href={local.href} {...others} />
-				) : (
-					<Text {...others} />
-				)}
-			</>
+			<Show when={local.href}>
+				{(href) => <Link href={href()} {...others} />}
+			</Show>
 		);
 	},
 	ul: (props) => {
@@ -51,10 +47,7 @@ export default function MarkdownViewer(props: MarkdownViewerProps) {
 
 	return (
 		<Show when={content()}>
-			<SolidMarkdown
-				class={clsx([viewerStyle, props.class])}
-				components={componentMap}
-			>
+			<SolidMarkdown class={"text-block"} components={componentMap}>
 				{content() as string}
 			</SolidMarkdown>
 		</Show>

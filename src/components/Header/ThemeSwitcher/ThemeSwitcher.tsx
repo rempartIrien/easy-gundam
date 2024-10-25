@@ -13,8 +13,6 @@ import Menu from "../../menu/Menu";
 import MenuContent from "../../menu/MenuContent";
 import MenuItem from "../../menu/MenuItem";
 import MenuTrigger from "../../menu/MenuTrigger";
-import HeaderIcon from "../HeaderIcon";
-import { menuTriggerStyle } from "../MenuTrigger.css";
 
 const themeAction = action(async (newTheme?: ThemeName) => {
 	"use server";
@@ -60,13 +58,9 @@ export default function ThemeSwitcher() {
 		<Show when={isDarkMode() !== undefined}>
 			<Menu open={open()} onOpenChange={setOpen}>
 				<MenuTrigger
-					class={menuTriggerStyle}
+					iconName={isDarkMode() ? "moon" : "sun"}
 					aria-label={t("header.actions.switchTheme")}
-				>
-					<Show when={isDarkMode()} fallback={<HeaderIcon name="sun" />}>
-						<HeaderIcon name="moon" />
-					</Show>
-				</MenuTrigger>
+				/>
 				<MenuContent>
 					<MenuItem isActive={!currentTheme()} onSelect={() => switchTheme()}>
 						{t("header.themes.system")}

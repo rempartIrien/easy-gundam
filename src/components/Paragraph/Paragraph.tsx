@@ -1,23 +1,16 @@
-import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 
 import Text from "../Text";
 import type { TextProps } from "../Text/Text";
 
-import { paragraphStyle } from "./Paragraph.css";
-
-type ParagraphProps = JSX.IntrinsicElements["p"] &
-	Partial<Pick<TextProps, "variant">>;
+type ParagraphProps = Omit<JSX.IntrinsicElements["p"], "class"> &
+	Partial<Pick<TextProps, "variant" | "color">>;
 
 export default function Paragraph(props: ParagraphProps) {
-	const [local, otherProps] = splitProps(props, ["class", "children"]);
+	const [local, otherProps] = splitProps(props, ["children"]);
 	return (
-		<Text
-			component="p"
-			class={clsx([paragraphStyle, local.class])}
-			{...otherProps}
-		>
+		<Text block {...otherProps}>
 			{local.children}
 		</Text>
 	);

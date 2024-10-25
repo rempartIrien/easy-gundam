@@ -1,12 +1,9 @@
-import clsx from "clsx";
 import { Show, createMemo, useContext } from "solid-js";
 
 import Paragraph from "~/components/Paragraph";
 import Text from "~/components/Text";
 import { LocaleContext } from "~/contexts/LocaleContext";
 import useTranslation from "~/hooks/useTranslation";
-
-import { adaptationStyle, releaseOnStyle, titleStyle } from "./Adaptation.css";
 
 export interface Adaptation {
 	title: string;
@@ -18,7 +15,6 @@ export interface Adaptation {
 
 interface AdaptationProps {
 	adaptation: Adaptation;
-	class?: string;
 	noTitle?: boolean;
 }
 
@@ -34,18 +30,20 @@ export default function Adaptation(props: AdaptationProps) {
 	});
 
 	return (
-		<div class={clsx([adaptationStyle, props.class])}>
+		<div>
 			<Show when={!props.noTitle}>
-				<Text variant="big" class={titleStyle}>
+				<Text variant="big" color="primary-text">
 					{props.adaptation.title}
 				</Text>
 			</Show>
-			<Text component="div" class={releaseOnStyle}>
-				{t(`series.details.overview.releasedOn.${props.adaptation.format}`, {
-					count: props.adaptation.episodeNumber,
-					date: dateString(),
-				})}
-			</Text>
+			<div class="[&:not(:last-child)]:mb-midSectionBottom">
+				<Text component="div">
+					{t(`series.details.overview.releasedOn.${props.adaptation.format}`, {
+						count: props.adaptation.episodeNumber,
+						date: dateString(),
+					})}
+				</Text>
+			</div>
 			<Show when={props.adaptation.description}>
 				<Paragraph>{props.adaptation.description}</Paragraph>
 			</Show>

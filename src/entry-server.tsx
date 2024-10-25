@@ -2,7 +2,6 @@
 import { StartServer, createHandler } from "@solidjs/start/server";
 
 import { getLocale } from "./i18n/i18n.cookie";
-import { bodyStyle } from "./root.css";
 import getHtmlTagClasses from "./theme/getHtmlTagClasses";
 import { getColorScheme } from "./theme/theme.cookie";
 
@@ -23,7 +22,7 @@ export default createHandler(
 							<meta name="color-scheme" content="dark light" />
 							{assets}
 						</head>
-						<body class={bodyStyle}>
+						<body class="min-h-100% flex flex-col bg-background-main text-text-main">
 							<div id="app">{children}</div>
 							{scripts}
 						</body>

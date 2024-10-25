@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--space-margin-bottom-section: 4rem;
+
+	/* TODO: execute https://coolors.co/contrast-checker/ */
+	--color-merigold: #FCAE1E;
+	--color-merigoldLight: #fbdfaa;
+	--color-merigoldDark: #6f4901;
+
+	--color-imperialRed: #ED2939;
+	--color-imperialRedLight: #fdc4c8;
+	--color-imperialRedDark: #670910;
+
+	--color-black: #000000;
+	--color-grayDarker: #131313;
+	--color-grayDark: #434343;
+	--color-gray: #909090;
+	--color-grayLight: #d1d1d1;
+	--color-grayLighter: #f1f1f1;
+	--color-white: #ffffff;
+
+	--color-candyApple: #FF0800;
+	--color-candyAppleLight: #ffdad9;
+	--color-candyAppleDark: #660300;
+
+	--color-apricot: #ED820E;
+	--color-apricotLight: #fdecda;
+	--color-apricotDark: #5f3406;
+
+	--color-emerald: #028A0F;
+	--color-emeraldLight: #c8fecd;
+	--color-emeraldDark: #013706;
+
+	--color-cerulean: #0492C2;
+	--color-ceruleanLight: #d1f3fe;
+	--color-ceruleanDark: #023a4e;
+
+	--color-background-main: var(--color-grayLighter);
+	--color-background-emphasis: color-mix(in srgb, var(--color-white) 60%, transparent);
+	--color-background-button: color-mix(in srgb, var(--color-grayLight) 50%, transparent);
+	--color-text-main: var(--color-black);
+	--color-text-disabled: var(--color-grayDark);
+	--color-primary-main: var(--color-imperialRed);
+	--color-primary-text: var(--color-imperialRedDark);
+	--color-primary-background: var(--color-imperialRedLight);
+	--color-secondary-main: var(--color-merigold);
+	--color-secondary-text: var(--color-merigoldDark);
+	--color-secondary-background: var(--color-merigoldLight);
+	--color-info-main: var(--color-cerulean);
+	--color-info-text: var(--color-ceruleanDark);
+	--color-info-background: var(--color-ceruleanLight);
+	--color-info-toast: color-mix(in srgb, var(--color-cerulean) 50%, transparent);
+	--color-success-main: var(--color-emerald);
+	--color-success-text: var(--color-emeraldDark);
+	--color-success-background: var(--color-emeraldLight);
+	--color-success-toast: color-mix(in srgb, var(--color-emerald) 50%, transparent);
+	--color-warning-main: var(--color-apricot);
+	--color-warning-text: var(--color-apricotDark);
+	--color-warning-background: var(--color-apricotLight);
+	--color-warning-toast: color-mix(in srgb, var(--color-apricot) 50%, transparent);
+	--color-error-main: var(--color-candyApple);
+	--color-error-text: var(--color-candyAppleDark);
+	--color-error-background: var(--color-candyAppleLight);
+	--color-error-toast: color-mix(in srgb, var(--color-candyApple) 50%, transparent);
+
+	--box-shadow: 0px 4px 10px 2px color-mix(in srgb, var(--color-gray) 50%, transparent);
+	--border: 1px solid var(--color-grayLight);
+
+	--font-size-small: 0.9rem;
+	--font-line-height-small: 1.7;
+	--font-size-regular: 1.125rem;
+	--font-line-height-regular: 1.7;
+	--font-size-big: 1.25rem;
+	--font-line-height-big: 1.7;
+	--font-size-subtitle: 1.8rem;
+	--font-line-height-subtitle: 1.35;
+	--font-size-title: 3rem;
+	--font-line-height-title: 1.2;
+
+	--chronology-border-width: 4px;
+	--chronology-bullet-size: theme(spacing.3f);
+	--chronology-year-width: calc(calc(var(--chronology-border-width) / 2 ) + 50%);
+	--chronology-gap: calc(calc(calc(var(--chronology-border-width) / 2 )) + theme(spacing.4f));
+	--chronology-bullet-paddingTop: theme(spacing.2f);
+	--chronology-year-columnWidth: theme(spacing.20r);
+	--chronology-bullet-right: calc(calc(var(--chronology-border-width) + var(--chronology-bullet-size)) / -2);
+	--chronology-bullet-top: calc(calc(calc(var(--font-size-big) * var(--font-line-height-big)) / 2) + var(--chronology-bullet-paddingTop));
+}
+
+@media screen(md) {
+	:root {
+		--font-size-small: 0.75rem;
+		--font-line-height-small: 1.6;
+		--font-size-regular: 1rem;
+		--font-line-height-regular: 1.6;
+		--font-size-big: 1.25rem;
+		--font-line-height-big: 1.6;
+		--font-size-subtitle: 2rem;
+		--font-line-height-subtitle: 1.35;
+		--font-size-title: 4rem;
+		--font-line-height-title: 1.2;
+	}
+}
+@layer utilities {
+	.dark {
+		--color-background-main: var(--color-grayDarker);
+		--color-background-emphasis: color-mix(in srgb, var(--color-grayDarker) 50%, transparent);
+		--color-background-button: color-mix(in srgb, var(--color-gray) 25%, transparent);
+		--color-text-main: var(--color-white);
+		--color-text-disabled: var(--color-grayLight);
+		--color-primary-main: var(--color-merigold);
+		--color-primary-text: var(--color-merigoldLight);
+		--color-primary-background: var(--color-merigoldDark);
+		--color-secondary-main: var(--color-imperialRed);
+		--color-secondary-text: var(--color-imperialRedLight);
+		--color-secondary-background: var(--color-imperialRedDark);
+		--color-info-main: var(--color-cerulean);
+		--color-info-text: var(--color-ceruleanLight);
+		--color-info-background: var(--color-ceruleanDark);
+		--color-info-toast: color-mix(in srgb, var(--color-cerulean) 50%, transparent);
+		--color-success-main: var(--color-emerald);
+		--color-success-text: var(--color-emeraldLight);
+		--color-success-background: var(--color-emeraldDark);
+		--color-success-toast: color-mix(in srgb, var(--color-emerald) 50%, transparent);
+		--color-warning-main: var(--color-apricot);
+		--color-warning-text: var(--color-apricotLight);
+		--color-warning-background: var(--color-apricotDark);
+		--color-warning-toast: color-mix(in srgb, var(--color-apricot) 50%, transparent);
+		--color-error-main: var(--color-candyApple);
+		--color-error-text: var(--color-candyAppleLight);
+		--color-error-background: var(--color-candyAppleDark);
+		--color-error-toast: color-mix(in srgb, var(--color-candyApple) 50%, transparent);
+
+		--box-shadow: none;
+		--border: 1px solid color-mix(in srgb, var(--color-white) 12.5%, transparent);
+	}
+}
+@layer utilities {
+	@media (prefers-color-scheme: dark) {
+		html:not(.light) {
+			@apply dark;
+		}
+	}
+}
+
+@layer utilities {
+  .glass-effect {
+		background-color: var(--color-background-emphasis);
+		backdrop-filter: blur(32px);
+		border: var(--border);
+		box-shadow: var(--box-shadow);
+	}
+
+	.link-mask {
+		 /* For safari create a mask that fit all the element (in height and width) */
+		mask-image: linear-gradient(black, black), url(/assets/icons/external-link.svg);
+		mask-composite: intersect;
+		mask-size: cover,contain;
+		mask-position: center;
+		mask-repeat: no-repeat;
+	}
+
+	.text-block {
+		@apply p-0;
+		@apply m-0;
+		@apply w-min-100-88r;
+		@apply mb-sectionBottom;
+
+		&:last-child {
+		  @apply mb-0;
+		}
+
+		& + & {
+			margin-top: calc(theme(spacing.midSectionBottom) - theme(spacing.sectionBottom))
+		}
+	}
+}
+
+

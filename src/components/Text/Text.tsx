@@ -1,43 +1,48 @@
 import clsx from "clsx";
-import type { Component, ComponentProps, JSX } from "solid-js";
+import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import useIsDarkMode from "~/hooks/useIsDarkMode";
 
-import { darkModeStyle, textStyle } from "./Text.css";
+export type TextProps = Omit<
+	{
+		variant?: "small" | "normal" | "big";
+		color?: "primary-main" | "primary-text" | "text" | "inherit";
+		children: JSX.Element;
+		block?: boolean;
+	},
+	"class"
+> &
+	(
+		| ({ block: true } & JSX.IntrinsicElements["p"])
+		| ({ block?: false | undefined } & JSX.IntrinsicElements["span"])
+	);
 
-export type TextProps<
-	// Type from Solid ValidComponent
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	T extends keyof JSX.IntrinsicElements | Component<any> = "span",
-> = {
-	variant?: "small" | "normal" | "big";
-} & {
-	component?: T;
-} & ComponentProps<T> &
-	JSX.HTMLAttributes<T>;
-
-export default function Text<
-	// Type from Solid ValidComponent
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	T extends keyof JSX.IntrinsicElements | Component<any> = "span",
->(props: TextProps<T>) {
+export default function Text(props: TextProps) {
 	const [local, otherProps] = splitProps(props, [
-		"class",
-		"component",
+		"block",
 		"variant",
+		"color",
 		"children",
 	]);
 	const isDarkMode = useIsDarkMode();
 
 	return (
 		<Dynamic
-			component={local.component || "span"}
+			component={local.block ? "p" : "span"}
 			class={clsx([
-				textStyle[local.variant || "normal"],
-				isDarkMode() && darkModeStyle,
-				local.class,
+				"font-sans",
+				local.block && "text-block",
+				local.variant === "small" && "text-sm",
+				(!local.variant || local.variant === "normal") && "text-base",
+				local.variant === "big" && "text-lg",
+				local.color === "primary-main" && "text-primary-main",
+				local.color === "primary-text" && "text-primary-text",
+				local.color === "text" && "text-text-main",
+				(!local.color || local.color === "inherit") && "text-inherit",
+				// See https://css-tricks.com/dark-mode-and-variable-fonts/
+				isDarkMode() ? "font-light" : "font-normal",
 			])}
 			{...otherProps}
 		>

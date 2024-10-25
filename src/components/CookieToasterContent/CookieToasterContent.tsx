@@ -5,13 +5,6 @@ import Button from "../Button";
 import Link from "../Link";
 import Text from "../Text";
 
-import {
-	actionListStyle,
-	actionStyle,
-	contentStyle,
-	textStyle,
-} from "./CookieToasterContent.css";
-
 interface CookieToasterContentProps {
 	onSave: () => void;
 	onCancel: () => void;
@@ -21,18 +14,20 @@ export default function CookieToasterContent(props: CookieToasterContentProps) {
 	const t = useTranslation();
 	const rootPath = useRootPath();
 	return (
-		<div class={contentStyle}>
-			<Text component="p" class={textStyle}>
-				{t("header.cookies.more")}
-			</Text>
-			<Text component="p" class={textStyle}>
-				<Link href={`${rootPath()}cookies`}>{t("header.cookies.link")}</Link>
-			</Text>
-			<div class={actionListStyle}>
-				<Button class={actionStyle} onClick={props.onSave}>
+		<div>
+			<p class="m-0 mb-2r">
+				<Text>{t("header.cookies.more")}</Text>
+			</p>
+			<p class="m-0 mb-2r">
+				<Text>
+					<Link href={`${rootPath()}cookies`}>{t("header.cookies.link")}</Link>
+				</Text>
+			</p>
+			<div class="flex gap-2f [&>*]:flex-1">
+				<Button onClick={props.onSave}>
 					{t("header.cookies.actions.save")}
 				</Button>
-				<Button class={actionStyle} onClick={props.onCancel}>
+				<Button onClick={props.onCancel}>
 					{t("header.cookies.actions.cancel")}
 				</Button>
 			</div>

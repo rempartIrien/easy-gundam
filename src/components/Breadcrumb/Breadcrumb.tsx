@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 import { For, Show } from "solid-js";
@@ -10,48 +9,49 @@ import Icon from "../Icon";
 import Link from "../Link";
 import Text from "../Text";
 
-import {
-	breadcrumbStyle,
-	chevronLeftStyle,
-	chevronRightStyle,
-	linkStyle,
-	listItemStyle,
-	listStyle,
-} from "./Breadcrumb.css";
-
 export interface BreadcrumbItem {
 	text?: string;
 	href?: string;
 }
 
-type BreadcrumbProps = JSX.IntrinsicElements["nav"] & {
+type BreadcrumbProps = Omit<JSX.IntrinsicElements["nav"], "class"> & {
 	items?: BreadcrumbItem[];
 };
 
 export default function Breadcrumb(props: BreadcrumbProps) {
 	const t = useTranslation();
-	const [local, others] = splitProps(props, ["class", "items"]);
+	const [local, others] = splitProps(props, ["items"]);
 	const rootPath = useRootPath();
 
 	return (
 		<Show when={local.items?.length}>
-			<nav class={clsx([breadcrumbStyle, local.class])} {...others}>
-				<ol class={listStyle}>
-					<li class={listItemStyle}>
-						<Link class={linkStyle} href={rootPath()}>
-							<Icon class={chevronLeftStyle} name="chevronLeft" />
-							{t("navigation.home")}
+			<nav class="mb-sectionBottom" {...others}>
+				<ol class="m-0 flex gap-0.5f p-0">
+					<li class="flex items-center gap-0.5f before:hidden [&:not(:nth-last-child(2))]:hidden md:[&:not(:nth-last-child(2))]:flex">
+						<Link href={rootPath()}>
+							<div class="flex items-center">
+								<div class="flex items-center text-base text-primary-main md:hidden">
+									<Icon name="chevronLeft" />
+								</div>
+								{t("navigation.home")}
+							</div>
 						</Link>
 					</li>
 					<For each={local.items}>
 						{(item) => (
-							<li class={listItemStyle}>
-								<Icon class={chevronRightStyle} name="chevronRight" />
+							<li class="flex items-center gap-0.5f before:hidden [&:not(:nth-last-child(2))]:hidden md:[&:not(:nth-last-child(2))]:flex">
+								<div class="hidden items-center text-base text-primary-main md:flex">
+									<Icon name="chevronRight" />
+								</div>
 								<Show when={item.href} fallback={<Text>{item.text}</Text>}>
 									{(href) => (
-										<Link class={linkStyle} href={href()}>
-											<Icon class={chevronLeftStyle} name="chevronLeft" />
-											{item.text}
+										<Link href={href()}>
+											<div class="flex items-center">
+												<span class="flex items-center text-base text-primary-main md:hidden">
+													<Icon name="chevronLeft" />
+												</span>
+												{item.text}
+											</div>
 										</Link>
 									)}
 								</Show>

@@ -7,7 +7,6 @@ import Adaptations from "~/components/Adaptations";
 import DocumentTitle from "~/components/DocumentTitle";
 import Image from "~/components/Image";
 import MarkdownViewer from "~/components/MarkdownViewer";
-import Section from "~/components/Section";
 import Staff from "~/components/Staff";
 import { listAdaptations } from "~/graphql/adaptation.server";
 import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
@@ -15,15 +14,6 @@ import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
 
 import { getSeries } from "../series.server";
-
-import {
-	adaptationsStyle,
-	containerstyle,
-	imageStyle,
-	staffStyle,
-	synopsisStyle,
-	textBlockStyle,
-} from "./(overview).css";
 
 const routeData = cache(async (params: Params) => {
 	"use server";
@@ -53,35 +43,38 @@ export default function SeriesOverview() {
 							t("series.details.overview.documentTitle"),
 						]}
 					/>
-					<Section class={containerstyle}>
+					<section class="mb-sectionBottom flex w-full flex-col items-center gap-4f lg:flex-row lg:items-start">
 						<Show when={nonNullSeries().image}>
 							{(i) => (
-								<Image
-									class={imageStyle}
-									imageId={i().id}
-									alt={i().description || nonNullSeries().title || ""}
-									size="medium"
-								/>
+								<div class="lg:sticky lg:top-10r">
+									<Image
+										imageId={i().id}
+										alt={i().description || nonNullSeries().title || ""}
+										size="medium"
+									/>
+								</div>
 							)}
 						</Show>
-						<div class={textBlockStyle}>
+						<div class="text-block flex-1">
 							<Show when={nonNullSeries().synopsis}>
 								{(s) => (
-									<section class={synopsisStyle}>
-										<MarkdownViewer class={synopsisStyle} content={s()} />
+									<section class="mb-sectionBottom">
+										<MarkdownViewer content={s()} />
 									</section>
 								)}
 							</Show>
 							<Show when={nonNullSeries().staff}>
-								{(s) => <Staff class={staffStyle} staff={s()} />}
-							</Show>
-							<Show when={data()?.adaptations}>
-								{(a) => (
-									<Adaptations class={adaptationsStyle} adaptations={a()} />
+								{(s) => (
+									<section class="mb-sectionBottom">
+										<Staff staff={s()} />
+									</section>
 								)}
 							</Show>
+							<Show when={data()?.adaptations}>
+								{(a) => <Adaptations adaptations={a()} />}
+							</Show>
 						</div>
-					</Section>
+					</section>
 				</>
 			)}
 		</Show>

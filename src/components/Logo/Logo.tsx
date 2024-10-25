@@ -1,16 +1,15 @@
-import clsx from "clsx";
 import { type JSX } from "solid-js";
 import { createMemo, splitProps } from "solid-js";
 
 import useIsDarkMode from "~/hooks/useIsDarkMode";
 
-type LogoProps = Omit<JSX.IntrinsicElements["img"], "src" | "alt"> & {
+type LogoProps = Omit<JSX.IntrinsicElements["img"], "src" | "alt" | "class"> & {
 	variant?: "text" | "small";
 };
 
 export default function Logo(props: LogoProps) {
 	const isDarkMode = useIsDarkMode();
-	const [local, others] = splitProps(props, ["class", "variant"]);
+	const [local, others] = splitProps(props, ["variant"]);
 
 	const url = createMemo(() => {
 		const variantPart = local.variant === "text" ? "Text" : "";
@@ -19,5 +18,5 @@ export default function Logo(props: LogoProps) {
 	});
 
 	// FIXME: hardcoded string
-	return <img class={clsx([local.class])} src={url()} alt="logo" {...others} />;
+	return <img src={url()} alt="logo" {...others} />;
 }

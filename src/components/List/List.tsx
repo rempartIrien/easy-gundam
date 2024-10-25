@@ -3,8 +3,6 @@ import type { ComponentProps, JSX, ValidComponent } from "solid-js";
 import { splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { listStyle } from "./List.css";
-
 export type ListProps<T extends ValidComponent = "ul"> = {
 	component?: T;
 } & ComponentProps<T> &
@@ -15,7 +13,7 @@ export default function List<T extends ValidComponent>(props: ListProps<T>) {
 	return (
 		<Dynamic
 			component={local.component || "ul"}
-			class={clsx([listStyle, local.class])}
+			class={clsx(["text-block !pl-4r font-sans text-base", local.class])}
 			{...others}
 		>
 			{local.children}

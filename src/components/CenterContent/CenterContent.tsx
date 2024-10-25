@@ -1,15 +1,12 @@
-import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 
-import { containerStyle } from "./CenterContent.css";
-
-type CenterContentProps = JSX.IntrinsicElements["div"];
+type CenterContentProps = Omit<JSX.IntrinsicElements["div"], "class">;
 
 export default function CenterContent(props: CenterContentProps) {
-	const [local, other] = splitProps(props, ["class", "children"]);
+	const [local, other] = splitProps(props, ["children"]);
 	return (
-		<div class={clsx(containerStyle, local.class)} {...other}>
+		<div class="mx-auto my-0 w-min-100-xl px-2f md:px-3f" {...other}>
 			{local.children}
 		</div>
 	);
