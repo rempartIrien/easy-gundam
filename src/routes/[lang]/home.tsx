@@ -8,6 +8,7 @@ import Heading from "~/components/Heading";
 import MarkdownViewer from "~/components/MarkdownViewer";
 import Paragraph from "~/components/Paragraph";
 import Section from "~/components/Section";
+import useAppName from "~/hooks/useAppName";
 import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
@@ -31,11 +32,12 @@ export const route = {
 export default function Home() {
 	const t = useTranslation();
 	const content = useLocalizedRouteData(routeData);
+	const appName = useAppName();
 
 	return (
 		<main>
 			<DocumentTitle content={t("home.documentTitle")} />
-			<Heading variant="title">{t("home.title")}</Heading>
+			<Heading variant="title">{t("home.title", { appName })}</Heading>
 			<Section>
 				<Paragraph>{t("home.subtitle")}</Paragraph>
 				<Show when={content()}>

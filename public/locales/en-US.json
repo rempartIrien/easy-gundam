@@ -124,7 +124,7 @@
 	"home": {
 		"documentTitle": "Home",
 		"subtitle": "This site speaks about Mobile Suit Gundam (機動戦士ガンダム), a series by Yoshiyuki Tomino (富野 由悠季 or 富野 喜幸).",
-		"title": "Welcome to Easy Gundam!"
+		"title": "Welcome to {{ appName }}!"
 	},
 	"navigation": {
 		"about": "About",

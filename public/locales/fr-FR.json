@@ -124,7 +124,7 @@
 	"home": {
 		"documentTitle": "Accueil",
 		"subtitle": "Ce site parle de Mobile Suit Gundam (機動戦士ガンダム), une série créée par Yoshiyuki Tomino (富野 由悠季 ou 富野 喜幸).",
-		"title": "Bienvenue sur Easy Gundam!"
+		"title": "Bienvenue sur {{ appName }} !"
 	},
 	"navigation": {
 		"about": "À propos",
