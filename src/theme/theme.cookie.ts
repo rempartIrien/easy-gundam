@@ -6,19 +6,6 @@ import type { ThemeName } from "./ThemeName";
 
 const ONE_YEAR = 365 * 24 * 60 * 60;
 
-// Create a cookie to track locale
-export function colorSchemeCookie(event: HTTPEvent, value: ThemeName) {
-	"use server";
-
-	setCookie(event, "color-scheme", value, {
-		httpOnly: true,
-		maxAge: ONE_YEAR, // in seconds
-		path: "/",
-		sameSite: "strict",
-		secure: import.meta.env.PROD,
-	});
-}
-
 // Helper function to get the value of the color scheme cookie
 export function getColorSchemeToken(event: HTTPEvent): ThemeName | null {
 	"use server";
@@ -28,7 +15,15 @@ export function getColorSchemeToken(event: HTTPEvent): ThemeName | null {
 }
 
 export function setColorScheme(event: HTTPEvent, value: ThemeName) {
-	setCookie(event, "color-scheme", value);
+	"use server";
+
+	setCookie(event, "color-scheme", value, {
+		httpOnly: true,
+		maxAge: ONE_YEAR, // in seconds
+		path: "/",
+		sameSite: "strict",
+		secure: import.meta.env.PROD,
+	});
 }
 
 export function deleteColorScheme(event: HTTPEvent) {

@@ -7,19 +7,6 @@ import { Language, LanguageNames } from "~/i18n/i18n.config";
 const ONE_YEAR = 365 * 24 * 60 * 60;
 export const DEFAULT_LOCALE: Language = Language.French;
 
-// Create a cookie to track locale
-export function createLocaleCookie(event: HTTPEvent, value: Language) {
-	"use server";
-
-	setCookie(event, "locale", value, {
-		httpOnly: true,
-		maxAge: ONE_YEAR, // in seconds
-		path: "/",
-		sameSite: "strict",
-		secure: import.meta.env.PROD,
-	});
-}
-
 // Helper function to get the value of the locale cookie
 export function getLocaleToken(event: HTTPEvent): Language | null {
 	"use server";
@@ -46,7 +33,15 @@ function extractPreferredLocale(
 }
 
 export function setLocale(event: HTTPEvent, value: Language) {
-	setCookie(event, "locale", value);
+	"use server";
+
+	setCookie(event, "locale", value, {
+		httpOnly: true,
+		maxAge: ONE_YEAR, // in seconds
+		path: "/",
+		sameSite: "strict",
+		secure: import.meta.env.PROD,
+	});
 }
 
 export function deleteLocale(event: HTTPEvent) {
