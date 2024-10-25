@@ -13,8 +13,6 @@ import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
 
-// FIXME: This is not intended to stay here, it's just to tell people what to
-// check when landing on the site.
 const routeData = cache((params: Params) => {
 	"use server";
 	invariant(isLanguage(params.lang), "Expected params.lang");
