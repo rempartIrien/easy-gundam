@@ -4,9 +4,9 @@ import { ThemeName } from "./ThemeName";
 
 function getHtmlTagClasses(themeName?: ThemeName | null) {
 	return clsx([
-		"text-100% h-[100vh]",
+		"h-[100vh] text-[100%]",
 		// https://aykevl.nl/2014/09/fix-jumping-scrollbar
-		"min-[960px]:mr-0 min-[960px]:ml-[calc(100w-100%)]",
+		"scroll-jump-fix",
 		themeName === ThemeName.Dark && ThemeName.Dark,
 		themeName === ThemeName.Light && ThemeName.Light,
 	]);

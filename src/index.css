@@ -138,15 +138,22 @@
 		--border: 1px solid color-mix(in srgb, var(--color-white) 12.5%, transparent);
 	}
 }
+
 @layer utilities {
 	@media (prefers-color-scheme: dark) {
 		html:not(.light) {
 			@apply dark;
 		}
 	}
-}
 
-@layer utilities {
+  @media (min-width: 960px) {
+    .scroll-jump-fix {
+      /* https://aykevl.nl/2014/09/fix-jumping-scrollbar */
+      @apply mr-0;
+      margin-left: calc(100vw - 100%);
+    }
+  }
+
   .glass-effect {
 		background-color: var(--color-background-emphasis);
 		backdrop-filter: blur(32px);
