@@ -1,36 +1,36 @@
-import type { Params, RouteDefinition } from "@solidjs/router";
-import type { JSX } from "solid-js";
+import { type Params, type RouteDefinition, cache } from "@solidjs/router";
 import { Show, createMemo } from "solid-js";
 import invariant from "tiny-invariant";
 
+import { listSeries } from "~/api/series.server";
+import { getTimelineByCode } from "~/api/timeline.server";
 import Breadcrumb from "~/components/Breadcrumb";
 import type { BreadcrumbItem } from "~/components/Breadcrumb/Breadcrumb";
+import Chronology from "~/components/Chronology";
+import DocumentTitle from "~/components/DocumentTitle";
 import Heading from "~/components/Heading";
-import Nav from "~/components/Nav";
-import NavItem from "~/components/NavItem";
+import MarkdownViewer from "~/components/MarkdownViewer";
+import Section from "~/components/Section";
 import useLocalizedRouteData from "~/hooks/useLocalizedRouteData";
 import useRootPath from "~/hooks/useRootPath";
 import useTranslation from "~/hooks/useTranslation";
 import { isLanguage } from "~/i18n/i18n.config";
 
-import { getTimeline } from "./timeline.server";
-
-function routeData(params: Params) {
+const routeData = cache(async (params: Params) => {
 	"use server";
 	invariant(isLanguage(params.lang), "Expected params.lang");
 	invariant(params.timelineCode, "Expected params.timelineCode");
-	return getTimeline(params.timelineCode, params.lang);
-}
+
+	const timeline = await getTimelineByCode(params.timelineCode, params.lang);
+	const series = await listSeries(params.timelineCode, params.lang);
+	return { timeline, series };
+}, "timeline");
 
 export const route = {
 	preload: ({ params }) => routeData(params),
 } satisfies RouteDefinition;
 
-interface TimelineProps {
-	children: JSX.Element;
-}
-
-export default function Timeline(props: TimelineProps) {
+export default function Timeline() {
 	const t = useTranslation();
 	const timeline = useLocalizedRouteData(routeData);
 	const rootPath = useRootPath();
@@ -43,7 +43,7 @@ export default function Timeline(props: TimelineProps) {
 					text: t("navigation.timelines"),
 					href: `${rootPath()}timelines`,
 				},
-				{ text: nonNullTimeline.name },
+				{ text: nonNullTimeline.timeline.name },
 			];
 		}
 	});
@@ -51,18 +51,28 @@ export default function Timeline(props: TimelineProps) {
 	return (
 		<Show when={timeline()}>
 			<Breadcrumb items={breadcrumbItems()} />
-			<Heading variant="title">{timeline()?.name}</Heading>
-			<div class="flex w-full justify-center">
-				<Nav
-					items={[
-						<NavItem href="" end>
-							{t("timelines.nav.description")}
-						</NavItem>,
-						<NavItem href="series">{t("timelines.nav.series")}</NavItem>,
-					]}
-				/>
-			</div>
-			<section class="py-4r">{props.children}</section>
+			<Heading variant="title">{timeline()?.timeline.name}</Heading>
+			<Show when={timeline()}>
+				{(data) => (
+					<>
+						<DocumentTitle
+							content={[
+								data().timeline.name,
+								t("timelines.details.series.documentTitle"),
+							]}
+						/>
+						<section class="py-4r">
+							<Section>
+								<MarkdownViewer content={data().timeline.description} />
+							</Section>
+							<Chronology
+								timelineCode={data().timeline.code}
+								items={data()?.series}
+							/>
+						</section>
+					</>
+				)}
+			</Show>
 		</Show>
 	);
 }

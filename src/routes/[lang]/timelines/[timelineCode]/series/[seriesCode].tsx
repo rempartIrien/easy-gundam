@@ -45,7 +45,7 @@ export default function Series(props: SeriesProps) {
 				},
 				{
 					text: nonNullSeries.timeline.name,
-					href: `${rootPath()}timelines/${nonNullSeries.timeline.code}/series`,
+					href: `${rootPath()}timelines/${nonNullSeries.timeline.code}`,
 				},
 				{ text: nonNullSeries.title },
 			];

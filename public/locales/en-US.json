@@ -185,10 +185,6 @@
 		"list": {
 			"documentTitle": "Timelines"
 		},
-		"nav": {
-			"description": "Description",
-			"series": "Series"
-		},
 		"title": "Timelines"
 	}
 }
