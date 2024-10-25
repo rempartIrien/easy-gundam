@@ -3,11 +3,11 @@ import clsx from "clsx";
 import type { JSX } from "solid-js";
 import { splitProps } from "solid-js";
 
-interface MenuItemProps {
+type MenuItemProps = {
 	isActive?: boolean;
 	onSelect: (() => void) | (() => Promise<void>);
 	children: JSX.Element;
-}
+};
 
 export default function MenuItem(props: MenuItemProps) {
 	const [local, others] = splitProps(props, [

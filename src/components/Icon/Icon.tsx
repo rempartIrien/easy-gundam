@@ -2,10 +2,10 @@ import { Dynamic } from "solid-js/web";
 
 import ICON_REGISTRY from "./icon-registry";
 
-export interface IconProps {
+export type IconProps = {
 	name: keyof typeof ICON_REGISTRY;
 	size?: string;
-}
+};
 
 export default function Icon(props: IconProps) {
 	return (

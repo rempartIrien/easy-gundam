@@ -3,9 +3,9 @@ import type { JSX } from "solid-js";
 
 import { MENU_REGION_CLASS } from "../MenuRegion";
 
-interface MenuContentProps {
+type MenuContentProps = {
 	children?: JSX.Element;
-}
+};
 
 export default function MenuContent(props: MenuContentProps) {
 	return (

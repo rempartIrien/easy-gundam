@@ -9,9 +9,9 @@ import Link from "../Link";
 import List from "../List";
 import Paragraph from "../Paragraph/Paragraph";
 
-interface MarkdownViewerProps {
+type MarkdownViewerProps = {
 	content?: string;
-}
+};
 
 const componentMap: ComponentProps<typeof SolidMarkdown>["components"] = {
 	h1: (props) => {

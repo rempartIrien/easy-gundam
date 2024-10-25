@@ -6,13 +6,13 @@ import type { JSX } from "solid-js";
 import Icon from "../Icon";
 import Text from "../Text";
 
-export interface ToastProps {
+export type ToastProps = {
 	toastId: number;
 	type: "error" | "info" | "success" | "warning";
 	duration: number;
 	title: JSX.Element | string;
 	content?: JSX.Element | string;
-}
+};
 
 export default function Toast(props: ToastProps) {
 	return (

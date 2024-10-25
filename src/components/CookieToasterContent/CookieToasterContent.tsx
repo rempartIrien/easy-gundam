@@ -5,10 +5,10 @@ import Button from "../Button";
 import Link from "../Link";
 import Text from "../Text";
 
-interface CookieToasterContentProps {
+type CookieToasterContentProps = {
 	onSave: () => void;
 	onCancel: () => void;
-}
+};
 
 export default function CookieToasterContent(props: CookieToasterContentProps) {
 	const t = useTranslation();

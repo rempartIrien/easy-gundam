@@ -4,11 +4,10 @@ import type { ComponentProps } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
 
-interface LinkProps
-	extends Omit<ComponentProps<typeof A>, "target" | "rel" | "class"> {
+type LinkProps = Omit<ComponentProps<typeof A>, "target" | "rel" | "class"> & {
 	noStyle?: boolean;
 	block?: boolean;
-}
+};
 
 export default function Link(props: LinkProps) {
 	const [local, others] = splitProps(props, ["children", "noStyle", "block"]);

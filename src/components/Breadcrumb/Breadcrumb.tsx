@@ -9,10 +9,10 @@ import Icon from "../Icon";
 import Link from "../Link";
 import Text from "../Text";
 
-export interface BreadcrumbItem {
+export type BreadcrumbItem = {
 	text?: string;
 	href?: string;
-}
+};
 
 type BreadcrumbProps = Omit<JSX.IntrinsicElements["nav"], "class"> & {
 	items?: BreadcrumbItem[];

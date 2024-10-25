@@ -2,21 +2,21 @@ import { describe, expect, it } from "vitest";
 
 import { format } from "./formatter.server";
 
-interface Output {
+type Output = {
 	id: string;
 	code: string;
 	name: string;
 	description: string;
-}
+};
 
-interface Input {
+type Input = {
 	id: string;
 	code: string;
 	translations: {
 		name: string;
 		description: string;
 	}[];
-}
+};
 
 describe("format", () => {
 	describe("when the input is an object (not an array)", () => {

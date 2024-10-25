@@ -5,10 +5,10 @@ import { useToaster } from "~/contexts/ToasterContext";
 import useRootPath from "./useRootPath";
 import useTranslation from "./useTranslation";
 
-interface ShowCookieToasterParams {
+type ShowCookieToasterParams = {
 	onSave: (() => void) | (() => Promise<void>);
 	onCancel?: (() => void) | (() => Promise<void>);
-}
+};
 
 export default function useCookieToaster(type: "theme" | "locale") {
 	const t = useTranslation();

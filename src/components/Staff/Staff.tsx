@@ -3,10 +3,10 @@ import useTranslation from "~/hooks/useTranslation";
 import Heading from "../Heading";
 import MarkdownViewer from "../MarkdownViewer";
 
-interface StaffProps {
+type StaffProps = {
 	staff: string;
 	class?: string;
-}
+};
 
 export default function Staff(props: StaffProps) {
 	const t = useTranslation();

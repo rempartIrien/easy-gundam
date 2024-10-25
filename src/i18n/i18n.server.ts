@@ -1,8 +1,8 @@
 import { Language } from "./i18n.config";
 
-interface RecursiveString {
+type RecursiveString = {
 	[key: string]: string | RecursiveString;
-}
+};
 
 export type I18nDictionary = Record<Language, RecursiveString>;
 

@@ -8,18 +8,18 @@ import List from "../List";
 
 import Adaptation from "./Adaptation";
 
-interface Adaptation {
+type Adaptation = {
 	title: string;
 	description?: string | null;
 	parutionDate: Date;
 	format: string;
 	episodeNumber: number;
-}
+};
 
-interface AdaptationsProps {
+type AdaptationsProps = {
 	adaptations: Adaptation[];
 	class?: string;
-}
+};
 
 export default function Adaptations(props: AdaptationsProps) {
 	const t = useTranslation();

@@ -12,12 +12,12 @@ import type { ImageSizeName } from "~/types/ImageSize";
 import { imageSizeMap } from "~/types/ImageSize";
 import getSize2x from "~/utils/get-size-2x";
 
-interface ImageProps {
+type ImageProps = {
 	imageId?: string | null;
 	alt: string;
 	size: ImageSizeName;
 	class?: string;
-}
+};
 
 export default function Image(props: ImageProps) {
 	const size2x = createMemo(() => getSize2x(props.size));

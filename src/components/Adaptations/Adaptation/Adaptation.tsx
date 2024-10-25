@@ -5,18 +5,18 @@ import Text from "~/components/Text";
 import { LocaleContext } from "~/contexts/LocaleContext";
 import useTranslation from "~/hooks/useTranslation";
 
-export interface Adaptation {
+export type Adaptation = {
 	title: string;
 	description?: string | null;
 	parutionDate: Date;
 	format: string;
 	episodeNumber: number;
-}
+};
 
-interface AdaptationProps {
+type AdaptationProps = {
 	adaptation: Adaptation;
 	noTitle?: boolean;
-}
+};
 
 export default function Adaptation(props: AdaptationProps) {
 	const t = useTranslation();
@@ -37,7 +37,7 @@ export default function Adaptation(props: AdaptationProps) {
 				</Text>
 			</Show>
 			<div class="[&:not(:last-child)]:mb-midSectionBottom">
-				<Text component="div">
+				<Text>
 					{t(`series.details.overview.releasedOn.${props.adaptation.format}`, {
 						count: props.adaptation.episodeNumber,
 						date: dateString(),

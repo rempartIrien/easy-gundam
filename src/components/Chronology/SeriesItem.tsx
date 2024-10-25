@@ -5,18 +5,18 @@ import Image from "../Image";
 import Link from "../Link";
 import Text from "../Text";
 
-export interface BaseSeries {
+export type BaseSeries = {
 	code: string;
 	title: string;
 	description: string | null;
 	year: number;
 	image: { id: string | null; description: string | null } | null;
-}
+};
 
-interface SeriesItemProps {
+type SeriesItemProps = {
 	series: BaseSeries;
 	timelineCode: string;
-}
+};
 
 // TODO: fallback when image is null
 // TODO: fix image size accordin to size

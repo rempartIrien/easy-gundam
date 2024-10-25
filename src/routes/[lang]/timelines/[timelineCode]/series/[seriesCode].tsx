@@ -27,9 +27,9 @@ export const route = {
 	preload: ({ params }) => routeData(params),
 } satisfies RouteDefinition;
 
-interface SeriesProps {
+type SeriesProps = {
 	children: JSX.Element;
-}
+};
 
 export default function Series(props: SeriesProps) {
 	const t = useTranslation();

@@ -26,9 +26,9 @@ export const route = {
 	preload: ({ params }) => routeData(params),
 } satisfies RouteDefinition;
 
-interface I18nLayoutProps {
+type I18nLayoutProps = {
 	children: JSX.Element;
-}
+};
 
 export default function I18nLayout(props: I18nLayoutProps) {
 	// Need to call data in JSX. See https://github.com/solidjs/solid-start/issues/577
