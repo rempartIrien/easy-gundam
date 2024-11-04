@@ -149,8 +149,8 @@
   @media (min-width: 960px) {
     .scroll-jump-fix {
       /* https://aykevl.nl/2014/09/fix-jumping-scrollbar */
-      @apply mr-0;
-      margin-left: calc(100vw - 100%);
+      @apply me-0;
+      margin-inline-start: calc(100vw - 100%);
     }
   }
 

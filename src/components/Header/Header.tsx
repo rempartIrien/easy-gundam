@@ -53,7 +53,7 @@ export default function Header(props: HeaderProps) {
 						))}
 					/>
 				</div>
-				<div class="mr-auto border-none sm:hidden">
+				<div class="me-auto border-none sm:hidden">
 					<IconButton
 						iconName={open() ? "close" : "menu"}
 						onClick={toggleMenu}
