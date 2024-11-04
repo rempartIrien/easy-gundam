@@ -15,7 +15,7 @@ let owner: Owner | null;
 
 function displayToast(
 	type: "error" | "info" | "success" | "warning",
-	title: string,
+	title?: string,
 	content?: (() => JSX.Element) | string,
 	duration: number = DEFAULT_DURATION,
 ) {
@@ -31,34 +31,26 @@ function displayToast(
 	return element ? toaster.show((props) => element(props)) : -1;
 }
 
+type ToastParamsWithoutType<T> = T extends (
+	type: Parameters<typeof displayToast>[0],
+	...args: infer P
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+) => any
+	? P
+	: never;
+
 const toasterService = {
-	toastError: (
-		title: string,
-		content?: (() => JSX.Element) | string,
-		duration?: number,
-	) => {
-		return displayToast("error", title, content, duration);
+	toastError: (...args: ToastParamsWithoutType<typeof displayToast>) => {
+		return displayToast("error", ...args);
 	},
-	toastInfo: (
-		title: string,
-		content?: (() => JSX.Element) | string,
-		duration?: number,
-	) => {
-		return displayToast("info", title, content, duration);
+	toastInfo: (...args: ToastParamsWithoutType<typeof displayToast>) => {
+		return displayToast("info", ...args);
 	},
-	toastSuccess: (
-		title: string,
-		content?: (() => JSX.Element) | string,
-		duration?: number,
-	) => {
-		return displayToast("success", title, content, duration);
+	toastSuccess: (...args: ToastParamsWithoutType<typeof displayToast>) => {
+		return displayToast("success", ...args);
 	},
-	toastWarning: (
-		title: string,
-		content?: (() => JSX.Element) | string,
-		duration?: number,
-	) => {
-		return displayToast("warning", title, content, duration);
+	toastWarning: (...args: ToastParamsWithoutType<typeof displayToast>) => {
+		return displayToast("warning", ...args);
 	},
 	dimissToast: (toastId: ToastProps["toastId"]) => {
 		toaster.dismiss(toastId);
