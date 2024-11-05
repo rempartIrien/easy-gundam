@@ -22,19 +22,21 @@ const spaces = [...Array(201)]
 		};
 	}, {});
 
+const screens = {
+	xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
+	sm: "30rem", // iPads, Tablets (480)
+	md: "48rem", // Small screens, laptops (768)
+	lg: "64rem", // Desktops, large screens (1024)
+	xl: "75rem", // Extra large screens, TV (1200)
+};
+
 export default {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	corePlugins: {
 		preflight: false, // Because we have sanitize.ccs
 	},
 	theme: {
-		screens: {
-			xs: "20rem", // Mobile devices (320) -- default case, shouldn't be used
-			sm: "30rem", // iPads, Tablets (480)
-			md: "48rem", // Small screens, laptops (768)
-			lg: "64rem", // Desktops, large screens (1024)
-			xl: "75rem", // Extra large screens, TV (1200)
-		},
+		screens,
 		spacing: {
 			...spaces,
 		},
@@ -112,7 +114,7 @@ export default {
 				chronologyYearColumnWidth: "var(--chronology-year-columnWidth)",
 			},
 			width: {
-				"min-100-xl": `min(100%, theme(screens.xl))`,
+				"min-100-xl": `min(100%, ${screens.xl})`,
 				"min-100-88r": `min(theme(spacing.88r), 100%)`,
 				chronologyYearWidth: "var(--chronology-year-width)",
 			},
