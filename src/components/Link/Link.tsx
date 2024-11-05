@@ -29,7 +29,7 @@ export default function Link(props: LinkProps) {
 				// Add enough characters since we stay in `display: inline`. Use non breakable characters.
 				// For safari create a mask that fit all the element (in height and width)
 				isExternal() &&
-					"after:link-mask after:inline after:bg-primary-text after:align-baseline after:content-['\\\\_\\\\_\\\\_'] hover:after:bg-primary-main",
+					"after:link-mask after:inline after:bg-primary-text after:align-baseline after:content-['---'] hover:after:bg-primary-main",
 			)}
 			target={target()}
 			rel={rel()}
