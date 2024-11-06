@@ -15,6 +15,8 @@ import getHtmlTagClasses from "~/theme/getHtmlTagClasses";
 import { getColorScheme } from "~/theme/theme.cookie";
 import type { ThemeName } from "~/theme/ThemeName";
 
+import MetaThemeColorSwitcher from "./MetaThemeColorSwitcher";
+
 const initFunction = async () => {
 	"use server";
 	const [dict, locale, themeName] = await Promise.all([
@@ -69,11 +71,13 @@ export default function Providers(props: { children: JSX.Element }) {
 						<MetaProvider>
 							<ThemeContext.Provider value={[themeName, setThemeName]}>
 								<LocaleContext.Provider value={[locale, setLocale]}>
-									<I18nProvider value={resvoledInit().dict}>
-										<KobalteI18nProvider locale={locale()}>
-											<ToasterProvider>{props.children}</ToasterProvider>
-										</KobalteI18nProvider>
-									</I18nProvider>
+									<MetaThemeColorSwitcher>
+										<I18nProvider value={resvoledInit().dict}>
+											<KobalteI18nProvider locale={locale()}>
+												<ToasterProvider>{props.children}</ToasterProvider>
+											</KobalteI18nProvider>
+										</I18nProvider>
+									</MetaThemeColorSwitcher>
 								</LocaleContext.Provider>
 							</ThemeContext.Provider>
 						</MetaProvider>
