@@ -1,6 +1,5 @@
 import { Title } from "@solidjs/meta";
 import type { JSX } from "solid-js";
-import { createEffect } from "solid-js";
 import { createMemo } from "solid-js";
 import { splitProps } from "solid-js";
 
@@ -31,12 +30,6 @@ export default function DocumentTitle(props: TitleProps) {
 	const title = createMemo(() =>
 		getContentArray(local.content).concat(String(appName)).join(delimiter),
 	);
-
-	// FIXME: Remove this line when SolidStart use something else than Solid Meta
-	// or when the app does not have TWO `Title` tags.
-	// Currently, the first page rendered server-side has the right `Title`, but
-	// it does not get updated if it contains reactive stuff.
-	createEffect(() => (document.title = title()));
 
 	return <Title {...others}>{title()}</Title>;
 }
