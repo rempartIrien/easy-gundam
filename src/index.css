@@ -107,7 +107,7 @@
 @layer utilities {
 	.dark {
 		--color-background-main: var(--color-grayDarker);
-		--color-background-emphasis: color-mix(in srgb, var(--color-grayDarker) 50%, transparent);
+		--color-background-emphasis: color-mix(in srgb, var(--color-grayDark), transparent 50%);
 		--color-background-button: color-mix(in srgb, var(--color-gray) 25%, transparent);
 		--color-text-main: var(--color-white);
 		--color-text-disabled: var(--color-grayLight);
