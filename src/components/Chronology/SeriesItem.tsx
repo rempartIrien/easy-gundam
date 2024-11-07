@@ -31,14 +31,14 @@ export default function SeriesItem(props: SeriesItemProps) {
 			}`}
 		>
 			<Card>
-				<div class="group flex gap-2f">
+				<div class="group/seriesItem flex gap-2f">
 					<Image
 						imageId={props.series.image?.id}
 						alt={props.series.image?.description || props.series.title}
 						size="extraSmall"
 					/>
 					<div class="flex-1 self-stretch">
-						<div class="text-primary-text group-hover:text-primary-main">
+						<div class="text-primary-text group-hover/seriesItem:text-primary-main">
 							<Text variant="big">{props.series.title}</Text>
 						</div>
 						<Text block>{props.series.description}</Text>
